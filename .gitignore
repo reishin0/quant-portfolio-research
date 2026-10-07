@@ -1,0 +1,30 @@
+# Local environments and editor state
+.venv/
+.venv-*/
+.setup-tmp/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Credentials and private settings
+.env
+.env.*
+*.pem
+*.key
+
+# Data are obtained separately; retain only the documentation.
+data/*
+!data/README.md
+
+# Local outputs and backups
+outputs/
+*.log
+*.bak
+*backup*
+*Copy.ipynb
+.publication_work/
