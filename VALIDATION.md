@@ -1,6 +1,37 @@
 # Validation record
 
-Verified locally on **8 October 2026**. This record applies to the maintained `portfolio_construction.ipynb`, `portfolio_tools.py`, `research_extensions.py`, launchers and tests.
+Verified locally on **8 October 2026**. This record applies to the maintained notebook, Python modules, launchers and tests.
+
+## Actual-submission integration
+
+- **26 behavioral tests passed**, including nine new source-data checks.
+- **All 24 notebook cells passed on the actual submission inputs**, through `launch.py --check`.
+- **All 24 cells passed in explicit synthetic mode**, through `launch.py --check --mode synthetic`.
+- Submission prices: 1,166 rows per selected symbol, 1,165 aligned returns,
+  504 initial training observations and 661 evaluation observations from
+  3 January 2022 through 20 August 2024. Seven methods and 224 rebalance targets.
+- Factor attribution: eight series (seven strategies plus SPY), 29 monthly
+  observations each, February 2022–June 2024. All 21 ETF regressions use 53
+  observations, February 2020–June 2024. Boundary months are excluded.
+- Inflation series: 1970–2023. BIS bank-credit series: last value 41.279% of GDP
+  for 2023 Q2. Row reordering leaves both macro loaders' selected data unchanged;
+  duplicate BIS matches fail explicitly. The resulting macro chart was visually checked.
+- All seven imported artifacts match the manifest. All 127 archived code cells
+  match the actual submitted notebook's code. Data, PDF and helper bytes are
+  unchanged; archive notebook transformations are declared in the manifest.
+- Duplicate ETF keys, invalid prices, missing symbols, short factor overlap and
+  rank-deficient regressions are rejected. Original unit and look-ahead tests pass.
+
+Environment: Python 3.13.15, pandas 2.3.3, NumPy 2.5.3, SciPy 1.18.1,
+openpyxl 3.1.5. `pip check` reported no broken requirements. Windows Jupyter
+emitted selector-thread and local-kernel transport warnings but completed.
+
+These checks establish software execution and the stated input contracts. The
+August 2024 asset selection and views are retrospective; no prospective investment
+performance claim is inferred. The supplied factors stop before the price cache,
+and macro release-date histories are unavailable.
+
+## Earlier consolidation checks (before submission import)
 
 ## Completed checks
 

@@ -1,0 +1,77 @@
+{
+  "imported_on": "2026-10-08",
+  "source": "User-supplied CQF August 2024 submission directory",
+  "report_date": "2024-08-21",
+  "provider_download_timestamp": "unknown; filesystem timestamps are not download evidence",
+  "redistribution": "Imported into the private research repository at the owner request; this project grants no rights to third-party data. Review provider terms before public redistribution.",
+  "files": [
+    {
+      "path": "data/efts_dataset.csv",
+      "role": "ETF adjusted prices",
+      "sha256": "a18cd4a8cbf054f0e72e7a14fdb9c0e3adec6be51e5d6ea0e5df51c5ddee3a07",
+      "original_sha256": "a18cd4a8cbf054f0e72e7a14fdb9c0e3adec6be51e5d6ea0e5df51c5ddee3a07",
+      "bytes": 3111695,
+      "coverage": "2020-01-02 to 2024-08-20",
+      "units": "USD prices; Market Cap is a single snapshot",
+      "provider": "Yahoo Finance prices; AUM collection described in the report",
+      "transformation": "none"
+    },
+    {
+      "path": "data/F-F_Research_Data_5_Factors_2x3_monthly.csv",
+      "role": "Monthly five factors and risk-free returns",
+      "sha256": "1e0804684c617c65827b3875fd0e72abbbb6970b0af05965ec9d45a5c5e49360",
+      "original_sha256": "1e0804684c617c65827b3875fd0e72abbbb6970b0af05965ec9d45a5c5e49360",
+      "bytes": 28835,
+      "coverage": "1963-07 to 2024-06",
+      "units": "percentage points per month",
+      "provider": "Kenneth R. French Data Library",
+      "transformation": "none"
+    },
+    {
+      "path": "data/Inflation-data.xlsx",
+      "role": "Global inflation",
+      "sha256": "0ea77a0faa5dc6778768fa7caa9c77f9ea3310f44ae9f5ac20ec2bfa7489c1ed",
+      "original_sha256": "0ea77a0faa5dc6778768fa7caa9c77f9ea3310f44ae9f5ac20ec2bfa7489c1ed",
+      "bytes": 6049175,
+      "coverage": "1970 to 2023 (Aggregate global series)",
+      "units": "percent per year",
+      "provider": "World Bank inflation database",
+      "transformation": "none"
+    },
+    {
+      "path": "data/WS_GLI_csv_col.csv",
+      "role": "Global liquidity",
+      "sha256": "40042c17d0c9332daed3fccf77849b752e63297c32d2e6f21df2047768ed9d5d",
+      "original_sha256": "40042c17d0c9332daed3fccf77849b752e63297c32d2e6f21df2047768ed9d5d",
+      "bytes": 245536,
+      "coverage": "selected series through 2023-Q2",
+      "units": "percent of GDP",
+      "provider": "BIS global liquidity indicators",
+      "transformation": "none"
+    },
+    {
+      "path": "research_archive/submission_report_2024.pdf",
+      "role": "Original report, 49 pages, dated 21 August 2024",
+      "sha256": "3e42b3456eb21af572d52fd97107ae5dc5ef6ac98ecf97be5deddcc7acb0ab86",
+      "original_sha256": "3e42b3456eb21af572d52fd97107ae5dc5ef6ac98ecf97be5deddcc7acb0ab86",
+      "bytes": 2749780,
+      "transformation": "none"
+    },
+    {
+      "path": "research_archive/utils.py",
+      "role": "Original notebook helper dependency",
+      "sha256": "d7484f49dab2ecc79cf225cc8f163731ebfaaec5f095e451e4c0cbce255a3a39",
+      "original_sha256": "d7484f49dab2ecc79cf225cc8f163731ebfaaec5f095e451e4c0cbce255a3a39",
+      "bytes": 6731,
+      "transformation": "none"
+    },
+    {
+      "path": "research_archive/portfolio_construction_2024.ipynb",
+      "role": "Actual submission notebook",
+      "sha256": "c11dc5044f787aa8bd69348caf23b78d1a32ad703e3b2d8099ea6042a1f69e69",
+      "original_sha256": "8a639ba99d301c1e0c8060005f8fa7d3298a0acfc74348d8b841b6be3a30a1bd",
+      "bytes": 200583,
+      "transformation": "Code cells unchanged; outputs, execution counts and cell metadata cleared; IDs and provenance note added; title attribution shortened."
+    }
+  ]
+}

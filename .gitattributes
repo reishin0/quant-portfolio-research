@@ -1,0 +1,9 @@
+# Preserve imported bytes so provenance hashes survive Windows/Linux checkouts.
+# Original whitespace is part of the hashed source record.
+data/efts_dataset.csv -text -whitespace
+data/F-F_Research_Data_5_Factors_2x3_monthly.csv -text -whitespace
+data/WS_GLI_csv_col.csv -text -whitespace
+data/Inflation-data.xlsx binary
+research_archive/submission_report_2024.pdf binary
+research_archive/portfolio_construction_2024.ipynb -text -whitespace
+research_archive/utils.py -text -whitespace

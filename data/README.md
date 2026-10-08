@@ -1,55 +1,70 @@
-# Data preparation
+# Submission inputs and provenance
 
-Third-party input files are deliberately not bundled. The maintained notebook obtains adjusted prices through Yahoo by default and uses the factor file below when available. Other historical inputs are documented for provenance and possible future extensions. Downloading a current file does not guarantee compatibility with a historical 2024 export.
+The four original inputs are included unchanged in this private repository.
+`manifest.json` records their SHA-256 hashes, sizes, units and coverage, plus
+the report and original notebook lineage. Provider download timestamps are unknown.
 
-## Daily ETF cache: `efts_dataset.csv`
+| File | Content | Coverage | Use |
+| --- | --- | --- | --- |
+| `efts_dataset.csv` | 24,486 rows, 21 ETFs, 1,166 dates | 2 January 2020–20 August 2024 | Adjusted closes for allocation and full-universe diagnostics |
+| `F-F_Research_Data_5_Factors_2x3_monthly.csv` | 732 monthly rows | July 1963–June 2024 | Five-factor excess-return attribution |
+| `Inflation-data.xlsx` | World Bank inflation workbook | Aggregate global series, 1970–2023 | Annual inflation chart |
+| `WS_GLI_csv_col.csv` | 225 BIS series | Selected series through 2023 Q2 | Quarterly bank-credit chart |
 
-The `efts` spelling is retained from the original project. The CSV uses one row per date and ETF, with these headers:
+## ETF prices
 
-```text
-Date,Open,High,Low,Close,Adj Close,Volume,Market Cap,ETF
-```
+The historical `efts` spelling is preserved. Columns are
+`Date,Open,High,Low,Close,Adj Close,Volume,Market Cap,ETF`.
+The maintained loader pivots `Adj Close` before calculating per-asset returns.
+It rejects duplicate keys, invalid dates, missing requested symbols and
+nonpositive/nonfinite prices. It does not fill gaps. End dates are exclusive.
 
-- `Date`: ISO date, such as `2024-08-22`; no duplicate `(Date, ETF)` pairs.
-- OHLC and `Adj Close`: numeric prices; preserve the provider's documented adjustment convention.
-- `Volume`: numeric trading volume.
-- `Market Cap`: numeric ETF AUM snapshot in a consistent currency, despite the historical column name. Record its observation date separately; repeating one snapshot down all rows does not create historical AUM data.
-- `ETF`: one of the 21 symbols listed in the notebook, including SPY.
+`Market Cap` has one value per ETF repeated across all dates. The report describes
+scraped capitalization/AUM, but the observation date is unknown. It is excluded
+from historical estimation. The cache does not include the separately queried
+Treasury-bill yield. Allocation retains a stated constant cash-rate assumption.
 
-Obtain historical prices through a permitted provider. The notebook's fresh-download branch uses `yfinance` with `auto_adjust=False` and `multi_level_index=False`; the historical AUM scraper needs replacement or verification. Missing AUM must not be fabricated. Supply a documented snapshot before attempting AUM-weighted analyses.
+Report Table 1 lists 21 ETFs and one separate risk-free series, rather than 22 ETFs.
+Its eight allocation assets are VUG, SPHD, MTUM, ACWI, XLK, XLE, IEO and GLD.
+SPY is the reference. The remaining 12 ETFs are retained in universe diagnostics
+and attribution. The eight-ETF selection remains retrospective.
 
-For a changed sample window, ensure every symbol has coverage and review missing adjusted prices. The cache loader checks column presence, duplicate observations and per-symbol coverage; it is not a complete data-quality validator.
+## Factors
 
-## Monthly factors: `F-F_Research_Data_5_Factors_2x3_monthly.csv`
+Source: [Kenneth R. French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).
+The unnamed first column is `YYYYMM`; the other columns are `Mkt-RF,SMB,HML,RMW,CMA,RF`.
+`FACTOR_UNIT="percent"` converts percentage points once: `1.0` becomes `0.01`.
+New inputs must contain only monthly rows, without annual tables or footer text.
 
-Source: [Kenneth R. French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html), Fama/French 5 Factors (2x3), monthly.
+Attribution compounds daily returns, conservatively omits both boundary months,
+and intersects dates with the factor vintage. It requires at least 24 aligned
+months and a full-rank design. The default strategy sample is February 2022–June
+2024 (29 months); full-universe attribution uses February 2020–June 2024 (53 months).
+There are no July/August 2024 factors in this file. RF is used for monthly attribution
+only, not silently substituted for the simulation's stated cash-rate assumption.
 
-The original notebook expects a cleaned CSV with an **unnamed first column** holding `YYYYMM` codes:
+These are time-series OLS regressions with classical IID standard errors, not
+Fama–MacBeth cross-sectional estimates. Factor coefficients do not adjust weights.
 
-```text
-,Mkt-RF,SMB,HML,RMW,CMA,RF
-```
+## Macroeconomic context
 
-Remove provider description lines, blank/footer blocks and the annual table, keeping only monthly six-digit date rows. Preserve the header spelling. Do not mix monthly and annual observations.
+Inflation source: [World Bank](https://www.worldbank.org/en/research/brief/inflation-database).
+The `Aggregate` sheet is read by `HCPI_GLOBAL_MED`, `HCPI_GLOBAL_AVE` and
+`HCPI_GLOBAL_AVE_GDP`, preserving annual percentage units rather than row offsets.
 
-Set `FACTOR_UNIT = "percent"` when values follow the standard percentage-point convention, such as `1.0` for 1%. Set it to `"decimal"` only when the file has already been converted. The maintained loader converts once, validates the required columns and rejects implausible decimal values before regression.
+Liquidity source: [BIS](https://data.bis.org/topics/GLI).
+The economic key is `FREQ=Q, CURR_DENOM=TO1, BORROWERS_CTY=5J,
+BORROWERS_SECTOR=A, LENDERS_SECTOR=B, L_POS_TYPE=I, L_INSTR=A,
+UNIT_MEASURE=770, UNIT_MULT=0`. The reader requires exactly one matching series,
+never row 142. The chart retains percent-of-GDP units without min–max normalization.
 
-The source library documents changes to its US return inputs beginning in 2025. Retain the download date and release vintage; a current download may revise historical observations.
+These snapshots lack publication histories and are descriptive context only.
+They do not feed earlier allocation decisions. The report's growth and risk-appetite
+interpretations are not treated as extra supplied time-series datasets.
 
-## Inflation: `Inflation-data.xlsx`
+## Reuse
 
-Source: [World Bank inflation database](https://www.worldbank.org/en/research/brief/inflation-database).
-
-The research reads worksheet `Aggregate`, columns `B:BG`, first five data rows, then transposes, promotes a row to headers and assigns four labels: `Year`, `Median`, `Average`, `GDP-weighted Average`. This is a positional assumption about the historical workbook. Inspect the workbook before running; a renamed current download alone is insufficient. Adapt the reader if the sheet layout changed and record the transformation.
-
-## Global liquidity: `WS_GLI_csv_col.csv`
-
-Source: [BIS global liquidity indicators](https://data.bis.org/topics/GLI).
-
-The original input is a wide CSV containing metadata columns `L_POS_TYPE`, `BORROWERS_CTY`, `BORROWERS_SECTOR`, `UNIT_MEASURE`, and quarterly columns such as `1996-Q1`.
-
-The code filters those metadata fields to `I`, `5J`, `A`, and `770`, respectively. Later it directly selects row label `142`. This row identity is not stable across exports. Verify the intended series by its metadata and stable series key; adapt that selection rather than assuming a fresh export has the same row order.
-
-## Provenance record for a future reproducible release
-
-For each input, record source URL, download timestamp, release/vintage, units, currency where relevant, observation window, adjustment settings, transformations and SHA-256 hash. Preserve the original input alongside any cleaned derivative outside the public repository unless redistribution is permitted. No data license is granted by this project.
+Inputs are included at the owner's request for private research. The project grants
+no third-party data rights; review provider redistribution terms before making
+them public. The declaration, duplicate report DOCX, exported notebook HTML and
+bytecode cache are excluded. The PDF and notebook source retain the historical record.

@@ -17,9 +17,14 @@ Thumbs.db
 *.pem
 *.key
 
-# Data are obtained separately; retain only the documentation.
+# Keep the four declared submission inputs; ignore unrelated local data.
 data/*
 !data/README.md
+!data/manifest.json
+!data/efts_dataset.csv
+!data/F-F_Research_Data_5_Factors_2x3_monthly.csv
+!data/Inflation-data.xlsx
+!data/WS_GLI_csv_col.csv
 
 # Local outputs and backups
 outputs/

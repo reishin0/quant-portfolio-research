@@ -20,7 +20,7 @@ and the tested Python modules form the single maintained implementation.
 | Fama-French percentage points were mixed with decimal ETF returns | The maintained loader requires an explicit `percent` or `decimal` unit, converts once, validates the schema, compounds portfolios to monthly frequency and runs aligned five-factor excess-return regressions. |
 | Optimizer names did not always match their objectives | Each named allocation has a matching explicit objective: portfolio variance, Black-Litterman Sharpe, or tracking variance. Solver success, bounds and the full-investment constraint are checked. |
 | Higher-moment results used weights from another optimization | A dedicated optimizer now evaluates each candidate portfolio's own annual mean and variance, skewness and excess kurtosis, and returns its own checked weights. |
-| Selection and evaluation used the same sample | The amended workflow starts with 504 prior observations, refits on an expanding window at each month start, and applies each target only to later observations. |
+| Selection and evaluation used the same sample | Numerical fitting uses 504 prior observations and monthly expanding windows. This does not correct the retrospective eight-ETF selection or August 2024 views; the results are explicitly retrospective scenarios. |
 | Costs and turnover were absent | Monthly one-way turnover is recorded. The default deducts 10 basis points per unit of one-way turnover, including initial investment, from the walk-forward return stream. |
 | Current beta, AUM and risk-free inputs were mixed with historical observations | The maintained workflow uses no live beta or AUM. It uses equal prior weights and one user-stated annual risk-free assumption recorded with each run. BAB betas are estimated within each prior training window. |
 | BAB used a full-sample ranking without beta-neutral scaling or costs | Each rebalance estimates betas from prior observations, scales low/high legs to zero estimated market beta, bounds gross exposure and includes transaction and short-borrow costs. |
@@ -38,6 +38,29 @@ and the tested Python modules form the single maintained implementation.
 - Transaction cost is `turnover × basis points / 10,000` and is deducted on the
   rebalance observation.
 - SPY is an uncosted reference series, not an investable strategy in this example.
+
+## Integration of the actual submission (8 October 2026)
+
+The actual submission directory supplied the 49-page report, four original data
+files, notebook and its `utils.py` dependency. The existing archive notebook was
+replaced from that source, retaining all 127 code cells unchanged. Saved outputs,
+execution counts and cell metadata were cleared; IDs and a provenance note were
+added and the title attribution shortened. The PDF and data bytes are unchanged.
+`data/manifest.json` records source and imported hashes. Duplicate HTML/DOCX,
+bytecode and the declaration were excluded.
+
+| Evidence in submission | Maintained implementation |
+| --- | --- |
+| Report Table 1, page 5: 21 ETFs plus RFR, with eight selected ETFs | Default `submission` mode consumes the actual adjusted closes. All 21 ETFs are retained for coverage, initial-training correlation and factor attribution. The allocation universe remains the documented eight assets. |
+| Price cache ends 20 August 2024; each ETF has one repeated AUM value | Actual coverage is reported, never extrapolated. Snapshot AUM is excluded from historical priors. No historical Treasury-bill series is fabricated. |
+| Factor file ends June 2024 | Decimal-unit conversion, geometric monthly returns, conservative removal of first/last partial-month risk, and an explicit overlap period. Require 24 months and full-rank OLS. |
+| Report section 4.6 discusses factor regressions and weight tilts | Maintained output is labelled time-series OLS attribution with IID standard errors. It does not claim Fama–MacBeth estimation or automatic factor tilting. |
+| Report section 4.7: macroeconomic context | World Bank series are selected by name; BIS series by full metadata key, not row 142. Charts retain percent and percent-of-GDP units. Release histories are unavailable, so these charts are context only. |
+| Report section 4.8, pages 33–34: views as of 21 August 2024 | These views postdate the last supplied price. Earlier evaluation is a retrospective scenario, even though covariance/beta fitting is chronological. This limitation is now explicit in output metadata. |
+
+`run_project.bat --check` and its shell equivalent now execute the actual submission
+inputs by default. `--mode synthetic` remains an explicit software validation path.
+Synthetic returns are not regressed against actual historical factors.
 
 The output includes target-weight history, rebalance-level turnover, summarized
 cost estimates, net walk-forward returns, assumptions, dates and a hash of the

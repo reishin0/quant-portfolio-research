@@ -1,5 +1,14 @@
 # Changelog
 
+## 8 October 2026 — actual submission inputs
+
+- Import the original report, notebook lineage, helper and four input files with hashes.
+- Add offline submission mode as the notebook/report default.
+- Restore inflation and BIS bank-credit charts with named-series selection.
+- Fit factors for the full 21-ETF universe and evaluated strategies using the actual vintage.
+- Exclude monthly boundaries, enforce adequate overlap and reject rank-deficient factor designs.
+- Declare retrospective universe/view selection and preserve original code cells separately.
+
 ## 8 October 2026 — professional research consolidation
 
 - Made `portfolio_construction.ipynb` the single authoritative analysis.

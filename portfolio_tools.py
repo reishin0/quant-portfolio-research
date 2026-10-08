@@ -22,7 +22,8 @@ BENCHMARK = 'SPY'
 PERIODS_PER_YEAR = 252
 
 
-def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42):
+def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42,
+                cache_path=None):
     """Return a date-by-symbol table and provenance; never silently change mode."""
     start_date, end_date = pd.Timestamp(start), pd.Timestamp(end)
     if pd.isna(start_date) or pd.isna(end_date) or start_date >= end_date:
@@ -45,6 +46,14 @@ def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42)
         mode = 'synthetic'
         label = 'SYNTHETIC VALIDATION DATA - not real ETF performance'
         details = {'seed': seed, 'calendar': 'weekdays, including market holidays'}
+    elif mode == 'submission':
+        from submission_data import DATA_DIR, file_sha256, load_submission_prices
+        path = Path(cache_path) if cache_path else DATA_DIR / 'efts_dataset.csv'
+        prices = load_submission_prices(path, symbols, start, end)
+        label = 'SUBMISSION SNAPSHOT - adjusted ETF prices supplied with the 2024 study'
+        details = {'source_file': path.name, 'source_file_sha256': file_sha256(path),
+                   'price_field': 'Adj Close', 'aum_used': False,
+                   'vintage': '2024 submission; exact provider download timestamp unknown'}
     elif mode == 'yahoo':
         import yfinance as yf
         try:
@@ -65,7 +74,7 @@ def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42)
         label = 'YAHOO FINANCE - adjusted historical prices, downloaded now'
         details = {'auto_adjust': True, 'downloaded_utc': datetime.now(timezone.utc).isoformat()}
     else:
-        raise ValueError('DATA_MODE must be "synthetic" or "yahoo".')
+        raise ValueError('DATA_MODE must be "submission", "synthetic" or "yahoo".')
 
     prices = prices.sort_index()
     if prices.index.has_duplicates:
@@ -364,7 +373,10 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'kelly_fraction': result['kelly_fraction'],
                 'bab_gross_limit': result['bab_gross_limit'],
                 'portfolio_methods': list(result['weights'].columns),
-                'evaluation': ('chronological expanding-window walk-forward illustration; '
-                               'targets use prior observations only; results are not investment evidence')}
+                'universe_selection': 'fixed eight ETFs selected retrospectively in the 2024 study',
+                'views_as_of': '2024-08-21',
+                'evaluation': ('retrospective scenario with chronological walk-forward parameter fitting; '
+                               '2024 universe and views are applied to earlier dates; '
+                               'not a point-in-time out-of-sample strategy test')}
     (target / 'run_info.json').write_text(json.dumps(metadata, indent=2), encoding='utf-8')
     return target

@@ -23,7 +23,9 @@ def run(command, *, env, capture=False):
 
 def main():
     parser = argparse.ArgumentParser(description='Set up and open the portfolio-construction research notebook.')
-    parser.add_argument('--check', action='store_true', help='Execute deterministic validation and export HTML without opening a browser.')
+    parser.add_argument('--check', action='store_true', help='Execute the research notebook and export HTML without opening a browser.')
+    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='submission',
+                        help='Data for --check/--report; defaults to the frozen submission.')
     parser.add_argument('--report', action='store_true', help='Execute validation and open the HTML report instead of Jupyter.')
     parser.add_argument('--repair', action='store_true', help='Recheck/install dependencies without removing the environment.')
     args = parser.parse_args()
@@ -74,8 +76,8 @@ def main():
     for key in ['JUPYTER_CONFIG_DIR', 'JUPYTER_DATA_DIR', 'JUPYTER_RUNTIME_DIR', 'IPYTHONDIR', 'MPLCONFIGDIR']:
         Path(env[key]).mkdir(parents=True, exist_ok=True)
     if args.check or args.report:
-        print('4/4  Running deterministic validation and writing a report...', flush=True)
-        command = [PYTHON, ROOT / 'run_analysis.py']
+        print(f'4/4  Running {args.mode} analysis and writing a report...', flush=True)
+        command = [PYTHON, ROOT / 'run_analysis.py', '--mode', args.mode]
         if args.report and not args.check:
             command.append('--open')
         run(command, env=env)

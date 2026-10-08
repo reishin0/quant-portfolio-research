@@ -27,7 +27,7 @@ class ResearchExtensionChecks(unittest.TestCase):
     def test_monthly_compounding_is_geometric(self):
         daily = pd.DataFrame({'A': np.tile([.1, -.1], 20)},
                              index=pd.bdate_range('2024-01-02', periods=40))
-        result = monthly_compound(daily)
+        result = monthly_compound(daily, trim_boundary_months=False)
         january = daily.loc['2024-01', 'A']
         expected = (1 + january).prod() - 1
         self.assertAlmostEqual(result.iloc[0, 0], expected)

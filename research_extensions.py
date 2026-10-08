@@ -27,13 +27,20 @@ def _numeric_frame(frame, name, minimum_rows=24):
     return result.sort_index()
 
 
-def monthly_compound(daily_returns):
-    """Compound decimal daily returns into calendar-month decimal returns."""
+def monthly_compound(daily_returns, trim_boundary_months=True):
+    """Compound daily returns; conservatively exclude both boundary months.
+
+    A return-only series cannot prove complete first/last month coverage. Trimming
+    prevents partial periods being regressed against full-month factor returns.
+    Set False only when complete coverage has been independently established.
+    """
     daily = _numeric_frame(daily_returns, 'daily_returns', minimum_rows=40)
     if not isinstance(daily.index, pd.DatetimeIndex):
         raise ValueError('daily_returns must use a DatetimeIndex.')
     periods = daily.index.to_period('M')
     monthly = (1 + daily).groupby(periods).prod() - 1
+    if trim_boundary_months:
+        monthly = monthly.iloc[1:-1]
     monthly.index = monthly.index.to_timestamp('M')
     return monthly
 
@@ -46,6 +53,8 @@ def load_fama_french_csv(path, unit='percent'):
     date_column = frame.columns[0]
     dates = frame[date_column].astype(str).str.strip()
     valid = dates.str.fullmatch(r'\d{6}')
+    if not valid.all():
+        raise ValueError('Cleaned factor file must contain only YYYYMM monthly rows.')
     frame = frame.loc[valid].copy()
     frame.index = pd.to_datetime(dates.loc[valid], format='%Y%m') + pd.offsets.MonthEnd(0)
     required = FACTOR_COLUMNS + ['RF']
@@ -74,9 +83,11 @@ def factor_regression(monthly_asset_returns, monthly_factors):
     if not set(required).issubset(factors.columns):
         raise ValueError(f'monthly_factors requires {required}.')
     joined = assets.join(factors[required], how='inner').dropna()
-    if len(joined) < len(FACTOR_COLUMNS) + 3:
-        raise ValueError('Too few aligned months for factor regression.')
+    if len(joined) < 24:
+        raise ValueError('Too few aligned months for factor regression; at least 24 required.')
     x = np.column_stack([np.ones(len(joined)), joined[FACTOR_COLUMNS].to_numpy()])
+    if np.linalg.matrix_rank(x) < x.shape[1]:
+        raise ValueError('Factor design matrix is rank deficient.')
     xtx_inverse = np.linalg.pinv(x.T @ x)
     rows = []
     for asset in assets.columns:
@@ -92,7 +103,9 @@ def factor_regression(monthly_asset_returns, monthly_factors):
         r_squared = 1 - float(residuals @ residuals) / total if total > 0 else np.nan
         row = {'Portfolio': asset, 'Annual alpha': coefficients[0] * 12,
                'Alpha t-stat': t_stats[0], 'R-squared': r_squared,
-               'Observations': len(y)}
+               'Observations': len(y),
+               'First month': str(joined.index.min().date()),
+               'Last month': str(joined.index.max().date())}
         for number, factor in enumerate(FACTOR_COLUMNS, start=1):
             row[f'{factor} loading'] = coefficients[number]
             row[f'{factor} t-stat'] = t_stats[number]
