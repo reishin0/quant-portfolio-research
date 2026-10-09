@@ -18,7 +18,7 @@ The work originated as a CQF Final Project submission titled **Portfolio Constru
 - Higher-moment utility using the portfolio's own mean, variance, skewness and excess kurtosis.
 - Cash-aware constrained full-Kelly log-growth allocation, followed by fractional scaling.
 - Betting-against-beta construction with low/high beta legs, zero estimated market beta and bounded gross exposure.
-- Fama–French five-factor attribution when an updated factor file is selected; the original June-2024 file is inactive by default.
+- Fama–French five-factor attribution using the October 2026 download through August 2026; the original June-2024 file stays inactive.
 - Original World Bank inflation and BIS bank-credit charts retained behind an explicit historical-context opt-in.
 - Expanding-window monthly walk-forward evaluation using only information available before each rebalance.
 - Weight drift, one-way turnover, transaction costs, short-borrow costs, cash financing and timestamped outputs.
@@ -105,7 +105,7 @@ commented and declared as original, rather than silently reused:
 DATA_MODE = "yahoo"
 START_DATE = "2020-01-01"
 END_DATE = "2026-10-09"  # Exclusive: request through 8 October 2026.
-FACTOR_FILE = None
+FACTOR_FILE = "data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv"
 INVESTOR_VIEWS = []
 VIEWS_AS_OF = None
 RUN_ORIGINAL_CONTEXT = False
@@ -133,21 +133,34 @@ The main implementation assumptions are visible in the first notebook cell:
 | `RUN_NETWORK_CONTEXT` | False | Explicit opt-in for appendix market context and current metadata |
 | `RUN_ORIGINAL_CONTEXT` | False | Explicit opt-in for unchanged original AUM/macro illustrations |
 | `INVESTOR_VIEWS` | Empty | No original views applied; posterior equals the equilibrium prior |
-| `FACTOR_FILE` | None | Attribution inactive until a factor file is explicitly selected |
+| `FACTOR_FILE` | October 2026 download | Current factor vintage through August 2026 |
 
-## Factor data
+## Factor data and professional views
 
-The **original 2024 submission** Kenneth French file is preserved at the path
-below, but its configuration is commented out. Supply an updated cleaned file
-via `FACTOR_FILE` to enable the factor analysis and related experiments:
+The active [monthly factors](data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv)
+contain 758 observations from July 1963 through August 2026, downloaded from the
+[Kenneth French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
+on 9 October 2026. The source ZIP and hash/cleaning metadata are also in `data/`.
+September/October values are not fabricated. Percentage points are converted once
+to decimals. Current CIZ-based history may revise older returns: this is a current
+vintage for retrospective attribution, not a historical release database. The
+original June-2024 file is unchanged and its setting remains commented out.
 
-```text
-data/F-F_Research_Data_5_Factors_2x3_monthly.csv
-```
+The [professional-view evidence](data/professional_views_20261009.json) records
+JPM's official 1 October 2026 allocation outlook and the June 2020 report found in
+Drive. The Drive upload date is not the report's publication date. The notebook
+shows source links, dates and the limitations of translating those views to this
+ETF universe. No qualitative preference is silently converted into a numerical
+ETF spread or confidence. `INVESTOR_VIEWS=[]` therefore retains the prior.
 
-Set `FACTOR_UNIT = "percent"` for the standard library convention where `1.0` means 1%, or `"decimal"` if the file has already been converted. The loader validates the date rows and required columns before regression. See [`data/README.md`](data/README.md).
-This vintage ends in June 2024. Attribution omits boundary months and reports the
-actual overlapping dates. Synthetic mode skips regressions against real factors.
+Nonempty numerical views require `VIEWS_AS_OF="YYYY-MM-DD"`. Each rebalance uses
+only views published strictly before its preceding observed close. Date-only
+publications are treated as available after their entire publication day. The
+October 1 report cannot affect October's first-day target; no eligible monthly
+rebalance occurs before this sample ends on October 8. Every run exports
+`view_history.csv` and its first activation date. Fixed numerical scenarios persist
+after activation; a time-limited forecast needs an explicit validity/review policy
+before activation. See [data documentation](data/README.md) for provenance.
 
 ## Outputs
 

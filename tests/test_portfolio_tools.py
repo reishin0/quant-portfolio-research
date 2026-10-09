@@ -92,6 +92,44 @@ class PortfolioChecks(unittest.TestCase):
             net_wealth = (1 + with_cost['portfolio_returns'][name]).prod()
             self.assertLess(net_wealth, gross_wealth)
 
+    def test_views_change_only_allocations_after_publication(self):
+        prices = self.prices.iloc[:650]
+        baseline = analyze(prices)
+        dates = baseline['view_history'].index
+        publication = dates[2].strftime('%Y-%m-%d')
+        amended = analyze(prices, investor_views=[('GLD', 'MTUM', .15, .9)],
+                          views_as_of=publication)
+        history = amended['view_history']
+        expected = history['Decision close'].dt.normalize() > pd.Timestamp(publication)
+        np.testing.assert_array_equal(history['Active views'], expected.astype(int))
+        before = amended['weight_history'].index.get_level_values('Date') <= pd.Timestamp(publication)
+        pd.testing.assert_frame_equal(amended['weight_history'].loc[before],
+                                     baseline['weight_history'].loc[before])
+        pd.testing.assert_frame_equal(amended['portfolio_returns'].loc[:publication],
+                                     baseline['portfolio_returns'].loc[:publication])
+        active_dates = history.index[expected]
+        self.assertGreater(len(active_dates), 0)
+        changed = amended['weight_history'].xs('BL maximum Sharpe', level='Portfolio').loc[active_dates]
+        original = baseline['weight_history'].xs('BL maximum Sharpe', level='Portfolio').loc[active_dates]
+        self.assertFalse(np.allclose(changed, original))
+
+    def test_unknown_publication_time_does_not_enter_previous_close_trade(self):
+        prices = self.prices.iloc[:600]
+        baseline = analyze(prices)
+        publication = baseline['view_history']['Decision close'].iloc[-1].strftime('%Y-%m-%d')
+        amended = analyze(prices, investor_views=[('GLD', 'MTUM', .15, .9)],
+                          views_as_of=publication)
+        pd.testing.assert_frame_equal(baseline['weight_history'], amended['weight_history'])
+        self.assertEqual(amended['view_history']['Active views'].sum(), 0)
+        np.testing.assert_allclose(amended['prior'], amended['posterior'])
+
+    def test_nonempty_views_require_valid_publication_date(self):
+        for date in [None, '', 'not a date', '2026-02-30', '2026-1-2']:
+            with self.subTest(date=date), self.assertRaisesRegex(ValueError, 'VIEWS_AS_OF'):
+                analyze(self.prices, investor_views=[('GLD', 'MTUM', .15, .9)], views_as_of=date)
+        with self.assertRaisesRegex(ValueError, 'different known assets'):
+            analyze(self.prices, investor_views=[('BAD', 'MTUM', .15, .9)], views_as_of='2099-01-01')
+
     def test_infeasible_cap_explains_problem(self):
         with self.assertRaisesRegex(ValueError, 'MAX_WEIGHT'):
             analyze(self.prices, max_weight=.10)

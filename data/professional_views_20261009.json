@@ -1,0 +1,41 @@
+{
+  "retrieved_at_utc": "2026-10-09T02:56:06.796063+00:00",
+  "status": "research_only_pending_numeric_mapping",
+  "active_views": [],
+  "sources": [
+    {
+      "id": "jpm_drive_20200609",
+      "title": "Quantitative Perspectives on Cross-Asset Risk Premia",
+      "publication_date": "2020-06-09",
+      "disseminated_at": "2020-06-09T17:32:00+08:00",
+      "drive_uploaded_at": "2026-10-09T01:36:23.241Z",
+      "url": "https://drive.google.com/file/d/14Dz2Fg05je4Ow_1yl0ZFMAXpdjaLKLa8/view",
+      "status": "historical_reference_only",
+      "note": "The file uploaded in October 2026 is a June 2020 report, not a current outlook. It discusses cross-asset risk premia and model views; no current ETF return spreads are inferred."
+    },
+    {
+      "id": "jpm_gaav_2026q4",
+      "title": "Global Asset Allocation Views 4Q 2026",
+      "publication_date": "2026-10-01",
+      "url": "https://am.jpmorgan.com/nl/en/asset-management/institutional/insights/portfolio-insights/asset-class-views/asset-allocation/",
+      "verification": "Direct publisher HTML fetched; title and Published 01-10-2026 verified. Web cached body returned an older vintage, which was not used.",
+      "retrieved_html_sha256": "d879763005be0a1f30fd04ffbe7a89dcbfdef6a2a21b89149e16d1a694c2bb62",
+      "source_summary": "JPM favors US and Japanese equities, is neutral on Europe and emerging markets, prefers US high-yield carry and European duration. Its S&P 500 price target is 8,600 over 12 months.",
+      "numerical_forecast": {
+        "instrument": "S&P 500 price index",
+        "target_level": 8600,
+        "horizon_months": 12
+      },
+      "mapping_decision": "No active eight-ETF BL view. SPY is a benchmark, not an allocation asset; US style/sector ETFs are not exact S&P 500 substitutes. No relative annual ETF return differences or numerical confidences are supplied. The index target is not a total-return forecast.",
+      "earliest_use_policy": "Only at a monthly rebalance whose preceding observed close falls strictly after 2026-10-01; the October 1 rebalance is ineligible. No eligible rebalance occurs in the sample ending October 8."
+    }
+  ],
+  "activation_requirements": [
+    "Compatible ETF exposures or explicitly declared proxy assumptions",
+    "Annual relative-return difference in decimal units",
+    "Model uncertainty/confidence declared separately from provider claims",
+    "Publication date in YYYY-MM-DD; same-day returns excluded",
+    "Explicit validity horizon or review policy before activating a time-limited forecast"
+  ],
+  "policy": "Sources are research evidence, not executable signals. Do not infer return spreads from qualitative overweight/underweight language. Active numerical inputs remain in notebook configuration. A Drive upload date never substitutes for publication date."
+}

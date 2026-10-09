@@ -1,4 +1,4 @@
-# Submission inputs and provenance
+# Data inputs and provenance
 
 The four original inputs are included unchanged in this private repository.
 `manifest.json` records their SHA-256 hashes, sizes, units and coverage, plus
@@ -6,8 +6,8 @@ the report and original notebook lineage. Provider download timestamps are unkno
 
 **ORIGINAL 2024 SUBMISSION — inactive reference data by default.** Their notebook
 configuration lines are commented and labelled as original. The active price run
-uses Yahoo through 8 October 2026. `FACTOR_FILE=None` disables the old factor file,
-and `RUN_ORIGINAL_CONTEXT=False` disables the unchanged macro/AUM illustrations.
+uses Yahoo through 8 October 2026. `FACTOR_FILE` selects a new October 2026
+factor download; `RUN_ORIGINAL_CONTEXT=False` disables the unchanged macro/AUM illustrations.
 Explicitly selecting submission mode opts into the original price cache only.
 
 | File | Content | Coverage | Use |
@@ -16,6 +16,37 @@ Explicitly selecting submission mode opts into the original price cache only.
 | `F-F_Research_Data_5_Factors_2x3_monthly.csv` | 732 monthly rows | July 1963–June 2024 | Five-factor excess-return attribution |
 | `Inflation-data.xlsx` | World Bank inflation workbook | Aggregate global series, 1970–2023 | Annual inflation chart |
 | `WS_GLI_csv_col.csv` | 225 BIS series | Selected series through 2023 Q2 | Quarterly bank-credit chart |
+
+## Current additions: 9 October 2026
+
+- `F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv`: 758 monthly rows,
+  July 1963-August 2026, stored in percentage points.
+- `ff5_source_20261009.zip`: unmodified official source download.
+- `ff5_provenance_20261009.json`: URL, UTC retrieval time, hashes, coverage,
+  units and exact cleaning rule. Keep only six-digit YYYYMM rows, strip field
+  whitespace, retain numeric strings, and omit the annual table/footer.
+- `professional_views_20261009.json`: dated source review and mapping decisions.
+  This file contains research evidence, not executable numerical signals.
+
+The factor loader divides percentages by 100 once. The notebook checks the
+selected current CSV against its recorded hash. The new vintage replaces the
+whole factor series for attribution; it is not appended to the 2024 snapshot.
+The provider moved from CRSP FIZ to CIZ beginning with the January 2025 release,
+and historical observations can change. These revised factors are descriptive
+attribution inputs, not point-in-time data used for historical allocation.
+No factor observations beyond the released August 2026 month are manufactured.
+
+The JPM document located in Drive was uploaded on 9 October 2026 but published
+on 9 June 2020. It remains a historical reference. The current official allocation
+outlook is dated 1 October 2026; source URL, target horizon and ETF mapping
+limitations are recorded in the JSON and displayed in the notebook. The source
+index target is not an ETF total-return forecast or a relative ETF return spread.
+No numerical confidence was supplied by the source. No active view is invented.
+
+For explicit numerical views, publication must precede the prior observed close
+used for a monthly target. This conservatively excludes publication-day and
+same-rebalance look-ahead. The report's October 1 publication cannot change the
+October 1 target. `view_history.csv` records eligibility at every rebalance.
 
 ## ETF prices
 
@@ -46,7 +77,7 @@ Attribution compounds daily returns, conservatively omits both boundary months,
 and intersects dates with the factor vintage. It requires at least 24 aligned
 months and a full-rank design. The original-input strategy sample was February 2022–June
 2024 (29 months); full-universe attribution uses February 2020–June 2024 (53 months).
-There are no July/August 2024 factors in this file. RF is used for monthly attribution
+There are no July/August 2024 factors in the original file; the current file extends through August 2026. RF is used for monthly attribution
 only, not silently substituted for the simulation's stated cash-rate assumption.
 
 These are time-series OLS regressions with classical IID standard errors, not

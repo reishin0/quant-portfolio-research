@@ -273,6 +273,9 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
     Each target allocation is fitted only with returns strictly before its
     rebalance date. Targets are held between month starts, asset weights drift
     with returns, and one-way turnover is charged at the stated basis-point rate.
+    Dated views enter only when the preceding observed close is strictly after
+    their publication date. Date-only sources are treated as available after
+    that entire day; the monthly schedule is not changed to force activation.
     """
     if not isinstance(training_days, int) or training_days < 252:
         raise ValueError('TRAINING_DAYS must be an integer of at least 252.')
@@ -281,9 +284,23 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
     if not np.isfinite(annual_short_borrow_bps) or annual_short_borrow_bps < 0:
         raise ValueError('ANNUAL_SHORT_BORROW_BPS must be a finite nonnegative number.')
 
+    configured_views = [] if investor_views is None else list(investor_views)
+    publication_date = None
+    if configured_views:
+        try:
+            parsed = datetime.strptime(views_as_of, '%Y-%m-%d')
+            if parsed.strftime('%Y-%m-%d') != views_as_of:
+                raise ValueError('Noncanonical date')
+            publication_date = pd.Timestamp(parsed)
+        except (TypeError, ValueError) as exc:
+            raise ValueError('Nonempty investor views require VIEWS_AS_OF in YYYY-MM-DD format.') from exc
+
     returns = aligned_returns(prices)
     if len(returns) <= training_days:
         raise ValueError('The aligned history must contain observations after TRAINING_DAYS.')
+    # Validate configured views even if their date lies beyond the sample.
+    black_litterman(returns.iloc[:training_days][ASSETS].cov() * PERIODS_PER_YEAR,
+                   views=configured_views)
     assets = returns[ASSETS]
     benchmark = returns[BENCHMARK]
     evaluation = returns.iloc[training_days:]
@@ -298,6 +315,7 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
     net_dates = []
     target_records = []
     turnover_records = []
+    view_records = []
     borrow_cost_totals = {name: 0.0 for name in methods}
     last_fit = None
     cost_rate = transaction_cost_bps / 10_000
@@ -310,7 +328,15 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         train = returns.iloc[:start_position]
         test = returns.iloc[start_position:stop_position]
         covariance = train[ASSETS].cov() * PERIODS_PER_YEAR
-        prior, posterior, views = black_litterman(covariance, views=investor_views)
+        decision_close = train.index[-1]
+        eligible = (publication_date is not None
+                    and decision_close.normalize() > publication_date)
+        active_views = configured_views if eligible else []
+        prior, posterior, views = black_litterman(covariance, views=active_views)
+        view_records.append({'Date': test.index[0], 'Decision close': decision_close,
+                             'Publication date': views_as_of if configured_views else None,
+                             'Configured views': len(configured_views),
+                             'Active views': len(active_views)})
         targets = optimize_weights(posterior, covariance, train[ASSETS],
                                    train[BENCHMARK], max_weight)
         targets['Higher-moment utility'] = higher_moment_weights(
@@ -384,7 +410,9 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
                 transaction_cost_bps=transaction_cost_bps,
                 annual_short_borrow_bps=annual_short_borrow_bps,
                 kelly_fraction=kelly_fraction, bab_gross_limit=bab_gross_limit,
-                views_as_of=views_as_of if investor_views else None)
+                views_as_of=views_as_of if configured_views else None,
+                configured_view_count=len(configured_views),
+                view_history=pd.DataFrame(view_records).set_index('Date'))
 
 
 def charts(result, label):
@@ -415,7 +443,8 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
     target = parent / f'{provenance["mode"]}_{name}'
     target.mkdir(exist_ok=False)
     for key in ['weights', 'weight_history', 'turnover', 'trading', 'historical',
-                'model', 'portfolio_returns', 'covariance', 'views', 'bab_diagnostics']:
+                'model', 'portfolio_returns', 'covariance', 'views', 'bab_diagnostics',
+                'view_history']:
         table = result[key].copy()
         table.insert(0, 'Data source', provenance['label'])
         table.to_csv(target / f'{key}.csv')
@@ -439,7 +468,11 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'portfolio_methods': list(result['weights'].columns),
                 'universe_selection': 'fixed eight ETFs selected retrospectively in the 2024 study',
                 'views_as_of': result['views_as_of'],
+                'configured_view_count': result['configured_view_count'],
                 'active_view_count': len(result['views']),
+                'view_activation_rule': 'publication date strictly before preceding observed close; monthly rebalances only',
+                'first_view_activation': (str(result['view_history'].query('`Active views` > 0').index[0].date())
+                                          if result['view_history']['Active views'].gt(0).any() else None),
                 'evaluation': ('retrospective scenario with chronological walk-forward parameter fitting; '
                                'the 2024-selected universe is applied to earlier dates; '
                                'only explicitly supplied views are active; '

@@ -1,5 +1,10 @@
 """Behavioral checks for factor, higher-moment, BAB and Kelly methods."""
 import tempfile
+import csv
+import hashlib
+import json
+import re
+import zipfile
 from pathlib import Path
 import unittest
 
@@ -56,6 +61,25 @@ class ResearchExtensionChecks(unittest.TestCase):
         self.assertAlmostEqual(result.loc['Known beta', 'Mkt-RF loading'], 1.5, places=8)
         self.assertAlmostEqual(result.loc['Known beta', 'Annual alpha'], .012, places=8)
         self.assertAlmostEqual(result.loc['Known beta', 'R-squared'], 1.0, places=8)
+
+    def test_current_factor_snapshot_matches_source_and_units(self):
+        data = Path(__file__).resolve().parents[1] / 'data'
+        manifest = json.loads((data / 'ff5_provenance_20261009.json').read_text())
+        raw, monthly = data / manifest['raw_file'], data / manifest['monthly_file']
+        self.assertEqual(hashlib.sha256(raw.read_bytes()).hexdigest(), manifest['raw_sha256'])
+        self.assertEqual(hashlib.sha256(monthly.read_bytes()).hexdigest(), manifest['monthly_sha256'])
+        with zipfile.ZipFile(raw) as archive:
+            text = archive.read(archive.namelist()[0]).decode('utf-8-sig')
+        expected = [[x.strip() for x in next(csv.reader([line]))]
+                    for line in text.splitlines() if re.match(r'^\s*\d{6}\s*,', line)]
+        with monthly.open(newline='') as stream:
+            rows = list(csv.reader(stream))[1:]
+        self.assertEqual(rows, expected)
+        self.assertEqual(len(rows), manifest['rows'])
+        factors = load_fama_french_csv(monthly, unit='percent')
+        expected_dates = pd.date_range('1963-07-31', '2026-08-31', freq='ME')
+        pd.testing.assert_index_equal(factors.index, expected_dates, check_names=False)
+        np.testing.assert_allclose(factors.iloc[-1].to_numpy(), np.array(rows[-1][1:], dtype=float) / 100)
 
     def test_higher_moment_and_kelly_constraints(self):
         higher = higher_moment_weights(self.returns, cap=.30)

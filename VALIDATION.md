@@ -1,5 +1,27 @@
 # Validation record
 
+## 9 October 2026 — refreshed factors and dated-view eligibility
+
+- **50 tests passed**. New checks reproduce the cleaned factor CSV from the raw
+  official ZIP, verify both hashes and percent-to-decimal units, reject undated
+  or malformed views, and prove pre-publication targets and returns are unchanged.
+- Same-day/preceding-close exclusion and post-publication activation passed.
+  Notebook/module calculation parity and all seven original artifact hashes pass.
+- The Yahoo notebook completed **all 44 executable cells**, retaining **15 PNG
+  outputs** plus factor regression tables and professional-source assessments.
+- Prices: **2 January 2020–8 October 2026**, 1,701 rows and nine symbols.
+  Factors: **July 1963–August 2026**, 758 monthly rows.
+- Strategy regressions use **55 months, February 2022–August 2026**; loaded-universe
+  regressions use **79 months, February 2020–August 2026**. No missing months
+  beyond the factor release are filled.
+- The current run has zero configured/active numerical views. JPM evidence is
+  visible but not automatically translated into unsupported ETF return spreads.
+  View history is exported; first activation is null.
+- Report: `outputs/validation_report_20261009T025848_176413Z/`; research outputs:
+  `outputs/yahoo_20261009T025844_683243Z/` (both local ignored artifacts).
+
+The entries below document prior configurations, not current defaults.
+
 ## 9 October 2026 — original inputs inactive; October price update
 
 - **46 tests passed**, including checks that the active notebook configuration

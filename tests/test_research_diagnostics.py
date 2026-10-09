@@ -134,7 +134,7 @@ class RestoredResearchChecks(unittest.TestCase):
         exec(compile(config, 'configuration', 'exec'), scope)
         self.assertEqual(scope['DATA_MODE'], 'yahoo')
         self.assertEqual(scope['END_DATE'], '2026-10-09')
-        self.assertIsNone(scope['FACTOR_FILE'])
+        self.assertEqual(scope['FACTOR_FILE'], 'data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv')
         self.assertEqual(scope['INVESTOR_VIEWS'], [])
         self.assertFalse(scope['RUN_ORIGINAL_CONTEXT'])
         self.assertIn('# ORIGINAL 2024 SUBMISSION', config)

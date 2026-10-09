@@ -1,5 +1,13 @@
 # Changelog
 
+## 9 October 2026 — current factors and publication-date enforcement
+
+- Save official monthly FF5 data through August 2026, raw source and hash provenance under data/.
+- Record JPM Drive and current official report dates and ETF mapping limitations.
+- Enforce publication dates in monthly allocation; export view eligibility and first activation.
+- Use only eligible views in final notebook diagnostics; regenerate visible factor analysis.
+- Preserve all original 2024 inputs unchanged.
+
 ## 9 October 2026 — original-input declaration and current price window
 
 - Comment and label unchanged original price, factor, macro and view settings.

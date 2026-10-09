@@ -1,0 +1,20 @@
+{
+  "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip",
+  "retrieved_at_utc": "2026-10-09T02:53:41.639608+00:00",
+  "raw_file": "ff5_source_20261009.zip",
+  "raw_sha256": "36756c5c2559648519ac4b22913d860c6afd865cfebce920e3e8927f8e2d10b7",
+  "monthly_file": "F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv",
+  "monthly_sha256": "2dfa4801b9a6560850abee81f0134e7d09ad9eed7155c3a649933225ee432094",
+  "first_month": "196307",
+  "last_month": "202608",
+  "rows": 758,
+  "stored_units": "percentage points",
+  "transformation": "Monthly YYYYMM rows only; strip whitespace; preserve numeric strings. Exclude annual table and source prose. Divide by 100 only in loader.",
+  "vintage_note": "Current CIZ research-return vintage; historical values can be revised. Not point-in-time inputs for historical trading. Original 2024 FIZ snapshot remains unchanged.",
+  "source_preamble": [
+    "This file was created using the 202608 CRSP database.",
+    "The 1-month TBill rate data until 202405 are from Ibbotson Associates. Starting from 202406, the 1-month TBill rate is from ICE BofA US 1-Month Treasury Bill Index. ",
+    "The annual TBill return is compounded from the monthly T-bill rates from January to December. ",
+    ""
+  ]
+}

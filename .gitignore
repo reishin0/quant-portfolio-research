@@ -25,6 +25,10 @@ data/*
 !data/F-F_Research_Data_5_Factors_2x3_monthly.csv
 !data/Inflation-data.xlsx
 !data/WS_GLI_csv_col.csv
+!data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv
+!data/ff5_source_20261009.zip
+!data/ff5_provenance_20261009.json
+!data/professional_views_20261009.json
 
 # Local outputs and backups
 outputs/

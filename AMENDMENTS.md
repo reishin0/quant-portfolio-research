@@ -6,6 +6,31 @@
 
 **Source-code reconciliation and accounting corrections:** 9 October 2026
 
+## 9 October 2026: refreshed factors and enforced view chronology
+
+This update supersedes the inactive-factor default described in the earlier entry.
+The new official factor snapshot runs through August 2026. Source ZIP, cleaned
+monthly CSV and provenance metadata are saved separately under `data/`. No original
+input bytes are changed. Current-vintage revised factors are used only for
+retrospective attribution and the explicitly in-sample appendix sensitivity.
+
+**Corrected defect:** the previous implementation recorded `views_as_of` but
+applied supplied views at all historical rebalances. Nonempty views now require
+a valid publication date and are withheld unless the preceding observed close is
+strictly after that date. Tests compare all pre-publication targets and returns
+against a no-view run, and check same-close exclusion and subsequent activation.
+Final P/Q/Omega diagnostics use the actual eligible views, not the configured list.
+Exports distinguish configured and active views and record each rebalance decision.
+
+Professional-source review found that the recently uploaded JPM Drive report is
+from June 2020. The current official October 1, 2026 outlook is separately recorded.
+It does not directly supply annual return spreads/confidences for the eight ETFs;
+its views remain sourced research rather than invented numerical inputs. The
+October 1 monthly target is ineligible for an October 1 publication in any case.
+Fixed scenarios have no automatic expiry; time-limited forecast activation needs
+an explicit validity/review policy. All calculations and source assessments remain
+visible in the main notebook, with regenerated factor outputs.
+
 ## October 2026 active configuration and original-input declaration
 
 Unchanged original 2024 input settings are now commented in the notebook and
