@@ -6,6 +6,29 @@
 
 **Source-code reconciliation and accounting corrections:** 9 October 2026
 
+## October 2026 active configuration and original-input declaration
+
+Unchanged original 2024 input settings are now commented in the notebook and
+labelled **ORIGINAL 2024 SUBMISSION**. The data/report/archive bytes remain intact
+for provenance. The active notebook and report launcher default to Yahoo with
+exclusive end `2026-10-09`; the verified provider history reaches 8 October 2026.
+
+- Original price mode/cutoff, factor-file path, macro-file paths and investor views
+  appear as commented references. Historical context is disabled by default.
+- The original factor file ends June 2024. `FACTOR_FILE=None` makes its analysis
+  and dependent experiments explicitly inactive until an updated file is selected.
+- The original 21-August-2024 views are no longer embedded as active BL defaults.
+  Empty `INVESTOR_VIEWS` returns the equilibrium prior unchanged; explicit supplied
+  views still use the maintained posterior formula. Run metadata records view count
+  and the supplied date instead of hard-coding the original date.
+- The eight-asset selection is still the original study universe. The cash/cost
+  settings remain user assumptions. Neither is represented as refreshed market data.
+- Notebook results are regenerated using Yahoo prices; unchanged factors, macro
+  snapshots and original views are not silently combined with the newer prices.
+
+The dated entries below describe the earlier restoration and corrections; this
+active-input policy supersedes their previous defaults.
+
 **Scope:** maintained professional continuation of the 2024 portfolio study
 
 The August 2024 notebook is retained under `research_archive/` as provenance. Its

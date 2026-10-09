@@ -118,6 +118,28 @@ class RestoredResearchChecks(unittest.TestCase):
         self.assertGreaterEqual(np.linalg.eigvalsh(details['mean_covariance']).min(), -1e-10)
         np.testing.assert_allclose(details['P'].sum(axis=1), 0)
 
+    def test_original_views_are_inactive_unless_explicitly_supplied(self):
+        covariance = self.returns.cov() * 252
+        prior, posterior, views = black_litterman(covariance)
+        np.testing.assert_allclose(prior, posterior)
+        self.assertTrue(views.empty)
+        _, with_view, active = black_litterman(covariance, views=[('GLD', 'MTUM', .15, .9)])
+        self.assertEqual(len(active), 1)
+        self.assertFalse(np.allclose(prior, with_view))
+
+    def test_current_configuration_does_not_activate_original_inputs(self):
+        nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
+        config = ''.join(next(c['source'] for c in nb['cells'] if c['id'] == 'configuration'))
+        scope = {}
+        exec(compile(config, 'configuration', 'exec'), scope)
+        self.assertEqual(scope['DATA_MODE'], 'yahoo')
+        self.assertEqual(scope['END_DATE'], '2026-10-09')
+        self.assertIsNone(scope['FACTOR_FILE'])
+        self.assertEqual(scope['INVESTOR_VIEWS'], [])
+        self.assertFalse(scope['RUN_ORIGINAL_CONTEXT'])
+        self.assertIn('# ORIGINAL 2024 SUBMISSION', config)
+        self.assertIn('# DATA_MODE = "submission"', config)
+
     def test_fitted_returns_include_nonmarket_factors(self):
         rng = np.random.default_rng(22)
         factors = pd.DataFrame(rng.normal(0, .02, (60, 5)), index=pd.date_range('2018-01-31', periods=60, freq='ME'), columns=FACTOR_COLUMNS)

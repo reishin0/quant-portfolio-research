@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parent
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--open', action='store_true', help='Open the finished report in a browser.')
-    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='submission',
-                        help='Default: frozen submission inputs; synthetic is a software check.')
+    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='yahoo',
+                        help='Default: Yahoo prices; submission explicitly opts into original 2024 prices.')
     args = parser.parse_args()
     print('Loading the portfolio-construction notebook...', flush=True)
     nb = nbformat.read(ROOT / 'portfolio_construction.ipynb', as_version=4)

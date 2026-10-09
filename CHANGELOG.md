@@ -1,5 +1,13 @@
 # Changelog
 
+## 9 October 2026 — original-input declaration and current price window
+
+- Comment and label unchanged original price, factor, macro and view settings.
+- Default notebook/report runs to Yahoo adjusted prices through 8 October 2026.
+- Disable original factor/macro/AUM inputs until explicitly selected; retain their analysis code and original files.
+- Make investor views explicit inputs; no views means posterior equals prior, with accurate view-date metadata.
+- Regenerate visible notebook outputs on the updated price history.
+
 ## 9 October 2026 — complete source-analysis reconciliation
 
 - Correct notebook presentation: place all 32 calculation implementations directly in the notebook and retain executed submission tables/charts for GitHub reading. The notebook now has 92 cells, including 44 executable cells; parity tests check its callable Python counterparts.

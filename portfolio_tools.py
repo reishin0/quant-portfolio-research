@@ -126,7 +126,7 @@ def aligned_returns(prices):
 
 
 def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
-                    return_details=False):
+                    return_details=False, views=None):
     """Annual excess-return posterior, using view-scaled uncertainty."""
     names = list(covariance.columns)
     if names != list(covariance.index) or len(names) < 2:
@@ -141,8 +141,14 @@ def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
     weights = np.full(len(names), 1 / len(names)) if prior_weights is None else np.asarray(prior_weights, dtype=float)
     if weights.shape != (len(names),) or not np.isfinite(weights).all() or (weights < 0).any() or not np.isclose(weights.sum(), 1):
         raise ValueError('Prior weights must be finite, nonnegative and sum to one.')
-    # Historical subjective views; they are scenarios, not current predictions.
-    views = [('GLD', 'MTUM', .15, .90), ('XLK', 'XLE', .08, .70), ('SPHD', 'VUG', .06, .80)]
+    # ORIGINAL 2024 SUBMISSION views (21 August 2024); inactive reference only:
+    # views = [('GLD', 'MTUM', .15, .90), ('XLK', 'XLE', .08, .70), ('SPHD', 'VUG', .06, .80)]
+    views = [] if views is None else list(views)
+    for view in views:
+        if (len(view) != 4 or view[0] not in names or view[1] not in names
+                or view[0] == view[1] or not np.isfinite(view[2:]).all()
+                or not 0 < view[3] <= 1):
+            raise ValueError('Views require two different known assets, a finite annual difference and confidence in (0, 1].')
     p = np.zeros((len(views), len(names)))
     for j, (long_asset, short_asset, _, _) in enumerate(views):
         p[j, names.index(long_asset)] = 1
@@ -260,7 +266,8 @@ def portfolio_step(weights, cash, asset_returns, daily_rf, daily_borrow_rate, co
 
 def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
             transaction_cost_bps=10.0, annual_short_borrow_bps=100.0,
-            kelly_fraction=0.5, bab_gross_limit=2.0):
+            kelly_fraction=0.5, bab_gross_limit=2.0,
+            investor_views=None, views_as_of=None):
     """Run an expanding-window, monthly walk-forward portfolio comparison.
 
     Each target allocation is fitted only with returns strictly before its
@@ -303,7 +310,7 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         train = returns.iloc[:start_position]
         test = returns.iloc[start_position:stop_position]
         covariance = train[ASSETS].cov() * PERIODS_PER_YEAR
-        prior, posterior, views = black_litterman(covariance)
+        prior, posterior, views = black_litterman(covariance, views=investor_views)
         targets = optimize_weights(posterior, covariance, train[ASSETS],
                                    train[BENCHMARK], max_weight)
         targets['Higher-moment utility'] = higher_moment_weights(
@@ -376,7 +383,8 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
                 evaluation_end=evaluation.index[-1], training_days=training_days,
                 transaction_cost_bps=transaction_cost_bps,
                 annual_short_borrow_bps=annual_short_borrow_bps,
-                kelly_fraction=kelly_fraction, bab_gross_limit=bab_gross_limit)
+                kelly_fraction=kelly_fraction, bab_gross_limit=bab_gross_limit,
+                views_as_of=views_as_of if investor_views else None)
 
 
 def charts(result, label):
@@ -430,9 +438,11 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'bab_gross_limit': result['bab_gross_limit'],
                 'portfolio_methods': list(result['weights'].columns),
                 'universe_selection': 'fixed eight ETFs selected retrospectively in the 2024 study',
-                'views_as_of': '2024-08-21',
+                'views_as_of': result['views_as_of'],
+                'active_view_count': len(result['views']),
                 'evaluation': ('retrospective scenario with chronological walk-forward parameter fitting; '
-                               '2024 universe and views are applied to earlier dates; '
+                               'the 2024-selected universe is applied to earlier dates; '
+                               'only explicitly supplied views are active; '
                                'not a point-in-time out-of-sample strategy test')}
     (target / 'run_info.json').write_text(json.dumps(metadata, indent=2), encoding='utf-8')
     return target

@@ -4,6 +4,12 @@ The four original inputs are included unchanged in this private repository.
 `manifest.json` records their SHA-256 hashes, sizes, units and coverage, plus
 the report and original notebook lineage. Provider download timestamps are unknown.
 
+**ORIGINAL 2024 SUBMISSION — inactive reference data by default.** Their notebook
+configuration lines are commented and labelled as original. The active price run
+uses Yahoo through 8 October 2026. `FACTOR_FILE=None` disables the old factor file,
+and `RUN_ORIGINAL_CONTEXT=False` disables the unchanged macro/AUM illustrations.
+Explicitly selecting submission mode opts into the original price cache only.
+
 | File | Content | Coverage | Use |
 | --- | --- | --- | --- |
 | `efts_dataset.csv` | 24,486 rows, 21 ETFs, 1,166 dates | 2 January 2020–20 August 2024 | Adjusted closes for allocation and full-universe diagnostics |
@@ -38,7 +44,7 @@ New inputs must contain only monthly rows, without annual tables or footer text.
 
 Attribution compounds daily returns, conservatively omits both boundary months,
 and intersects dates with the factor vintage. It requires at least 24 aligned
-months and a full-rank design. The default strategy sample is February 2022–June
+months and a full-rank design. The original-input strategy sample was February 2022–June
 2024 (29 months); full-universe attribution uses February 2020–June 2024 (53 months).
 There are no July/August 2024 factors in this file. RF is used for monthly attribution
 only, not silently substituted for the simulation's stated cash-rate assumption.

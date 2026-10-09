@@ -10,16 +10,16 @@ The work originated as a CQF Final Project submission titled **Portfolio Constru
 
 ## Implemented research
 
-- Frozen adjusted ETF prices from the 2024 submission, with explicit Yahoo and synthetic alternatives.
+- Yahoo adjusted ETF prices through the configured October 2026 cutoff; original 2024 settings retained as commented references, with synthetic mode for software checks.
 - Per-asset simple returns with common endpoint trimming and rejection of internal price gaps.
 - Separate annualized covariance and correlation calculations.
-- Black–Litterman prior, stated relative views and variance-scaled view uncertainty.
+- Black–Litterman prior and optional dated relative views with variance-scaled uncertainty; original 2024 views are commented out.
 - Equal-weight, minimum-variance, Black–Litterman maximum-Sharpe and minimum-tracking-error portfolios.
 - Higher-moment utility using the portfolio's own mean, variance, skewness and excess kurtosis.
 - Cash-aware constrained full-Kelly log-growth allocation, followed by fractional scaling.
 - Betting-against-beta construction with low/high beta legs, zero estimated market beta and bounded gross exposure.
-- Fama–French five-factor attribution using the supplied vintage, for all 21 ETFs and the evaluated strategies.
-- World Bank inflation and BIS bank-credit charts selected by named series and economic metadata.
+- Fama–French five-factor attribution when an updated factor file is selected; the original June-2024 file is inactive by default.
+- Original World Bank inflation and BIS bank-credit charts retained behind an explicit historical-context opt-in.
 - Expanding-window monthly walk-forward evaluation using only information available before each rebalance.
 - Weight drift, one-way turnover, transaction costs, short-borrow costs, cash financing and timestamped outputs.
 - Initial-window CAPM comparisons, rolling alpha/beta diagnostics and return-based window selection.
@@ -44,7 +44,7 @@ and defective calculations are replaced with declared corrections. Each source c
 has a hash and destination cell IDs in notebook metadata.
 
 The notebook includes **all 32 calculation functions directly in its code cells**,
-as well as saved submission-data tables and charts. It can be read on GitHub
+as well as saved Yahoo-run tables and charts with actual coverage through 8 October 2026. It can be read on GitHub
 without first running it or opening a separate report. It imports third-party
 libraries, but no project calculation modules. The `.py` files retain matching
 callable functions for tests and reuse; tests enforce agreement with the notebook.
@@ -53,7 +53,8 @@ After **Research interpretation and next work**, supplementary sections retain t
 AUM snapshot illustration, factor-threshold weight heuristic, quartile beta spread,
 inflation/bank-credit context, and optional equity-index/gold/yield/VIX acquisition.
 These sections do not change the seven main strategies. Set `RUN_NETWORK_CONTEXT=True`
-to execute the optional provider calls; default submission mode remains offline.
+to execute the optional extra provider calls. The default Yahoo price run needs
+network access; synthetic mode remains an offline software check.
 
 ## Run the project
 
@@ -73,7 +74,7 @@ sh run_project.command
 
 The launcher creates a local `.venv`, installs the declared dependencies, registers the project kernel and opens [`portfolio_construction.ipynb`](portfolio_construction.ipynb). It does not install into the system Python environment.
 
-For an end-to-end run on the actual submission inputs and an HTML report:
+For an end-to-end run on the active Yahoo price window and an HTML report:
 
 ```powershell
 # Windows
@@ -86,18 +87,28 @@ sh run_project.command --check
 ```
 
 Use `--report` instead of `--check` to open the completed report after execution.
-Use `--check --mode synthetic` for a separate generated-data software check, or
-`--check --mode yahoo` for fresh prices. After dependency installation, submission
-mode requires no network access.
+Use `--check --mode synthetic` for a separate generated-data software check.
+`--check --mode submission` explicitly opts into the original 2024 price cache;
+it does not enable old factors, macro snapshots or investor views automatically.
 
 ## Research configuration
 
-The notebook defaults to the supplied adjusted-price snapshot:
+The notebook defaults to the October 2026 price update. Original settings are
+commented and declared as original, rather than silently reused:
 
 ```python
-DATA_MODE = "submission"
+# ORIGINAL 2024 SUBMISSION — inactive historical references:
+# DATA_MODE = "submission"
+# END_DATE = "2024-08-23"
+# FACTOR_FILE = "data/F-F_Research_Data_5_Factors_2x3_monthly.csv"
+
+DATA_MODE = "yahoo"
 START_DATE = "2020-01-01"
-END_DATE = "2024-08-23"
+END_DATE = "2026-10-09"  # Exclusive: request through 8 October 2026.
+FACTOR_FILE = None
+INVESTOR_VIEWS = []
+VIEWS_AS_OF = None
+RUN_ORIGINAL_CONTEXT = False
 ```
 
 Set `DATA_MODE = "synthetic"` for deterministic offline validation. The program never silently substitutes synthetic prices after a failed Yahoo request.
@@ -120,10 +131,15 @@ The main implementation assumptions are visible in the first notebook cell:
 | `RISK_AVERSIONS` | 0.5, 1, 3.07 | Mean–variance utility scenarios, with cash permitted |
 | `KELLY_COMPARISON_FRACTIONS` | 0.50, 0.66, 1.00 | Net walk-forward sensitivity comparison |
 | `RUN_NETWORK_CONTEXT` | False | Explicit opt-in for appendix market context and current metadata |
+| `RUN_ORIGINAL_CONTEXT` | False | Explicit opt-in for unchanged original AUM/macro illustrations |
+| `INVESTOR_VIEWS` | Empty | No original views applied; posterior equals the equilibrium prior |
+| `FACTOR_FILE` | None | Attribution inactive until a factor file is explicitly selected |
 
 ## Factor data
 
-The supplied Kenneth French factor file is included at:
+The **original 2024 submission** Kenneth French file is preserved at the path
+below, but its configuration is commented out. Supply an updated cleaned file
+via `FACTOR_FILE` to enable the factor analysis and related experiments:
 
 ```text
 data/F-F_Research_Data_5_Factors_2x3_monthly.csv
@@ -142,8 +158,8 @@ Each run creates a new folder under `outputs/` containing:
 - rebalance-level turnover and implementation-cost summaries;
 - expected and realized performance tables;
 - allocation and growth charts;
-- Fama–French strategy and 21-ETF regression outputs in submission mode;
-- universe coverage, initial-training correlation, inflation and bank-credit tables and charts;
+- Fama–French strategy and loaded-universe regression outputs when a factor file is selected;
+- universe coverage and initial-training correlation; original inflation/credit charts only on explicit historical opt-in;
 - restored diagnostic tables/figures, ordered moment tensors and `supplementary_info.json` with source reconciliation;
 - `run_info.json` with price-table hash, date coverage and model assumptions.
 
@@ -169,7 +185,7 @@ Existing output folders are never overwritten.
 
 ## Interpretation limits
 
-Parameter fitting is chronological, but the eight-ETF universe and views were chosen in August 2024. The report dates the views to 21 August, after the supplied prices end. Applying those choices to earlier dates is a retrospective scenario, not a point-in-time out-of-sample strategy test. Macro snapshots lack release-date histories and are descriptive context only. The cost model excludes market impact, taxes and security-locate availability. Multiple-period validation, predeclared universes and dated view histories remain necessary for investment evaluation.
+Parameter fitting is chronological, but the eight-ETF universe was selected in August 2024. Applying that selection to earlier dates remains retrospective. Original views are commented out; no October 2026 view forecasts have been invented. With no supplied views, the BL posterior equals its prior. The 3% cash rate and cost parameters are user-set assumptions, not updated observations. Original macro snapshots lack release-date histories and are inactive descriptive references. The cost model excludes market impact, taxes and security-locate availability. Multiple-period validation, predeclared universes and dated view histories remain necessary for investment evaluation.
 
 No repository license has been selected. Third-party code and data remain subject to their own terms. This project is quantitative research code, not personalized investment advice.
 The inputs are currently included for private research; review provider redistribution

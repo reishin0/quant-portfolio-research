@@ -24,8 +24,8 @@ def run(command, *, env, capture=False):
 def main():
     parser = argparse.ArgumentParser(description='Set up and open the portfolio-construction research notebook.')
     parser.add_argument('--check', action='store_true', help='Execute the research notebook and export HTML without opening a browser.')
-    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='submission',
-                        help='Data for --check/--report; defaults to the frozen submission.')
+    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='yahoo',
+                        help='Data for --check/--report; defaults to Yahoo; submission is original 2024 data.')
     parser.add_argument('--report', action='store_true', help='Execute validation and open the HTML report instead of Jupyter.')
     parser.add_argument('--repair', action='store_true', help='Recheck/install dependencies without removing the environment.')
     args = parser.parse_args()

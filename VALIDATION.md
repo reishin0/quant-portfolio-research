@@ -1,5 +1,29 @@
 # Validation record
 
+## 9 October 2026 — original inputs inactive; October price update
+
+- **46 tests passed**, including checks that the active notebook configuration
+  does not enable the original factor/macro/view inputs and that empty BL views
+  leave the prior unchanged. Explicitly supplied views still update the posterior.
+- The default `launch.py --check` now ran Yahoo mode. **All 44 executable cells
+  completed**, with inactive historical/factor sections printing explicit status.
+- The extended-window synthetic run also completed all 44 executable cells;
+  its report is separate and does not replace the visible Yahoo results.
+- Provider coverage was verified as **2 January 2020–8 October 2026**, with
+  **1,701 price rows across the eight allocation ETFs plus SPY**. The requested
+  exclusive end was `2026-10-09`; no later dates were inferred.
+- The visible notebook now saves this Yahoo run, including **13 PNG chart outputs**.
+  Its snapshot metadata states the actual price coverage. The view count is zero
+  and the view date is null; old 2024 views are not applied to the updated prices.
+- Factor analysis and factor-tilt plots are inactive until a factor file is
+  explicitly supplied. Original AUM/inflation/credit illustrations are disabled
+  unless historical context is explicitly enabled. Their implementation remains
+  visible; no unchanged series has been relabelled as updated.
+- Original data/report/archive bytes still match all seven manifest hashes.
+
+The following dated validation entries describe earlier configurations, including
+the previously saved submission run. They are not the active input defaults.
+
 ## 9 October 2026 — calculations and results inside the notebook
 
 - The maintained notebook now has **92 cells, including 44 executable cells**.
