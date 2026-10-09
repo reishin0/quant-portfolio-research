@@ -4,6 +4,8 @@
 
 **Professional research consolidation:** 8 October 2026
 
+**Source-code reconciliation and accounting corrections:** 9 October 2026
+
 **Scope:** maintained professional continuation of the 2024 portfolio study
 
 The August 2024 notebook is retained under `research_archive/` as provenance. Its
@@ -14,7 +16,7 @@ and the tested Python modules form the single maintained implementation.
 
 | Original issue | Amendment in the executable workflow |
 | --- | --- |
-| Returns crossed ETF boundaries in a long table | Prices remain in a date-by-symbol table. `pct_change(fill_method=None)` runs down each symbol column, and only complete shared dates are retained. |
+| Returns crossed ETF boundaries in a long table | Prices remain in a date-by-symbol table. `pct_change(fill_method=None)` runs down each symbol column. Common unavailable endpoints are trimmed; internal gaps are rejected rather than erasing held-period returns. |
 | Covariance was treated as correlation | Annualized covariance is used by Black-Litterman and the optimizers. Correlation is calculated and labelled separately for display only. |
 | Daily, monthly and annual quantities were mixed | Optimization inputs use annual excess returns and annual covariance. Historical metrics convert daily observations with one documented 252-observation convention. |
 | Fama-French percentage points were mixed with decimal ETF returns | The maintained loader requires an explicit `percent` or `decimal` unit, converts once, validates the schema, compounds portfolios to monthly frequency and runs aligned five-factor excess-return regressions. |
@@ -24,7 +26,44 @@ and the tested Python modules form the single maintained implementation.
 | Costs and turnover were absent | Monthly one-way turnover is recorded. The default deducts 10 basis points per unit of one-way turnover, including initial investment, from the walk-forward return stream. |
 | Current beta, AUM and risk-free inputs were mixed with historical observations | The maintained workflow uses no live beta or AUM. It uses equal prior weights and one user-stated annual risk-free assumption recorded with each run. BAB betas are estimated within each prior training window. |
 | BAB used a full-sample ranking without beta-neutral scaling or costs | Each rebalance estimates betas from prior observations, scales low/high legs to zero estimated market beta, bounds gross exposure and includes transaction and short-borrow costs. |
-| Kelly mixed units and exponentiated simple returns | Fractional Kelly now maximizes mean daily log growth directly, keeps the unused sleeve in cash and checks the allocation constraint and price-domain validity. |
+| Kelly mixed units and exponentiated simple returns | Solve constrained full Kelly with cash available, then scale its risky weights by the fraction. Compound dated simple returns and apply financing and costs consistently. |
+
+## Restored source analyses (9 October 2026)
+
+The supplied notebook contains 213 cells, including 127 code cells. Every code cell
+has a destination and review decision in the maintained notebook's final source
+reconciliation table. Metadata records the exact source-file hash, each code-cell
+hash and destination cell IDs. The maintained notebook now contains 50 cells;
+repeated displays and formula variants are consolidated. Historical files are unchanged.
+
+| Source topic | Restoration and correction |
+| --- | --- |
+| Asset performance and Sortino | Initial-window table, full-history descriptive wealth/drawdown panels and outlier inspection. Downside deviation includes all observations and uses the period cash rate as the target. |
+| Rolling beta/alpha window choice | Compare conditional return residuals for 30/60/90 windows on common initial-training dates. Coefficients exclude the current observation. Realized market returns used for scoring are not claimed as ex-ante forecasts. |
+| CAPM and return-vector comparison | Estimate beta against the same SPY or ACWI proxy used for its premium; compare annual excess returns on one prior window. Current provider beta belongs only in the optional appendix. |
+| Explicit BL calculations | Expose P, Q, Omega, posterior-mean covariance and predictive covariance. Main strategies retain return covariance; predictive covariance is a labelled sensitivity. |
+| Normalizing return estimates into weights; dividing weights by risk aversion | Replace with constrained mean–variance utility at lambda 0.5, 1 and 3.07, with explicit cash. These numerical coefficients are not universal investor classifications. |
+| Higher-order tensors | Contract raw third/fourth-order central moments, then standardize by portfolio volatility. Verify against the higher-moment optimizer's own portfolio. Pairwise standardized slices are not substituted for full tensors. |
+| Factor scatter plots | Plot observed against fitted excess returns using all five factors. Restore loadings/threshold displays with corrected units. |
+| Factor weight multipliers | Preserve +/-10% multipliers as a capped appendix sensitivity, with original numerical and adaptive thresholds explicitly labelled. Calibration metrics use 12 periods/year, not 252. No claim of Fama–MacBeth estimation or predictive performance. |
+| Original quartile beta spread | Fix membership on initial-training betas. Keep the uncosted zero-net-investment payoff separate from the main funded, costed beta-neutral BAB portfolio. |
+| Kelly fractions | Compare 0.50, 0.66 and 1.00 against the same full-Kelly target at each rebalance using the shared net cash/holdings ledger. |
+| Snapshot AUM and cap redistribution | Appendix only: acknowledge one undated repeated snapshot, normalize selected assets and repeatedly enforce all caps. An eight-asset 10% cap is infeasible. |
+| Inflation, credit, six indices, gold, Treasury yield and VIX | Move descriptive macro context after research interpretation. Keep local CPI/BIS charts plus standardized credit. Restore optional network acquisition with accurate price/yield labels, provenance and explicit current-vintage metadata. Replace the hard-coded Kavout URL with symbol-specific Yahoo metadata. |
+
+The same update fixes three defects found in the maintained implementation:
+
+- An internal missing price previously removed complete return dates for every
+  asset. It now fails explicitly, preserving the need for a valuation policy.
+- Borrow charges previously reduced reported NAV without reducing the cash used
+  to calculate later weights. They now debit cash and normalize positions against
+  net wealth. Rebalance transaction costs retain their declared proportional
+  capital deduction before target holdings are established.
+- Kelly previously forced a fixed fraction into risky assets. The cash-aware full
+  solution can now choose all cash; fractions multiply that solution.
+
+These changes invalidate numerical equivalence to earlier BAB and Kelly outputs.
+Previously generated reports remain historical artifacts and are not overwritten.
 
 ## Evaluation contract
 

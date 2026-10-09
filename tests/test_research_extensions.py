@@ -63,7 +63,9 @@ class ResearchExtensionChecks(unittest.TestCase):
         self.assertAlmostEqual(higher.sum(), 1)
         self.assertGreaterEqual(higher.min(), -1e-8)
         self.assertLessEqual(higher.max(), .30 + 1e-8)
-        self.assertAlmostEqual(kelly.sum(), .5)
+        self.assertLessEqual(kelly.sum(), .5 + 1e-7)
+        full = fractional_kelly_weights(self.returns, fraction=1, cap=.30)
+        np.testing.assert_allclose(kelly, full * .5)
         self.assertGreaterEqual(kelly.min(), -1e-8)
         self.assertLessEqual(kelly.max(), .30 + 1e-8)
 

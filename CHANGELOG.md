@@ -1,5 +1,14 @@
 # Changelog
 
+## 9 October 2026 — complete source-analysis reconciliation
+
+- Review and map every one of the supplied notebook's 127 code cells, with hashes and destination IDs.
+- Expand the maintained notebook to 50 cells with CAPM, rolling exposures, BL matrices/covariance, risk-aversion allocations, moment tensors, factor diagnostics and Kelly fraction comparisons.
+- Place AUM, factor-tilt and quartile-spread experiments plus macro/provider context after research interpretation.
+- Consolidate redundant displays and replace invalid formulas explicitly; preserve historical input files unchanged.
+- Reject internal price gaps, debit short-borrow charges from the holdings cash ledger, and solve full Kelly with cash before scaling.
+- Add regression tests for economic identities, chronology, monthly units, caps, source coverage and optional provider calls.
+
 ## 8 October 2026 — actual submission inputs
 
 - Import the original report, notebook lineage, helper and four input files with hashes.

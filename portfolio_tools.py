@@ -98,8 +98,24 @@ def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42,
 
 
 def aligned_returns(prices):
-    """Compute changes within columns, without filling gaps, then align dates."""
-    returns = prices.pct_change(fill_method=None).dropna(how='any')
+    """Trim unavailable endpoints and reject gaps inside the common price history.
+
+    Dropping an internal return row would erase held assets' gains/losses. This
+    function does not invent prices or an exchange calendar for absent dates.
+    """
+    if not isinstance(prices.index, pd.DatetimeIndex) or prices.index.has_duplicates:
+        raise ValueError('Prices require unique datetime observations.')
+    prices = prices.sort_index()
+    if prices.columns.has_duplicates or prices.empty or prices.isna().all().any():
+        raise ValueError('Price columns must be unique and contain observations.')
+    start = max(prices.apply(lambda x: x.first_valid_index()))
+    end = min(prices.apply(lambda x: x.last_valid_index()))
+    common = prices.loc[start:end]
+    if common.isna().any().any():
+        raise ValueError('Internal missing prices: repair the source or define an explicit valuation policy; return days cannot be dropped.')
+    if not np.isfinite(common.to_numpy()).all() or (common <= 0).any().any():
+        raise ValueError('Prices must be finite and positive.')
+    returns = common.pct_change(fill_method=None).iloc[1:]
     if len(returns) < 252:
         raise ValueError('Fewer than 252 complete aligned return observations. Expand the dates or inspect gaps.')
     if not np.isfinite(returns.to_numpy()).all():
@@ -109,7 +125,8 @@ def aligned_returns(prices):
     return returns
 
 
-def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1):
+def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
+                    return_details=False):
     """Annual excess-return posterior, using view-scaled uncertainty."""
     names = list(covariance.columns)
     if names != list(covariance.index) or len(names) < 2:
@@ -138,6 +155,18 @@ def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1)
     omega = np.diag(np.maximum(view_variance, 1e-12) * (1 - confidence) / confidence)
     posterior = prior + scaled @ p.T @ np.linalg.solve(p @ scaled @ p.T + omega, q - p @ prior)
     table = pd.DataFrame(views, columns=['Outperformer', 'Comparator', 'Annual difference', 'Assumed confidence'])
+    if return_details:
+        mean_covariance = scaled - scaled @ p.T @ np.linalg.solve(p @ scaled @ p.T + omega, p @ scaled)
+        labels = [f'{v[0]} - {v[1]}' for v in views]
+        return {
+            'prior': pd.Series(prior, index=names),
+            'posterior': pd.Series(posterior, index=names), 'views': table,
+            'P': pd.DataFrame(p, index=labels, columns=names),
+            'Q': pd.Series(q, index=labels, name='Annual relative view'),
+            'Omega': pd.DataFrame(omega, index=labels, columns=labels),
+            'mean_covariance': pd.DataFrame(mean_covariance, index=names, columns=names),
+            'predictive_covariance': pd.DataFrame(sigma + mean_covariance, index=names, columns=names),
+        }
     return pd.Series(prior, index=names), pd.Series(posterior, index=names), table
 
 
@@ -181,24 +210,52 @@ def optimize_weights(expected_excess, covariance, returns, benchmark, cap=0.35):
     return pd.DataFrame(result_weights, index=names)
 
 
-def historical_metrics(series, annual_rf=0.03):
-    """Daily arithmetic mean/Sharpe, compounded CAGR, and initial-wealth drawdown."""
+def historical_metrics(series, annual_rf=0.03, periods_per_year=PERIODS_PER_YEAR):
+    """Annualized metrics from explicit period frequency; default is daily/252."""
     values = np.asarray(series, dtype=float)
     if len(values) < 2 or not np.isfinite(values).all() or (values <= -1).any():
-        raise ValueError('At least two finite daily returns above -100% are required.')
+        raise ValueError('At least two finite period returns above -100% are required.')
     if not np.isfinite(annual_rf) or annual_rf <= -1:
         raise ValueError('The annual risk-free assumption must be finite and greater than -100%.')
-    volatility = values.std(ddof=1) * np.sqrt(PERIODS_PER_YEAR)
-    excess = values - ((1 + annual_rf) ** (1 / PERIODS_PER_YEAR) - 1)
+    if not np.isfinite(periods_per_year) or periods_per_year <= 0:
+        raise ValueError('periods_per_year must be positive.')
+    volatility = values.std(ddof=1) * np.sqrt(periods_per_year)
+    excess = values - ((1 + annual_rf) ** (1 / periods_per_year) - 1)
+    downside = np.sqrt(np.mean(np.minimum(excess, 0) ** 2) * periods_per_year)
     wealth = np.concatenate([[1.0], np.cumprod(1 + values)])
     drawdown = wealth / np.maximum.accumulate(wealth) - 1
     return {
-        'Annual mean': values.mean() * PERIODS_PER_YEAR,
-        'CAGR': wealth[-1] ** (PERIODS_PER_YEAR / len(values)) - 1,
+        'Annual mean': values.mean() * periods_per_year,
+        'CAGR': wealth[-1] ** (periods_per_year / len(values)) - 1,
         'Annual volatility': volatility,
-        'Sharpe': excess.mean() * PERIODS_PER_YEAR / volatility if volatility > 0 else np.nan,
+        'Sharpe': excess.mean() * periods_per_year / volatility if volatility > 0 else np.nan,
+        'Sortino': excess.mean() * periods_per_year / downside if downside > 0 else np.nan,
         'Max drawdown': drawdown.min(),
     }
+
+
+def portfolio_step(weights, cash, asset_returns, daily_rf, daily_borrow_rate, cost=0.0):
+    """One self-financing holding day; borrow fees debit cash.
+
+    Rebalance costs reduce initial wealth proportionally before target holdings
+    are established. Borrow payments then reduce end-of-day cash and NAV.
+    """
+    weights = np.asarray(weights, dtype=float)
+    asset_returns = np.asarray(asset_returns, dtype=float)
+    if (weights.shape != asset_returns.shape or not np.isfinite(weights).all()
+            or not np.isfinite(asset_returns).all() or (asset_returns <= -1).any()
+            or not np.isfinite([cash, daily_rf, daily_borrow_rate, cost]).all()
+            or not 0 <= cost < 1 or daily_borrow_rate < 0
+            or not np.isclose(weights.sum() + cash, 1)):
+        raise ValueError('Invalid holdings, returns, financing or transaction cost.')
+    fee = float(np.maximum(-weights, 0).sum() * daily_borrow_rate)
+    closing_assets = weights * (1 + asset_returns)
+    closing_cash = cash * (1 + daily_rf) - fee
+    gross = float(closing_assets.sum() + closing_cash)
+    if gross <= 0:
+        raise RuntimeError('Portfolio lost at least 100% after financing and borrow costs.')
+    return ((1 - cost) * gross - 1, closing_assets / gross,
+            closing_cash / gross, fee)
 
 
 def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
@@ -275,19 +332,15 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
             for name in methods:
                 weights_now = current[name]['assets']
                 cash_now = current[name]['cash']
-                short_borrow = float(np.maximum(-weights_now, 0).sum()
-                                     * daily_short_borrow_rate)
-                market_return = float(weights_now @ asset_returns + cash_now * daily_rf)
-                if 1 + market_return <= 0:
-                    raise RuntimeError(f'{name} lost at least 100% before costs on {date.date()}.')
-                after_borrow = market_return - short_borrow
                 cost = turnover_records[-len(methods) + methods.index(name)]['Estimated cost'] if row_number == 0 else 0.0
-                net = (1 - cost) * (1 + after_borrow) - 1
+                net, closing_weights, closing_cash, short_borrow = portfolio_step(
+                    weights_now, cash_now, asset_returns, daily_rf,
+                    daily_short_borrow_rate, cost)
                 net_returns[name].append(net)
                 borrow_cost_totals[name] += short_borrow
                 current[name] = {
-                    'assets': weights_now * (1 + asset_returns) / (1 + market_return),
-                    'cash': cash_now * (1 + daily_rf) / (1 + market_return),
+                    'assets': closing_weights,
+                    'cash': closing_cash,
                 }
         last_fit = (covariance, prior, posterior, views, targets, last_bab_diagnostics)
 
@@ -371,6 +424,9 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'transaction_cost_bps_per_one_way_turnover': result['transaction_cost_bps'],
                 'annual_short_borrow_bps': result['annual_short_borrow_bps'],
                 'kelly_fraction': result['kelly_fraction'],
+                'kelly_definition': 'fraction times constrained full-Kelly risky weights; cash allowed; cap before scaling',
+                'borrow_accounting': 'daily short charges debited from cash; weights normalized by after-borrow NAV',
+                'missing_price_policy': 'trim common endpoints; reject internal missing prices; no inferred exchange calendar',
                 'bab_gross_limit': result['bab_gross_limit'],
                 'portfolio_methods': list(result['weights'].columns),
                 'universe_selection': 'fixed eight ETFs selected retrospectively in the 2024 study',

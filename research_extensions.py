@@ -143,13 +143,20 @@ def higher_moment_weights(returns, cap=0.35, risk_aversion=3.0,
 
 
 def fractional_kelly_weights(returns, annual_rf=0.03, fraction=0.5, cap=0.35):
-    """Maximize sample log growth for a fractional risky sleeve and cash balance."""
+    """Solve capped, unlevered full Kelly with cash, then scale risky weights.
+
+    The fraction is a multiplier of that constrained full-Kelly solution, not
+    a required risky exposure. Negative opportunities may leave all wealth cash.
+    The cap applies to full Kelly before scaling.
+    """
     data = _numeric_frame(returns, 'returns', minimum_rows=252)
     n = data.shape[1]
     if not 0 < fraction <= 1:
         raise ValueError('fraction must be in (0, 1].')
-    if cap <= 0 or cap * n < fraction:
-        raise ValueError('cap is infeasible for the requested Kelly fraction.')
+    if not np.isfinite(cap) or not 0 < cap <= 1:
+        raise ValueError('cap must be in (0, 1].')
+    if not np.isfinite(annual_rf) or annual_rf <= -1:
+        raise ValueError('annual_rf must be finite and greater than -1.')
     daily_rf = (1 + annual_rf) ** (1 / PERIODS_PER_YEAR) - 1
     matrix = data.to_numpy()
 
@@ -157,14 +164,16 @@ def fractional_kelly_weights(returns, annual_rf=0.03, fraction=0.5, cap=0.35):
         gross = 1 + matrix @ weights + (1 - weights.sum()) * daily_rf
         return np.inf if (gross <= 0).any() else -float(np.log(gross).mean())
 
-    start = np.full(n, fraction / n)
+    start = np.zeros(n)
     result = minimize(negative_log_growth, start, method='SLSQP',
                       bounds=[(0, cap)] * n,
-                      constraints=[{'type': 'eq', 'fun': lambda weights: weights.sum() - fraction}],
+                      constraints=[{'type': 'ineq', 'fun': lambda weights: 1 - weights.sum()}],
                       options={'ftol': 1e-12, 'maxiter': 1000})
-    if not result.success:
+    if (not result.success or not np.isfinite(result.x).all()
+            or result.x.min() < -1e-7 or result.x.max() > cap + 1e-7
+            or result.x.sum() > 1 + 1e-7 or not np.isfinite(result.fun)):
         raise RuntimeError(f'Fractional Kelly optimization failed: {result.message}')
-    return pd.Series(result.x, index=data.columns, name='Fractional Kelly')
+    return pd.Series(result.x * fraction, index=data.columns, name='Fractional Kelly')
 
 
 def bab_weights(asset_returns, benchmark_returns, gross_limit=2.0):

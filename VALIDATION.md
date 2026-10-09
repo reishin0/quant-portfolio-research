@@ -1,6 +1,50 @@
 # Validation record
 
-Verified locally on **8 October 2026**. This record applies to the maintained notebook, Python modules, launchers and tests.
+## 9 October 2026 — source reconciliation and restored analyses
+
+- **42 behavioral tests passed**, including 16 new checks for the restored analyses
+  and regression cases from the repository review.
+- **All 50 notebook cells completed on the actual submission inputs** through
+  `launch.py --check`; **all 50 also completed in synthetic mode** through
+  `launch.py --check --mode synthetic`. Conditional data sections state when they
+  are omitted; a completed notebook does not imply live optional-provider coverage.
+- Every one of the supplied 213-cell notebook's **127 code cells** has a source
+  hash, destination cell IDs and a review decision. All destinations exist.
+  The original submission manifest's seven hashes remain valid.
+- Submission mode exported **50 supplemental tables and 14 diagnostic figures**,
+  alongside the main portfolio outputs, source reconciliation and ordered moment tensors.
+- The rolling-window comparison scored 414 common initial-training dates across
+  20 candidate ETFs and selected 30 observations from 30/60/90. No evaluated-period
+  returns were used to choose that window.
+- Tensor-contracted skewness/kurtosis matched the direct portfolio sample within
+  `2e-14` in the submission run. Separate fixtures check known CAPM beta,
+  five-factor fitted returns, scalar mean–variance/cash solutions and capped weights.
+- Regression cases prove that internal missing quotes cannot silently remove a
+  different asset's gain, borrow fees debit cash without changing held share
+  counts, and unfavorable Kelly opportunities can remain all cash.
+- Kelly 0.50/0.66/1.00 comparisons use the same dated ledger; the configured main
+  Kelly series matches its comparison series. Monthly heuristic statistics use 12
+  observations/year and are labelled calibration-only.
+- The optional market/metadata cell passed a mocked-provider execution test.
+  **No live appendix acquisition was performed** in this validation. It requires
+  explicit `RUN_NETWORK_CONTEXT=True`, network access and available provider data.
+- Factor-fit and Kelly-comparison figures were visually inspected. The source
+  notebook is stored with execution counts and outputs cleared; generated reports
+  remain separate timestamped local artifacts.
+
+Environment: the existing Windows Python 3.13.15 project environment; `pip check`
+reported no broken requirements. Local Jupyter emitted its existing Windows
+selector-thread/transport warnings and completed successfully. macOS/Linux and
+other Python versions were not exercised in this update.
+
+The restored diagnostics do not establish prospective investment performance.
+BAB and Kelly results supersede their earlier accounting/definition versions;
+earlier generated reports have been preserved rather than overwritten.
+
+## Historical validation — 8 October 2026
+
+The records below describe earlier notebook versions and their then-current scope.
+They do not override the latest validation above.
 
 ## Actual-submission integration
 
@@ -85,7 +129,7 @@ External-provider availability and historical revisions can change. A successful
 
 `requirements.txt` uses compatibility ranges rather than an exact cross-platform lockfile. Each automated report records the versions actually used in `environment.json`.
 
-## Limits
+## Historical limits before submission integration
 
 macOS, Linux and Python 3.11/3.13 were not rerun for the 8 October consolidation. Factor-regression behavior was verified with controlled fixtures; the project does not redistribute the Kenneth French file, so the complete notebook validation correctly skipped live factor attribution when that local file was absent.
 

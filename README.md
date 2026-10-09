@@ -11,17 +11,22 @@ The work originated as a CQF Final Project submission titled **Portfolio Constru
 ## Implemented research
 
 - Frozen adjusted ETF prices from the 2024 submission, with explicit Yahoo and synthetic alternatives.
-- Per-asset simple returns with explicit missing-data alignment.
+- Per-asset simple returns with common endpoint trimming and rejection of internal price gaps.
 - Separate annualized covariance and correlation calculations.
 - Black–Litterman prior, stated relative views and variance-scaled view uncertainty.
 - Equal-weight, minimum-variance, Black–Litterman maximum-Sharpe and minimum-tracking-error portfolios.
 - Higher-moment utility using the portfolio's own mean, variance, skewness and excess kurtosis.
-- Fractional Kelly log-growth allocation with an explicit cash balance.
+- Cash-aware constrained full-Kelly log-growth allocation, followed by fractional scaling.
 - Betting-against-beta construction with low/high beta legs, zero estimated market beta and bounded gross exposure.
 - Fama–French five-factor attribution using the supplied vintage, for all 21 ETFs and the evaluated strategies.
 - World Bank inflation and BIS bank-credit charts selected by named series and economic metadata.
 - Expanding-window monthly walk-forward evaluation using only information available before each rebalance.
 - Weight drift, one-way turnover, transaction costs, short-borrow costs, cash financing and timestamped outputs.
+- Initial-window CAPM comparisons, rolling alpha/beta diagnostics and return-based window selection.
+- Explicit Black–Litterman P/Q/Omega, posterior mean uncertainty and predictive covariance.
+- Covariance-aware return-vector and risk-aversion allocation comparisons with cash.
+- Third/fourth-order central-moment tensors checked against the actual portfolio return series.
+- Sortino, tracking error, information ratio, factor-fit plots and net Kelly fraction comparisons.
 
 The original 2024 notebook is retained at [`research_archive/portfolio_construction_2024.ipynb`](research_archive/portfolio_construction_2024.ipynb) for provenance. It is not needed by the maintained implementation. [`AMENDMENTS.md`](AMENDMENTS.md) maps the original calculation issues to their current corrections.
 
@@ -31,6 +36,18 @@ the actual submission with 127 code cells unchanged and saved outputs cleared.
 [data/manifest.json](data/manifest.json) records original and imported hashes.
 The report is a historical reference; its numerical conclusions are not the results
 of the amended implementation.
+
+All **127 code cells** from the supplied **213-cell source notebook** are reconciled
+in the maintained notebook's **Source-code reconciliation** appendix. The expanded
+notebook has 50 cells: repeated displays and equivalent calculations are consolidated,
+and defective calculations are replaced with declared corrections. Each source cell
+has a hash and destination cell IDs in notebook metadata.
+
+After **Research interpretation and next work**, supplementary sections retain the
+AUM snapshot illustration, factor-threshold weight heuristic, quartile beta spread,
+inflation/bank-credit context, and optional equity-index/gold/yield/VIX acquisition.
+These sections do not change the seven main strategies. Set `RUN_NETWORK_CONTEXT=True`
+to execute the optional provider calls; default submission mode remains offline.
 
 ## Run the project
 
@@ -91,8 +108,12 @@ The main implementation assumptions are visible in the first notebook cell:
 | `TRAINING_DAYS` | 504 | Observations before the first evaluated target |
 | `TRANSACTION_COST_BPS` | 10 | Cost per unit of one-way turnover |
 | `ANNUAL_SHORT_BORROW_BPS` | 100 | Annual cost against gross short exposure |
-| `KELLY_FRACTION` | 50% | Risky sleeve size; balance remains in cash |
+| `KELLY_FRACTION` | 50% | Scale of constrained full-Kelly risky weights; balance remains in cash |
 | `BAB_GROSS_LIMIT` | 2.0 | Maximum absolute long-plus-short exposure |
+| `ROLLING_WINDOWS` | 30, 60, 90 | Candidates scored only on common initial-training dates |
+| `RISK_AVERSIONS` | 0.5, 1, 3.07 | Mean–variance utility scenarios, with cash permitted |
+| `KELLY_COMPARISON_FRACTIONS` | 0.50, 0.66, 1.00 | Net walk-forward sensitivity comparison |
+| `RUN_NETWORK_CONTEXT` | False | Explicit opt-in for appendix market context and current metadata |
 
 ## Factor data
 
@@ -117,6 +138,7 @@ Each run creates a new folder under `outputs/` containing:
 - allocation and growth charts;
 - Fama–French strategy and 21-ETF regression outputs in submission mode;
 - universe coverage, initial-training correlation, inflation and bank-credit tables and charts;
+- restored diagnostic tables/figures, ordered moment tensors and `supplementary_info.json` with source reconciliation;
 - `run_info.json` with price-table hash, date coverage and model assumptions.
 
 Existing output folders are never overwritten.
@@ -128,6 +150,7 @@ Existing output folders are never overwritten.
 | [`portfolio_construction.ipynb`](portfolio_construction.ipynb) | Authoritative research notebook |
 | [`portfolio_tools.py`](portfolio_tools.py) | Data, Black–Litterman, optimization, walk-forward and reporting code |
 | [`research_extensions.py`](research_extensions.py) | Factor regression, higher moments, Kelly and BAB methods |
+| [`research_diagnostics.py`](research_diagnostics.py) | Restored CAPM, rolling exposure, allocation sensitivity, tensor and factor diagnostics |
 | [`submission_data.py`](submission_data.py) | Frozen prices, named macro series and input-hash verification |
 | [`data/`](data/) | Four original inputs and provenance manifest |
 | [`tests/`](tests/) | Offline behavioral and look-ahead checks |

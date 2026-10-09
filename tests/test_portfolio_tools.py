@@ -27,12 +27,12 @@ class PortfolioChecks(unittest.TestCase):
         index = pd.bdate_range('2020-01-01', periods=300)
         prices = pd.DataFrame({'A': 100 * 1.001 ** np.arange(300),
                                'B': 10000 * 0.999 ** np.arange(300)}, index=index)
-        prices.loc[index[40], 'A'] = np.nan
         returns = aligned_returns(prices)
-        self.assertNotIn(index[40], returns.index)
-        self.assertNotIn(index[41], returns.index)
         np.testing.assert_allclose(returns['A'], .001, atol=1e-12)
         np.testing.assert_allclose(returns['B'], -.001, atol=1e-12)
+        prices.loc[index[40], 'A'] = np.nan
+        with self.assertRaisesRegex(ValueError, 'Internal missing prices'):
+            aligned_returns(prices)
 
     def test_drawdown_includes_starting_capital(self):
         metrics = historical_metrics(pd.Series([-.2, .1]), annual_rf=0)
