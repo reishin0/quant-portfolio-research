@@ -1,0 +1,27 @@
+{
+  "source": "Yahoo Finance via yfinance",
+  "retrieved_at_utc": "2026-10-09T07:29:11.667850+00:00",
+  "requested_start": "2020-01-01",
+  "requested_end_exclusive": "2026-10-09",
+  "price_file": "etf_adjusted_20261009.csv",
+  "price_sha256": "4a112603429da1ed626dbf46982775adb4f14cf73160499cd378be9f4f4479ac",
+  "price_field": "Adj Close from auto_adjust=False",
+  "adjustment": "Provider split/dividend adjusted; values can be revised; no separate dividends added to these total-return proxies",
+  "symbols": [
+    "VUG",
+    "SPHD",
+    "MTUM",
+    "ACWI",
+    "XLK",
+    "XLE",
+    "IEO",
+    "GLD",
+    "SPY"
+  ],
+  "first_price": "2020-01-02",
+  "last_price": "2026-10-08",
+  "rows": 1701,
+  "actions_file": "etf_actions_20261009.csv",
+  "actions_sha256": "2ecaa2777ca661bd5d0297d1da806064b37685b04c85a002f4c6818229c68d8b",
+  "actions_note": "Current provider action metadata, not a historical publication archive; used to flag data anomalies, not a trading signal."
+}

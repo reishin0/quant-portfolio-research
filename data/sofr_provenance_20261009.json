@@ -1,0 +1,12 @@
+{
+  "series": "SOFR",
+  "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&cosd=2019-12-20&coed=2026-10-07",
+  "source": "Federal Reserve Bank of New York, retrieved via FRED",
+  "retrieved_at_utc": "2026-10-09T07:29:12.383786+00:00",
+  "file": "sofr_20261009.csv",
+  "sha256": "c6c56fb174f9fbb1bee76dadcddb556a3df586ba8ba6a7d83e1d4bc6c366124d",
+  "units": "percent per annum, actual/360 simple accrual per published overnight period",
+  "use": "Retrospective realized cash/financing proxy only; not a tradable deposit rate or an ex-ante predictor. Typically published on following government-securities business day. Current vintage may include revisions.",
+  "coverage_first": "2019-12-20",
+  "coverage_last": "2026-10-07"
+}

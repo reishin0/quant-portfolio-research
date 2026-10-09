@@ -14,9 +14,9 @@ from portfolio_tools import historical_metrics, portfolio_step
 from research_extensions import _numeric_frame, FACTOR_COLUMNS, factor_regression
 
 
-def performance_table(returns, annual_rf=0.03, periods_per_year=252, benchmark=None):
+def performance_table(returns, annual_rf=0.03, periods_per_year=252, benchmark=None, cash_returns=None):
     data = _numeric_frame(returns, 'returns', minimum_rows=2)
-    table = pd.DataFrame({name: historical_metrics(data[name], annual_rf, periods_per_year)
+    table = pd.DataFrame({name: historical_metrics(data[name], annual_rf, periods_per_year, cash_returns)
                           for name in data}).T
     if benchmark is not None:
         reference = pd.Series(benchmark).reindex(data.index)
@@ -191,7 +191,7 @@ def factor_tilt(weights, loadings, positive_threshold, negative_threshold, cap=.
 
 
 def evaluate_targets(asset_returns, targets, annual_rf=.03, transaction_cost_bps=10,
-                     annual_short_borrow_bps=100):
+                     annual_short_borrow_bps=100, cash_returns=None):
     """Evaluate precomputed dated targets with the same ledger as the main run.
 
     Caller is responsible for fitting targets before their effective dates.
@@ -208,6 +208,10 @@ def evaluate_targets(asset_returns, targets, annual_rf=.03, transaction_cost_bps
             or annual_rf <= -1 or min(transaction_cost_bps, annual_short_borrow_bps) < 0):
         raise ValueError('Invalid financing/cost assumptions.')
     rf = (1 + annual_rf) ** (1 / 252) - 1
+    if cash_returns is not None and (not cash_returns.index.equals(returns.index)
+                                    or not np.isfinite(cash_returns).all()
+                                    or (cash_returns <= -1).any()):
+        raise ValueError('Cash returns must exactly match evaluation dates.')
     borrow = annual_short_borrow_bps / 10000 / 252
     w, cash = np.zeros(len(names)), 1.0
     result, trades = [], []
@@ -220,7 +224,8 @@ def evaluate_targets(asset_returns, targets, annual_rf=.03, transaction_cost_bps
             cost = turnover * transaction_cost_bps / 10000
             trades.append({'Date': date, 'One-way turnover': turnover, 'Estimated cost': cost})
             w, cash = target, target_cash
-        net, w, cash, _ = portfolio_step(w, cash, row.to_numpy(), rf, borrow, cost)
+        period_cash = rf if cash_returns is None else float(cash_returns.loc[date])
+        net, w, cash, _ = portfolio_step(w, cash, row.to_numpy(), period_cash, borrow, cost)
         result.append(net)
     return pd.Series(result, index=returns.index), pd.DataFrame(trades).set_index('Date')
 

@@ -24,11 +24,15 @@ def run(command, *, env, capture=False):
 def main():
     parser = argparse.ArgumentParser(description='Set up and open the portfolio-construction research notebook.')
     parser.add_argument('--check', action='store_true', help='Execute the research notebook and export HTML without opening a browser.')
-    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='yahoo',
-                        help='Data for --check/--report; defaults to Yahoo; submission is original 2024 data.')
+    parser.add_argument('--mode', choices=['snapshot', 'submission', 'synthetic', 'yahoo'], default='snapshot',
+                        help='Data for --check/--report; defaults to offline frozen prices; submission is original 2024 data.')
     parser.add_argument('--report', action='store_true', help='Execute validation and open the HTML report instead of Jupyter.')
     parser.add_argument('--repair', action='store_true', help='Recheck/install dependencies without removing the environment.')
+    parser.add_argument('--locked', action='store_true', help='Install the tested Windows Python 3.13 package pins.')
     args = parser.parse_args()
+    requirements = ROOT / 'requirements-lock-windows-py313.txt' if args.locked else REQUIREMENTS
+    if args.locked and (os.name != 'nt' or sys.version_info[:2] != (3, 13)):
+        raise RuntimeError('--locked requires Windows and Python 3.13.')
     if not (3, 11) <= sys.version_info[:2] <= (3, 13):
         print('Please install 64-bit Python 3.11, 3.12 or 3.13 from https://www.python.org/downloads/ .')
         print('Then run run_project.bat on Windows or: python3 launch.py')
@@ -49,19 +53,21 @@ def main():
     actual = tuple(map(int, version_result.stdout.strip().splitlines()[-1].split('.')))
     if not (3, 11) <= actual <= (3, 13):
         raise RuntimeError('This folder has an older .venv. Rename that .venv folder, then launch again with Python 3.11-3.13.')
+    if args.locked and actual != (3, 13):
+        raise RuntimeError('The existing .venv must use Python 3.13 for --locked.')
     pip_result = subprocess.run([str(PYTHON), '-m', 'pip', '--version'], cwd=ROOT, env=env,
                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     if pip_result.returncode:
         run([PYTHON, '-m', 'ensurepip', '--upgrade'], env=env)
 
-    fingerprint = hashlib.sha256(REQUIREMENTS.read_bytes()).hexdigest()
+    fingerprint = hashlib.sha256(requirements.read_bytes()).hexdigest()
     marker = VENV / '.portfolio-requirements.sha256'
     ready = marker.exists() and marker.read_text().strip() == fingerprint
     print('2/4  Checking packages (first installation needs internet and may take several minutes)...', flush=True)
-    if args.repair or not ready:
-        run([PYTHON, '-m', 'pip', 'install', '--no-cache-dir', '-r', REQUIREMENTS], env=env)
+    if args.repair or args.locked or not ready:
+        run([PYTHON, '-m', 'pip', 'install', '--no-cache-dir', '-r', requirements], env=env)
     run([PYTHON, '-m', 'pip', 'check'], env=env)
-    run([PYTHON, '-c', 'import numpy, pandas, scipy, matplotlib, yfinance, jupyterlab, ipykernel, nbclient, nbconvert, portfolio_tools, research_extensions; print("Imports OK")'], env=env)
+    run([PYTHON, '-c', 'import pandas_market_calendars, numpy, pandas, scipy, matplotlib, yfinance, jupyterlab, ipykernel, nbclient, nbconvert, portfolio_tools, research_extensions; print("Imports OK")'], env=env)
     marker.write_text(fingerprint + '\n')
 
     print('3/4  Preparing the notebook kernel inside this environment...', flush=True)

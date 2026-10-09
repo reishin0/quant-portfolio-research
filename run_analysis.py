@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parent
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--open', action='store_true', help='Open the finished report in a browser.')
-    parser.add_argument('--mode', choices=['submission', 'synthetic', 'yahoo'], default='yahoo',
-                        help='Default: Yahoo prices; submission explicitly opts into original 2024 prices.')
+    parser.add_argument('--mode', choices=['snapshot', 'submission', 'synthetic', 'yahoo'], default='snapshot',
+                        help='Default: offline frozen prices; Yahoo explicitly refreshes prices.')
     args = parser.parse_args()
     print('Loading the portfolio-construction notebook...', flush=True)
     nb = nbformat.read(ROOT / 'portfolio_construction.ipynb', as_version=4)
@@ -46,8 +46,12 @@ def main():
     report.write_text(body, encoding='utf-8')
     # Record direct package versions, without local paths or environment values.
     from importlib.metadata import version
-    packages = ['numpy', 'pandas', 'scipy', 'matplotlib', 'yfinance', 'jupyterlab', 'ipykernel', 'nbclient', 'nbconvert', 'openpyxl']
-    versions = {'python': sys.version.split()[0], 'packages': {name: version(name) for name in packages},
+    packages = ['numpy', 'pandas', 'scipy', 'matplotlib', 'yfinance', 'jupyterlab', 'ipykernel', 'nbclient', 'nbconvert', 'openpyxl', 'pandas_market_calendars', 'exchange_calendars']
+    import hashlib
+    from importlib.metadata import distributions
+    versions = {'code_sha256': hashlib.sha256('\n'.join(c.source for c in nb.cells if c.cell_type == 'code').encode()).hexdigest(),
+                'installed_packages': {d.metadata['Name']: d.version for d in distributions()},
+                'python': sys.version.split()[0], 'packages': {name: version(name) for name in packages},
                 'mode': args.mode, 'notebook_execution': 'all cells passed'}
     (output / 'environment.json').write_text(json.dumps(versions, indent=2), encoding='utf-8')
     print('SUCCESS: every portfolio-construction notebook cell completed.')

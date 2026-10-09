@@ -115,17 +115,26 @@ def factor_regression(monthly_asset_returns, monthly_factors):
 
 def higher_moment_weights(returns, cap=0.35, risk_aversion=3.0,
                           skew_preference=0.02, kurtosis_penalty=0.005):
-    """Long-only weights maximizing a stated mean/variance/skew/kurtosis utility."""
+    """Composite annual mean/variance and daily standardized-moment preference.
+
+    Deterministic multistart SLSQP checks feasibility, not global optimality.
+    Coefficients are explicit heuristic preferences, not a Taylor utility fit.
+    """
     data = _numeric_frame(returns, 'returns', minimum_rows=252)
     n = data.shape[1]
+    if n < 2:
+        raise ValueError("Higher-moment allocation requires at least two assets.")
     if not 1 / n <= cap <= 1:
         raise ValueError(f'cap must be between {1/n:.3f} and 1.')
-    if min(risk_aversion, skew_preference, kurtosis_penalty) < 0:
+    if (not np.isfinite([risk_aversion, skew_preference, kurtosis_penalty]).all()
+            or min(risk_aversion, skew_preference, kurtosis_penalty) < 0):
         raise ValueError('Higher-moment preferences must be nonnegative.')
     matrix = data.to_numpy()
 
     def negative_utility(weights):
         series = matrix @ weights
+        if series.std(ddof=1) < 1e-12:
+            return 1e12
         mean = series.mean() * PERIODS_PER_YEAR
         variance = series.var(ddof=1) * PERIODS_PER_YEAR
         utility = (mean - 0.5 * risk_aversion * variance
@@ -134,20 +143,42 @@ def higher_moment_weights(returns, cap=0.35, risk_aversion=3.0,
         return -float(utility)
 
     equal = np.full(n, 1 / n)
-    result = minimize(negative_utility, equal, method='SLSQP', bounds=[(0, cap)] * n,
-                      constraints=[{'type': 'eq', 'fun': lambda weights: weights.sum() - 1}],
-                      options={'ftol': 1e-12, 'maxiter': 1000})
-    if not result.success:
-        raise RuntimeError(f'Higher-moment optimization failed: {result.message}')
-    return pd.Series(result.x, index=data.columns, name='Higher-moment utility')
+    starts = [equal]
+    for index in np.argsort(matrix.mean(axis=0))[-min(3, n):]:
+        concentrated = np.full(n, (1 - cap) / (n - 1))
+        concentrated[index] = cap
+        starts.append(concentrated)
+    attempts, candidates = [], []
+    for number, start in enumerate(starts):
+        result = minimize(negative_utility, start, method='SLSQP', bounds=[(0, cap)] * n,
+                          constraints=[{'type': 'eq', 'fun': lambda weights: weights.sum() - 1}],
+                          options={'ftol': 1e-12, 'maxiter': 1000})
+        w = result.x
+        valid = bool(result.success and np.isfinite(w).all() and np.isfinite(result.fun)
+                     and result.fun < 1e11 and abs(w.sum() - 1) <= 1e-7
+                     and w.min() >= -1e-7 and w.max() <= cap + 1e-7)
+        attempts.append({'Start': number, 'Valid': valid, 'Utility': -float(result.fun),
+                         'Message': str(result.message)})
+        if valid:
+            candidates.append(result)
+    if not candidates:
+        raise RuntimeError(f'Higher-moment optimization found no feasible solution: {attempts}')
+    best = min(candidates, key=lambda result: result.fun)
+    weights = pd.Series(best.x, index=data.columns, name='Higher-moment utility')
+    weights.attrs['solver_attempts'] = attempts
+    weights.attrs['local_utility_spread'] = float(max(r.fun for r in candidates) - best.fun)
+    return weights
 
 
-def fractional_kelly_weights(returns, annual_rf=0.03, fraction=0.5, cap=0.35):
+def fractional_kelly_weights(returns, annual_rf=0.03, fraction=0.5, cap=0.35,
+                             holding_period='monthly'):
     """Solve capped, unlevered full Kelly with cash, then scale risky weights.
 
     The fraction is a multiplier of that constrained full-Kelly solution, not
     a required risky exposure. Negative opportunities may leave all wealth cash.
-    The cap applies to full Kelly before scaling.
+    The cap applies to full Kelly before scaling. Default scenarios are completed
+    calendar-month buy-and-hold asset returns (both boundary months excluded).
+    Daily mode describes daily rebalancing and is not used by the monthly strategy.
     """
     data = _numeric_frame(returns, 'returns', minimum_rows=252)
     n = data.shape[1]
@@ -157,11 +188,20 @@ def fractional_kelly_weights(returns, annual_rf=0.03, fraction=0.5, cap=0.35):
         raise ValueError('cap must be in (0, 1].')
     if not np.isfinite(annual_rf) or annual_rf <= -1:
         raise ValueError('annual_rf must be finite and greater than -1.')
-    daily_rf = (1 + annual_rf) ** (1 / PERIODS_PER_YEAR) - 1
-    matrix = data.to_numpy()
+    if holding_period == 'monthly':
+        scenarios = monthly_compound(data)
+        if len(scenarios) < 10:
+            raise ValueError('Monthly Kelly requires at least 10 complete historical months.')
+        period_rf = (1 + annual_rf) ** (1 / 12) - 1
+    elif holding_period == 'daily':
+        scenarios = data
+        period_rf = (1 + annual_rf) ** (1 / PERIODS_PER_YEAR) - 1
+    else:
+        raise ValueError('holding_period must be monthly or daily.')
+    matrix = scenarios.to_numpy()
 
     def negative_log_growth(weights):
-        gross = 1 + matrix @ weights + (1 - weights.sum()) * daily_rf
+        gross = 1 + matrix @ weights + (1 - weights.sum()) * period_rf
         return np.inf if (gross <= 0).any() else -float(np.log(gross).mean())
 
     start = np.zeros(n)

@@ -1,5 +1,36 @@
 # Methodology amendments
 
+## 9 October 2026 — stages 1–3: research contract, audit and frozen inputs
+
+This entry supersedes earlier descriptions of Yahoo defaults, same-close fitting,
+daily Kelly scenarios and constant-only financing. Original submission bytes remain unchanged.
+
+- State the research question, primary comparisons, strategy objectives, default
+  constraints and retrospective/prospective boundary in the notebook.
+- Fit through close t-2, execute at close t-1 and earn the return ending t. Dated
+  views must precede the fit cutoff. Export both fit and execution timestamps.
+- Fit Kelly to completed monthly buy-and-hold scenarios, excluding both boundary
+  months, to match monthly target holding. Keep daily mode an explicit alternative.
+- Check higher-moment solutions from four deterministic starts for solver success,
+  finite objective, budget and caps; export local utility spread, without claiming
+  global optimality. Reject non-positive-definite optimizer covariance.
+- Add independent analytical tests for variance/Sharpe/tracking optima, BL updates,
+  quadratic gradients, Kelly, financing, short positions and execution timing.
+- Default to hash-verified updated price/action snapshots, audit NYSE sessions and
+  flag large adjusted moves. Preserve all source data and avoid filling gaps.
+- Use historical realized SOFR financing for real-data runs; leave the constant
+  3% forecast explicit. Add a fixed-target constant-financing sensitivity and
+  excess-volatility Sharpe. Undefined cash-against-cash ratios stay missing.
+- Pin the tested Windows Python 3.13 environment, export actual versions/code hash,
+  and keep all 35 calculation functions inline with module parity tests.
+
+The new cash rate is a current-vintage realized proxy, not an available-at-decision
+forecast. Prices, factors and universe selection still prevent a point-in-time claim.
+Stages 4–7 remain future research, including robustness and uncertainty assessment.
+
+## Earlier amendment history
+
+
 **Initial amendment:** 6 October 2026
 
 **Professional research consolidation:** 8 October 2026

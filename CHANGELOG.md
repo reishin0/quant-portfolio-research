@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-09 — research foundation (stages 1–3)
+
+- Define the research/evaluation contract and precise fit/execution/return chronology.
+- Align Kelly with monthly holding periods; add higher-moment multistart checks.
+- Freeze updated adjusted prices, corporate actions and historical SOFR with hashes.
+- Audit exchange sessions and add realized financing plus a constant-rate sensitivity.
+- Add analytical and failure-mode tests, inline implementations and Windows package pins.
+- Preserve original 2024 artifacts; retain the retrospective interpretation boundary.
+
+
 ## 9 October 2026 — current factors and publication-date enforcement
 
 - Save official monthly FF5 data through August 2026, raw source and hash provenance under data/.

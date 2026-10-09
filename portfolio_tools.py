@@ -16,6 +16,7 @@ from scipy.optimize import minimize
 
 from research_extensions import (bab_weights, fractional_kelly_weights,
                                  higher_moment_weights)
+from data_tools import load_price_snapshot
 
 ASSETS = ['VUG', 'SPHD', 'MTUM', 'ACWI', 'XLK', 'XLE', 'IEO', 'GLD']
 BENCHMARK = 'SPY'
@@ -46,6 +47,11 @@ def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42,
         mode = 'synthetic'
         label = 'SYNTHETIC VALIDATION DATA - not real ETF performance'
         details = {'seed': seed, 'calendar': 'weekdays, including market holidays'}
+    elif mode == 'snapshot':
+        path = Path(cache_path) if cache_path else Path('data/etf_snapshot_20261009.json')
+        prices, snapshot = load_price_snapshot(path, symbols, start, end)
+        label = 'FROZEN YAHOO SNAPSHOT - adjusted ETF prices retrieved 9 October 2026'
+        details = {'snapshot_manifest': snapshot, 'source_file_sha256': snapshot['price_sha256']}
     elif mode == 'submission':
         from submission_data import DATA_DIR, file_sha256, load_submission_prices
         path = Path(cache_path) if cache_path else DATA_DIR / 'efts_dataset.csv'
@@ -74,7 +80,7 @@ def load_prices(mode='synthetic', start='2020-01-01', end='2024-08-23', seed=42,
         label = 'YAHOO FINANCE - adjusted historical prices, downloaded now'
         details = {'auto_adjust': True, 'downloaded_utc': datetime.now(timezone.utc).isoformat()}
     else:
-        raise ValueError('DATA_MODE must be "submission", "synthetic" or "yahoo".')
+        raise ValueError('DATA_MODE must be "snapshot", "submission", "synthetic" or "yahoo".')
 
     prices = prices.sort_index()
     if prices.index.has_duplicates:
@@ -136,7 +142,7 @@ def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
         raise ValueError('Covariance must be finite and symmetric.')
     if np.linalg.eigvalsh(sigma).min() < -1e-10:
         raise ValueError('Covariance must be positive semidefinite.')
-    if tau <= 0 or risk_aversion <= 0:
+    if not np.isfinite([tau, risk_aversion]).all() or tau <= 0 or risk_aversion <= 0:
         raise ValueError('tau and risk aversion must be positive.')
     weights = np.full(len(names), 1 / len(names)) if prior_weights is None else np.asarray(prior_weights, dtype=float)
     if weights.shape != (len(names),) or not np.isfinite(weights).all() or (weights < 0).any() or not np.isclose(weights.sum(), 1):
@@ -192,6 +198,8 @@ def optimize_weights(expected_excess, covariance, returns, benchmark, cap=0.35):
     bench = benchmark.to_numpy(dtype=float)
     if not all(np.isfinite(value).all() for value in [sigma, mu, history, bench]):
         raise ValueError('Optimization inputs must be finite.')
+    if (not np.allclose(sigma, sigma.T) or np.linalg.eigvalsh(sigma).min() <= 1e-12):
+        raise ValueError('Optimizer covariance must be symmetric positive definite; inspect ill conditioning.')
     equal = np.full(n, 1 / n)
 
     def variance(w):
@@ -216,7 +224,8 @@ def optimize_weights(expected_excess, covariance, returns, benchmark, cap=0.35):
     return pd.DataFrame(result_weights, index=names)
 
 
-def historical_metrics(series, annual_rf=0.03, periods_per_year=PERIODS_PER_YEAR):
+def historical_metrics(series, annual_rf=0.03, periods_per_year=PERIODS_PER_YEAR,
+                       cash_returns=None):
     """Annualized metrics from explicit period frequency; default is daily/252."""
     values = np.asarray(series, dtype=float)
     if len(values) < 2 or not np.isfinite(values).all() or (values <= -1).any():
@@ -226,7 +235,16 @@ def historical_metrics(series, annual_rf=0.03, periods_per_year=PERIODS_PER_YEAR
     if not np.isfinite(periods_per_year) or periods_per_year <= 0:
         raise ValueError('periods_per_year must be positive.')
     volatility = values.std(ddof=1) * np.sqrt(periods_per_year)
-    excess = values - ((1 + annual_rf) ** (1 / periods_per_year) - 1)
+    if cash_returns is None:
+        cash = np.full(len(values), (1 + annual_rf) ** (1 / periods_per_year) - 1)
+    else:
+        if isinstance(series, pd.Series) and not cash_returns.index.equals(series.index):
+            raise ValueError('Cash returns must match performance dates exactly.')
+        cash = np.asarray(cash_returns, dtype=float)
+        if cash.shape != values.shape or not np.isfinite(cash).all() or (cash <= -1).any():
+            raise ValueError('Invalid performance cash returns.')
+    excess = values - cash
+    excess_volatility = excess.std(ddof=1) * np.sqrt(periods_per_year)
     downside = np.sqrt(np.mean(np.minimum(excess, 0) ** 2) * periods_per_year)
     wealth = np.concatenate([[1.0], np.cumprod(1 + values)])
     drawdown = wealth / np.maximum.accumulate(wealth) - 1
@@ -234,7 +252,7 @@ def historical_metrics(series, annual_rf=0.03, periods_per_year=PERIODS_PER_YEAR
         'Annual mean': values.mean() * periods_per_year,
         'CAGR': wealth[-1] ** (periods_per_year / len(values)) - 1,
         'Annual volatility': volatility,
-        'Sharpe': excess.mean() * periods_per_year / volatility if volatility > 0 else np.nan,
+        'Sharpe': excess.mean() * periods_per_year / excess_volatility if excess_volatility > 1e-15 else np.nan,
         'Sortino': excess.mean() * periods_per_year / downside if downside > 0 else np.nan,
         'Max drawdown': drawdown.min(),
     }
@@ -267,13 +285,13 @@ def portfolio_step(weights, cash, asset_returns, daily_rf, daily_borrow_rate, co
 def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
             transaction_cost_bps=10.0, annual_short_borrow_bps=100.0,
             kelly_fraction=0.5, bab_gross_limit=2.0,
-            investor_views=None, views_as_of=None):
+            investor_views=None, views_as_of=None, cash_returns=None):
     """Run an expanding-window, monthly walk-forward portfolio comparison.
 
-    Each target allocation is fitted only with returns strictly before its
-    rebalance date. Targets are held between month starts, asset weights drift
+    For a first earned return ending t, fitting stops at close t-2; execution
+    occurs at close t-1. Targets are held between month starts, asset weights drift
     with returns, and one-way turnover is charged at the stated basis-point rate.
-    Dated views enter only when the preceding observed close is strictly after
+    Dated views enter only when the fit cutoff close is strictly after
     their publication date. Date-only sources are treated as available after
     that entire day; the monthly schedule is not changed to force activation.
     """
@@ -296,14 +314,23 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
             raise ValueError('Nonempty investor views require VIEWS_AS_OF in YYYY-MM-DD format.') from exc
 
     returns = aligned_returns(prices)
-    if len(returns) <= training_days:
+    if len(returns) <= training_days + 1:
         raise ValueError('The aligned history must contain observations after TRAINING_DAYS.')
     # Validate configured views even if their date lies beyond the sample.
     black_litterman(returns.iloc[:training_days][ASSETS].cov() * PERIODS_PER_YEAR,
                    views=configured_views)
     assets = returns[ASSETS]
     benchmark = returns[BENCHMARK]
-    evaluation = returns.iloc[training_days:]
+    if cash_returns is None:
+        cash_series = pd.Series((1 + annual_rf) ** (1 / PERIODS_PER_YEAR) - 1, index=returns.index)
+        cash_label = 'constant annual cash-rate assumption'
+    else:
+        if (not isinstance(cash_returns, pd.Series) or not cash_returns.index.equals(returns.index)
+                or not np.isfinite(cash_returns).all() or (cash_returns <= -1).any()):
+            raise ValueError('Cash returns must exactly cover all aligned return dates.')
+        cash_series = cash_returns.copy()
+        cash_label = 'supplied realized cash proxy; fixed annual_rf remains the forecast assumption'
+    evaluation = returns.iloc[training_days + 1:]
     # Use the first available observation in each calendar month as a rebalance.
     rebalance_dates = evaluation.groupby(evaluation.index.to_period('M')).head(1).index
     positions = [returns.index.get_loc(date) for date in rebalance_dates]
@@ -316,6 +343,7 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
     target_records = []
     turnover_records = []
     view_records = []
+    solver_records = []
     borrow_cost_totals = {name: 0.0 for name in methods}
     last_fit = None
     cost_rate = transaction_cost_bps / 10_000
@@ -325,7 +353,8 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
 
     for number, start_position in enumerate(positions):
         stop_position = positions[number + 1] if number + 1 < len(positions) else len(returns)
-        train = returns.iloc[:start_position]
+        # Fit after close t-2, execute at close t-1, earn the return ending t.
+        train = returns.iloc[:start_position - 1]
         test = returns.iloc[start_position:stop_position]
         covariance = train[ASSETS].cov() * PERIODS_PER_YEAR
         decision_close = train.index[-1]
@@ -334,13 +363,17 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         active_views = configured_views if eligible else []
         prior, posterior, views = black_litterman(covariance, views=active_views)
         view_records.append({'Date': test.index[0], 'Decision close': decision_close,
+                             'Execution close': returns.index[start_position - 1],
                              'Publication date': views_as_of if configured_views else None,
                              'Configured views': len(configured_views),
                              'Active views': len(active_views)})
         targets = optimize_weights(posterior, covariance, train[ASSETS],
                                    train[BENCHMARK], max_weight)
-        targets['Higher-moment utility'] = higher_moment_weights(
-            train[ASSETS], cap=max_weight)
+        higher = higher_moment_weights(train[ASSETS], cap=max_weight)
+        targets['Higher-moment utility'] = higher
+        for attempt in higher.attrs['solver_attempts']:
+            solver_records.append({'Date': test.index[0], **attempt,
+                                   'Local utility spread': higher.attrs['local_utility_spread']})
         targets['Fractional Kelly'] = fractional_kelly_weights(
             train[ASSETS], annual_rf=annual_rf, fraction=kelly_fraction,
             cap=max_weight)
@@ -367,7 +400,7 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
                 cash_now = current[name]['cash']
                 cost = turnover_records[-len(methods) + methods.index(name)]['Estimated cost'] if row_number == 0 else 0.0
                 net, closing_weights, closing_cash, short_borrow = portfolio_step(
-                    weights_now, cash_now, asset_returns, daily_rf,
+                    weights_now, cash_now, asset_returns, float(cash_series.loc[date]),
                     daily_short_borrow_rate, cost)
                 net_returns[name].append(net)
                 borrow_cost_totals[name] += short_borrow
@@ -379,7 +412,9 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
 
     portfolio_returns = pd.DataFrame(net_returns, index=pd.DatetimeIndex(net_dates))
     portfolio_returns[BENCHMARK] = evaluation[BENCHMARK]
-    historical = pd.DataFrame({name: historical_metrics(portfolio_returns[name], annual_rf)
+    portfolio_returns['Cash proxy'] = cash_series.loc[evaluation.index]
+    historical = pd.DataFrame({name: historical_metrics(portfolio_returns[name], annual_rf,
+                                                       cash_returns=cash_series.loc[evaluation.index])
                                for name in portfolio_returns}).T
     covariance, prior, posterior, views, asset_weights, bab_diagnostics = last_fit
     cash_weights = 1 - asset_weights.sum(axis=0)
@@ -412,7 +447,9 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
                 kelly_fraction=kelly_fraction, bab_gross_limit=bab_gross_limit,
                 views_as_of=views_as_of if configured_views else None,
                 configured_view_count=len(configured_views),
-                view_history=pd.DataFrame(view_records).set_index('Date'))
+                view_history=pd.DataFrame(view_records).set_index('Date'),
+                solver_history=pd.DataFrame(solver_records).set_index(['Date', 'Start']),
+                cash_returns=cash_series, cash_label=cash_label)
 
 
 def charts(result, label):
@@ -444,10 +481,11 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
     target.mkdir(exist_ok=False)
     for key in ['weights', 'weight_history', 'turnover', 'trading', 'historical',
                 'model', 'portfolio_returns', 'covariance', 'views', 'bab_diagnostics',
-                'view_history']:
+                'view_history', 'solver_history']:
         table = result[key].copy()
         table.insert(0, 'Data source', provenance['label'])
         table.to_csv(target / f'{key}.csv')
+    result['cash_returns'].to_csv(target / 'cash_returns.csv')
     expected_returns = pd.DataFrame({'Prior annual excess return': result['prior'],
                                      'BL posterior annual excess return': result['posterior']})
     expected_returns.insert(0, 'Data source', provenance['label'])
@@ -458,19 +496,22 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'evaluation_start': str(result['evaluation_start'].date()),
                 'evaluation_end': str(result['evaluation_end'].date()),
                 'rebalance_rule': 'first available observation of each calendar month',
+                'execution_contract': 'fit after close t-2, execute close t-1, first earned return ends t',
+                'cash_model': result['cash_label'],
+                'cash_returns_sha256': hashlib.sha256(result['cash_returns'].to_csv().encode()).hexdigest(),
                 'transaction_cost_bps_per_one_way_turnover': result['transaction_cost_bps'],
                 'annual_short_borrow_bps': result['annual_short_borrow_bps'],
                 'kelly_fraction': result['kelly_fraction'],
-                'kelly_definition': 'fraction times constrained full-Kelly risky weights; cash allowed; cap before scaling',
+                'kelly_definition': 'complete-month buy-and-hold log-growth objective; fraction scales capped full-Kelly risky weights; fixed annual_rf cash forecast',
                 'borrow_accounting': 'daily short charges debited from cash; weights normalized by after-borrow NAV',
-                'missing_price_policy': 'trim common endpoints; reject internal missing prices; no inferred exchange calendar',
+                'missing_price_policy': 'notebook audits requested exchange sessions and rejects missing quotes; library aligned_returns rejects internal gaps',
                 'bab_gross_limit': result['bab_gross_limit'],
                 'portfolio_methods': list(result['weights'].columns),
                 'universe_selection': 'fixed eight ETFs selected retrospectively in the 2024 study',
                 'views_as_of': result['views_as_of'],
                 'configured_view_count': result['configured_view_count'],
                 'active_view_count': len(result['views']),
-                'view_activation_rule': 'publication date strictly before preceding observed close; monthly rebalances only',
+                'view_activation_rule': 'publication date strictly before fit cutoff t-2; execute t-1; monthly rebalances only',
                 'first_view_activation': (str(result['view_history'].query('`Active views` > 0').index[0].date())
                                           if result['view_history']['Active views'].gt(0).any() else None),
                 'evaluation': ('retrospective scenario with chronological walk-forward parameter fitting; '

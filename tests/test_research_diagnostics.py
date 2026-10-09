@@ -132,7 +132,7 @@ class RestoredResearchChecks(unittest.TestCase):
         config = ''.join(next(c['source'] for c in nb['cells'] if c['id'] == 'configuration'))
         scope = {}
         exec(compile(config, 'configuration', 'exec'), scope)
-        self.assertEqual(scope['DATA_MODE'], 'yahoo')
+        self.assertEqual(scope['DATA_MODE'], 'snapshot')
         self.assertEqual(scope['END_DATE'], '2026-10-09')
         self.assertEqual(scope['FACTOR_FILE'], 'data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv')
         self.assertEqual(scope['INVESTOR_VIEWS'], [])
@@ -176,7 +176,7 @@ class RestoredResearchChecks(unittest.TestCase):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
         cells = {c['id']: ''.join(c['source']) for c in nb['cells']}
         implementations = nb['metadata']['inline_implementations']
-        self.assertEqual(len(implementations), 32)
+        self.assertEqual(len(implementations), 35)
         for item in implementations:
             module = ast.parse((ROOT / item['module']).read_text(encoding='utf-8'))
             expected = next(n for n in module.body if isinstance(n, ast.FunctionDef) and n.name == item['name'])
@@ -192,7 +192,7 @@ class RestoredResearchChecks(unittest.TestCase):
 
     def test_notebook_has_no_hidden_project_module_imports(self):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
-        local = {'portfolio_tools', 'research_extensions', 'research_diagnostics', 'submission_data'}
+        local = {'portfolio_tools', 'research_extensions', 'research_diagnostics', 'submission_data', 'data_tools'}
         for cell in nb['cells']:
             if cell['cell_type'] != 'code':
                 continue

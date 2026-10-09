@@ -1,5 +1,48 @@
 # Validation record
 
+## 9 October 2026 — stages 1–3 research foundation
+
+- **62 tests passed** (`python -m unittest discover -s tests -q`), including 12 new
+  analytical/failure-mode tests. These check closed-form variance/Sharpe/tracking
+  optima, BL posterior/uncertainty, the quadratic gradient, monthly Kelly sizing,
+  signed holdings/cash/cost accounting, variable-cash Sharpe, solver feasibility,
+  execution-close exclusion, missing sessions and input tampering.
+- **46 executable cells passed** in all three offline modes: frozen updated prices,
+  synthetic and original submission. The maintained notebook retains the updated
+  frozen run: **97 total cells, 35 inline calculation functions, 15 PNG outputs**.
+- Two independent frozen notebook runs produced **66 byte-identical CSV exports**
+  and identical moment-tensor arrays. This establishes repeatability for the tested
+  Windows Python 3.13.15 environment, not universal bitwise agreement across platforms.
+- Updated prices: **2 January 2020–8 October 2026**, 1,701 dates, nine ETFs;
+  **258 corporate-action records**. No missing NYSE sessions/quotes. **32 adjusted
+  moves above 10%** were flagged for inspection, not changed or declared errors.
+- Realized SOFR covers every evaluated interval. Default evaluation is **4 January
+  2022–8 October 2026**; every fit cutoff precedes execution by one session.
+  Cash-against-cash Sharpe/Sortino are undefined and intentionally missing.
+- Constant-cash replay preserves target histories. In this retrospective run,
+  Kelly CAGR is 9.59% with SOFR versus 9.01% with constant cash; BAB is -0.48%
+  versus -1.05%. Fully invested long-only wealth is unchanged by cash financing.
+  These are sensitivity results, not evidence of statistical superiority.
+- No active numerical views; BL maximum Sharpe matches equal weight structurally
+  under the equal-weight reverse-optimized prior. It is not independent confirmation.
+- Original report, notebook, utility and four data artifacts: **all seven manifest
+  hashes unchanged**. Notebook/module AST parity and all 127 source-cell mappings pass.
+- Pinned environment installed and `pip check` passed. Reports record all installed
+  package versions and executed code hash. Upstream calendar/NumPy deprecation and
+  Jupyter Windows event-loop warnings are non-fatal; portability needs separate testing.
+- Frozen report: `outputs/validation_report_20261009T074413_966764Z/`;
+  research exports: `outputs/snapshot_20261009T074410_473439Z/`.
+- Synthetic report: `outputs/validation_report_20261009T074428_338994Z/`.
+  Original-input report: `outputs/validation_report_20261009T074507_146114Z/`.
+  Reports are local ignored artifacts; saved results are embedded in the notebook.
+- Executed notebook code SHA-256:
+  `087dc7c202cf93953149612e0aa02b6fa0d95bd890a4c063727d7f4ef5daa3ce`.
+
+The original universe is retrospective and providers can revise historical inputs.
+Stages 4–7 (robust validation, uncertainty, implementation stress and final synthesis)
+remain future work. Passing software checks is not a 100/100 research grade.
+
+
 ## 9 October 2026 — refreshed factors and dated-view eligibility
 
 - **50 tests passed**. New checks reproduce the cleaned factor CSV from the raw

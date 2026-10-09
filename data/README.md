@@ -6,7 +6,7 @@ the report and original notebook lineage. Provider download timestamps are unkno
 
 **ORIGINAL 2024 SUBMISSION — inactive reference data by default.** Their notebook
 configuration lines are commented and labelled as original. The active price run
-uses Yahoo through 8 October 2026. `FACTOR_FILE` selects a new October 2026
+uses the frozen Yahoo snapshot through 8 October 2026. `FACTOR_FILE` selects a new October 2026
 factor download; `RUN_ORIGINAL_CONTEXT=False` disables the unchanged macro/AUM illustrations.
 Explicitly selecting submission mode opts into the original price cache only.
 
@@ -17,7 +17,41 @@ Explicitly selecting submission mode opts into the original price cache only.
 | `Inflation-data.xlsx` | World Bank inflation workbook | Aggregate global series, 1970–2023 | Annual inflation chart |
 | `WS_GLI_csv_col.csv` | 225 BIS series | Selected series through 2023 Q2 | Quarterly bank-credit chart |
 
-## Current additions: 9 October 2026
+## Frozen prices and cash: 9 October 2026
+
+- `etf_adjusted_20261009.csv`: 1,701 dates, nine ETFs, 2 January 2020–8 October 2026.
+- `etf_actions_20261009.csv`: 258 current provider action records.
+- `etf_snapshot_20261009.json`: requested/actual coverage, symbols, retrieval UTC,
+  adjustment convention and SHA-256 hashes. Acquired with yfinance `auto_adjust=False`,
+  `actions=True`; only `Adj Close` is used for returns. Dividends are not added again.
+- `sofr_20261009.csv` and `sofr_provenance_20261009.json`: NY Fed SOFR downloaded
+  through FRED, observation dates 20 December 2019–7 October 2026, with source URL,
+  retrieval time, units and byte hash. Empty holiday observations remain in the raw CSV.
+
+The price loader verifies both price/action hashes and refuses requests beyond the
+snapshot's declared window. The notebook checks every expected NYSE session, rejects
+missing or invalid quotes and flags adjusted moves over 10% with action metadata.
+A corporate action annotation is context, not confirmation that an unusual move is correct.
+Original submission mode audits its actual available window. Synthetic mode uses weekdays.
+
+SOFR percent/year is divided by 100 and accrued ACT/360. Each overnight quote spans
+calendar days until the next quote; interest is simple within that interval and compounds
+at the next quote. The final quote covers at most four calendar days; longer extensions
+fail. No rate is invented for uncovered dates. SOFR uses the
+[NY Fed methodology](https://www.newyorkfed.org/markets/reference-rates/additional-information-about-reference-rates)
+and [FRED series](https://fred.stlouisfed.org/series/SOFR).
+
+This current-vintage rate is a realized financing proxy published in arrears, not an
+ex-ante input or a broker deposit product. Close-to-close application is an explicit
+approximation. Debit/credit cash use the same rate; short borrow uses the separate
+fixed annual assumption. A constant 3% replay holds target histories fixed and reports
+financing sensitivity. Optimizer/CAPM forecast assumptions remain separate.
+
+Revised adjusted prices and rates are frozen for reproducibility, not reconstructed
+point-in-time histories. For newer dates, explicitly acquire a new dated snapshot and
+manifest; retain this evidence. Yahoo mode exports the new run's price table separately.
+
+## Current factors and views: 9 October 2026
 
 - `F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv`: 758 monthly rows,
   July 1963-August 2026, stored in percentage points.
@@ -43,8 +77,8 @@ limitations are recorded in the JSON and displayed in the notebook. The source
 index target is not an ETF total-return forecast or a relative ETF return spread.
 No numerical confidence was supplied by the source. No active view is invented.
 
-For explicit numerical views, publication must precede the prior observed close
-used for a monthly target. This conservatively excludes publication-day and
+For explicit numerical views, publication must precede the fit cutoff at close t-2; execution occurs at close t-1
+for a first earned return ending t. This conservatively excludes publication-day and
 same-rebalance look-ahead. The report's October 1 publication cannot change the
 October 1 target. `view_history.csv` records eligibility at every rebalance.
 
@@ -78,7 +112,7 @@ and intersects dates with the factor vintage. It requires at least 24 aligned
 months and a full-rank design. The original-input strategy sample was February 2022–June
 2024 (29 months); full-universe attribution uses February 2020–June 2024 (53 months).
 There are no July/August 2024 factors in the original file; the current file extends through August 2026. RF is used for monthly attribution
-only, not silently substituted for the simulation's stated cash-rate assumption.
+only; it is distinct from the SOFR realized-financing proxy and constant forecast assumption.
 
 These are time-series OLS regressions with classical IID standard errors, not
 Fama–MacBeth cross-sectional estimates. Factor coefficients do not adjust weights.

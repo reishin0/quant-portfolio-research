@@ -29,6 +29,11 @@ data/*
 !data/ff5_source_20261009.zip
 !data/ff5_provenance_20261009.json
 !data/professional_views_20261009.json
+!data/etf_adjusted_20261009.csv
+!data/etf_actions_20261009.csv
+!data/etf_snapshot_20261009.json
+!data/sofr_20261009.csv
+!data/sofr_provenance_20261009.json
 
 # Local outputs and backups
 outputs/

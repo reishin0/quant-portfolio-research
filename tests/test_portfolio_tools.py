@@ -56,7 +56,7 @@ class PortfolioChecks(unittest.TestCase):
         self.assertTrue((weights.loc[ASSETS, core].to_numpy() >= -1e-7).all())
         self.assertTrue((weights.loc[ASSETS, core].to_numpy() <= .35 + 1e-7).all())
         np.testing.assert_allclose(result['weight_history'].sum(axis=1), 1, atol=1e-7)
-        self.assertTrue(np.isfinite(result['historical']).all().all())
+        self.assertTrue(np.isfinite(result['historical'].drop(index='Cash proxy')).all().all())
         self.assertTrue(np.isfinite(result['model']).all().all())
         sigma = result['covariance'].to_numpy()
         equal = weights.loc[ASSETS, 'Equal weight'].to_numpy()
