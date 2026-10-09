@@ -39,9 +39,15 @@ of the amended implementation.
 
 All **127 code cells** from the supplied **213-cell source notebook** are reconciled
 in the maintained notebook's **Source-code reconciliation** appendix. The expanded
-notebook has 50 cells: repeated displays and equivalent calculations are consolidated,
+notebook has 92 cells: repeated displays and equivalent calculations are consolidated,
 and defective calculations are replaced with declared corrections. Each source cell
 has a hash and destination cell IDs in notebook metadata.
+
+The notebook includes **all 32 calculation functions directly in its code cells**,
+as well as saved submission-data tables and charts. It can be read on GitHub
+without first running it or opening a separate report. It imports third-party
+libraries, but no project calculation modules. The `.py` files retain matching
+callable functions for tests and reuse; tests enforce agreement with the notebook.
 
 After **Research interpretation and next work**, supplementary sections retain the
 AUM snapshot illustration, factor-threshold weight heuristic, quartile beta spread,

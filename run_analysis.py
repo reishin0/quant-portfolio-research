@@ -21,6 +21,8 @@ def main():
     args = parser.parse_args()
     print('Loading the portfolio-construction notebook...', flush=True)
     nb = nbformat.read(ROOT / 'portfolio_construction.ipynb', as_version=4)
+    # This describes the checked-in display snapshot, not the run about to start.
+    nb.metadata.pop('executed_snapshot', None)
     # Override only the data-mode assignment; retain all source research settings.
     config = next(cell for cell in nb.cells if cell.id == 'configuration')
     import re

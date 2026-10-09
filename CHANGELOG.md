@@ -2,6 +2,8 @@
 
 ## 9 October 2026 — complete source-analysis reconciliation
 
+- Correct notebook presentation: place all 32 calculation implementations directly in the notebook and retain executed submission tables/charts for GitHub reading. The notebook now has 92 cells, including 44 executable cells; parity tests check its callable Python counterparts.
+
 - Review and map every one of the supplied notebook's 127 code cells, with hashes and destination IDs.
 - Expand the maintained notebook to 50 cells with CAPM, rolling exposures, BL matrices/covariance, risk-aversion allocations, moment tensors, factor diagnostics and Kelly fraction comparisons.
 - Place AUM, factor-tilt and quartile-spread experiments plus macro/provider context after research interpretation.

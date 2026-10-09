@@ -1,4 +1,5 @@
 """Economic identities and source-coverage checks for restored notebook analyses."""
+import ast
 import json
 from pathlib import Path
 import unittest
@@ -148,6 +149,36 @@ class RestoredResearchChecks(unittest.TestCase):
         positions = {cell['id']: i for i, cell in enumerate(nb['cells'])}
         for appendix in ['aum-snapshot', 'factor-tilt-experiment', 'beta-spread', 'macro-context', 'network-context']:
             self.assertGreater(positions[appendix], positions['next-steps'])
+
+    def test_notebook_contains_matching_calculation_implementations(self):
+        nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
+        cells = {c['id']: ''.join(c['source']) for c in nb['cells']}
+        implementations = nb['metadata']['inline_implementations']
+        self.assertEqual(len(implementations), 32)
+        for item in implementations:
+            module = ast.parse((ROOT / item['module']).read_text(encoding='utf-8'))
+            expected = next(n for n in module.body if isinstance(n, ast.FunctionDef) and n.name == item['name'])
+            actual = next(n for n in ast.parse(cells[item['cell_id']]).body
+                          if isinstance(n, ast.FunctionDef) and n.name == item['name'])
+            if item['name'] == 'load_prices':
+                # Its input helpers are defined locally in the notebook instead.
+                class RemoveLocalImport(ast.NodeTransformer):
+                    def visit_ImportFrom(self, node):
+                        return None if node.module == 'submission_data' else node
+                expected = RemoveLocalImport().visit(expected)
+            self.assertEqual(ast.dump(actual), ast.dump(expected), item['name'])
+
+    def test_notebook_has_no_hidden_project_module_imports(self):
+        nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
+        local = {'portfolio_tools', 'research_extensions', 'research_diagnostics', 'submission_data'}
+        for cell in nb['cells']:
+            if cell['cell_type'] != 'code':
+                continue
+            for node in ast.walk(ast.parse(''.join(cell['source']))):
+                if isinstance(node, ast.ImportFrom):
+                    self.assertNotIn(node.module, local, cell['id'])
+                elif isinstance(node, ast.Import):
+                    self.assertFalse(any(alias.name in local for alias in node.names), cell['id'])
 
     def test_optional_network_cell_with_mocked_provider(self):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))

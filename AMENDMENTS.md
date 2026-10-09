@@ -33,8 +33,15 @@ and the tested Python modules form the single maintained implementation.
 The supplied notebook contains 213 cells, including 127 code cells. Every code cell
 has a destination and review decision in the maintained notebook's final source
 reconciliation table. Metadata records the exact source-file hash, each code-cell
-hash and destination cell IDs. The maintained notebook now contains 50 cells;
+hash and destination cell IDs. The maintained notebook now contains 92 cells;
 repeated displays and formula variants are consolidated. Historical files are unchanged.
+
+The initial restoration called calculation functions from project modules and
+cleared the saved results. The notebook presentation has now been corrected:
+all 32 calculation functions appear directly in 21 implementation cells, placed
+alongside the relevant analysis. Saved submission-run tables and charts are retained
+for reading on GitHub. No project calculation module is imported by the notebook.
+Tests enforce parity with the callable Python counterparts used for testing and reuse.
 
 | Source topic | Restoration and correction |
 | --- | --- |

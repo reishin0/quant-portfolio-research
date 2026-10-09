@@ -1,6 +1,27 @@
 # Validation record
 
-## 9 October 2026 — source reconciliation and restored analyses
+## 9 October 2026 — calculations and results inside the notebook
+
+- The maintained notebook now has **92 cells, including 44 executable cells**.
+  All **32 calculation functions** are visible in 21 implementation cells beside
+  their relevant analysis. There are no imports from project calculation modules.
+- **44 tests passed**, including AST-level parity checks between every visible
+  calculation function and its callable Python counterpart, and a check rejecting
+  hidden project-module imports.
+- The inline submission run completed all 44 code cells. Its saved notebook now
+  retains **16 PNG chart outputs and 36 HTML table outputs**, plus execution counts
+  and a dated submission-snapshot record. GitHub readers can inspect the analysis
+  without first executing it or opening a separate HTML report.
+- The inline synthetic run also completed all 44 code cells; real-data-only
+  appendix and factor branches remain explicitly skipped in synthetic mode.
+- The frozen inputs and methodology have not changed in this presentation update.
+  The supplementary experiments remain after research interpretation. Optional
+  network calls remain disabled in the saved submission run.
+- Automated reruns execute a separate copy and export a new report; they do not
+  overwrite the committed submission display snapshot. Its snapshot metadata is
+  removed from rerun copies so it cannot mislabel later synthetic/Yahoo results.
+
+## Earlier 9 October 2026 — source reconciliation and restored analyses
 
 - **42 behavioral tests passed**, including 16 new checks for the restored analyses
   and regression cases from the repository review.
@@ -28,9 +49,9 @@
 - The optional market/metadata cell passed a mocked-provider execution test.
   **No live appendix acquisition was performed** in this validation. It requires
   explicit `RUN_NETWORK_CONTEXT=True`, network access and available provider data.
-- Factor-fit and Kelly-comparison figures were visually inspected. The source
-  notebook is stored with execution counts and outputs cleared; generated reports
-  remain separate timestamped local artifacts.
+- Factor-fit and Kelly-comparison figures were visually inspected. At this earlier
+  stage the source notebook stored no outputs; the presentation update above now
+  retains the submission results directly in the notebook.
 
 Environment: the existing Windows Python 3.13.15 project environment; `pip check`
 reported no broken requirements. Local Jupyter emitted its existing Windows
