@@ -1,0 +1,23 @@
+{
+  "recorded_at_utc": "2026-10-16T05:24:06.565376+00:00",
+  "portfolio_tests": {
+    "run": 100,
+    "passed": 99,
+    "optional_hmm_skipped": 1
+  },
+  "macro_tests_existing_hmm_runtime": {
+    "passed": 7,
+    "includes_optional_hmm_test": true
+  },
+  "executed_cells": 54,
+  "embedded_review_cells": 2,
+  "frozen_notebook_full_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+  "frozen_protocol_verified": true,
+  "original_submission_hashes_verified": true,
+  "updated_prices_rejected_as_frozen_extension": true,
+  "production_source_hashes_unchanged": true,
+  "report_directory": "outputs\\updated_report_20261016T051447_810132Z",
+  "research_exports": "outputs/snapshot_20261016T051554_592198Z",
+  "intraday_output": "outputs/macro_regime_20261016",
+  "publication": "No commit or push during this amendment"
+}

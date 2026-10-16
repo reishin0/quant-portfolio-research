@@ -1,0 +1,26 @@
+[
+  {
+    "id": "jpm_Q3_proxy_diagnostic",
+    "period_start": "2026-07-01",
+    "period_end": "2026-09-30",
+    "published_on": "2026-07-03",
+    "target": 4300.0,
+    "actual": 4266.403780078419,
+    "available_at_utc": "2026-10-16T05:43:16.285949+00:00",
+    "outcome_definition_verified": false,
+    "source_url": "https://www.kitco.com/news/off-the-wire/2026-07-03/jp-morgan-says-weaker-demand-may-cap-gold-gains-near-term-sees-rebound",
+    "outcome_definition": "Weekday mean of issuer NAV-implied bullion, holidays carried. Provider averaging convention and licensed bullion outcome not verified."
+  },
+  {
+    "id": "jpm_Q4_pending",
+    "period_start": "2026-10-01",
+    "period_end": "2026-12-31",
+    "published_on": "2026-07-03",
+    "target": 4500.0,
+    "actual": null,
+    "available_at_utc": "2026-10-16T05:43:16.285949+00:00",
+    "outcome_definition_verified": false,
+    "source_url": "https://www.kitco.com/news/off-the-wire/2026-07-03/jp-morgan-says-weaker-demand-may-cap-gold-gains-near-term-sees-rebound",
+    "outcome_definition": "Quarter unfinished"
+  }
+]

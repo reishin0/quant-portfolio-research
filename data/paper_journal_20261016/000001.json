@@ -1,0 +1,97 @@
+{
+  "decision_id": "paper_pair_2026-10-15",
+  "information_close": "2026-10-15",
+  "protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+  "input_sha256": {
+    "portfolio_amendments.py": "927dcf478fa264aeaac31d1292879ce06796309fcab6d76a9d5f30bfc2354cde",
+    "paper_research.py": "6067197a46828d557b9af0d45c6899e254956881fc2449439fb11fd7673b5aeb",
+    "run_amended_analysis.py": "f4abfdd65453ce771463813fde4e5d9ffeadc5b2827d1c1379b217e15ade8a86",
+    "run_updated_analysis.py": "cc54a5f6353816133b1bf530a2dedc03f6d93729d1a1f6f8c445aa346877fb6b",
+    "research/amendment_design_20261016.json": "485f2d4e45f6fc0b6872bbd969feb3d635db73208379aec85465b4aef82410ba",
+    "data/refresh_20261016/etf_adjusted.csv": "8235acc7b1b3ffbdf94c5e5401f584cb126067e33071de9433f644805a06c1a2",
+    "data/refresh_20261016/gld_valuations.csv": "41beeaea5158cbfd7ce981646d43e53fa0028bec90080e9383408666fea85e77",
+    "data/refresh_20261016/jpm_research_views.json": "a4d7710418e083e6eac27271eee28d3f170b6a72f63c40199cd5a9aa60b1b24a",
+    "data/refresh_20261016/refresh_manifest.json": "e5acc7e5a6ec2c4a3cec3cb74ae643edfb16228ec4e4f5a61dc1bfcef3cdfb2a",
+    "data/refresh_20261016/cash_returns.csv": "9086cdc6b865a0db604b3a25ccacf3009cb4630709c1ff32eb127e7828e95eff",
+    "data/amendments_20261016/forecast_outcomes.json": "d3816f7d8fa55559d9e3fce5f8468e16df5eba8814fb2db3baf9621c7880b4d9"
+  },
+  "inputs_available_at_utc": "2026-10-16T05:43:16.285949+00:00",
+  "execution_close_utc": "2026-10-16T20:00:00+00:00",
+  "first_return_close_utc": "2026-10-19T20:00:00+00:00",
+  "starting_state": "ALL_CASH_NEW_PAPER_ACCOUNT",
+  "solver_status": "MATCHED",
+  "transaction_cost_bps": 10.0,
+  "targets": {
+    "Scenario common risk": {
+      "VUG": 0.11630654511867386,
+      "SPHD": 0.11364791710938109,
+      "MTUM": 0.1213574633904063,
+      "ACWI": 0.12596637540161962,
+      "XLK": 0.12357787407990627,
+      "XLE": 0.11921345346504189,
+      "IEO": 0.12382538203540408,
+      "GLD": 0.1395612680335891,
+      "Cash": 0.016543721365977815
+    },
+    "Equal weight common risk": {
+      "VUG": 0.125,
+      "SPHD": 0.125,
+      "MTUM": 0.125,
+      "ACWI": 0.125,
+      "XLK": 0.125,
+      "XLE": 0.125,
+      "IEO": 0.125,
+      "GLD": 0.125,
+      "Cash": 0.0
+    }
+  },
+  "common_risk_audit": [
+    {
+      "Strategy": "Scenario common risk",
+      "Status": "MATCHED",
+      "Common volatility": 0.12111988744232388,
+      "Actual ex ante volatility": 0.1211198874423239,
+      "Risk gap": 1.3877787807814457e-17,
+      "Feasible minimum": 0.0,
+      "Feasible maximum": 0.12315736863315786,
+      "Risky scale": 0.9834562786340222,
+      "One-way turnover": 0.9834562786340222,
+      "Cash": 0.016543721365977815,
+      "Initial exception": true
+    },
+    {
+      "Strategy": "Equal weight common risk",
+      "Status": "MATCHED",
+      "Common volatility": 0.12111988744232388,
+      "Actual ex ante volatility": 0.12111988744232388,
+      "Risk gap": 0.0,
+      "Feasible minimum": 0.0,
+      "Feasible maximum": 0.12111988744232388,
+      "Risky scale": 1.0,
+      "One-way turnover": 1.0,
+      "Cash": 0.0,
+      "Initial exception": true
+    }
+  ],
+  "forecast_error_fraction": 0.1,
+  "basis_error_fraction": 0.02,
+  "view_active": true,
+  "horizon": {
+    "recorded_at_utc": "2026-10-16T05:49:05.392812+00:00",
+    "next_execution_close_utc": "2026-10-16T20:00:00+00:00",
+    "first_return_close_utc": "2026-10-19T20:00:00+00:00",
+    "view_expiry_execution_boundary": "2026-12-02",
+    "remaining_active_return_sessions": 32,
+    "minimum_strategy_sessions": 60,
+    "minimum_completed_forecast_cycles": 8,
+    "strategy_inference_admitted": false,
+    "completed_quarter_score_admitted": false,
+    "score_rule": "Quarter average forecast error separately; portfolio returns across frozen cycles. No inference from this unfinished quarter."
+  },
+  "evidence": "Prospectively recorded local paper decision; no execution or return observed.",
+  "policy_scope": "First holding interval only. Continued monthly decisions require new verified input vintages and drifted paper holdings; no all-cash resets presented as a continuous track record.",
+  "sequence": 1,
+  "recorded_at_utc": "2026-10-16T05:49:05.569374+00:00",
+  "previous_sha256": null,
+  "sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66"
+}

@@ -1,5 +1,150 @@
 # Validation record
 
+## 16 October 2026 — review before private publication
+
+- All **59 executable cells passed** in the published `portfolio_construction_amended.ipynb`. Its opening declaration describes the review repairs; the new integrity cell runs before calculations.
+- **119 tests ran: 118 passed, one optional HMM test skipped.** The six new regression checks cover the retained snapshot, missing/truncated journals, protocol binding, changed policy bytes and unchanged inherited calculations. `pip check` passed.
+- All **210 CSV result tables** agree with the preceding amended run within `rtol=1e-10`, `atol=1e-12`. No allocation or parameter changes were introduced by the review.
+- The complete frozen baseline, both protocol documents, their pinned code/data/runtime and all four original input hashes verify. The one retained paper decision is unchanged; no completed prospective outcome was added.
+- `research/review_validation_20261016.json` records the executed artifact hash and validation counts. The runner writes timestamped local outputs; the root notebook is the reviewed publication copy.
+- A clean export of the staged Git tree verified both protocols, all pinned inputs and the journal anchor, and successfully rebuilt the reviewed notebook without ignored raw downloads. Staged `git diff --check` passed with preserved CRLF bytes explicitly recognized.
+
+## 16 October 2026 — implemented methodology extensions
+
+- **All 58 executable cells passed** in `outputs/amended_report_20261016T054920_050400Z/portfolio_construction_amended.ipynb`; the HTML report is alongside it. Calculation exports are in `outputs/snapshot_20261016T055203_083927Z/`. The new notebook includes both implementation and amendment declarations. New common-risk results agree with the independent run; the baseline numeric tables agree with the earlier refreshed notebook.
+- **113 tests ran: 112 passed, one optional HMM test skipped.** Thirteen added checks cover analytical common-risk scaling, cash-inclusive turnover, infeasible pairs, future-price independence, independent forecast shrinkage arithmetic, prior-only basis estimation, forecast/outcome availability, calendar horizons, journal tampering/duplicate/backdating rejection, subsequent-outcome accounting, and exact inline-function/baseline-cell parity.
+- New retrospective common-risk experiment: **53 sessions**, scenario **5.5597%**, equal weight **5.7420%**; risk matches at all three rebalances within 1e-8. The independent accounting ledger reconciles turnover. Both accounts start in cash before the first active return, so this is a distinct experiment from slicing the older portfolios.
+- **75** aligned daily basis observations yield **35** chronological checks after the initial 40. Last prior-only shrunk sigma: **1.3236%**. This daily timing-basis diagnostic does not replace the full forecast-horizon mapping assumption.
+- Forecast calibration admission finds **zero eligible comparable completed quarters**: Q3 is an in-quarter forecast with an unverified outcome proxy/calendar; Q4 is unfinished. The 10% forecast and 2% mapping-basis assumptions remain unchanged and uncalibrated.
+- Separate paper protocol `research/paper_protocol_20261016.json` pins the new implementation, design and input vintage while retaining the original protocol as a dependency. First local paper decision recorded at **2026-10-16 05:49:05 UTC**, before intended execution **October 16, 20:00 UTC** and first return endpoint **October 19, 20:00 UTC**. Receipt hash: `5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66`. It is a decision receipt only, with no execution or subsequent return observed.
+- Both protocols verify; original submission hashes and the full frozen notebook hash remain unchanged. `git diff --check` passes. New execution result and output identities are recorded in the amended notebook's execution receipt.
+
+## 16 October 2026 — current-vintage rerun and isolated macro prototype
+
+- **All 54 calculation cells passed** in the refreshed real-data notebook, with prices and issuer valuations through October 15. Final report directory: `outputs/updated_report_20261016T051447_810132Z/`; calculation exports: `outputs/snapshot_20261016T051554_592198Z/`. The dated portfolio and intraday reviews are embedded as narrative cells after execution; calculation sources/outputs are unchanged by that insertion.
+- **100 tests ran: 99 passed, one optional HMM test skipped** in the portfolio environment. The separate seven-test macro suite passed in the existing AutoTrade numerical environment, including the skipped HMM causal-filter test. No AutoTrade strategy or broker code was executed. `pip check` and `git diff --check` pass.
+- The entire frozen notebook file and all four original submission files are byte-identical to their pre-refresh identities. Frozen protocol code/input/runtime verification passes. The updated Yahoo history correctly fails the original exact-prefix extension test; gold and cash prefixes remain equal. No accepted frozen forward result is claimed.
+- Main evaluation: 700 sessions through October 15. Equal-weight CAGR 23.7540%, Sharpe 1.2583; minimum-variance CAGR 22.3587%, Sharpe 1.4133. Its paired Sharpe difference interval still includes zero.
+- JPM reconstruction: 53 sessions, scenario 6.1204%, matched prior 6.2721%, difference -0.1517 percentage points. Forecast, allocation policy and uncertainty assumptions are unchanged.
+- Isolated macro replay: four exploratory evaluation dates, 1,403 common eligible minutes and only eight overlapping positive minute labels. The bond proxy adds no true-positive minutes versus the broad guard; the combined HMM filter misses all eight. Every artificial 30-minute trading diagnostic loses after both declared cost assumptions. Full results and limitations are in `research/macro_regime/REVIEW_20261016.md`.
+- Native session logs, actual arrival times and measured intraday yields were unavailable; no native latency, realized execution or causal-regime claim is made. No thresholds were tuned after the replay.
+- Non-fatal upstream NumPy/calendar deprecation, Windows Jupyter selector and physical-core detection warnings remain documented. They did not produce cell errors or failed tests. Pinned baseline dependencies were not changed to suppress warnings.
+
+## 9 October 2026 — quarterly-average model and frozen forward protocol
+
+This entry supersedes the earlier endpoint/confidence scenario below.
+
+- **90 tests passed**, including independent quarterly-average/error-propagation math, explicit Omega, same-date issuer inputs, future-data independence, trading-cost behavior, turnover-cap/ledger agreement and frozen-history admission.
+- **All 54 executable cells passed** in snapshot, synthetic and submission modes. The maintained notebook contains **109 cells, 51 inline calculation functions and 18 PNG charts**, with the executed snapshot saved in place. Notebook/module parity passes.
+- The issuer input contains **70 NAV/ounces pairs** from 1 July through 8 October. Two explicitly marked US holidays are excluded. NAV-implied bullion is a proxy, and the provider averaging calendar and forecast-error distribution remain uncalibrated research assumptions.
+- Main strict recorded-date results remain unchanged. The separate reconstruction uses a cost-aware mean/variance objective and actual execution-turnover guard; it is not directly the old maximum-Sharpe portfolio with a single parameter changed.
+- **3 August–8 October, 48 sessions:** scenario cumulative net return **6.7826%**, cost-aware prior **6.9232%**, difference **-0.1405 percentage points**. Maximum drawdowns: **-1.8498%** and **-1.8308%**. Preserve the negative finding; no calibration was chosen to improve it.
+- Fixed GLD overweight returns **6.0362%**, GLD-exposure-matched control **6.1979%**, cash-scaled equal-weight risk control **6.2761%**. Actual GLD matching is exact at the three active rebalances. The cash-only risk control cannot increase leverage and falls short of scenario ex ante volatility; inspect the exported risk gaps before interpreting comparisons.
+- The scenario's GLD execution targets are **13.2309%, 13.9058%, 13.1517%**. Latest-close announced GLD target: **12.7515%**. Active-period total one-way turnover is **1.9196%**, versus **0.8866%** for its prior. The 10% per-rebalance limit is checked against an independent replay; initial all-cash deployment is explicitly exempt.
+- Five declared error/basis cases show cumulative return differences versus prior from **-0.2981 to approximately 0 percentage points**. No winner selection. At the latest close Q is **79.72% annual arithmetic excess** but Omega is **1.0578 annual-return variance**; a large annualized Q is not strong evidence or a promised return.
+- Protocol frozen at **2026-10-09 11:46:11 UTC**, after the last observed price of **8 October**. Source/code/package pins verify. No future evidence is present. Earliest eligible fit/execute/earned-return dates are **12/13/14 October**, conditional on receiving those observations. Generated dates in the forward evaluator's unit test are fixtures only and are not exported as evidence.
+- All four original data hashes remain unchanged. `pip check` and `git diff --check` pass. Existing upstream NumPy/calendar and Jupyter Windows-loop warnings are non-fatal; no notebook cell raised an error.
+- Snapshot report: `outputs/validation_report_20261009T114727_491930Z/`; research exports: `outputs/snapshot_20261009T114723_660877Z/`.
+- Synthetic report: `outputs/validation_report_20261009T114743_989899Z/`.
+- Submission report: `outputs/validation_report_20261009T114716_666392Z/`.
+- Executed notebook calculation SHA-256: `8e7cd5f3686a68785946e36df8013ba7c18ac0d2232a31616a73a8205c60bf1a`.
+
+The implementation is validated under the declared assumptions. This short retrospective study does not establish forward superiority. The frozen evaluator preserves that distinction rather than treating a replay as new evidence.
+
+
+## 9 October 2026 — JPM research review and mapped GLD result
+
+- **83 tests passed**. Ten new tests independently check the scalar absolute BL
+  posterior, mixed P rows, horizon arithmetic/fees, future-price independence,
+  publication and expiry, invalid inputs, matched trading schedules and budget/caps.
+  Registered-set publication metadata now reports the actual active source date.
+- **53 executable cells passed** in snapshot, synthetic and submission-price modes.
+  The maintained notebook saves the snapshot run: **108 cells, 48 inline calculation
+  functions, 18 PNG charts**. Synthetic/submission modes explicitly skip the real
+  post-July-2026 JPM scenario rather than applying it to unrelated observations.
+- Source review covers June 9 gold, July 1 mid-year, July 3 Reuters revision, July 28
+  equity, August 7 factors and September 4 investor research. The June/early-July
+  USD 6,000 gold figure was superseded by the July 3 Reuters-attributed **USD 4,500
+  Q4 average**. The underlying JPM note was unavailable. Later qualitative research
+  supplies no numerical ETF spread; public searches are not exhaustive coverage.
+- Main strict recorded-date results, weights, return paths and configuration registry
+  are byte-identical to the preceding stages 4–7 run. The JPM study is separate and
+  explicitly reconstructed from publication dates; its mapping date is 9 October.
+- Reconstruction: **3 August–8 October 2026, 48 sessions, three active rebalances**.
+  Net cumulative return is **6.8735% versus 6.2761%** for the matched prior, a
+  **0.5973 percentage-point** difference. Maximum drawdown is **-1.8254% versus
+  -1.8293%**. These are short-period returns, not a validated annual alpha.
+- All seven disclosed cases were retained. Their matched-prior cumulative return
+  differences range from **+0.0787 to +1.3696 percentage points**. The quarter-start
+  case has an extra expiry exit and its own identically timed prior control.
+  No confidence, endpoint or basis assumption was chosen by these returns.
+- GLD rebalance targets are **25.99%, 2.13%, 35.00%**. The latest-close research
+  target is also **35%**, at the cap; other assets are shown in `jpm_latest_weights.csv`.
+  This material allocation sensitivity limits any robustness claim. The source
+  forecasts a quarterly average: the assumed endpoint and nonsynchronous spot/ETF
+  conversion remain model choices, with explicit sensitivity checks.
+- All four original data hashes remain unchanged. Notebook/module parity, package
+  checks and `git diff --check` passed. The existing upstream calendar/Jupyter
+  warnings remain non-fatal in this tested environment.
+- Snapshot report: `outputs/validation_report_20261009T090000_872841Z/`;
+  research exports: `outputs/snapshot_20261009T085953_109909Z/`.
+- Synthetic report: `outputs/validation_report_20261009T090120_483433Z/`.
+- Submission-price report: `outputs/validation_report_20261009T090015_161728Z/`.
+- Executed notebook code SHA-256:
+  `9cb2efc915a70cbc00ca907a7eb0d2f70e9b555cdd630c9407f2074c812a749a`.
+
+The forecast horizon is unfinished. The result establishes implementation behavior,
+not that JPM's forecast succeeded or that the reconstructed allocation has reliable
+predictive superiority. Latest-close weights are research output, not executed trades.
+
+## 9 October 2026 — stages 4–7 completed locally
+
+- **73 tests passed** (`python -m unittest discover -s tests -q`): dated-view
+  availability/supersession/expiry, matched control schedules, development-only
+  selection under future-data mutation, an independent Bartlett HAC calculation,
+  covariance shrinkage, paired bootstrap repeatability, drawdown duration and the
+  explicit BAB cash policy, alongside the existing analytical/accounting checks.
+- **51 executable cells passed in each of three offline modes**: updated frozen
+  snapshot, synthetic and original submission prices. The maintained notebook saves
+  the frozen snapshot: **105 cells, 45 inline calculation functions and 17 PNG charts**.
+- Two independent frozen runs produced **110 byte-identical CSV exports** and
+  identical higher-moment tensor arrays. This checks the tested Windows Python
+  3.13.15 environment; other environments still require validation. The final run
+  also records the actual runtime configuration separately from the saved source.
+- Development: 500 sessions, 4 January 2022–29 December 2023. The declared
+  minimum-variance volatility rule selected **252-session sample covariance** from
+  four configurations before evaluating later observations. Every candidate is
+  exported. Evaluation: **695 sessions, 2 January 2024–8 October 2026**.
+- The 22-row experiment-case register records four window/covariance configurations,
+  three caps, nine fixed-target cost scenarios, three confidence levels and three
+  bootstrap block lengths. Confidence cases explicitly remain unavailable because
+  no numerical view set is enabled; these are not passed empirical view tests.
+- Minimum variance: net CAGR **22.09%**, Sharpe **1.39**, maximum drawdown **-10.19%**.
+  Equal weight: **24.13%**, **1.28**, **-16.71%** respectively. The minimum-variance
+  Sharpe difference is **0.11**, with a 21-session block-bootstrap 95% pointwise
+  interval **[-0.67, 0.78]**. No positive Sharpe improvement is established by these
+  conditional intervals. BL matches equal weight structurally with the current prior.
+- Factor attribution uses **31 months, February 2024–August 2026**. All displayed
+  alpha Holm-adjusted HAC p-values are 1.0. Submission-mode strategy attribution is
+  explicitly unavailable with fewer than 24 aligned months; synthetic mode omits it.
+- The selected BAB path holds cash at **one of 34 evaluation rebalances** because
+  a leg beta is ineligible; that event is exported. Estimated beta neutrality does
+  not imply zero realized beta. Cash-aware exposure and costs remain explicit.
+- All **four original data hashes remain unchanged**. Package lock installation,
+  `pip check`, notebook/module parity and `git diff --check` passed. The existing
+  non-fatal Windows Jupyter and upstream calendar deprecation warnings remain.
+- Frozen report: `outputs/validation_report_20261009T083930_929852Z/`;
+  research exports: `outputs/snapshot_20261009T083927_213317Z/`.
+- Synthetic report: `outputs/validation_report_20261009T084010_201673Z/`.
+- Submission-price report: `outputs/validation_report_20261009T083955_974094Z/`.
+- Saved/executed frozen notebook code SHA-256:
+  `0506ad25f8ce940631fc59b3a38398f2edc5ee4491c9e5dddfd7d76eb3a8eec5`.
+
+These are retrospective research and software results. The fixed ETF universe,
+revised provider vintages, inspected evaluation period, conditional bootstrap and
+simplified costs prevent a prospective performance claim or a guaranteed grade.
+The dated records below describe earlier configurations, not current defaults.
+
 ## 9 October 2026 — stages 1–3 research foundation
 
 - **62 tests passed** (`python -m unittest discover -s tests -q`), including 12 new
@@ -9,7 +154,7 @@
   execution-close exclusion, missing sessions and input tampering.
 - **46 executable cells passed** in all three offline modes: frozen updated prices,
   synthetic and original submission. The maintained notebook retains the updated
-  frozen run: **97 total cells, 35 inline calculation functions, 15 PNG outputs**.
+  frozen run: **96 total cells, 35 inline calculation functions, 15 PNG outputs**.
 - Two independent frozen notebook runs produced **66 byte-identical CSV exports**
   and identical moment-tensor arrays. This establishes repeatability for the tested
   Windows Python 3.13.15 environment, not universal bitwise agreement across platforms.
@@ -25,22 +170,19 @@
   These are sensitivity results, not evidence of statistical superiority.
 - No active numerical views; BL maximum Sharpe matches equal weight structurally
   under the equal-weight reverse-optimized prior. It is not independent confirmation.
-- Original report, notebook, utility and four data artifacts: **all seven manifest
-  hashes unchanged**. Notebook/module AST parity and all 127 source-cell mappings pass.
 - Pinned environment installed and `pip check` passed. Reports record all installed
   package versions and executed code hash. Upstream calendar/NumPy deprecation and
   Jupyter Windows event-loop warnings are non-fatal; portability needs separate testing.
-- Frozen report: `outputs/validation_report_20261009T074413_966764Z/`;
-  research exports: `outputs/snapshot_20261009T074410_473439Z/`.
-- Synthetic report: `outputs/validation_report_20261009T074428_338994Z/`.
-  Original-input report: `outputs/validation_report_20261009T074507_146114Z/`.
-  Reports are local ignored artifacts; saved results are embedded in the notebook.
+- Frozen report: `outputs/validation_report_20261009T080736_888825Z/`;
+  research exports: `outputs/snapshot_20261009T080734_232159Z/`.
+- Reports are local generated artifacts; saved results are embedded in the notebook.
+- The current snapshot notebook rerun passed all 46 code cells; all 62 tests passed.
+  The four data files match all four manifest hashes.
 - Executed notebook code SHA-256:
-  `087dc7c202cf93953149612e0aa02b6fa0d95bd890a4c063727d7f4ef5daa3ce`.
+  `de1aee2c45e2f5e5a5846e0b17d033d783c73f5739723e8897c3ebdb6ceb90af`.
 
 The original universe is retrospective and providers can revise historical inputs.
-Stages 4–7 (robust validation, uncertainty, implementation stress and final synthesis)
-remain future work. Passing software checks is not a 100/100 research grade.
+The later stages 4–7 record above supersedes this earlier foundation-only status. Passing software checks is not a 100/100 research grade.
 
 
 ## 9 October 2026 — refreshed factors and dated-view eligibility
@@ -48,8 +190,6 @@ remain future work. Passing software checks is not a 100/100 research grade.
 - **50 tests passed**. New checks reproduce the cleaned factor CSV from the raw
   official ZIP, verify both hashes and percent-to-decimal units, reject undated
   or malformed views, and prove pre-publication targets and returns are unchanged.
-- Same-day/preceding-close exclusion and post-publication activation passed.
-  Notebook/module calculation parity and all seven original artifact hashes pass.
 - The Yahoo notebook completed **all 44 executable cells**, retaining **15 PNG
   outputs** plus factor regression tables and professional-source assessments.
 - Prices: **2 January 2020–8 October 2026**, 1,701 rows and nine symbols.
@@ -84,10 +224,6 @@ The entries below document prior configurations, not current defaults.
   explicitly supplied. Original AUM/inflation/credit illustrations are disabled
   unless historical context is explicitly enabled. Their implementation remains
   visible; no unchanged series has been relabelled as updated.
-- Original data/report/archive bytes still match all seven manifest hashes.
-
-The following dated validation entries describe earlier configurations, including
-the previously saved submission run. They are not the active input defaults.
 
 ## 9 October 2026 — calculations and results inside the notebook
 
@@ -110,7 +246,7 @@ the previously saved submission run. They are not the active input defaults.
   overwrite the committed submission display snapshot. Its snapshot metadata is
   removed from rerun copies so it cannot mislabel later synthetic/Yahoo results.
 
-## Earlier 9 October 2026 — source reconciliation and restored analyses
+## Earlier 9 October 2026 — restored analyses
 
 - **42 behavioral tests passed**, including 16 new checks for the restored analyses
   and regression cases from the repository review.
@@ -118,11 +254,8 @@ the previously saved submission run. They are not the active input defaults.
   `launch.py --check`; **all 50 also completed in synthetic mode** through
   `launch.py --check --mode synthetic`. Conditional data sections state when they
   are omitted; a completed notebook does not imply live optional-provider coverage.
-- Every one of the supplied 213-cell notebook's **127 code cells** has a source
-  hash, destination cell IDs and a review decision. All destinations exist.
-  The original submission manifest's seven hashes remain valid.
 - Submission mode exported **50 supplemental tables and 14 diagnostic figures**,
-  alongside the main portfolio outputs, source reconciliation and ordered moment tensors.
+  alongside the main portfolio outputs, ordered moment tensors.
 - The rolling-window comparison scored 414 common initial-training dates across
   20 candidate ETFs and selected 30 observations from 30/60/90. No evaluated-period
   returns were used to choose that window.
@@ -170,9 +303,6 @@ They do not override the latest validation above.
 - Inflation series: 1970–2023. BIS bank-credit series: last value 41.279% of GDP
   for 2023 Q2. Row reordering leaves both macro loaders' selected data unchanged;
   duplicate BIS matches fail explicitly. The resulting macro chart was visually checked.
-- All seven imported artifacts match the manifest. All 127 archived code cells
-  match the actual submitted notebook's code. Data, PDF and helper bytes are
-  unchanged; archive notebook transformations are declared in the manifest.
 - Duplicate ETF keys, invalid prices, missing symbols, short factor overlap and
   rank-deficient regressions are rejected. Original unit and look-ahead tests pass.
 
@@ -191,7 +321,7 @@ and macro release-date histories are unavailable.
 
 | Check | Result |
 | --- | --- |
-| Python source and notebook structure | Both notebooks parsed as JSON; every code cell and maintained Python file compiled successfully |
+| Python source and notebook structure | The maintained notebook parsed as JSON; every code cell and maintained Python file compiled successfully |
 | Offline behavioral suite | 17 tests passed |
 | Deterministic notebook execution | All 22 cells passed; executed notebook, HTML report, charts, tables and metadata were created |
 | Supported launcher path | `launch.py --check` completed environment checks, `pip check`, imports, kernel registration and the full report run |

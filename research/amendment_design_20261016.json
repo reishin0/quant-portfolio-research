@@ -1,0 +1,20 @@
+{
+  "version": "20261016-methodology-v1",
+  "evidence": "New retrospective experiment, declared before examining its results. Not the frozen October 9 experiment.",
+  "common_risk": {
+    "controls": ["cost-aware JPM scenario sleeve", "equal-weight sleeve"],
+    "covariance": "252 previous sessions, sample annual covariance, no forward observations",
+    "selection": "Highest shared volatility on two long-only risky-sleeve-plus-cash rays, subject to identical caps and turnover constraints. No leverage.",
+    "asset_cap": 0.275,
+    "one_way_turnover_cap": 0.10,
+    "initial_all_cash_exception": true,
+    "infeasible_rule": "Hold both controls and report risk mismatch; never force a match",
+    "cost_bps": 10,
+    "schedule": "Existing monthly active dates; fit t-2, execution t-1, return t; existing expiry exit retained"
+  },
+  "basis": {"minimum_training_pairs": 40, "prior_sigma": 0.02, "prior_strength_pairs": 40, "role": "Timing-basis diagnostic only, not a substitute for forecast-horizon Omega"},
+  "forecast_error": {"minimum_independent_completed_quarters": 8, "prior_sigma": 0.10, "prior_strength_quarters": 8, "policy": "Prior-only comparable outcome/lead-horizon gate; deduplicate quarters; retain default below minimum"},
+  "inference": {"minimum_prospective_sessions": 60, "minimum_completed_forecast_cycles": 8, "quarter_score": "Separate complete-quarter forecast error from active-view portfolio returns"},
+  "paper_journal": "Hash-chained exclusive entries, current wall-clock capture before execution; separate outcome evaluator; no backdating or broker execution claims",
+  "tuning": "No post-result parameter selection; correctness repairs must be declared"
+}

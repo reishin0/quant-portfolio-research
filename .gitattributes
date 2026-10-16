@@ -1,12 +1,14 @@
 # Preserve imported bytes so provenance hashes survive Windows/Linux checkouts.
 # Original whitespace is part of the hashed source record.
+# Research protocols hash bytes, including line endings. Do not normalize these.
+*.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.ipynb -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
 data/efts_dataset.csv -text -whitespace
 data/F-F_Research_Data_5_Factors_2x3_monthly.csv -text -whitespace
 data/WS_GLI_csv_col.csv -text -whitespace
 data/Inflation-data.xlsx binary
-research_archive/submission_report_2024.pdf binary
-research_archive/portfolio_construction_2024.ipynb -text -whitespace
-research_archive/utils.py -text -whitespace
 data/F-F_Research_Data_5_Factors_2x3_monthly_20261009.csv -text
 data/ff5_source_20261009.zip binary
 data/etf_adjusted_20261009.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol

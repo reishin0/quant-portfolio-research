@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "policy": "Latest available set supersedes earlier sets; monthly activation, exclusive expiry with a scheduled exit; publication and mapping-record dates both precede decisions. No inferred numerical forecasts.",
+  "sets": [
+    {
+      "id": "jpm_drive_20200609",
+      "enabled": false,
+      "source_title": "Quantitative Perspectives on Cross-Asset Risk Premia",
+      "source_url": "https://drive.google.com/file/d/14Dz2Fg05je4Ow_1yl0ZFMAXpdjaLKLa8/view",
+      "published_on": "2020-06-09",
+      "recorded_on": "2026-10-09",
+      "valid_from": null,
+      "expires_on": null,
+      "horizon_months": null,
+      "return_definition": null,
+      "provider_forecast": null,
+      "mapping_assumptions": "The file uploaded in October 2026 is a June 2020 report, not a current outlook. It discusses cross-asset risk premia and model views; no current ETF return spreads are inferred.",
+      "inactive_reason": "No justified annual relative total-return ETF mapping and model uncertainty supplied.",
+      "classification": "provider_forecast_with_mapping",
+      "views": []
+    },
+    {
+      "id": "jpm_gaav_2026q4",
+      "enabled": false,
+      "source_title": "Global Asset Allocation Views 4Q 2026",
+      "source_url": "https://am.jpmorgan.com/nl/en/asset-management/institutional/insights/portfolio-insights/asset-class-views/asset-allocation/",
+      "published_on": "2026-10-01",
+      "recorded_on": "2026-10-09",
+      "valid_from": null,
+      "expires_on": null,
+      "horizon_months": 12,
+      "return_definition": null,
+      "provider_forecast": {
+        "instrument": "S&P 500 price index",
+        "target_level": 8600,
+        "horizon_months": 12
+      },
+      "mapping_assumptions": "No active eight-ETF BL view. SPY is a benchmark, not an allocation asset; US style/sector ETFs are not exact S&P 500 substitutes. No relative annual ETF return differences or numerical confidences are supplied. The index target is not a total-return forecast.",
+      "inactive_reason": "No justified annual relative total-return ETF mapping and model uncertainty supplied.",
+      "classification": "provider_forecast_with_mapping",
+      "views": []
+    }
+  ]
+}

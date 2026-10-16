@@ -1,0 +1,11 @@
+{
+  "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&cosd=2019-12-20&coed=2026-10-16",
+  "retrieved_at_utc": "2026-10-16T05:01:09.965108+00:00",
+  "sha256": "c28b317243f388d13dcbfa3bce82bfa77d0c6b59d3d66243bf33ae39cb096e53",
+  "bytes": 28174,
+  "file": "sofr.csv",
+  "coverage_first": "2019-12-20",
+  "coverage_last": "2026-10-14",
+  "units": "percent per annum; ACT/360 simple accrual",
+  "use": "Realized financing proxy, not a decision input. Published in arrears."
+}

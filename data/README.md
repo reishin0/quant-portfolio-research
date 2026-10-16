@@ -1,8 +1,21 @@
 # Data inputs and provenance
 
+## 16 October 2026 methodology inputs
+
+`amendments_20261016/forecast_outcomes.json` records the Q3 diagnostic outcome proxy and Q4 pending outcome with source, availability time and comparability flags. Q3 uses issuer NAV-implied bullion, not a licensed matching spot series; neither entry is admitted to forecast-uncertainty calibration.
+
+`paper_journal_20261016/` holds exclusive numbered research decision receipts. A receipt declares the new all-cash paper starting state, input/protocol hashes, actual recording time, intended future execution/return interval and targets. Never edit or backdate an entry. Historical reconstruction and future outcome files remain separate. No broker holding or trade is implied.
+
+## 16 October 2026 dated additions
+
+`refresh_20261016/` contains new adjusted prices and issuer valuations through October 15, SOFR and daily Treasury observations through October 14, and the latest available monthly factors through August. `refresh_manifest.json` and provider manifests record input hashes, actual observation dates and historical revision checks. Original and frozen input files remain unchanged.
+
+`intraday_20261016/` contains separately sourced Yahoo one-minute bars for SPY, QQQ, DIA, IEF and SHY, October 1–15. The manifest retains retrieval times and raw-response hashes. These are retrospective aggregate bars, not native strategy receipts or measured Treasury yields.
+
+Raw vendor workbooks, HTML, response files and redundant raw price exports remain local. The notebook runner requires every derived input hash; if raw sources are present it verifies them too, and records any absent optional raw source. A fresh download may differ and must use a new directory. No redistribution right is asserted by inclusion in this private research workspace.
+
 The four original inputs are included unchanged in this private repository.
-`manifest.json` records their SHA-256 hashes, sizes, units and coverage, plus
-the report and original notebook lineage. Provider download timestamps are unknown.
+`manifest.json` records their SHA-256 hashes, sizes, units and coverage. Provider download timestamps are unknown.
 
 **ORIGINAL 2024 SUBMISSION — inactive reference data by default.** Their notebook
 configuration lines are commented and labelled as original. The active price run
@@ -90,13 +103,11 @@ The maintained loader pivots `Adj Close` before calculating per-asset returns.
 It rejects duplicate keys, invalid dates, missing requested symbols and
 nonpositive/nonfinite prices. It does not fill gaps. End dates are exclusive.
 
-`Market Cap` has one value per ETF repeated across all dates. The report describes
-scraped capitalization/AUM, but the observation date is unknown. It is excluded
+`Market Cap` has one value per ETF repeated across all dates. The observation date of these capitalization/AUM values is unknown. It is excluded
 from historical estimation. The cache does not include the separately queried
 Treasury-bill yield. Allocation retains a stated constant cash-rate assumption.
 
-Report Table 1 lists 21 ETFs and one separate risk-free series, rather than 22 ETFs.
-Its eight allocation assets are VUG, SPHD, MTUM, ACWI, XLK, XLE, IEO and GLD.
+The price data contain 21 ETFs. The eight allocation assets are VUG, SPHD, MTUM, ACWI, XLK, XLE, IEO and GLD.
 SPY is the reference. The remaining 12 ETFs are retained in universe diagnostics
 and attribution. The eight-ETF selection remains retrospective.
 
@@ -114,8 +125,8 @@ months and a full-rank design. The original-input strategy sample was February 2
 There are no July/August 2024 factors in the original file; the current file extends through August 2026. RF is used for monthly attribution
 only; it is distinct from the SOFR realized-financing proxy and constant forecast assumption.
 
-These are time-series OLS regressions with classical IID standard errors, not
-Fama–MacBeth cross-sectional estimates. Factor coefficients do not adjust weights.
+These are time-series OLS regressions with IID and three-lag HAC uncertainty,
+plus Holm-adjusted alpha tests; they are not Fama–MacBeth cross-sectional estimates. Factor coefficients do not adjust weights.
 
 ## Macroeconomic context
 
@@ -130,12 +141,47 @@ UNIT_MEASURE=770, UNIT_MULT=0`. The reader requires exactly one matching series,
 never row 142. The chart retains percent-of-GDP units without min–max normalization.
 
 These snapshots lack publication histories and are descriptive context only.
-They do not feed earlier allocation decisions. The report's growth and risk-appetite
-interpretations are not treated as extra supplied time-series datasets.
+They do not feed earlier allocation decisions.
 
 ## Reuse
 
 Inputs are included at the owner's request for private research. The project grants
 no third-party data rights; review provider redistribution terms before making
-them public. The declaration, duplicate report DOCX, exported notebook HTML and
-bytecode cache are excluded. The PDF and notebook source retain the historical record.
+them public.
+
+
+## Executable view register
+
+`view_register.json` stores disabled source records separately from numerical view
+sets. Enabling a set requires source and mapping statements, publication/recording
+and activation/expiry dates, a 12-month annual arithmetic total-return spread,
+classification, and confidence with an uncertainty basis. Source facts and our
+assumptions must be distinguishable. Current JPM records supply no eligible ETF
+numerical mapping. The notebook validates the register and hashes it with each run.
+Publication and mapping recording precede decisions. Activation is monthly; expiry
+is exclusive at execution and adds a recorded exit rebalance. Newer available sets
+supersede older sets, with no revival after expiry. Legacy fixed-view configuration
+is not used by the main experiment runner.
+
+## JPM research reviewed on 9 October 2026
+
+`jpm_research_views_20261009.json` records six June–September research sources plus
+GLD issuer information, source hashes when raw retrieval succeeded, rejection and
+supersession decisions, and the explicit GLD scenario. The July revision is Reuters
+attribution; the underlying JPM note was not available. No full copyrighted reports
+are redistributed. Publication dates remain distinct from today's mapping date.
+The 4,500 USD/oz Q4 average is not itself an ETF forecast or a terminal price.
+All conversion, fee, quarterly observation and forecast-error assumptions are declared.
+The file drives the separate reconstructed comparison, not the strict view register.
+
+
+`gld_valuation_20261009.csv` contains 70 issuer NAV/ounces pairs from 1 July through
+8 October, extracted from the issuer historical workbook. Two explicitly labelled
+US holidays are excluded. The JSON source record pins the extracted CSV and the
+retrieved workbook hash. NAV/ounces is an implied bullion proxy, not licensed LBMA
+spot; the workbook itself stays in the ignored local research cache.
+
+`forward_protocol_20261009.json` is the immutable first prospective specification.
+It pins code, packages, policy and existing input vintages. Extended inputs go in
+separate files, preserve frozen observations and are supplied explicitly to
+`forward_evaluation.py`. Current files contain no subsequent evidence.

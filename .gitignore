@@ -29,11 +29,32 @@ data/*
 !data/ff5_source_20261009.zip
 !data/ff5_provenance_20261009.json
 !data/professional_views_20261009.json
+!data/view_register.json
+!data/jpm_research_views_20261009.json
+!data/gld_valuation_20261009.csv
+!data/forward_protocol_20261009.json
 !data/etf_adjusted_20261009.csv
 !data/etf_actions_20261009.csv
 !data/etf_snapshot_20261009.json
 !data/sofr_20261009.csv
 !data/sofr_provenance_20261009.json
+
+# Dated research refresh: derived inputs and provenance; raw vendor downloads stay local.
+!data/refresh_20261016/
+data/refresh_20261016/*
+!data/refresh_20261016/*.csv
+!data/refresh_20261016/*.json
+data/refresh_20261016/yahoo_daily_raw.csv
+!data/intraday_20261016/
+data/intraday_20261016/*
+!data/intraday_20261016/bars.csv
+!data/intraday_20261016/manifest.json
+!data/amendments_20261016/
+data/amendments_20261016/*
+!data/amendments_20261016/forecast_outcomes.json
+!data/paper_journal_20261016/
+data/paper_journal_20261016/*
+!data/paper_journal_20261016/*.json
 
 # Local outputs and backups
 outputs/

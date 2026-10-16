@@ -1,7 +1,6 @@
 {
   "imported_on": "2026-10-08",
   "source": "User-supplied CQF August 2024 submission directory",
-  "report_date": "2024-08-21",
   "provider_download_timestamp": "unknown; filesystem timestamps are not download evidence",
   "redistribution": "Imported into the private research repository at the owner request; this project grants no rights to third-party data. Review provider terms before public redistribution.",
   "files": [
@@ -13,7 +12,7 @@
       "bytes": 3111695,
       "coverage": "2020-01-02 to 2024-08-20",
       "units": "USD prices; Market Cap is a single snapshot",
-      "provider": "Yahoo Finance prices; AUM collection described in the report",
+      "provider": "Yahoo Finance prices; AUM observation timestamp unknown",
       "transformation": "none"
     },
     {
@@ -48,30 +47,6 @@
       "units": "percent of GDP",
       "provider": "BIS global liquidity indicators",
       "transformation": "none"
-    },
-    {
-      "path": "research_archive/submission_report_2024.pdf",
-      "role": "Original report, 49 pages, dated 21 August 2024",
-      "sha256": "3e42b3456eb21af572d52fd97107ae5dc5ef6ac98ecf97be5deddcc7acb0ab86",
-      "original_sha256": "3e42b3456eb21af572d52fd97107ae5dc5ef6ac98ecf97be5deddcc7acb0ab86",
-      "bytes": 2749780,
-      "transformation": "none"
-    },
-    {
-      "path": "research_archive/utils.py",
-      "role": "Original notebook helper dependency",
-      "sha256": "d7484f49dab2ecc79cf225cc8f163731ebfaaec5f095e451e4c0cbce255a3a39",
-      "original_sha256": "d7484f49dab2ecc79cf225cc8f163731ebfaaec5f095e451e4c0cbce255a3a39",
-      "bytes": 6731,
-      "transformation": "none"
-    },
-    {
-      "path": "research_archive/portfolio_construction_2024.ipynb",
-      "role": "Actual submission notebook",
-      "sha256": "c11dc5044f787aa8bd69348caf23b78d1a32ad703e3b2d8099ea6042a1f69e69",
-      "original_sha256": "8a639ba99d301c1e0c8060005f8fa7d3298a0acfc74348d8b841b6be3a30a1bd",
-      "bytes": 200583,
-      "transformation": "Code cells unchanged; outputs, execution counts and cell metadata cleared; IDs and provenance note added; title attribution shortened."
     }
   ]
 }

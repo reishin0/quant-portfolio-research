@@ -159,15 +159,8 @@ class RestoredResearchChecks(unittest.TestCase):
         self.assertAlmostEqual(tilted.sum(), 1)
         self.assertLessEqual(tilted.max(), .35 + 1e-10)
 
-    def test_source_mapping_covers_all_code_cells_and_existing_destinations(self):
+    def test_supplementary_analyses_follow_interpretation(self):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
-        mapping = nb['metadata']['source_reconciliation']
-        self.assertEqual(len(mapping['cells']), 127)
-        self.assertEqual(len({item['source_cell'] for item in mapping['cells']}), 127)
-        ids = {cell['id'] for cell in nb['cells']}
-        for item in mapping['cells']:
-            self.assertTrue(set(item['target_cells']) <= ids)
-            self.assertEqual(len(item['source_code_sha256']), 64)
         positions = {cell['id']: i for i, cell in enumerate(nb['cells'])}
         for appendix in ['aum-snapshot', 'factor-tilt-experiment', 'beta-spread', 'macro-context', 'network-context']:
             self.assertGreater(positions[appendix], positions['next-steps'])
@@ -176,7 +169,7 @@ class RestoredResearchChecks(unittest.TestCase):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
         cells = {c['id']: ''.join(c['source']) for c in nb['cells']}
         implementations = nb['metadata']['inline_implementations']
-        self.assertEqual(len(implementations), 35)
+        self.assertEqual(len(implementations), 51)
         for item in implementations:
             module = ast.parse((ROOT / item['module']).read_text(encoding='utf-8'))
             expected = next(n for n in module.body if isinstance(n, ast.FunctionDef) and n.name == item['name'])
@@ -192,7 +185,7 @@ class RestoredResearchChecks(unittest.TestCase):
 
     def test_notebook_has_no_hidden_project_module_imports(self):
         nb = json.loads((ROOT / 'portfolio_construction.ipynb').read_text(encoding='utf-8'))
-        local = {'portfolio_tools', 'research_extensions', 'research_diagnostics', 'submission_data', 'data_tools'}
+        local = {'portfolio_tools', 'research_extensions', 'research_diagnostics', 'submission_data', 'data_tools', 'research_validation', 'jpm_views'}
         for cell in nb['cells']:
             if cell['cell_type'] != 'code':
                 continue

@@ -1,0 +1,21 @@
+{
+  "verified_at_utc": "2026-10-16T05:53:25.584388+00:00",
+  "executed_cells": 58,
+  "tests": {
+    "run": 113,
+    "passed": 112,
+    "optional_hmm_skipped": 1
+  },
+  "notebook": "outputs\\amended_report_20261016T054920_050400Z\\portfolio_construction_amended.ipynb",
+  "exports": "outputs\\snapshot_20261016T055203_083927Z",
+  "notebook_sha256": "9667446498789b1b79decdbe9d6ae3dce26c25c0af30149375898b310e4886d4",
+  "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+  "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66",
+  "paper_outcomes_observed": 0,
+  "frozen_notebook_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+  "frozen_protocol_verified": true,
+  "new_protocol_verified": true,
+  "original_input_hashes_verified": true,
+  "baseline_numeric_results_unchanged_from_previous_refresh": true,
+  "notebook_vs_independent_common_risk_replay_equal": true
+}

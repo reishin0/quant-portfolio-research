@@ -1,0 +1,26 @@
+{
+  "source": "Yahoo Finance via yfinance",
+  "retrieved_at_utc": "2026-10-16T05:01:05.878815+00:00",
+  "requested_start": "2020-01-01",
+  "requested_end_exclusive": "2026-10-16",
+  "price_file": "etf_adjusted.csv",
+  "price_sha256": "8235acc7b1b3ffbdf94c5e5401f584cb126067e33071de9433f644805a06c1a2",
+  "symbols": [
+    "VUG",
+    "SPHD",
+    "MTUM",
+    "ACWI",
+    "XLK",
+    "XLE",
+    "IEO",
+    "GLD",
+    "SPY"
+  ],
+  "rows": 1706,
+  "first_price": "2020-01-02",
+  "last_price": "2026-10-15",
+  "actions_file": "etf_actions.csv",
+  "actions_sha256": "b25fce7c33d413f3f169ef2b7941ab3c5d877ea0b35a773b17f9733e3cd4e2ec",
+  "price_field": "Adj Close, auto_adjust=False",
+  "vintage_note": "Current-vintage research data; never spliced into frozen prices."
+}

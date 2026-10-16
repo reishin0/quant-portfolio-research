@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "reviewed_on": "2026-10-09",
+  "searched_publication_window": [
+    "2026-06-01",
+    "2026-09-30"
+  ],
+  "status": "one_sourced_gold_scenario_with_explicit_mapping_uncertainty",
+  "search_limits": "Public JPM pages and Reuters syndications searched, plus Drive JPM/J.P. Morgan search. No qualifying 2026 Drive report found; only the June 2020 report. No later June-September numerical gold revision verified; this is not proof of exhaustive institutional research coverage.",
+  "sources": [
+    {
+      "id": "jpm_gold_20260609",
+      "title": "Gold price outlook",
+      "published_on": "2026-06-09",
+      "url": "https://www.jpmorgan.com/insights/global-research/commodities/gold-prices",
+      "assessment": "The June page gives a Q4 gold average of USD 6000/oz. Superseded by the July revision; not used as the current view.",
+      "retrieved_html_sha256": "36c03d50b4fce93c2b17163b43a4647d03903ff1e7af903d7c8907d53eb810ca",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    },
+    {
+      "id": "jpm_midyear_20260701",
+      "title": "Mid-year market outlook 2026: The tug of war continues",
+      "published_on": "2026-07-01",
+      "url": "https://www.jpmorgan.com/insights/global-research/outlook/mid-year-outlook",
+      "assessment": "The public page still shows December gold at USD 6000/oz. Later dated reporting supersedes this value; a live webpage is not proof the forecast stayed current.",
+      "retrieved_html_sha256": "0b96e12bac3760615d592fb4bffdc218cda9b25d14d2d8d216186debebd67dd0",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    },
+    {
+      "id": "jpm_gold_revision_20260703",
+      "title": "Reuters: JPMorgan sees USD 4500 gold price in fourth quarter, says risks to downside",
+      "published_on": "2026-07-03",
+      "url": "https://www.investing.com/news/commodities-news/jp-morgan-says-weaker-demand-may-cap-gold-gains-nearterm-sees-rebound-in-late-2026-and-2027-4775299",
+      "assessment": "Reuters reports Q3 and Q4 gold averages of USD 4300 and 4500/oz and downside risks. July 3 public availability is used conservatively; the underlying JPM note is not available. The same article reports spot USD 4174.21/oz at 12:41 GMT.",
+      "verification": "Readable Reuters article via web retrieval; corroborated by Reuters syndication at MarketScreener and Kitco. Raw HTTP download returned 403; no raw-page hash claimed."
+    },
+    {
+      "id": "jpm_equity_20260728",
+      "title": "Global Equity Views 3Q 2026",
+      "published_on": "2026-07-28",
+      "url": "https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/asset-class-views/equity/",
+      "assessment": "Diversification across styles and regions; momentum risk and AI concentration. No numeric ETF relative-return spread or confidence: qualitative context only.",
+      "retrieved_html_sha256": "8996c6570ba319b8d194a6aa6860691b9175cb03b1199867eff1a5ce1398f743",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    },
+    {
+      "id": "jpm_factor_20260807",
+      "title": "Factor Views 3Q 2026",
+      "published_on": "2026-08-07",
+      "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/insights/portfolio-insights/asset-class-views/factor/",
+      "assessment": "Positive long-run value/quality outlook and elevated momentum risk; suggests trimming momentum overweights, not abandoning momentum. Long-short sector-neutral factors are not SPHD versus MTUM ETF return forecasts.",
+      "retrieved_html_sha256": "fde8738ec6e5929b3d73f6f1abfce333fac46974636e2cb99ece00ca3eb9dbb7",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    },
+    {
+      "id": "jpm_investor_20260904",
+      "title": "Investor update: September 2026",
+      "published_on": "2026-09-04",
+      "url": "https://www.personalinvesting.jpmorgan.com/insights/investor-update-september",
+      "assessment": "Positive but slightly trimmed equity exposure. Discussion of gold strength is retrospective, not a numerical gold or ETF target.",
+      "retrieved_html_sha256": "68d87a4d30aacb315b9399619ab9aeb3ab9aa1d393ffcd175f045de346655836",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    },
+    {
+      "id": "gld_mapping",
+      "title": "SPDR Gold Shares fund description",
+      "published_on": null,
+      "url": "https://www.spdrgoldshares.com/usa/gld/",
+      "assessment": "GLD tracks bullion less expenses; expense ratio 0.40%. An ETF proxy still carries timing, fee and premium/discount basis risk.",
+      "retrieved_html_sha256": "cbf450e321df2d9328fc30a55a2961da917993988b23bc419f0f0793fa31ccca",
+      "verification": "Direct publisher HTML retrieved 2026-10-09; source date checked against page text or metadata."
+    }
+  ],
+  "forecast": {
+    "id": "jpm_gold_q4_20260703_scenario",
+    "asset": "GLD",
+    "published_on": "2026-07-03",
+    "recorded_on": "2026-10-09",
+    "provider": "JPMorgan Global Research, attributed by Reuters",
+    "source_id": "jpm_gold_revision_20260703",
+    "source_url": "https://www.investing.com/news/commodities-news/jp-morgan-says-weaker-demand-may-cap-gold-gains-nearterm-sees-rebound-in-late-2026-and-2027-4775299",
+    "provider_return_definition": "Q4 2026 average USD gold price, not a terminal price or ETF expected return",
+    "target_usd_per_ounce": 4500.0,
+    "annual_expense_ratio": 0.004,
+    "mapping_type": "bullion_quarter_average",
+    "period_start": "2026-10-01",
+    "period_end": "2026-12-31",
+    "minimum_remaining_days": 30,
+    "forecast_error_fraction": 0.1,
+    "basis_error_fraction": 0.02,
+    "valuation_file": "data/gld_valuation_20261009.csv",
+    "valuation_sha256": "34ef48965c2f14b2f21c6a35807061ce7139669fb5d9b61efb4645f63bdf3521",
+    "valuation_source_url": "https://api.spdrgoldshares.com/api/v1/historical-archive?exchange=NYSE&lang=en&product=gld",
+    "source_workbook_sha256": "57f07e03e9cb4cdada97405227e8ff642e9d63ffc9a5336e1d7c35da69cedff0",
+    "uncertainty_basis": "Uncalibrated one-standard-deviation research assumptions: 10% quarterly forecast error and 2% ETF/bullion basis error. Sensitivity 5%/20%. No JPM probabilities or confidence supplied.",
+    "mapping_assumptions": [
+      "Equal-weight weekday valuation average approximates the provider quarterly average; holiday weekdays use the most recent prior NAV-implied bullion valuation. Provider averaging calendar is unspecified.",
+      "NAV divided by ounces per share is a bullion proxy including trust liabilities, not licensed LBMA spot. Both inputs are from the same issuer valuation date.",
+      "Condition on already observed quarter valuations. For remaining weekdays assume a linear expected bullion price path and solve its slope to match the complete quarterly average.",
+      "Convert the expected path at its mean remaining observation horizon to GLD using current ounces per share, 0.40% annual fee decay and current ETF close. NAV valuation precedes market close; the basis-error term covers, but does not eliminate, this timing/model risk.",
+      "Propagate quarterly forecast error through the slope and ETF mapping into annual-return Omega. The shorter effective horizon raises uncertainty. Stop less than 30 calendar days before quarter end.",
+      "Recorded 9 October 2026; earlier publication reconstruction is retrospective, never prospective evidence."
+    ]
+  },
+  "allocation_policy": {
+    "risk_aversion": 3.07,
+    "max_active_weight": 0.15,
+    "max_one_way_turnover": 0.1,
+    "holding_years": 0.08333333333333333,
+    "fixed_gold_overweight": 0.05,
+    "initial_cash_entry_exempt": true
+  }
+}

@@ -1,5 +1,42 @@
 # Changelog
 
+## 16 October 2026 — reviewed notebook publication
+
+Publish the executed amendment beside the unchanged frozen baseline. Add strict snapshot/protocol checks, journal truncation detection and regression tests. Preserve hashed file bytes across Git checkouts. The new reviewed runner executes 59 cells, including a provenance gate; existing portfolio calculations remain unchanged.
+
+## 16 October 2026 — common-risk control, paper journal and uncertainty gates
+
+Implemented the remaining feasible research improvements in a separate amended notebook: exact feasible ex ante risk matching, prospective paper-decision capture with separate outcome evaluation, horizon-aware scoring/inference, and prior-only uncertainty diagnostics. Preserved the negative common-risk result and retained uncalibrated forecast assumptions where comparable completed outcomes are missing. Frozen baseline files remain unchanged.
+
+## 16 October 2026 research amendment
+
+Added a separately versioned data refresh and executed notebook derivative through October 15, preserving the frozen baseline. Added the five-improvement reassessment and an isolated intraday equity/bond-proxy/HMM investigation with causal tests, source coverage and declared negative results. See `research/REFRESH_20261016.md` and `research/macro_regime/REVIEW_20261016.md`.
+
+## 2026-10-09 — stable allocation and frozen forward evaluation
+
+- Replaced arbitrary quarterly-average endpoint and mismatched July quotes with a conditional quarterly observation model and same-date issuer NAV/ounces pairs.
+- Propagate explicit, uncalibrated forecast and basis error into Omega; display effective Bayesian weight and all five error/basis cases.
+- Put trading costs inside mean/variance utility, constrain announced active weights, and cap actual execution turnover with a declared initial-entry exception. Report drift beyond target bounds.
+- Add fixed GLD, GLD exposure and cash-scaled risk controls, including matching gaps and identical costs/dates.
+- Add exclusive protocol freezing and subsequent-data evaluation with code/runtime/input pins, immutable historical rows, calendar validation and decision/execution/return admission.
+- This supersedes the endpoint/confidence mapping described in the earlier entry below. All original data files remain unchanged. Forward performance remains unavailable until new observations arrive.
+
+
+## 2026-10-09 — JPM source audit and absolute BL views
+
+- Added June–September source review, revised gold-forecast mapping and seven transparent reconstruction sensitivities.
+- Added absolute-view support, publication metadata repair, dated mapping tests and notebook results.
+
+## 2026-10-09 — stages 4–7
+
+- Add dated view sets with availability, supersession and expiry controls.
+- Add chronological development selection and complete candidate evaluation records.
+- Add paired block bootstrap, HAC/Holm attribution, shrinkage and sensitivity grids.
+- Report invalid BAB construction as an explicit cash policy in experiments.
+- Add exposure/risk/drawdown diagnostics and results-derived research interpretation.
+- Export the runtime research specification and retain all calculations inline.
+
+
 ## 2026-10-09 — research foundation (stages 1–3)
 
 - Define the research/evaluation contract and precise fit/execution/return chronology.
@@ -30,7 +67,6 @@
 
 - Correct notebook presentation: place all 32 calculation implementations directly in the notebook and retain executed submission tables/charts for GitHub reading. The notebook now has 92 cells, including 44 executable cells; parity tests check its callable Python counterparts.
 
-- Review and map every one of the supplied notebook's 127 code cells, with hashes and destination IDs.
 - Expand the maintained notebook to 50 cells with CAPM, rolling exposures, BL matrices/covariance, risk-aversion allocations, moment tensors, factor diagnostics and Kelly fraction comparisons.
 - Place AUM, factor-tilt and quartile-spread experiments plus macro/provider context after research interpretation.
 - Consolidate redundant displays and replace invalid formulas explicitly; preserve historical input files unchanged.
@@ -39,17 +75,16 @@
 
 ## 8 October 2026 — actual submission inputs
 
-- Import the original report, notebook lineage, helper and four input files with hashes.
+- Import four input files with hashes.
 - Add offline submission mode as the notebook/report default.
 - Restore inflation and BIS bank-credit charts with named-series selection.
 - Fit factors for the full 21-ETF universe and evaluated strategies using the actual vintage.
 - Exclude monthly boundaries, enforce adequate overlap and reject rank-deficient factor designs.
-- Declare retrospective universe/view selection and preserve original code cells separately.
+- Declare retrospective universe/view selection.
 
 ## 8 October 2026 — professional research consolidation
 
 - Made `portfolio_construction.ipynb` the single authoritative analysis.
-- Moved the untouched 2024 notebook and its environment record to `research_archive/`.
 - Removed the beginner/companion/legacy split from the maintained workflow and documentation.
 - Added tested Fama–French five-factor loading and regression with explicit units.
 - Added a dedicated higher-moment optimizer using its own portfolio weights.
@@ -66,5 +101,3 @@
 - Added reproducible environment launchers, deterministic validation and timestamped outputs.
 
 ## August 2024 — original study
-
-The original notebook is preserved unchanged under `research_archive/` for provenance. Its contemporaneous calculations and interpretations are not the authority for the maintained implementation.

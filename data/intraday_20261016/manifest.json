@@ -1,0 +1,356 @@
+{
+  "created_at_utc": "2026-10-16T05:02:54.014913+00:00",
+  "helper": "C:\\DataScraping_Windows\\Python\\Autotrade\\scripts\\yahoo.py",
+  "helper_sha256": "2cf4cd117c021500b9ef7defb55f3684542f545d86f4e80571b9313d99b93935",
+  "request_start": "2026-10-01",
+  "end_exclusive": "2026-10-16",
+  "results": {
+    "SPY": {
+      "symbol": "SPY",
+      "requests": [
+        {
+          "symbol": "SPY",
+          "start": "2026-10-01T00:00:00-04:00",
+          "end_exclusive": "2026-10-08T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SPY",
+          "parameters": {
+            "period1": 1790827200,
+            "period2": 1791432000,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "1bf1233523829f795d8db433bc6e720942ec529731e15b20fd54a6065b174536",
+          "downloaded_utc": "2026-10-16T05:02:52.476747+00:00",
+          "raw_file": "raw/SPY_2026-10-01_2026-10-08.json",
+          "status": "FETCHED",
+          "kept_rows": 1950,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "SPY",
+          "start": "2026-10-08T00:00:00-04:00",
+          "end_exclusive": "2026-10-15T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SPY",
+          "parameters": {
+            "period1": 1791432000,
+            "period2": 1792036800,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "224bdd2a2ea9e72e6d3ddfd468f7b5c6f5e2146889dd2eae50df957252a5ad80",
+          "downloaded_utc": "2026-10-16T05:02:52.553018+00:00",
+          "raw_file": "raw/SPY_2026-10-08_2026-10-15.json",
+          "status": "FETCHED",
+          "kept_rows": 1950,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "SPY",
+          "start": "2026-10-15T00:00:00-04:00",
+          "end_exclusive": "2026-10-16T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SPY",
+          "parameters": {
+            "period1": 1792036800,
+            "period2": 1792123200,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "b233d5f2647c27eb021b4d8675c095cc4355ca85c43fdb0e32fd329116f1820e",
+          "downloaded_utc": "2026-10-16T05:02:52.591577+00:00",
+          "raw_file": "raw/SPY_2026-10-15_2026-10-16.json",
+          "status": "FETCHED",
+          "kept_rows": 390,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        }
+      ],
+      "errors": []
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "requests": [
+        {
+          "symbol": "QQQ",
+          "start": "2026-10-01T00:00:00-04:00",
+          "end_exclusive": "2026-10-08T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/QQQ",
+          "parameters": {
+            "period1": 1790827200,
+            "period2": 1791432000,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "ef2cc1d9156821377535f06663c8dde4da8aad101b7215d3ef1b5296e31ae2bc",
+          "downloaded_utc": "2026-10-16T05:02:52.814492+00:00",
+          "raw_file": "raw/QQQ_2026-10-01_2026-10-08.json",
+          "status": "FETCHED",
+          "kept_rows": 1949,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 1,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "QQQ",
+          "start": "2026-10-08T00:00:00-04:00",
+          "end_exclusive": "2026-10-15T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/QQQ",
+          "parameters": {
+            "period1": 1791432000,
+            "period2": 1792036800,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "080f733593781e1622edffdd20f91aba0e3d1da3406d8a4d71136dbdc85be685",
+          "downloaded_utc": "2026-10-16T05:02:52.905494+00:00",
+          "raw_file": "raw/QQQ_2026-10-08_2026-10-15.json",
+          "status": "FETCHED",
+          "kept_rows": 1950,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "QQQ",
+          "start": "2026-10-15T00:00:00-04:00",
+          "end_exclusive": "2026-10-16T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/QQQ",
+          "parameters": {
+            "period1": 1792036800,
+            "period2": 1792123200,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "85bce34896ff6d5b1c52f0a8a00467b5d5e0896bb942a1119e2a851594482785",
+          "downloaded_utc": "2026-10-16T05:02:52.941169+00:00",
+          "raw_file": "raw/QQQ_2026-10-15_2026-10-16.json",
+          "status": "FETCHED",
+          "kept_rows": 390,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        }
+      ],
+      "errors": []
+    },
+    "DIA": {
+      "symbol": "DIA",
+      "requests": [
+        {
+          "symbol": "DIA",
+          "start": "2026-10-01T00:00:00-04:00",
+          "end_exclusive": "2026-10-08T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/DIA",
+          "parameters": {
+            "period1": 1790827200,
+            "period2": 1791432000,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "77821d4803d4ff0d406724f5772ace8d821366638d8f2d7679f8127066eabc97",
+          "downloaded_utc": "2026-10-16T05:02:53.164315+00:00",
+          "raw_file": "raw/DIA_2026-10-01_2026-10-08.json",
+          "status": "FETCHED",
+          "kept_rows": 1950,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "DIA",
+          "start": "2026-10-08T00:00:00-04:00",
+          "end_exclusive": "2026-10-15T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/DIA",
+          "parameters": {
+            "period1": 1791432000,
+            "period2": 1792036800,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "36055ffab4d8cd0bad9c76a91a5a51c17b23fbd16f61cbae15143a146a314c46",
+          "downloaded_utc": "2026-10-16T05:02:53.241538+00:00",
+          "raw_file": "raw/DIA_2026-10-08_2026-10-15.json",
+          "status": "FETCHED",
+          "kept_rows": 1950,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "DIA",
+          "start": "2026-10-15T00:00:00-04:00",
+          "end_exclusive": "2026-10-16T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/DIA",
+          "parameters": {
+            "period1": 1792036800,
+            "period2": 1792123200,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "e8914340fa3228f3b6edd5eb9cb2aaac76438d6a3ba6ed693fce5b32824c38e4",
+          "downloaded_utc": "2026-10-16T05:02:53.286146+00:00",
+          "raw_file": "raw/DIA_2026-10-15_2026-10-16.json",
+          "status": "FETCHED",
+          "kept_rows": 390,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 0,
+          "identical_duplicates": 0
+        }
+      ],
+      "errors": []
+    },
+    "IEF": {
+      "symbol": "IEF",
+      "requests": [
+        {
+          "symbol": "IEF",
+          "start": "2026-10-01T00:00:00-04:00",
+          "end_exclusive": "2026-10-08T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/IEF",
+          "parameters": {
+            "period1": 1790827200,
+            "period2": 1791432000,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "3b9bad5509db5d4799b282a15c4fe48c3e0ff99cc7e806c6b739c1efd7e8bce8",
+          "downloaded_utc": "2026-10-16T05:02:53.490312+00:00",
+          "raw_file": "raw/IEF_2026-10-01_2026-10-08.json",
+          "status": "FETCHED",
+          "kept_rows": 1945,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 5,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "IEF",
+          "start": "2026-10-08T00:00:00-04:00",
+          "end_exclusive": "2026-10-15T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/IEF",
+          "parameters": {
+            "period1": 1791432000,
+            "period2": 1792036800,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "5830a92bca68b9aa864c7e95136f6587e73561b37e14ab20b818f8b05bf4c039",
+          "downloaded_utc": "2026-10-16T05:02:53.557725+00:00",
+          "raw_file": "raw/IEF_2026-10-08_2026-10-15.json",
+          "status": "FETCHED",
+          "kept_rows": 1942,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 8,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "IEF",
+          "start": "2026-10-15T00:00:00-04:00",
+          "end_exclusive": "2026-10-16T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/IEF",
+          "parameters": {
+            "period1": 1792036800,
+            "period2": 1792123200,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "62ddf76f430354b6991f6c78a635b6ce21396bdcdec0996d1d68b31a4aacd103",
+          "downloaded_utc": "2026-10-16T05:02:53.595484+00:00",
+          "raw_file": "raw/IEF_2026-10-15_2026-10-16.json",
+          "status": "FETCHED",
+          "kept_rows": 388,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 2,
+          "identical_duplicates": 0
+        }
+      ],
+      "errors": []
+    },
+    "SHY": {
+      "symbol": "SHY",
+      "requests": [
+        {
+          "symbol": "SHY",
+          "start": "2026-10-01T00:00:00-04:00",
+          "end_exclusive": "2026-10-08T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SHY",
+          "parameters": {
+            "period1": 1790827200,
+            "period2": 1791432000,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "2945970a583b469e3febd48b9a0abb4cce320a11322fdbd70999f9a66ee13e8f",
+          "downloaded_utc": "2026-10-16T05:02:53.799308+00:00",
+          "raw_file": "raw/SHY_2026-10-01_2026-10-08.json",
+          "status": "FETCHED",
+          "kept_rows": 1894,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 56,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "SHY",
+          "start": "2026-10-08T00:00:00-04:00",
+          "end_exclusive": "2026-10-15T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SHY",
+          "parameters": {
+            "period1": 1791432000,
+            "period2": 1792036800,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "2b246105e033eb4a3efa8d94f2ed60176ad1540726ea50ca555b722c2f8aa78c",
+          "downloaded_utc": "2026-10-16T05:02:53.865509+00:00",
+          "raw_file": "raw/SHY_2026-10-08_2026-10-15.json",
+          "status": "FETCHED",
+          "kept_rows": 1863,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 87,
+          "identical_duplicates": 0
+        },
+        {
+          "symbol": "SHY",
+          "start": "2026-10-15T00:00:00-04:00",
+          "end_exclusive": "2026-10-16T00:00:00-04:00",
+          "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart/SHY",
+          "parameters": {
+            "period1": 1792036800,
+            "period2": 1792123200,
+            "interval": "1m",
+            "includePrePost": "false"
+          },
+          "http_status": 200,
+          "response_sha256": "3f163d1c9dc7fa40f1c3b653709d9fa7d5ee46faf2003a60f8b763773cc5f4bd",
+          "downloaded_utc": "2026-10-16T05:02:53.911353+00:00",
+          "raw_file": "raw/SHY_2026-10-15_2026-10-16.json",
+          "status": "FETCHED",
+          "kept_rows": 373,
+          "excluded_outside_window_or_rth": 1,
+          "rejected_invalid_rows": 17,
+          "identical_duplicates": 0
+        }
+      ],
+      "errors": []
+    }
+  },
+  "bar_file_sha256": "39134f3a750eb842fed6d54434e3f376aa87e2e1240220887a47f2bc1c962da8",
+  "evidence": "Downloaded retrospective aggregate bars, available at bar end. Bond ETFs are price proxies, not measured yields. No native-tick or live-receipt claim."
+}

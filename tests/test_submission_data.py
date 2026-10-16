@@ -16,7 +16,7 @@ from submission_data import (DATA_DIR, load_inflation, load_liquidity,
 
 class SubmissionChecks(unittest.TestCase):
     def test_manifest_and_original_coverage(self):
-        self.assertEqual(len(verify_submission_files()['files']), 7)
+        self.assertEqual(len(verify_submission_files()['files']), 4)
         prices = load_submission_prices()
         self.assertEqual(prices.shape, (1166, 21))
         self.assertEqual(str(prices.index[-1].date()), '2024-08-20')

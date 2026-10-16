@@ -1,0 +1,32 @@
+{
+  "sofr.csv": {
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&cosd=2019-12-20&coed=2026-10-16",
+    "retrieved_at_utc": "2026-10-16T05:01:09.965108+00:00",
+    "sha256": "c28b317243f388d13dcbfa3bce82bfa77d0c6b59d3d66243bf33ae39cb096e53",
+    "bytes": 28174
+  },
+  "ff5_source.zip": {
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip",
+    "retrieved_at_utc": "2026-10-16T05:01:11.237839+00:00",
+    "sha256": "36756c5c2559648519ac4b22913d860c6afd865cfebce920e3e8927f8e2d10b7",
+    "bytes": 11964
+  },
+  "gld_historical.xlsx": {
+    "url": "https://api.spdrgoldshares.com/api/v1/historical-archive?exchange=NYSE&lang=en&product=gld",
+    "retrieved_at_utc": "2026-10-16T05:01:11.473059+00:00",
+    "sha256": "fd065ae1ff35b3da037f9fa5dcf819193c33f7085d3fbe7c1597918dff510784",
+    "bytes": 541817
+  },
+  "treasury_daily.csv": {
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2,DGS10&cosd=2026-09-01&coed=2026-10-16",
+    "retrieved_at_utc": "2026-10-16T05:01:14.552232+00:00",
+    "sha256": "443203a03d4e6150db21a3ac92c64f2f0834a341942b90a4bcd56ccb026f474a",
+    "bytes": 286086
+  },
+  "nyse_market_update.html": {
+    "url": "https://e.nyse.com/mac-desk-midday-market-update",
+    "retrieved_at_utc": "2026-10-16T05:01:16.525650+00:00",
+    "sha256": "56be594012e2ffc1cef0365bca3db76506d2c430a6082c9180bed4aa0d5f4afa",
+    "bytes": 157724
+  }
+}

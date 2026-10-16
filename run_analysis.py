@@ -33,7 +33,7 @@ def main():
         raise ValueError('Notebook must contain exactly one DATA_MODE assignment.')
     nbformat.validate(nb)
     print('Starting its local Python kernel and executing all cells...', flush=True)
-    NotebookClient(nb, timeout=300, startup_timeout=60, kernel_name='portfolio-research',
+    NotebookClient(nb, timeout=900, startup_timeout=60, kernel_name='portfolio-research',
                    resources={'metadata': {'path': str(ROOT)}}, allow_errors=False).execute()
     output = ROOT / 'outputs' / datetime.now(timezone.utc).strftime('validation_report_%Y%m%dT%H%M%S_%fZ')
     output.mkdir(parents=True, exist_ok=False)
@@ -46,7 +46,7 @@ def main():
     report.write_text(body, encoding='utf-8')
     # Record direct package versions, without local paths or environment values.
     from importlib.metadata import version
-    packages = ['numpy', 'pandas', 'scipy', 'matplotlib', 'yfinance', 'jupyterlab', 'ipykernel', 'nbclient', 'nbconvert', 'openpyxl', 'pandas_market_calendars', 'exchange_calendars']
+    packages = ['numpy', 'pandas', 'scipy', 'matplotlib', 'yfinance', 'jupyterlab', 'ipykernel', 'nbclient', 'nbconvert', 'openpyxl', 'pandas_market_calendars', 'exchange_calendars', 'scikit-learn', 'statsmodels']
     import hashlib
     from importlib.metadata import distributions
     versions = {'code_sha256': hashlib.sha256('\n'.join(c.source for c in nb.cells if c.cell_type == 'code').encode()).hexdigest(),

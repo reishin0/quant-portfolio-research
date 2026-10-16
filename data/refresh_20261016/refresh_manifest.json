@@ -1,0 +1,31 @@
+{
+  "recorded_at_utc": "2026-10-16T05:02:01.777830+00:00",
+  "last_price": "2026-10-15",
+  "last_gold_valuation": "2026-10-15",
+  "last_sofr": "2026-10-14",
+  "last_factor_month": "202608",
+  "last_daily_treasury": "2026-10-14",
+  "common_portfolio_end": "2026-10-15",
+  "price_prefix_unchanged": false,
+  "gold_prefix_unchanged": true,
+  "cash_prefix_unchanged": true,
+  "files": {
+    "cash_returns.csv": "9086cdc6b865a0db604b3a25ccacf3009cb4630709c1ff32eb127e7828e95eff",
+    "download_receipts.json": "22b9ff90b680f798bd7bebc45bc56d6803eec13da48bbc8e5fc60a3252e75c7b",
+    "etf_actions.csv": "b25fce7c33d413f3f169ef2b7941ab3c5d877ea0b35a773b17f9733e3cd4e2ec",
+    "etf_adjusted.csv": "8235acc7b1b3ffbdf94c5e5401f584cb126067e33071de9433f644805a06c1a2",
+    "etf_snapshot.json": "929bfc2027f7cc323ccc3c45858b9d7a3fca595006917b393814358b313bb5be",
+    "ff5_monthly.csv": "7858ecdaa83c44de9c0602f0b4e0c13bc06faff4d01b922458e5b36716c5f736",
+    "ff5_provenance.json": "633c4160ea1038d69e535e631b689ad7f7525c8bdc7b5d3e9fc5f75b853c8a09",
+    "ff5_source.zip": "36756c5c2559648519ac4b22913d860c6afd865cfebce920e3e8927f8e2d10b7",
+    "gld_historical.xlsx": "fd065ae1ff35b3da037f9fa5dcf819193c33f7085d3fbe7c1597918dff510784",
+    "gld_valuations.csv": "41beeaea5158cbfd7ce981646d43e53fa0028bec90080e9383408666fea85e77",
+    "jpm_research_views.json": "a4d7710418e083e6eac27271eee28d3f170b6a72f63c40199cd5a9aa60b1b24a",
+    "price_vintage_comparison.csv": "006761aca96d2a9db1589643dbca2c2c723712e34334d9c4127db41771ae4682",
+    "sofr.csv": "c28b317243f388d13dcbfa3bce82bfa77d0c6b59d3d66243bf33ae39cb096e53",
+    "sofr_provenance.json": "5a6e99975e1b00476ee09068f5d6e6eaeec3677ebc819d11814cb732ab571564",
+    "treasury_daily.csv": "443203a03d4e6150db21a3ac92c64f2f0834a341942b90a4bcd56ccb026f474a",
+    "yahoo_daily_raw.csv": "cc6242c176de0f96ba8fa42b1e3fd47fd0d345fcc09acf484370dedfed6e1718"
+  },
+  "evidence": "Refreshed historical reconstruction. Not a contemporaneously recorded paper trade."
+}

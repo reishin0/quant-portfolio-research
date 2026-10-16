@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-10-09T11:46:11.326021+00:00",
+  "decision_cutoff_date": "2026-10-09",
+  "last_observed_price": "2026-10-08",
+  "policy": "First fit strictly after cutoff, execute next close, earn following return. No retrospective rows count.",
+  "selection": "Fixed 252-session sample covariance, no subsequent reselection or sensitivity winner.",
+  "training_window_days": 252,
+  "covariance_estimator": "sample",
+  "annual_rf": 0.03,
+  "max_weight": 0.35,
+  "transaction_cost_bps": 10.0,
+  "annual_short_borrow_bps": 100.0,
+  "prices_file": "data/etf_adjusted_20261009.csv",
+  "views_file": "data/jpm_research_views_20261009.json",
+  "file_sha256": {
+    "portfolio_tools.py": "164e415e15e49836ff71cf982ce7c8fd1279253cf004ad28ba99e4981e7a94b6",
+    "research_extensions.py": "67aa88ad08ad0d9c275766daeb35bd7e0fda9309e9239b665707ddc0371d1d9c",
+    "research_diagnostics.py": "5a448c23016d6870c88aea774cfa69fc354158c9e1a307212b0ba10d90351ab0",
+    "jpm_views.py": "691cc25e152e48662c9948fa3a7c8bca0861f539b55b3001fc797de821e9e948",
+    "forward_evaluation.py": "e7904a77d1187a3face9b43e8ba6a13d6c0e5e8fbc3bf19a8215b3d2d87eedff",
+    "data_tools.py": "a1d862c3eb17eee02c63f3f9f556d5faa284f8ebb2ab45227108e8fcf47f7e04",
+    "data/jpm_research_views_20261009.json": "573aebcfab99af89399fdce4323f6ff31884f821f6a9c07fd244bbeea4d37dac",
+    "data/gld_valuation_20261009.csv": "34ef48965c2f14b2f21c6a35807061ce7139669fb5d9b61efb4645f63bdf3521",
+    "data/etf_adjusted_20261009.csv": "4a112603429da1ed626dbf46982775adb4f14cf73160499cd378be9f4f4479ac",
+    "data/sofr_20261009.csv": "c6c56fb174f9fbb1bee76dadcddb556a3df586ba8ba6a7d83e1d4bc6c366124d",
+    "data/sofr_provenance_20261009.json": "00443e07dda979313ea7a12b24957f41507f5b43ef80ec98d46417b09adb2fcc"
+  },
+  "notebook_code_sha256": "8e7cd5f3686a68785946e36df8013ba7c18ac0d2232a31616a73a8205c60bf1a",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "pandas_market_calendars": "5.5.0",
+    "exchange_calendars": "4.13.2"
+  },
+  "evidence": "No subsequent observations at freeze; historical reconstruction excluded.",
+  "evaluation_rule": "Report all five controls and all net paths. Minimum 60 subsequent sessions before bootstrap inference. No alpha claim from an unfinished quarter."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-10-16T05:49:03.674171+00:00",
+  "parent_protocol": "data/forward_protocol_20261009.json",
+  "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+  "prices_file": "data/refresh_20261016/etf_adjusted.csv",
+  "views_file": "data/refresh_20261016/jpm_research_views.json",
+  "last_observed_price": "2026-10-15",
+  "input_vintage_available_at_utc": "2026-10-16T05:43:16.285949+00:00",
+  "file_sha256": {
+    "portfolio_amendments.py": "927dcf478fa264aeaac31d1292879ce06796309fcab6d76a9d5f30bfc2354cde",
+    "paper_research.py": "6067197a46828d557b9af0d45c6899e254956881fc2449439fb11fd7673b5aeb",
+    "run_amended_analysis.py": "f4abfdd65453ce771463813fde4e5d9ffeadc5b2827d1c1379b217e15ade8a86",
+    "run_updated_analysis.py": "cc54a5f6353816133b1bf530a2dedc03f6d93729d1a1f6f8c445aa346877fb6b",
+    "research/amendment_design_20261016.json": "485f2d4e45f6fc0b6872bbd969feb3d635db73208379aec85465b4aef82410ba",
+    "data/refresh_20261016/etf_adjusted.csv": "8235acc7b1b3ffbdf94c5e5401f584cb126067e33071de9433f644805a06c1a2",
+    "data/refresh_20261016/gld_valuations.csv": "41beeaea5158cbfd7ce981646d43e53fa0028bec90080e9383408666fea85e77",
+    "data/refresh_20261016/jpm_research_views.json": "a4d7710418e083e6eac27271eee28d3f170b6a72f63c40199cd5a9aa60b1b24a",
+    "data/refresh_20261016/refresh_manifest.json": "e5acc7e5a6ec2c4a3cec3cb74ae643edfb16228ec4e4f5a61dc1bfcef3cdfb2a",
+    "data/refresh_20261016/cash_returns.csv": "9086cdc6b865a0db604b3a25ccacf3009cb4630709c1ff32eb127e7828e95eff",
+    "data/amendments_20261016/forecast_outcomes.json": "d3816f7d8fa55559d9e3fce5f8468e16df5eba8814fb2db3baf9621c7880b4d9"
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "pandas_market_calendars": "5.5.0",
+    "exchange_calendars": "4.13.2"
+  },
+  "amended_notebook_code_sha256": "f0b72bae259590c1f72758f6a4e9da0f1a7546d973f2d2c8da66d53bfcb723f5",
+  "design": {
+    "version": "20261016-methodology-v1",
+    "evidence": "New retrospective experiment, declared before examining its results. Not the frozen October 9 experiment.",
+    "common_risk": {
+      "controls": [
+        "cost-aware JPM scenario sleeve",
+        "equal-weight sleeve"
+      ],
+      "covariance": "252 previous sessions, sample annual covariance, no forward observations",
+      "selection": "Highest shared volatility on two long-only risky-sleeve-plus-cash rays, subject to identical caps and turnover constraints. No leverage.",
+      "asset_cap": 0.275,
+      "one_way_turnover_cap": 0.1,
+      "initial_all_cash_exception": true,
+      "infeasible_rule": "Hold both controls and report risk mismatch; never force a match",
+      "cost_bps": 10,
+      "schedule": "Existing monthly active dates; fit t-2, execution t-1, return t; existing expiry exit retained"
+    },
+    "basis": {
+      "minimum_training_pairs": 40,
+      "prior_sigma": 0.02,
+      "prior_strength_pairs": 40,
+      "role": "Timing-basis diagnostic only, not a substitute for forecast-horizon Omega"
+    },
+    "forecast_error": {
+      "minimum_independent_completed_quarters": 8,
+      "prior_sigma": 0.1,
+      "prior_strength_quarters": 8,
+      "policy": "Prior-only comparable outcome/lead-horizon gate; deduplicate quarters; retain default below minimum"
+    },
+    "inference": {
+      "minimum_prospective_sessions": 60,
+      "minimum_completed_forecast_cycles": 8,
+      "quarter_score": "Separate complete-quarter forecast error from active-view portfolio returns"
+    },
+    "paper_journal": "Hash-chained exclusive entries, current wall-clock capture before execution; separate outcome evaluator; no backdating or broker execution claims",
+    "tuning": "No post-result parameter selection; correctness repairs must be declared"
+  },
+  "prospective_scope": "First recorded paper interval only. New all-cash accounts, no inference of actual broker holdings. Historical reconstruction excluded.",
+  "uncertainty_status": "10% forecast and 2% mapping basis remain uncalibrated assumptions; daily timing basis diagnostic not substituted.",
+  "prospective_outcomes_observed": 0
+}

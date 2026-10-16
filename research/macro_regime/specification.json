@@ -1,0 +1,20 @@
+{
+  "recorded_on": "2026-10-16",
+  "classification": "Retrospective exploratory candidate, not native-session reproduction or untouched evidence",
+  "sources": "Downloaded Yahoo completed one-minute bars; native yields unavailable intraday",
+  "universe": ["SPY", "QQQ", "DIA", "IEF", "SHY"],
+  "development_sessions": "2026-10-01 through 2026-10-09",
+  "evaluation_sessions": "2026-10-12 through 2026-10-15; October 14-15 market narrative already inspected",
+  "guard_threshold": 0.003,
+  "early_equity_threshold": 0.001,
+  "proxy_session_threshold": 0.001,
+  "freshness_seconds": 90,
+  "hmm": {"states": 2, "min_samples": 80, "n_iter": 200, "seed": 42, "training_rows": 1500, "probability_threshold": 0.7, "features": "log return, prior 20-observation volatility, log volume change; train-only scaling; recursive forward filter"},
+  "outcome_label": "SPY return over next 15 complete minutes below -0.2%; an evaluation label, not a causal macro regime or execution result",
+  "economic_diagnostic": "Non-overlapping 30-minute SPY opportunities at session minute 30,60,...,330. Decide at t, enter at next bar close, exit 30 minutes later. Compare accepting all with abstaining on each stress signal. Report assumed 2 and 5 bps per side. Not native strategy fills, slippage measurement or profitability proof.",
+  "minimum_evaluation_sessions": 4,
+  "threshold_selection": "No parameter search or outcome-based tuning in this experiment",
+  "native_comparison": "Full original session logs and provider timestamps required for latency attribution. Native HMM model identity absent; use labelled adapted HMM rather than claiming reproduction.",
+  "stop_rule": "One bounded diagnostic run, fix only correctness defects. No promotion from these four dates. Subsequent shadow study needs source-qualified inputs and untouched sessions.",
+  "deployment": "NONE"
+}

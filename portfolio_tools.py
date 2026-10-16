@@ -15,7 +15,8 @@ import pandas as pd
 from scipy.optimize import minimize
 
 from research_extensions import (bab_weights, fractional_kelly_weights,
-                                 higher_moment_weights)
+                                 higher_moment_weights, estimate_covariance,
+                                 validate_view_register, eligible_view_set)
 from data_tools import load_price_snapshot
 
 ASSETS = ['VUG', 'SPHD', 'MTUM', 'ACWI', 'XLK', 'XLE', 'IEO', 'GLD']
@@ -132,8 +133,12 @@ def aligned_returns(prices):
 
 
 def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
-                    return_details=False, views=None):
-    """Annual excess-return posterior, using view-scaled uncertainty."""
+                    return_details=False, views=None, omega=None):
+    """Annual excess-return posterior, using view-scaled uncertainty.
+
+    A None comparator specifies an absolute annual excess return for one asset.
+    Otherwise Q is the annual return difference between two assets.
+    """
     names = list(covariance.columns)
     if names != list(covariance.index) or len(names) < 2:
         raise ValueError('Covariance labels and ordering must match.')
@@ -151,30 +156,43 @@ def black_litterman(covariance, prior_weights=None, risk_aversion=3.07, tau=0.1,
     # views = [('GLD', 'MTUM', .15, .90), ('XLK', 'XLE', .08, .70), ('SPHD', 'VUG', .06, .80)]
     views = [] if views is None else list(views)
     for view in views:
-        if (len(view) != 4 or view[0] not in names or view[1] not in names
+        if (len(view) != 4 or view[0] not in names or (view[1] is not None and view[1] not in names)
                 or view[0] == view[1] or not np.isfinite(view[2:]).all()
                 or not 0 < view[3] <= 1):
-            raise ValueError('Views require two different known assets, a finite annual difference and confidence in (0, 1].')
+            raise ValueError('Views require a known asset, a different known comparator or None for absolute excess, a finite annual Q and confidence in (0, 1].')
     p = np.zeros((len(views), len(names)))
     for j, (long_asset, short_asset, _, _) in enumerate(views):
         p[j, names.index(long_asset)] = 1
-        p[j, names.index(short_asset)] = -1
+        if short_asset is not None:
+            p[j, names.index(short_asset)] = -1
     q = np.array([view[2] for view in views])
     confidence = np.array([view[3] for view in views])
     prior = risk_aversion * sigma @ weights
     scaled = tau * sigma
     view_variance = np.diag(p @ scaled @ p.T)
-    omega = np.diag(np.maximum(view_variance, 1e-12) * (1 - confidence) / confidence)
+    explicit_omega = omega is not None
+    if omega is None:
+        omega = np.diag(np.maximum(view_variance, 1e-12) * (1 - confidence) / confidence)
+    else:
+        omega = np.asarray(omega, dtype=float)
+        if (omega.shape != (len(views), len(views)) or not np.isfinite(omega).all()
+                or not np.allclose(omega, omega.T)
+                or (len(views) and np.linalg.eigvalsh(omega).min() <= 0)):
+            raise ValueError('Explicit Omega must be finite, symmetric, positive definite and match views.')
     posterior = prior + scaled @ p.T @ np.linalg.solve(p @ scaled @ p.T + omega, q - p @ prior)
     table = pd.DataFrame(views, columns=['Outperformer', 'Comparator', 'Annual difference', 'Assumed confidence'])
+    if explicit_omega:
+        table['Assumed confidence'] = np.nan
+    if len(views):
+        table['Effective marginal weight'] = view_variance / (view_variance + np.diag(omega))
     if return_details:
         mean_covariance = scaled - scaled @ p.T @ np.linalg.solve(p @ scaled @ p.T + omega, p @ scaled)
-        labels = [f'{v[0]} - {v[1]}' for v in views]
+        labels = [f'{v[0]} - {v[1]}' if v[1] is not None else f'{v[0]} excess' for v in views]
         return {
             'prior': pd.Series(prior, index=names),
             'posterior': pd.Series(posterior, index=names), 'views': table,
             'P': pd.DataFrame(p, index=labels, columns=names),
-            'Q': pd.Series(q, index=labels, name='Annual relative view'),
+            'Q': pd.Series(q, index=labels, name='Annual excess/relative view'),
             'Omega': pd.DataFrame(omega, index=labels, columns=labels),
             'mean_covariance': pd.DataFrame(mean_covariance, index=names, columns=names),
             'predictive_covariance': pd.DataFrame(sigma + mean_covariance, index=names, columns=names),
@@ -285,7 +303,10 @@ def portfolio_step(weights, cash, asset_returns, daily_rf, daily_borrow_rate, co
 def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
             transaction_cost_bps=10.0, annual_short_borrow_bps=100.0,
             kelly_fraction=0.5, bab_gross_limit=2.0,
-            investor_views=None, views_as_of=None, cash_returns=None):
+            investor_views=None, views_as_of=None, cash_returns=None,
+            view_register=None, apply_registered_views=True,
+            training_window_days=None, covariance_estimator='sample',
+            evaluation_start_date=None, bab_failure_policy='raise'):
     """Run an expanding-window, monthly walk-forward portfolio comparison.
 
     For a first earned return ending t, fitting stops at close t-2; execution
@@ -302,6 +323,13 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
     if not np.isfinite(annual_short_borrow_bps) or annual_short_borrow_bps < 0:
         raise ValueError('ANNUAL_SHORT_BORROW_BPS must be a finite nonnegative number.')
 
+    if training_window_days is not None and (not isinstance(training_window_days, int) or training_window_days < 252):
+        raise ValueError('Training window must be None or at least 252 sessions.')
+    if bab_failure_policy not in {'raise', 'cash'}:
+        raise ValueError('BAB failure policy must be raise or cash.')
+    register = validate_view_register([] if view_register is None else view_register, ASSETS)
+    if register and investor_views:
+        raise ValueError('Use the dated view register or legacy fixed views, not both.')
     configured_views = [] if investor_views is None else list(investor_views)
     publication_date = None
     if configured_views:
@@ -331,8 +359,21 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         cash_series = cash_returns.copy()
         cash_label = 'supplied realized cash proxy; fixed annual_rf remains the forecast assumption'
     evaluation = returns.iloc[training_days + 1:]
-    # Use the first available observation in each calendar month as a rebalance.
+    if evaluation_start_date is not None:
+        evaluation = evaluation.loc[pd.Timestamp(evaluation_start_date):]
+    if len(evaluation) < 2:
+        raise ValueError('At least two evaluation sessions are required.')
+    # Monthly activation, plus execution at the first session on/after view expiry.
     rebalance_dates = evaluation.groupby(evaluation.index.to_period('M')).head(1).index
+    expiry_effective_dates = []
+    for record in register:
+        if record['enabled']:
+            execution_positions = np.flatnonzero(returns.index >= pd.Timestamp(record['expires_on']))
+            if len(execution_positions) and execution_positions[0] + 1 < len(returns):
+                effective = returns.index[execution_positions[0] + 1]
+                if effective in evaluation.index:
+                    expiry_effective_dates.append(effective)
+    rebalance_dates = rebalance_dates.union(pd.DatetimeIndex(expiry_effective_dates)).sort_values()
     positions = [returns.index.get_loc(date) for date in rebalance_dates]
     methods = ['Equal weight', 'Minimum variance', 'BL maximum Sharpe',
                'Minimum tracking error', 'Higher-moment utility',
@@ -355,17 +396,29 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         stop_position = positions[number + 1] if number + 1 < len(positions) else len(returns)
         # Fit after close t-2, execute at close t-1, earn the return ending t.
         train = returns.iloc[:start_position - 1]
+        if training_window_days is not None:
+            train = train.iloc[-training_window_days:]
         test = returns.iloc[start_position:stop_position]
-        covariance = train[ASSETS].cov() * PERIODS_PER_YEAR
+        covariance = estimate_covariance(train[ASSETS], covariance_estimator)
         decision_close = train.index[-1]
         eligible = (publication_date is not None
                     and decision_close.normalize() > publication_date)
         active_views = configured_views if eligible else []
+        active_set = None
+        if register:
+            active_views, active_set = eligible_view_set(register, decision_close, returns.index[start_position - 1])
+            if not apply_registered_views:
+                active_views, active_set = [], None
         prior, posterior, views = black_litterman(covariance, views=active_views)
         view_records.append({'Date': test.index[0], 'Decision close': decision_close,
                              'Execution close': returns.index[start_position - 1],
-                             'Publication date': views_as_of if configured_views else None,
-                             'Configured views': len(configured_views),
+                             'Publication date': next((r['published_on'] for r in register if r['id'] == active_set), None) if register else (views_as_of if configured_views else None),
+                             'Configured views': sum(len(r.get('views', [])) for r in register if r['enabled']) if register else len(configured_views),
+                             'Active set': active_set,
+                             'Fit start': train.index[0], 'Fit observations': len(train),
+                             'Covariance estimator': covariance_estimator,
+                             'Shrinkage': covariance.attrs['shrinkage'],
+                             'Covariance condition number': float(np.linalg.cond(covariance)),
                              'Active views': len(active_views)})
         targets = optimize_weights(posterior, covariance, train[ASSETS],
                                    train[BENCHMARK], max_weight)
@@ -377,8 +430,19 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
         targets['Fractional Kelly'] = fractional_kelly_weights(
             train[ASSETS], annual_rf=annual_rf, fraction=kelly_fraction,
             cap=max_weight)
-        targets['BAB beta-neutral'], last_bab_diagnostics = bab_weights(
-            train[ASSETS], train[BENCHMARK], gross_limit=bab_gross_limit)
+        try:
+            targets['BAB beta-neutral'], last_bab_diagnostics = bab_weights(
+                train[ASSETS], train[BENCHMARK], gross_limit=bab_gross_limit)
+            view_records[-1]['BAB construction'] = 'beta-neutral target'
+        except ValueError as exc:
+            if bab_failure_policy != 'cash' or 'positive average beta' not in str(exc):
+                raise
+            # Explicit experiment policy: do not force leverage through near-zero/negative leg beta.
+            targets['BAB beta-neutral'] = pd.Series(0., index=ASSETS)
+            betas = train[ASSETS].apply(lambda col: col.cov(train[BENCHMARK]) / train[BENCHMARK].var())
+            last_bab_diagnostics = pd.DataFrame({'Beta': betas, 'Weight': 0., 'Leg': 'Cash: ineligible leg beta'})
+            last_bab_diagnostics.attrs.update(portfolio_beta=0., gross_exposure=0.)
+            view_records[-1]['BAB construction'] = 'cash: nonpositive or near-zero leg beta'
         for name in methods:
             target = targets[name].to_numpy(dtype=float)
             target_cash = 1 - target.sum()
@@ -445,11 +509,13 @@ def analyze(prices, annual_rf=0.03, max_weight=0.35, training_days=504,
                 transaction_cost_bps=transaction_cost_bps,
                 annual_short_borrow_bps=annual_short_borrow_bps,
                 kelly_fraction=kelly_fraction, bab_gross_limit=bab_gross_limit,
-                views_as_of=views_as_of if configured_views else None,
-                configured_view_count=len(configured_views),
+                views_as_of=view_records[-1]['Publication date'] if register else (views_as_of if configured_views else None),
+                configured_view_count=sum(len(r.get('views', [])) for r in register if r['enabled']) if register else len(configured_views),
                 view_history=pd.DataFrame(view_records).set_index('Date'),
                 solver_history=pd.DataFrame(solver_records).set_index(['Date', 'Start']),
-                cash_returns=cash_series, cash_label=cash_label)
+                cash_returns=cash_series, cash_label=cash_label,
+                view_register=register, max_weight=max_weight, bab_failure_policy=bab_failure_policy, training_window_days=training_window_days,
+                covariance_estimator=covariance_estimator, apply_registered_views=apply_registered_views)
 
 
 def charts(result, label):
@@ -495,7 +561,12 @@ def save_run(result, provenance, annual_rf, max_weight, parent='outputs'):
                 'training_days_before_first_evaluation': result['training_days'],
                 'evaluation_start': str(result['evaluation_start'].date()),
                 'evaluation_end': str(result['evaluation_end'].date()),
-                'rebalance_rule': 'first available observation of each calendar month',
+                'rebalance_rule': 'monthly plus registered-view expiry; first earned-return dates recorded',
+                'training_window_days': result['training_window_days'],
+                'covariance_estimator': result['covariance_estimator'],
+                'view_register': result['view_register'],
+                'apply_registered_views': result['apply_registered_views'],
+                'bab_failure_policy': result['bab_failure_policy'],
                 'execution_contract': 'fit after close t-2, execute close t-1, first earned return ends t',
                 'cash_model': result['cash_label'],
                 'cash_returns_sha256': hashlib.sha256(result['cash_returns'].to_csv().encode()).hexdigest(),

@@ -1,0 +1,23 @@
+{
+  "baseline_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+  "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+  "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+  "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66",
+  "journal_entries": 1,
+  "status": "VERIFIED_DATED_SNAPSHOT",
+  "completed_at_utc": "2026-10-16T07:18:40.118763+00:00",
+  "executed_cells": 59,
+  "notebook_sha256": "932308ba0e87e884c655e750e5956ad8bf5e917cbdfdbaa3fb7c1b2cb9604b49",
+  "executed_code_sha256": "3dfa8181b6f3668a3f56339582e6d4e6df0f8c453fddf46582259ae226e4d97a",
+  "evidence": "Retrospective reconstruction. The retained paper decision has no observed outcome in this snapshot.",
+  "tests": {
+    "run": 119,
+    "passed": 118,
+    "optional_hmm_skipped": 1
+  },
+  "dependency_check": "passed",
+  "unchanged_result_tables": 210,
+  "published_notebook": "portfolio_construction_amended.ipynb",
+  "staged_git_export_checks": "Both frozen protocols, original inputs, amended inputs, journal anchor and reviewed notebook build passed from exported index without ignored raw files.",
+  "staged_diff_check": "passed"
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip",
+  "retrieved_at_utc": "2026-10-16T05:01:11.237839+00:00",
+  "sha256": "36756c5c2559648519ac4b22913d860c6afd865cfebce920e3e8927f8e2d10b7",
+  "bytes": 11964,
+  "monthly_file": "ff5_monthly.csv",
+  "monthly_sha256": "7858ecdaa83c44de9c0602f0b4e0c13bc06faff4d01b922458e5b36716c5f736",
+  "first_month": "196307",
+  "last_month": "202608",
+  "stored_units": "percentage points; convert exactly once in notebook",
+  "rows": 758,
+  "vintage_note": "Current CIZ vintage; retrospective attribution only."
+}

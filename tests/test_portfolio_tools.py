@@ -127,7 +127,7 @@ class PortfolioChecks(unittest.TestCase):
         for date in [None, '', 'not a date', '2026-02-30', '2026-1-2']:
             with self.subTest(date=date), self.assertRaisesRegex(ValueError, 'VIEWS_AS_OF'):
                 analyze(self.prices, investor_views=[('GLD', 'MTUM', .15, .9)], views_as_of=date)
-        with self.assertRaisesRegex(ValueError, 'different known assets'):
+        with self.assertRaisesRegex(ValueError, 'different known comparator'):
             analyze(self.prices, investor_views=[('BAD', 'MTUM', .15, .9)], views_as_of='2099-01-01')
 
     def test_infeasible_cap_explains_problem(self):

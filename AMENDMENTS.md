@@ -1,9 +1,88 @@
 # Methodology amendments
 
+## 16 October 2026 — review and publication repair
+
+- Publish the executed derivative as `portfolio_construction_amended.ipynb`; preserve the complete frozen baseline bytes and both existing protocols.
+- Add `review_checks.py` and `run_reviewed_analysis.py`. Check protocol documents, parent binding, forecast registry, pinned source/data/runtime and original inputs before execution. Require the retained journal head and entry count so deletion cannot be reported as an empty, valid history.
+- Preserve hashed Python, JSON, CSV and notebook bytes through Git checkout. Verify the staged tree independently before publishing.
+- Declare these software repairs in the notebook's first cell and `research/REVIEW_FIXES_20261016.md`. No allocation, uncertainty or cost parameter changes; no replacement paper decision and no completed prospective outcome.
+
+## 16 October 2026 — remaining feasible improvements implemented
+
+- Add `portfolio_amendments.py`, `paper_research.py` and `run_amended_analysis.py`; the new notebook includes the additional functions inline in four new executable cells, while preserving the 54 refreshed baseline cells.
+- Replace the approximate risk comparison in a separately declared experiment with the intersection of two cash-sleeve feasible risk intervals. Apply identical caps, turnover/cash/financing constraints and independently verify accounting. All three sampled rebalances match; expose and hold both if a later pair is infeasible.
+- Add an exclusive, hash-chained local paper journal and separate subsequent-outcome evaluator; reject backdating, stale decision prices, future input availability, duplicate IDs and premature outcomes. The first entry is a new all-cash paper pair, not an actual account or historical backfill.
+- Separate completed-quarter forecast scoring from strategy inference. A new protocol retains a 60-session minimum and adds eight completed comparable forecast cycles; the current view has only 32 remaining active return sessions.
+- Add chronological ETF/NAV timing-basis checks and a comparable-quarter uncertainty gate. The completed Q3 proxy fails comparability/definition gates; Q4 is unfinished. Existing 10%/2% uncertainty assumptions remain in allocations, explicitly uncalibrated.
+- New common-risk result: scenario 5.5597%, equal weight 5.7420% over 53 retrospective sessions. No parameter tuning or positive-edge claim. Full declarations and data limits appear in `research/AMENDMENTS_IMPLEMENTED_20261016.md` and in the new executed notebook.
+
+## 16 October 2026 — dated input refresh and isolated macro investigation
+
+- Preserve the frozen notebook, pinned code/inputs/protocol and four original submission inputs. Add a new price/valuation vintage through October 15, lagged-rate/factor coverage audit and exact-prefix revision comparison under `data/refresh_20261016/`.
+- Add `refresh_inputs.py` and `run_updated_analysis.py`. The executed derivative changes input paths, the exclusive end date and the descriptive vintage label; allocation mathematics, parameters, forecast and uncertainty assumptions remain fixed. It embeds the dated review and intraday investigation after the existing research sections.
+- Reject revised historical Yahoo observations under the original forward contract. Retain the new reconstruction separately; do not splice histories or relax the frozen check.
+- Reassess all five improvements, including common-risk mismatch, forecast horizon, decision journaling and uncalibrated uncertainty, in `research/REFRESH_20261016.md`.
+- Add a separate bar-level macro prototype with explicit bond-price proxy labels, freshness rejection, prior-only HMM fitting, causal filtering, controls and cost sensitivity. Preserve its negative result; this is not native trade reproduction or an untouched holdout.
+- Raw vendor files stay local; derived data and hashes support the research run. No live strategies, shadow settings, launchers, schedules or broker state were changed. No commit or push was performed for this amendment.
+
+## 9 October 2026 — quarterly observations, uncertainty, costs and forward protocol
+
+- Replaced arbitrary quarterly-average endpoint and mismatched July quotes with a conditional quarterly observation model and same-date issuer NAV/ounces pairs.
+- Propagate explicit, uncalibrated forecast and basis error into Omega; display effective Bayesian weight and all five error/basis cases.
+- Put trading costs inside mean/variance utility, constrain announced active weights, and cap actual execution turnover with a declared initial-entry exception. Report drift beyond target bounds.
+- Add fixed GLD, GLD exposure and cash-scaled risk controls, including matching gaps and identical costs/dates.
+- Add exclusive protocol freezing and subsequent-data evaluation with code/runtime/input pins, immutable historical rows, calendar validation and decision/execution/return admission.
+- This supersedes the endpoint/confidence mapping described in the earlier entry below. All original data files remain unchanged. Forward performance remains unavailable until new observations arrive.
+
+
+## 9 October 2026 — JPM source revision and absolute-view review
+
+- Audit June–September JPM research and record publication dates, public-source
+  limits and retrieved HTML hashes. Detect that the June/July USD 6,000 gold pages
+  are superseded by the July 3 Reuters-attributed USD 4,500 Q4 average.
+- Add absolute excess-return BL views (`comparator=None`) and independent scalar
+  posterior tests. A bullion forecast no longer requires inventing another ETF view.
+- Keep strict recorded-date results separate from a publication-date reconstruction.
+  Never backdate the 9 October mapping; expose its quarter-average/endpoint, fee,
+  timing-basis and confidence assumptions and all seven sensitivity cases.
+- Recalculate remaining-horizon arithmetic excess return using only decision-close
+  prices, enforce an explicit short-horizon exit, and match control trading dates.
+- Fix registered-view publication metadata: active-set publication now appears in
+  each rebalance audit instead of the empty legacy fixed-view date field.
+- Correct single-series chart sizing; retain all calculations, audit tables and
+  results inside the notebook with module parity checks.
+
+## 9 October 2026 — stages 4–7 research experiments
+
+- Introduce a dated, validated view-set register, separating provider statements,
+  ETF mapping and confidence assumptions. Publication and mapping-record dates
+  precede decisions; newest sets supersede older ones; expiry causes a recorded
+  prior-only rebalance. Matched controls use the same schedule and costs.
+- Keep JPM records disabled: no justified numerical ETF mapping/confidence is
+  supplied. Confidence sensitivity explicitly records unavailable cases.
+- Select from four fixed window/covariance configurations using development-only
+  minimum-variance volatility. Display all later candidate outcomes on common dates.
+- Add an explicit BAB cash policy for ineligible near-zero/nonpositive leg betas,
+  recording every affected rebalance. Other failures remain visible errors.
+- Add paired circular block-bootstrap CAGR/Sharpe differences at three block lengths;
+  intervals are conditional and pointwise, not proof of prospective superiority.
+- Add three-lag Bartlett HAC standard errors, alpha intervals and Holm alpha p-values
+  alongside IID factor estimates. Require contiguous monthly samples of at least 24.
+- Add Ledoit–Wolf covariance fitted per prior window, cap and fixed-target cost grids,
+  target exposure/concentration, signed risk contributions, drawdown duration and
+  realized BAB beta. Small-window factor-tilt diagnostics explicitly state insufficient data.
+- Generate headline tables and sentences from one results object. Export candidate
+  paths, case statuses, source/runtime/input hashes and a timestamped specification.
+
+All inspected observations remain retrospective. Numerical-view benefit cannot be
+estimated from the current inactive register. No perfect grade or deployment claim
+follows from successful software validation. Prior dated entries describe older defaults.
+
+
 ## 9 October 2026 — stages 1–3: research contract, audit and frozen inputs
 
 This entry supersedes earlier descriptions of Yahoo defaults, same-close fitting,
-daily Kelly scenarios and constant-only financing. Original submission bytes remain unchanged.
+daily Kelly scenarios and constant-only financing. The four original data files remain unchanged.
 
 - State the research question, primary comparisons, strategy objectives, default
   constraints and retrospective/prospective boundary in the notebook.
@@ -26,7 +105,7 @@ daily Kelly scenarios and constant-only financing. Original submission bytes rem
 
 The new cash rate is a current-vintage realized proxy, not an available-at-decision
 forecast. Prices, factors and universe selection still prevent a point-in-time claim.
-Stages 4–7 remain future research, including robustness and uncertainty assessment.
+The subsequent stages 4–7 entry above extends this foundation with robustness and uncertainty assessment.
 
 ## Earlier amendment history
 
@@ -35,7 +114,7 @@ Stages 4–7 remain future research, including robustness and uncertainty assess
 
 **Professional research consolidation:** 8 October 2026
 
-**Source-code reconciliation and accounting corrections:** 9 October 2026
+**Accounting corrections:** 9 October 2026
 
 ## 9 October 2026: refreshed factors and enforced view chronology
 
@@ -65,7 +144,7 @@ visible in the main notebook, with regenerated factor outputs.
 ## October 2026 active configuration and original-input declaration
 
 Unchanged original 2024 input settings are now commented in the notebook and
-labelled **ORIGINAL 2024 SUBMISSION**. The data/report/archive bytes remain intact
+labelled **ORIGINAL 2024 SUBMISSION**. The data bytes remain intact
 for provenance. The active notebook and report launcher default to Yahoo with
 exclusive end `2026-10-09`; the verified provider history reaches 8 October 2026.
 
@@ -87,10 +166,6 @@ active-input policy supersedes their previous defaults.
 
 **Scope:** maintained professional continuation of the 2024 portfolio study
 
-The August 2024 notebook is retained under `research_archive/` as provenance. Its
-published results have not been silently rewritten. `portfolio_construction.ipynb`
-and the tested Python modules form the single maintained implementation.
-
 ## What was amended
 
 | Original issue | Amendment in the executable workflow |
@@ -108,12 +183,6 @@ and the tested Python modules form the single maintained implementation.
 | Kelly mixed units and exponentiated simple returns | Solve constrained full Kelly with cash available, then scale its risky weights by the fraction. Compound dated simple returns and apply financing and costs consistently. |
 
 ## Restored source analyses (9 October 2026)
-
-The supplied notebook contains 213 cells, including 127 code cells. Every code cell
-has a destination and review decision in the maintained notebook's final source
-reconciliation table. Metadata records the exact source-file hash, each code-cell
-hash and destination cell IDs. The maintained notebook now contains 92 cells;
-repeated displays and formula variants are consolidated. Historical files are unchanged.
 
 The initial restoration called calculation functions from project modules and
 cleared the saved results. The notebook presentation has now been corrected:
@@ -166,22 +235,16 @@ Previously generated reports remain historical artifacts and are not overwritten
 
 ## Integration of the actual submission (8 October 2026)
 
-The actual submission directory supplied the 49-page report, four original data
-files, notebook and its `utils.py` dependency. The existing archive notebook was
-replaced from that source, retaining all 127 code cells unchanged. Saved outputs,
-execution counts and cell metadata were cleared; IDs and a provenance note were
-added and the title attribution shortened. The PDF and data bytes are unchanged.
-`data/manifest.json` records source and imported hashes. Duplicate HTML/DOCX,
-bytecode and the declaration were excluded.
+The four input files are retained with their source hashes in `data/manifest.json`.
 
-| Evidence in submission | Maintained implementation |
+| Research input or issue | Maintained implementation |
 | --- | --- |
-| Report Table 1, page 5: 21 ETFs plus RFR, with eight selected ETFs | Default `submission` mode consumes the actual adjusted closes. All 21 ETFs are retained for coverage, initial-training correlation and factor attribution. The allocation universe remains the documented eight assets. |
+| ETF universe: 21 ETFs with eight allocation assets | Default `submission` mode consumes the actual adjusted closes. All 21 ETFs are retained for coverage, initial-training correlation and factor attribution. The allocation universe remains the documented eight assets. |
 | Price cache ends 20 August 2024; each ETF has one repeated AUM value | Actual coverage is reported, never extrapolated. Snapshot AUM is excluded from historical priors. No historical Treasury-bill series is fabricated. |
 | Factor file ends June 2024 | Decimal-unit conversion, geometric monthly returns, conservative removal of first/last partial-month risk, and an explicit overlap period. Require 24 months and full-rank OLS. |
-| Report section 4.6 discusses factor regressions and weight tilts | Maintained output is labelled time-series OLS attribution with IID standard errors. It does not claim Fama–MacBeth estimation or automatic factor tilting. |
-| Report section 4.7: macroeconomic context | World Bank series are selected by name; BIS series by full metadata key, not row 142. Charts retain percent and percent-of-GDP units. Release histories are unavailable, so these charts are context only. |
-| Report section 4.8, pages 33–34: views as of 21 August 2024 | These views postdate the last supplied price. Earlier evaluation is a retrospective scenario, even though covariance/beta fitting is chronological. This limitation is now explicit in output metadata. |
+| Factor regressions and weight tilts | Maintained output is labelled time-series OLS attribution with IID standard errors. It does not claim Fama–MacBeth estimation or automatic factor tilting. |
+| Macroeconomic context | World Bank series are selected by name; BIS series by full metadata key, not row 142. Charts retain percent and percent-of-GDP units. Release histories are unavailable, so these charts are context only. |
+| Historical views dated 21 August 2024 | These views postdate the last supplied price. Earlier evaluation is a retrospective scenario, even though covariance/beta fitting is chronological. This limitation is now explicit in output metadata. |
 
 `run_project.bat --check` and its shell equivalent now execute the actual submission
 inputs by default. `--mode synthetic` remains an explicit software validation path.
