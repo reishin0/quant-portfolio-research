@@ -1,0 +1,40 @@
+{
+  "completed_at_utc": "2026-10-17T01:16:05.560245+00:00",
+  "preserved_notebooks": {
+    "portfolio_construction.ipynb": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+    "portfolio_construction_amended.ipynb": "932308ba0e87e884c655e750e5956ad8bf5e917cbdfdbaa3fb7c1b2cb9604b49"
+  },
+  "executed_cells": 6,
+  "notebook_sha256": "aa053d18a489369fcf425fd2de502d6f7cb7802c056339427960af55409be9a4",
+  "evidence": "Source-qualified retrospective diagnostics and synthetic cash scenarios only; trading comparison not evaluated.",
+  "validation_date_sgt": "2026-10-17",
+  "tests": {
+    "run": 151,
+    "passed": 150,
+    "optional_hmm_skipped": 1,
+    "credit_funding_tests": 32,
+    "review_regression_tests_added": 10
+  },
+  "published_notebook": "credit_funding_research.ipynb",
+  "synthetic_scenario_count": 7,
+  "classification": "FUNDING_VULNERABILITY",
+  "financing_access": "RECENT_COMPLETED_FINANCING",
+  "issuer_credit_state": "UNKNOWN",
+  "sector_state": "UNKNOWN",
+  "broad_market_state": "UNKNOWN",
+  "comparison_status": "NOT_EVALUATED_MISSING_QUALIFIED_HISTORY_AND_EXPOSURE_POLICY",
+  "prior_execution": {
+    "completed_at_utc": "2026-10-16T23:26:37.695328+00:00",
+    "notebook_sha256": "73922971da644c0b87e8b3ef00b519e649d6fcdee8895d2796dc981609ec3f8b",
+    "tests": {
+      "run": 141,
+      "passed": 140,
+      "optional_hmm_skipped": 1,
+      "new_credit_funding_tests": 22
+    }
+  },
+  "mirror_credit_funding_tests_passed": 32,
+  "scenario_summaries_unchanged": true,
+  "source_observations_and_original_specification_unchanged": true,
+  "dependency_check": "passed"
+}

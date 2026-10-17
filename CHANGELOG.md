@@ -1,5 +1,13 @@
 # Changelog
 
+## 17 October 2026 — credit/funding review
+
+Corrected accounting-period selection, decision-time binding of credit/sector assessments, facility draw ordering and drawable-capacity reporting. Added regression tests and explicit input validation. Re-executed the separate notebook with the amendments declared and the original portfolio freezes preserved.
+
+## 17 October 2026 — credit and funding research
+
+Added a separate executed research notebook and tested daily disclosure/credit rules plus a monthly cash stress engine. Retained explicit missing issuer-data states, successful-financing evidence and synthetic-only scenario labels. Both existing portfolio notebooks and frozen protocols remain unchanged.
+
 ## 16 October 2026 — reviewed notebook publication
 
 Publish the executed amendment beside the unchanged frozen baseline. Add strict snapshot/protocol checks, journal truncation detection and regression tests. Preserve hashed file bytes across Git checkouts. The new reviewed runner executes 59 cells, including a provenance gate; existing portfolio calculations remain unchanged.

@@ -57,6 +57,9 @@ data/paper_journal_20261016/*
 !data/paper_journal_20261016/*.json
 
 # Local outputs and backups
+!data/credit_funding_20261017/
+data/credit_funding_20261017/*
+!data/credit_funding_20261017/*.json
 outputs/
 *.log
 *.bak

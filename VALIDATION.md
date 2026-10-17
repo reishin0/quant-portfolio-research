@@ -1,5 +1,21 @@
 # Validation record
 
+## 17 October 2026 — credit/funding review before private publication
+
+- Re-executed all **6 notebook code cells** after correcting financial-period selection, same-decision credit/sector binding and facility draw ordering/capacity reporting. The notebook opening declares the repairs; the source manifest retains preceding artifact hashes.
+- **151 tests ran: 150 passed, one optional HMM test skipped.** The credit/funding suite now has **32 passing tests**, including ten review regressions and edge cases. The same 32 tests passed in the second folder's Python environment. Seven of the added cases exposed failures in the pre-review implementation.
+- All seven synthetic scenario summary rows are unchanged; the new tests exercise cases absent from those examples. Source observations and the original research specification remain byte-identical. Dependency checks passed.
+- Both existing portfolio notebooks, both frozen protocols and all baseline pins remain unchanged. The main notebook and reviewed portfolio notebook still hash to `a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244` and `932308ba0e87e884c655e750e5956ad8bf5e917cbdfdbaa3fb7c1b2cb9604b49` respectively.
+- Updated execution and test evidence is in `research/credit_funding/validation_20261017.json`; the earlier execution identity is retained there. This remains retrospective/synthetic research with no completed issuer-credit trading comparison.
+
+## 17 October 2026 — isolated credit and funding research
+
+- All **6 executable cells** in `credit_funding_research.ipynb` passed. The notebook contains the calculation implementation, source audit, explicit amendment declaration, seven synthetic cash scenarios, chart and missing-evidence interpretation.
+- **141 tests ran: 140 passed, one optional HMM test skipped.** The 22 new tests cover disclosure timing, future/current-vintage exclusion, issuer separation, stale and duplicate credit observations, peer-relative persistence, index-transmission gating, same-pool facilities, one-time capacity, fixed/floating/refinanced interest, hedge schedules and independently reconciled monthly funding gaps.
+- Both existing portfolio notebook files, both frozen protocols, all their pinned inputs/source and the paper journal remain unchanged. `verify_review_snapshot()` and `git diff --check` pass.
+- The case is classified as funding vulnerability with recent completed financing. Issuer, sector and broad-market stress remain `UNKNOWN`; the three-way performance comparison is not evaluated because qualified history and an exposure policy are missing. No default prediction, live connection or company cash-flow forecast is claimed.
+- Execution hashes and counts are recorded in `research/credit_funding/validation_20261017.json`. The cash chart was visually checked. The extension was synced to the local `portfolio-construction-public` mirror; this does not publish it publicly.
+
 ## 16 October 2026 — review before private publication
 
 - All **59 executable cells passed** in the published `portfolio_construction_amended.ipynb`. Its opening declaration describes the review repairs; the new integrity cell runs before calculations.

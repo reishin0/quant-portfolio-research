@@ -1,0 +1,86 @@
+{
+  "retrieved_at_utc": "2026-10-16T23:20:49Z",
+  "source_audit_date_sgt": "2026-10-17",
+  "units": "USD millions unless explicitly stated",
+  "availability_note": "eligible_at is a conservative date-only research boundary, not proof of historical receipt. Source pages were checked after the event. No contemporaneous warning is claimed.",
+  "fundamentals": [
+    {
+      "issuer": "CRWV",
+      "period_end": "2026-06-30",
+      "published_on": "2026-08-12",
+      "eligible_at": "2026-08-13T00:00:00-04:00",
+      "availability_basis": "filing_date_plus_next_midnight",
+      "sec_accepted_display": "2026-08-11 19:24:42",
+      "scope": "consolidated historical disclosure, not a usable parent cash pool",
+      "cash_and_equivalents": 5524.0,
+      "facility_availability": 10014.0,
+      "debt_principal": 35551.0,
+      "operating_cash_flow_h1": 3663.0,
+      "cash_capex_h1": 14117.0,
+      "principal_remainder_2026": 4413.0,
+      "principal_2027": 6184.0,
+      "monthly_forecast": null,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/0001769628-26-000366-index.htm"
+    }
+  ],
+  "financing_events": [
+    {
+      "issuer": "CRWV",
+      "event_id": "ddtl_5_5",
+      "kind": "committed_facility",
+      "published_on": "2026-08-10",
+      "eligible_at": "2026-08-11T00:00:00-04:00",
+      "availability_basis": "date_only_next_midnight",
+      "principal_or_capacity": 2600.0,
+      "loan_term_years": 5.0,
+      "average_contract_years": 3.0,
+      "floating_margin_bp": 550.0,
+      "drawable_cash_for_model": null,
+      "source_url": "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Closes-2-6-Billion-Loan-Facility-Expanding-Financing-Flexibility-for-AI-Infrastructure/default.aspx"
+    },
+    {
+      "issuer": "CRWV",
+      "event_id": "convertible_2033",
+      "kind": "completed_financing",
+      "published_on": "2026-09-22",
+      "eligible_at": "2026-09-23T00:00:00-04:00",
+      "availability_basis": "filing_date_plus_next_midnight",
+      "sec_accepted_display": "2026-09-22 16:17:14",
+      "principal_or_capacity": 4200.0,
+      "net_before_expenses": 4137.0,
+      "capped_call_cost": 566.2,
+      "coupon_pct": 2.875,
+      "maturity": "2033-04-01",
+      "drawable_cash_for_model": null,
+      "note": "Evidence of financing access. No roll-forward to October cash without intervening uses, other flows and pool restrictions.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000432/crwv-20260917.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000432/0001769628-26-000432-index.htm"
+    }
+  ],
+  "broad_credit_snapshot": {
+    "series": "BAMLH0A0HYM2",
+    "source_url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+    "units": "percent OAS, not issuer yield",
+    "eligible_at": "2026-10-16T23:20:49Z",
+    "availability_basis": "current_vintage_retrieval_only; historical release vintages not qualified",
+    "page_updated_at": "2026-10-16T08:59:00-05:00",
+    "observations": [
+      {"date": "2026-10-09", "oas_pct": 3.11},
+      {"date": "2026-10-12", "oas_pct": 3.11},
+      {"date": "2026-10-13", "oas_pct": 3.16},
+      {"date": "2026-10-14", "oas_pct": 3.25},
+      {"date": "2026-10-15", "oas_pct": 3.23}
+    ]
+  },
+  "unavailable": {
+    "issuer_bond_panel": "Qualified instrument-level price/OAS history, trade and dissemination timestamps, coupons, maturity, seniority and option terms absent",
+    "matched_credit_peers": "Comparable maturity, seniority, currency and credit quality panel absent",
+    "monthly_cash_forecast": "Pool-specific receipts, mandatory commitments, debt/lease schedule and conditional facility draws absent",
+    "floating_and_hedge_schedule": "Monthly unhedged balances, reset dates and hedge expiry allocation absent",
+    "sector_breadth": "No qualified cross-issuer credit panel",
+    "equity_transmission": "No matched daily equity-breadth observations in this source audit",
+    "historical_vintages": "Broad credit download does not establish historical arrival timestamps"
+  },
+  "bond_data_access_source": "https://www.finra.org/sites/default/files/TRACE_Overview.pdf"
+}

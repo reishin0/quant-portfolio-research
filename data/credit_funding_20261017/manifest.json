@@ -1,0 +1,31 @@
+{
+  "recorded_on_sgt": "2026-10-17",
+  "classification": "Retrospective research and synthetic correctness cases; no operational integration",
+  "file_sha256": {
+    "research/credit_funding/specification.json": "6e93d7be991bc6428a4ec32925f097d759c39f54b3b204efc71211b91059f68d",
+    "research/credit_funding/model.py": "e8df33a293050ac92a514e0ebfa5e1afbd034656dcf3a8be991fbc20a37a6459",
+    "data/credit_funding_20261017/source_observations.json": "7cd3d8e1f5a3ae69adc9a919894460230ce1cea271804ad4f751b8e46387d5a1",
+    "run_credit_funding.py": "0dd7970ecdd98b8e7caf5b78d0c7d8cd1c440ac60dacba32f618b9e04e4a28db"
+  },
+  "preserved_commit": "dbb69d3be06122b2a60122816abd49b37eb3b695",
+  "review": {
+    "reviewed_at_utc": "2026-10-17T01:15:40.775833+00:00",
+    "superseded_artifact_sha256": {
+      "data/credit_funding_20261017/manifest.json": "c9d6d4df1351f6f58bfe120dfb12bc770325203816848be9be3f7a29fac24337",
+      "research/credit_funding/model.py": "affc4f05ef5a9accbe7e97ff6df76afce0daa48599f4e0d7048814217e24d4ab",
+      "run_credit_funding.py": "1922bb1ec1f2f50a52666ec921c726a69acafa08fcbf6747c7ce8bf5f3a0d8cf",
+      "credit_funding_research.ipynb": "73922971da644c0b87e8b3ef00b519e649d6fcdee8895d2796dc981609ec3f8b",
+      "research/credit_funding/specification.json": "6e93d7be991bc6428a4ec32925f097d759c39f54b3b204efc71211b91059f68d",
+      "data/credit_funding_20261017/source_observations.json": "7cd3d8e1f5a3ae69adc9a919894460230ce1cea271804ad4f751b8e46387d5a1"
+    },
+    "corrections": [
+      "newest accounting period then available revision",
+      "typed same-decision credit and sector assessments",
+      "earliest-expiry facility draws with ID tie-break",
+      "nominal versus drawable capacity",
+      "strict date, number and policy validation"
+    ],
+    "threshold_changes": false,
+    "source_observations_changed": false
+  }
+}

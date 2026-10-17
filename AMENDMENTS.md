@@ -1,5 +1,20 @@
 # Methodology amendments
 
+## 17 October 2026 — credit/funding review corrections
+
+- Correct disclosure selection to prioritize the newest accounting period, then the latest available same-period revision.
+- Bind issuer, sector and broad-credit assessments to the same decision timestamp and assessment type; cached future/stale or unstamped states cannot affect current permissions.
+- Draw eligible facilities in deterministic earliest-expiry order. Separate nominal unused commitments from current drawable capacity. Reject absent facility dates, boolean/nonnumeric cash inputs and invalid policy windows.
+- Apply all declared credit/breadth parameters in the notebook. Record preceding artifact hashes in the updated extension manifest and disclose repairs in the notebook opening. Original thresholds, source observations, both portfolio notebooks and both frozen protocols remain unchanged.
+
+## 17 October 2026 — isolated credit and funding extension
+
+- Add `research/credit_funding/model.py`, its declared specification, source-checked observations under `data/credit_funding_20261017/`, an executable runner and the separate `credit_funding_research.ipynb`. Both portfolio notebooks, all pinned baseline files and the paper decision are byte-preserved.
+- Separate dated funding vulnerability, positive financing events, issuer-relative credit stress and sector/index transmission. Preserve missing-data states; an issuer warning cannot automatically become a SPY signal.
+- Add reconciled monthly same-pool cash scenarios, one-time facility capacity consumption, conditional capacity haircuts, receipt/renewal shocks and incremental interest on eligible exposures. Existing fixed coupons do not reprice with secondary-market yields. Avoid subtracting baseline interest or operating leases twice.
+- Preserve publication timing. Date-only disclosures use an explicit conservative next-midnight convention; current-vintage broad-credit observations are descriptive only. No exact first-warning time is claimed.
+- Record that issuer/peer history and monthly usable company cash schedules are missing. The three-way trading comparison is not evaluated. Seven synthetic scenarios are correctness demonstrations, not company forecasts. The new module has no operational connections.
+
 ## 16 October 2026 — review and publication repair
 
 - Publish the executed derivative as `portfolio_construction_amended.ipynb`; preserve the complete frozen baseline bytes and both existing protocols.

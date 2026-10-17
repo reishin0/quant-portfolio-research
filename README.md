@@ -1,5 +1,9 @@
 # Portfolio Construction Research
 
+## Credit and funding extension — 17 October 2026
+
+The separate [executed credit/funding notebook](credit_funding_research.ipynb) adds dated issuer disclosures, credit-versus-peer rules, sector/index separation and monthly cash-funding scenarios. It preserves both portfolio notebooks and their frozen protocols. Run `python run_credit_funding.py`; see [data contracts and evidence limits](research/credit_funding/README.md). The included case supports a funding watch, while issuer spread history and a usable company cash forecast remain unavailable. Synthetic scenarios validate accounting; no historical trading advantage or live integration is claimed.
+
 ## Reviewed executable notebook
 
 Open [portfolio_construction_amended.ipynb](portfolio_construction_amended.ipynb) for the reviewed October 16 amendment, including saved results through October 15 and explicit amendment declarations. Reproduce it with `python run_reviewed_analysis.py` after the environment setup below. This verifies both frozen protocols, input hashes and the retained paper journal before executing. See [review fixes](research/REVIEW_FIXES_20261016.md).
