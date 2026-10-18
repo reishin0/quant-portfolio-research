@@ -1,0 +1,38 @@
+[
+  {
+    "cusip": "46270CAB5",
+    "issueSymbolIdentifier": "IREN6268256",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "46270CAD1",
+    "issueSymbolIdentifier": "IREN6434305",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "46270CAE9",
+    "issueSymbolIdentifier": "IREN6200763",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "46270CAG4",
+    "issueSymbolIdentifier": "IREN6250883",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "46270CAJ8",
+    "issueSymbolIdentifier": "IREN6250885",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "46270CAL3",
+    "issueSymbolIdentifier": "IREN6393112",
+    "issuerName": "IREN LTD",
+    "bondType": "CA"
+  }
+]

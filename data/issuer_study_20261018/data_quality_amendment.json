@@ -1,0 +1,12 @@
+{
+  "declared_at": "2026-10-18T06:24:42.215279+00:00",
+  "reason": "First strict replay rejected zero last-sale prices. Raw records remain unchanged. A separate study adapter makes nonpositive-price or nonfinite-price/yield observations unavailable for diagnostic windows; no interpolation, repair, zero-yield inference or threshold tuning.",
+  "zero_price_rows": {
+    "ORCL": 2,
+    "EQIX": 1,
+    "APLD": 1,
+    "CORZ": 1
+  },
+  "observation": "All five zero-price rows also have missing yield. The existing issuer model continues to reject invalid prices.",
+  "scope": "Retrospective comparison only; prior code and CoreWeave inputs unchanged"
+}

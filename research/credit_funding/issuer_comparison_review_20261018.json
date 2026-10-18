@@ -1,0 +1,293 @@
+{
+  "reviewed_at": "2026-10-18T06:35:35.450922+00:00",
+  "scope": "Cross-issuer retrospective research only; no portfolio or prospective-journal modification",
+  "execution": {
+    "executed_at": "2026-10-18T06:33:23.295437+00:00",
+    "case": "coreweave_20261017",
+    "case_sha256": "cb6b50f4af1c896bb706d23d49f5c48e3e5cf7467c4639f1588ec8753e216867",
+    "comparison_manifest_sha256": "6ee42702bb58c0d9d54395c0f5afd01c8771cb4be71163f6c7ab22f9e0ebca92",
+    "comparison_module_sha256": "cfbf4f91fecd15fe6c70dd04d64292aff9b6e75143e911aacb9d160644ca9161",
+    "notebook_sha256": "9c46c25e46457dcc999682d2560c99d60bf9bc67d67ea9e926f7ae95c0669b9a",
+    "code_cells": 11,
+    "published": true,
+    "status": "EXECUTED_WITHOUT_CELL_ERRORS",
+    "scope": "Retrospective diagnostic; no qualified historical strategy or prospective claim"
+  },
+  "tests": {
+    "main_total": 195,
+    "main_passed": 194,
+    "optional_hmm_skipped": 1,
+    "mirror_targeted_passed": 44,
+    "pip_check": "passed"
+  },
+  "baseline_main": {
+    "baseline_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+    "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+    "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+    "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66",
+    "journal_entries": 1,
+    "status": "VERIFIED_DATED_SNAPSHOT"
+  },
+  "baseline_mirror": {
+    "baseline_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+    "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+    "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+    "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66",
+    "journal_entries": 1,
+    "status": "VERIFIED_DATED_SNAPSHOT"
+  },
+  "preserved_preexisting_files": 116,
+  "retained_coreweave_warning_dates": [
+    "2026-07-27",
+    "2026-10-15"
+  ],
+  "changed_preexisting_files": [
+    ".gitignore",
+    "issuer_credit_funding_research.ipynb",
+    "research/credit_funding/ISSUER_REPLAY.md",
+    "run_issuer_credit_replay.py"
+  ],
+  "file_sha256": {
+    "run_issuer_credit_replay.py": "4cfaa5bb7a5b8040197904eda39ea213d2a4d753a4177fdc886378034213c325",
+    "research/credit_funding/issuer_comparison.py": "cfbf4f91fecd15fe6c70dd04d64292aff9b6e75143e911aacb9d160644ca9161",
+    "research/credit_funding/acquire_issuer_study.py": "b29d2c57d45bd692115c8743c6b0900d8ebcb69d505f516d37c2fac9cf0ded5e",
+    "research/credit_funding/issuer_study_20261018.json": "82f21746a208ce3e2f356605f61ff6efa1c3c3fabc845f5d6f4a1264c8e3473d",
+    "tests/test_issuer_comparison.py": "3e76a6642f6dbbe1c96cef7b0088ac2e27f381d52924100a5ddd4d3d21b4145e",
+    "issuer_credit_funding_research.ipynb": "9c46c25e46457dcc999682d2560c99d60bf9bc67d67ea9e926f7ae95c0669b9a",
+    "data/issuer_study_20261018/manifest.json": "6ee42702bb58c0d9d54395c0f5afd01c8771cb4be71163f6c7ab22f9e0ebca92"
+  },
+  "documentation_sha256_normalized_lf": {
+    ".gitignore": "00083060a859fbce692faa33ca678a030b1de8249e1c08419f75b22b0d58a140",
+    "research/credit_funding/ISSUER_REPLAY.md": "701360beaa462bf173028aecb15ea5321e5116b03f73a88d794685bd8fcff737"
+  },
+  "coverage": [
+    {
+      "issuer": "APLD",
+      "role": "near peer; separate legal borrowers, one issue each; no pooled quorum",
+      "bond_rows": 443,
+      "unavailable_bond_rows": 10,
+      "equity_sessions": 199,
+      "last_bond_date": "2026-10-15",
+      "evaluable_sessions": 0,
+      "unknown_or_ineligible_sessions": 199,
+      "warning_sessions": null,
+      "warning_onsets": null
+    },
+    {
+      "issuer": "IREN",
+      "role": "near peer; retrieved debt is convertible; yield test ineligible",
+      "bond_rows": 0,
+      "unavailable_bond_rows": 0,
+      "equity_sessions": 199,
+      "last_bond_date": null,
+      "evaluable_sessions": 0,
+      "unknown_or_ineligible_sessions": 199,
+      "warning_sessions": null,
+      "warning_onsets": null
+    },
+    {
+      "issuer": "NBIS",
+      "role": "near peer; retrieved debt is convertible; yield test ineligible",
+      "bond_rows": 0,
+      "unavailable_bond_rows": 0,
+      "equity_sessions": 199,
+      "last_bond_date": null,
+      "evaluable_sessions": 0,
+      "unknown_or_ineligible_sessions": 199,
+      "warning_sessions": null,
+      "warning_onsets": null
+    },
+    {
+      "issuer": "CORZ",
+      "role": "near peer; separate legal borrowers, one issue each; old parent issue may be retired",
+      "bond_rows": 122,
+      "unavailable_bond_rows": 10,
+      "equity_sessions": 199,
+      "last_bond_date": "2026-10-15",
+      "evaluable_sessions": 0,
+      "unknown_or_ineligible_sessions": 199,
+      "warning_sessions": null,
+      "warning_onsets": null
+    },
+    {
+      "issuer": "ORCL",
+      "role": "mature contrast",
+      "bond_rows": 771,
+      "unavailable_bond_rows": 4,
+      "equity_sessions": 199,
+      "last_bond_date": "2026-10-15",
+      "evaluable_sessions": 175,
+      "unknown_or_ineligible_sessions": 24,
+      "warning_sessions": 0.0,
+      "warning_onsets": 0.0
+    },
+    {
+      "issuer": "EQIX",
+      "role": "mature contrast",
+      "bond_rows": 641,
+      "unavailable_bond_rows": 42,
+      "equity_sessions": 199,
+      "last_bond_date": "2026-10-15",
+      "evaluable_sessions": 175,
+      "unknown_or_ineligible_sessions": 24,
+      "warning_sessions": 0.0,
+      "warning_onsets": 0.0
+    }
+  ],
+  "funding_outcomes": [
+    {
+      "issuer": "APLD",
+      "date": "2026-01-08T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": 10.2692568309,
+      "minimum_close_pct": 10.2692568309,
+      "loss_hit": false,
+      "excess_spy_pct": 9.8733205351,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "APLD",
+      "date": "2026-01-08T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": 9.4239204087,
+      "minimum_close_pct": -12.8209178216,
+      "loss_hit": true,
+      "excess_spy_pct": 9.2629391448,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "IREN",
+      "date": "2026-02-06T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": 0.9323437069,
+      "minimum_close_pct": -4.3031388309,
+      "loss_hit": false,
+      "excess_spy_pct": 2.2166988715,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "IREN",
+      "date": "2026-02-06T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": -7.1479836184,
+      "minimum_close_pct": -12.263927429,
+      "loss_hit": true,
+      "excess_spy_pct": -5.3597461741,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "NBIS",
+      "date": "2026-02-13T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": 2.6527889169,
+      "minimum_close_pct": -0.4999545786,
+      "loss_hit": false,
+      "excess_spy_pct": 2.5589082915,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "NBIS",
+      "date": "2026-02-13T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": 32.4864843111,
+      "minimum_close_pct": -11.4376072239,
+      "loss_hit": true,
+      "excess_spy_pct": 34.3522591073,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "CORZ",
+      "date": "2026-03-03T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": 1.0457506236,
+      "minimum_close_pct": -2.8758204482,
+      "loss_hit": false,
+      "excess_spy_pct": 1.5087736957,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "CORZ",
+      "date": "2026-03-03T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": -2.2222231918,
+      "minimum_close_pct": -9.0849694509,
+      "loss_hit": false,
+      "excess_spy_pct": 1.9248671705,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "ORCL",
+      "date": "2026-03-11T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": -6.2653180641,
+      "minimum_close_pct": -6.2653180641,
+      "loss_hit": false,
+      "excess_spy_pct": -4.0622481908,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "ORCL",
+      "date": "2026-03-11T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": -15.1903479379,
+      "minimum_close_pct": -15.1903479379,
+      "loss_hit": true,
+      "excess_spy_pct": -15.9942142378,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "EQIX",
+      "date": "2026-02-12T00:00:00.000",
+      "horizon": 5,
+      "observed_after": 5,
+      "complete": true,
+      "close_return_pct": -3.1068916463,
+      "minimum_close_pct": -4.1592212183,
+      "loss_hit": false,
+      "excess_spy_pct": -4.3046428471,
+      "arm": "first_funding_watch"
+    },
+    {
+      "issuer": "EQIX",
+      "date": "2026-02-12T00:00:00.000",
+      "horizon": 20,
+      "observed_after": 20,
+      "complete": true,
+      "close_return_pct": 1.8077900167,
+      "minimum_close_pct": -4.1592212183,
+      "loss_hit": false,
+      "excess_spy_pct": 4.593769639,
+      "arm": "first_funding_watch"
+    }
+  ],
+  "conclusion": "Useful incremental early-warning performance is not established: closer peers lack a comparable two-bond quorum; mature contrasts have no flags; first-disclosure loss hits occur against high ordinary-date loss rates.",
+  "review_fixes": [
+    "Missing and nonpositive TRACE prices invalidate windows without editing raw evidence",
+    "Separate project borrowers and convertible instruments cannot fabricate quorum",
+    "Full equity exchange calendar verified, no fill",
+    "Publication eligibility and event-close timing shown; same-day losses excluded",
+    "Incomplete forward horizons censored; zero-event precision unavailable",
+    "Earlier weakness and ordinary-date/price-only loss frequencies retained"
+  ],
+  "publication": "Local amendment only; no new commit or push requested in this turn"
+}

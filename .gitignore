@@ -64,6 +64,10 @@ data/credit_funding_20261017/*
 data/coreweave_evidence_20261017/*
 !data/coreweave_evidence_20261017/*.json
 !data/coreweave_evidence_20261017/*.csv
+!data/issuer_study_20261018/
+data/issuer_study_20261018/*
+!data/issuer_study_20261018/*.json
+!data/issuer_study_20261018/*.csv
 outputs/
 *.log
 *.bak

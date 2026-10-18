@@ -1,0 +1,30 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/bondSearch",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "bondType"
+    ],
+    "multiFieldMatchFilters": [
+      {
+        "searchValue": "ORACLE",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T06:20:13.714493+00:00",
+  "sha256": "7f5f9b6be2a4c63d8579174aebe1c7fbc8451935745e2e787f9f856c2cb27bd4",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

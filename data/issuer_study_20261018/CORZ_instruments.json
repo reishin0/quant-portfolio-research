@@ -1,0 +1,74 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "21874AAB2",
+    "is144A": "N",
+    "couponRate": 10,
+    "issueSymbolIdentifier": "CORZ5749941",
+    "issuerName": "CORE SCIENTIFIC INC NEW",
+    "maturityDate": "2029-01-23",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "21874AAA4",
+    "is144A": "N",
+    "couponRate": 12.5,
+    "issueSymbolIdentifier": "CORZ5755616",
+    "issuerName": "CORE SCIENTIFIC INC NEW",
+    "maturityDate": "2028-01-23",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "21874AAC0",
+    "is144A": "Y",
+    "couponRate": 3,
+    "issueSymbolIdentifier": "CORZ5872379",
+    "issuerName": "CORE SCIENTIFIC INC NEW",
+    "maturityDate": "2029-09-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "21874AAE6",
+    "is144A": "Y",
+    "couponRate": 0.0,
+    "issueSymbolIdentifier": "CORZ5953471",
+    "issuerName": "CORE SCIENTIFIC INC NEW",
+    "maturityDate": "2031-06-15",
+    "couponType": "FXZC",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "U2062LAA9",
+    "is144A": "N",
+    "couponRate": 7.75,
+    "issueSymbolIdentifier": "CORZ6374959",
+    "issuerName": "CORE SCIENTIFIC FIN I LLC",
+    "maturityDate": "2031-05-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "21874LAA0",
+    "is144A": "Y",
+    "couponRate": 7.75,
+    "issueSymbolIdentifier": "CORZ6374960",
+    "issuerName": "CORE SCIENTIFIC FIN I LLC",
+    "maturityDate": "2031-05-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  }
+]

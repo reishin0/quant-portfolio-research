@@ -1,0 +1,200 @@
+[
+  {
+    "cusip": "29444UAW6",
+    "issueSymbolIdentifier": "EQIX4619408",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29390XAA2",
+    "issueSymbolIdentifier": "EQNE5817186",
+    "issuerName": "EQUINIX EUROPE 2 FING CORP LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29390XAG9",
+    "issueSymbolIdentifier": "EQNE6226750",
+    "issuerName": "EQUINIX EUROPE 2 FING CORP LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29390XAH7",
+    "issueSymbolIdentifier": "EQNE6318332",
+    "issuerName": "EQUINIX EUROPE 2 FING CORP LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29390XAK0",
+    "issueSymbolIdentifier": "EQNE6471062",
+    "issuerName": "EQUINIX EUROPE 2 FING CORP LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAM8",
+    "issueSymbolIdentifier": "EQIX3976667",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAN6",
+    "issueSymbolIdentifier": "EQIX4185570",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAP1",
+    "issueSymbolIdentifier": "EQIX4185571",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAQ9",
+    "issueSymbolIdentifier": "EQIX4313197",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAR7",
+    "issueSymbolIdentifier": "EQIX4465341",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAS5",
+    "issueSymbolIdentifier": "EQIX4619405",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAT3",
+    "issueSymbolIdentifier": "EQIX4619406",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAU0",
+    "issueSymbolIdentifier": "EQIX4619407",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UAV8",
+    "issueSymbolIdentifier": "EQIX4619404",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBC9",
+    "issueSymbolIdentifier": "EQIX4909425",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBD7",
+    "issueSymbolIdentifier": "EQIX4909426",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBE5",
+    "issueSymbolIdentifier": "EQIX4909427",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBF2",
+    "issueSymbolIdentifier": "EQIX4999473",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBG0",
+    "issueSymbolIdentifier": "EQIX4999474",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBH8",
+    "issueSymbolIdentifier": "EQIX4999475",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBJ4",
+    "issueSymbolIdentifier": "EQIX4999476",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBK1",
+    "issueSymbolIdentifier": "EQIX5050788",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBL9",
+    "issueSymbolIdentifier": "EQIX5050786",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBM7",
+    "issueSymbolIdentifier": "EQIX5050787",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBQ8",
+    "issueSymbolIdentifier": "EQIX5178901",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBR6",
+    "issueSymbolIdentifier": "EQIX5178902",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBS4",
+    "issueSymbolIdentifier": "EQIX5178903",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBT2",
+    "issueSymbolIdentifier": "EQIX5178904",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBU9",
+    "issueSymbolIdentifier": "EQIX5390681",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBV7",
+    "issueSymbolIdentifier": "EQIX6470449",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBX3",
+    "issueSymbolIdentifier": "EQIX6470447",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29444UBY1",
+    "issueSymbolIdentifier": "EQIX6470448",
+    "issuerName": "EQUINIX INC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "29447KAA3",
+    "issueSymbolIdentifier": "EQIX6318331",
+    "issuerName": "EQUINIX ASIA FING CORP PTE LTD",
+    "bondType": "CA"
+  }
+]

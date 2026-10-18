@@ -1,0 +1,14 @@
+{
+  "currency": "USD",
+  "scope": "Selected mature-contrast debt: issuer prospectuses/term sheets and SEC holdings currency for Equinix 1.55% 2028. Match coupon, maturity and issuer; FINRA metadata alone does not expose currency in the fetched schema.",
+  "sources": {
+    "68389XCD5": "https://www.sec.gov/Archives/edgar/data/1341439/000119312521091259/d131374d424b2.htm",
+    "68389XCM5": "https://www.sec.gov/Archives/edgar/data/1341439/000119312523024315/d769683d424b2.htm",
+    "68389XCY9": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525018491/d890482d424b2.htm",
+    "68389XDW2": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526033882/d44245dfwp.htm",
+    "29444UBL9": "https://www.sec.gov/Archives/edgar/data/1100663/000175272424147916/xslFormNPORT-P_X01/primary_doc.xml",
+    "29444UBR6": "https://www.sec.gov/Archives/edgar/data/1101239/000110465921060402/a21-9019_6fwp.htm",
+    "29444UBV7": "https://www.sec.gov/Archives/edgar/data/1101239/000110465926089246/tm2621537-2_424b2.htm",
+    "29444UBE5": "https://www.sec.gov/Archives/edgar/data/1101239/000110123926000091/eqix-20260331.htm"
+  }
+}

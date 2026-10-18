@@ -1,0 +1,122 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "98474TAB3",
+    "is144A": "N",
+    "couponRate": 1.125,
+    "issueSymbolIdentifier": "YNDX4204610",
+    "issuerName": "NEBIUS GRP N V",
+    "maturityDate": "2018-12-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAE6",
+    "is144A": "Y",
+    "couponRate": 1,
+    "issueSymbolIdentifier": "YNDX6173809",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2030-09-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAL0",
+    "is144A": "Y",
+    "couponRate": 2.625,
+    "issueSymbolIdentifier": "YNDX6344116",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2033-03-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAJ5",
+    "is144A": "Y",
+    "couponRate": 1.25,
+    "issueSymbolIdentifier": "YNDX6344117",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2031-03-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAB2",
+    "is144A": "N",
+    "couponRate": 2,
+    "issueSymbolIdentifier": "YNDX6478684",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2029-06-05",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAD8",
+    "is144A": "N",
+    "couponRate": 3,
+    "issueSymbolIdentifier": "YNDX6478685",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2031-06-05",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAN6",
+    "is144A": "Y",
+    "couponRate": 0.5,
+    "issueSymbolIdentifier": "YNDX6491331",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2030-02-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAQ9",
+    "is144A": "Y",
+    "couponRate": 4.5,
+    "issueSymbolIdentifier": "YNDX6491332",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2034-02-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAG1",
+    "is144A": "N",
+    "couponRate": 1,
+    "issueSymbolIdentifier": "YNDX6516607",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2030-09-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "63954QAH9",
+    "is144A": "N",
+    "couponRate": 2.75,
+    "issueSymbolIdentifier": "YNDX6516608",
+    "issuerName": "NEBIUS GROUP NV",
+    "maturityDate": "2032-09-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  }
+]

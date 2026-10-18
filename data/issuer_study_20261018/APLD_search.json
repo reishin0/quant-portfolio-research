@@ -1,0 +1,86 @@
+[
+  {
+    "cusip": "00202DAA5",
+    "issueSymbolIdentifier": "APLD6234451",
+    "issuerName": "APLD COMPUTECO LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "03772CAA1",
+    "issueSymbolIdentifier": "APLD6329907",
+    "issuerName": "APLD COMPUTECO 2 LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "03790CAE1",
+    "issueSymbolIdentifier": "AFDA5801910",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAF8",
+    "issueSymbolIdentifier": "AFDA6193311",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAG6",
+    "issueSymbolIdentifier": "AFDA6193312",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAH4",
+    "issueSymbolIdentifier": "AFDA6193313",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAJ0",
+    "issueSymbolIdentifier": "AFDA6193314",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAK7",
+    "issueSymbolIdentifier": "AFDA6193315",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790CAL5",
+    "issueSymbolIdentifier": "AFDA6193316",
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  },
+  {
+    "cusip": "03790NAA5",
+    "issueSymbolIdentifier": "APLD6422003",
+    "issuerName": "APLD COMPUTECO 3 LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "U0379NAA7",
+    "issueSymbolIdentifier": "APLD6234452",
+    "issuerName": "APLD COMPUTECO LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "U0380CAA8",
+    "issueSymbolIdentifier": "APLD6329906",
+    "issuerName": "APLD COMPUTECO 2 LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "U0380KAA0",
+    "issueSymbolIdentifier": "APLD6422001",
+    "issuerName": "APLD COMPUTECO 3 LLC",
+    "bondType": "CA"
+  },
+  {
+    "cusip": null,
+    "issueSymbolIdentifier": null,
+    "issuerName": "APLDAC",
+    "bondType": "ABS"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "selected_at": "2026-10-18T06:21:03.340589+00:00",
+  "study_sha256": "82f21746a208ce3e2f356605f61ff6efa1c3c3fabc845f5d6f4a1264c8e3473d",
+  "amendment_before_outcomes": "Exclude floating-rate notes as well as convertible notes; select fixed-coupon instruments only. Public search response contained a truncated unfiltered failed request; it is excluded from all inputs. Non-US Reg S twins are not separate bonds.",
+  "selection": {
+    "ORCL": {
+      "legal_issuer": "ORACLE CORP",
+      "bonds": [
+        "68389XCD5",
+        "68389XCM5",
+        "68389XCY9",
+        "68389XDW2"
+      ],
+      "role": "mature contrast"
+    },
+    "EQIX": {
+      "legal_issuer": "EQUINIX INC",
+      "bonds": [
+        "29444UBL9",
+        "29444UBR6",
+        "29444UBV7",
+        "29444UBE5"
+      ],
+      "role": "mature contrast"
+    },
+    "APLD": {
+      "bonds": [
+        "00202DAA5",
+        "03772CAA1",
+        "03790NAA5"
+      ],
+      "role": "near peer; separate legal borrowers, one issue each; no pooled quorum"
+    },
+    "CORZ": {
+      "bonds": [
+        "21874AAA4",
+        "21874LAA0"
+      ],
+      "role": "near peer; separate legal borrowers, one issue each; old parent issue may be retired"
+    },
+    "IREN": {
+      "bonds": [],
+      "role": "near peer; retrieved debt is convertible; yield test ineligible"
+    },
+    "NBIS": {
+      "bonds": [],
+      "role": "near peer; retrieved debt is convertible; yield test ineligible"
+    }
+  }
+}

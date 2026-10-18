@@ -59,3 +59,24 @@ This tool helps investigate investment exceeding internal cash generation and ch
 The retained case demonstrates the limits: July's warning preceded strong gains and October's warning followed the October 14 fall. Earlier financing dependence was visible, but reliable sell-off timing was not established. All warning episodes and incomplete outcomes stay visible.
 
 Before claiming predictive or portfolio value, obtain historical issuer/peer OAS with delivery/correction vintages, comparable instrument definitions, actual monthly cash/commitment/hedge inputs, a declared exposure and cost policy, and untouched issuer/period holdouts. Compare price-only, broad-credit and issuer-enriched rules on identical coverage. Multiple bonds of one issuer are not sector breadth. Last-sale yields cannot enter the frozen OAS gate; public capacity totals cannot enter the cash engine as unrestricted parent cash.
+
+## Cross-issuer amendment, 18 October 2026
+
+The generic notebook now includes the separately declared six-issuer comparison in
+`issuer_study_20261018.json`, using saved evidence in `data/issuer_study_20261018/`.
+Run `python run_issuer_credit_replay.py --publish` to execute both the retained
+case and the comparison offline. The prior review receipt applies to its recorded
+version; see `issuer_comparison_review_20261018.json` for this amendment's checks.
+
+The four nearer peers (APLD, IREN, NBIS, CORZ) cannot meet the unchanged two-bond,
+same-legal-borrower rule with the available instruments. ORCL and EQIX are mature
+contrasts, not matched credit peers; neither triggered a warning. All six first
+loaded 2026 disclosures show financing dependence. Four have an interim 10% loss
+within 20 sessions, but none within five; APLD and NBIS finish 20 sessions higher.
+These are descriptive cases, not demonstrated incremental warning skill.
+
+The study retains current-vintage FINRA observations, Yahoo adjusted prices,
+primary-source financial facts, instrument exclusions, missing-data states and
+failed warnings. Five zero-price/missing-yield rows are made unavailable only in
+the new adapter; raw observations and the earlier issuer model are unchanged.
+No frozen portfolio notebook, input snapshot, protocol or journal was amended.

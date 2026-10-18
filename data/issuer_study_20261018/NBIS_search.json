@@ -1,0 +1,62 @@
+[
+  {
+    "cusip": "63954QAB2",
+    "issueSymbolIdentifier": "YNDX6478684",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAD8",
+    "issueSymbolIdentifier": "YNDX6478685",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAE6",
+    "issueSymbolIdentifier": "YNDX6173809",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAG1",
+    "issueSymbolIdentifier": "YNDX6516607",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAH9",
+    "issueSymbolIdentifier": "YNDX6516608",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAJ5",
+    "issueSymbolIdentifier": "YNDX6344117",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAL0",
+    "issueSymbolIdentifier": "YNDX6344116",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAN6",
+    "issueSymbolIdentifier": "YNDX6491331",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "63954QAQ9",
+    "issueSymbolIdentifier": "YNDX6491332",
+    "issuerName": "NEBIUS GROUP NV",
+    "bondType": "CA"
+  },
+  {
+    "cusip": "98474TAB3",
+    "issueSymbolIdentifier": "YNDX4204610",
+    "issuerName": "NEBIUS GRP N V",
+    "bondType": "CA"
+  }
+]

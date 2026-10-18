@@ -1,0 +1,38 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/endOfDayPriceYield",
+  "request": {
+    "fields": [
+      "tradeDate",
+      "cusip",
+      "issueSymbolIdentifier",
+      "lastSalePrice",
+      "lastSaleYield"
+    ],
+    "domainFilters": [
+      {
+        "fieldName": "cusip",
+        "values": [
+          "00202DAA5",
+          "03772CAA1",
+          "03790NAA5"
+        ]
+      }
+    ],
+    "dateRangeFilters": [
+      {
+        "fieldName": "tradeDate",
+        "startDate": "2026-01-01",
+        "endDate": "2026-10-16"
+      }
+    ],
+    "sortFields": [
+      "tradeDate"
+    ],
+    "offset": 0,
+    "limit": 5000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T06:21:24.909303+00:00",
+  "sha256": "698ba8e794bcf032ee5a2977f6151c9820cfd69f168f3b90d6e2581c72c8f370",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

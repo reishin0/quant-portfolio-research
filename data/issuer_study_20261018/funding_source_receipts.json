@@ -1,0 +1,62 @@
+[
+  {
+    "issuer": "APLD",
+    "download_url": "https://ir.applieddigital.com/sec-filings/all-sec-filings/content/0001144879-26-000006/apld-20251130.htm",
+    "status": 200,
+    "raw_sha256": "ab5d31ccfa81ac3fdf20479e73e99dcb2bcd31fba7f1afc00d06b0d9bc2ae221",
+    "raw_bytes": 2220124,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": "APLD extraction uses earlier earnings release with matching cash-flow facts; source fact URL in disclosure record governs availability"
+  },
+  {
+    "issuer": "CORZ",
+    "download_url": "https://investors.corescientific.com/sec-filings/all-sec-filings/content/0001628280-26-013214/q42025corescientificinc-ea.htm",
+    "status": 200,
+    "raw_sha256": "59981debfc4d730ccd383226f42bdd1ea14ecc5dd27e5ee74336214ddef3760c",
+    "raw_bytes": 346660,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": ""
+  },
+  {
+    "issuer": "ORCL",
+    "download_url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Fiscal-Year-2026-Third-Quarter-Financial-Results/default.aspx",
+    "status": 200,
+    "raw_sha256": "c5676257df501ed7d1014cedb7b4d9d597dfd42af724573696659d7d6001cf06",
+    "raw_bytes": 495205,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": ""
+  },
+  {
+    "issuer": "EQIX",
+    "download_url": "https://investor.equinix.com/news-events/press-releases/detail/1096/equinix-provides-robust-2026-outlook-driven-by-strong",
+    "status": 200,
+    "raw_sha256": "ab94101a7b2ff4832edf9447020ab579ea851fadf1fbb56c5a8482bb8329582b",
+    "raw_bytes": 405091,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": ""
+  },
+  {
+    "issuer": "IREN",
+    "download_url": "https://cdn.yahoofinance.com/prod/sec-filings/0001878848/000187884826000015/iren-20251231.htm",
+    "status": 200,
+    "raw_sha256": "16e729fa4e7793f414bed6d3a3d5b848179569641579b91a1d34dda26ae57387",
+    "raw_bytes": 1948131,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": ""
+  },
+  {
+    "issuer": "NBIS",
+    "download_url": "https://assets.nebius.com/assets/2829268f-924f-4846-87b5-2365b7e58b41/Financial%20results_Q4%202025_11022026.pdf",
+    "status": 200,
+    "raw_sha256": "7196502aa1da8f95b6460cb2aa7143d453e3460c2974e93d5f553ed2f1262864",
+    "raw_bytes": 540645,
+    "raw_retention": "Local ignored acquisition output; factual structured extracts and URLs packaged, not whole issuer publications",
+    "retrieved_on_utc": "2026-10-18",
+    "note": ""
+  }
+]

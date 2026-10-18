@@ -1,0 +1,44 @@
+{
+  "study_id": "issuer_comparison_20261018",
+  "declared_at": "2026-10-18T06:18:26.466901+00:00",
+  "status": "Declared before fetching bond or equity outcomes; issuer financing types already inspected. Retrospective convenience sample, not an untouched holdout.",
+  "window": [
+    "2026-01-01",
+    "2026-10-16"
+  ],
+  "candidates": {
+    "APLD": "AI data-center developer; project issuers must remain separate",
+    "IREN": "AI compute and mining transition; convertible debt may preclude comparable yield test",
+    "NBIS": "AI cloud buildout; convertible debt may preclude comparable yield test",
+    "CORZ": "AI hosting and mining transition; project borrower and convertible debt must remain separate",
+    "ORCL": "Mature diversified cloud infrastructure contrast, not matched credit peer",
+    "EQIX": "Mature data-center infrastructure contrast, not matched credit peer"
+  },
+  "rules": {
+    "history": 20,
+    "persistence": 3,
+    "widening_bp": 100,
+    "max_gap_calendar_days": 4,
+    "min_warning_bonds": 2
+  },
+  "instrument_selection": "USD nonconvertible bonds, future maturity 2028-01-01 through 2036-12-31, exact same legal issuer; choose up to four sorted by maturity then CUSIP before price outcomes. Never count Reg S and 144A twins or taps as independent issues. Missing metadata excludes. Convertible and separate legal borrowers retained in coverage ledger.",
+  "funding_test": "Use first available 2026 published financial statement per issuer with signed operating cash flow, cash property investment and positive reported debt. Latest updates may be shown separately. Eligibility next New York calendar day. No carry-forward forecast; funding watch is disclosure event, not sell signal. Book debt may only establish positive debt, explicitly not a principal schedule.",
+  "outcomes": {
+    "horizons": [
+      5,
+      20
+    ],
+    "loss_threshold_pct": -10,
+    "warning_outcome": "Forward close return and minimum close relative to event close over next 5/20 observed equity sessions. Full horizon required for comparisons; incomplete is censored. No same-day loss counts as predicted.",
+    "comparators": "All eligible nonwarning days on same issuer and horizon, plus fixed price-only rule: daily return <= -5%. Descriptive base rates, overlapping observations not independent. Also report daily losses <= -10% and whether bond warning existed 1-20 observed sessions before; unknown bond coverage remains unknown, not no warning.",
+    "funding_events": "Same event-relative equity outcomes for first loaded funding-watch disclosure. No claim of earlier-ever detection; static financing dependence may have low specificity."
+  },
+  "prohibitions": [
+    "No threshold tuning",
+    "No synthetic bond histories",
+    "No converting last-sale yields to OAS",
+    "No merging subsidiary issuers",
+    "No frozen baseline changes",
+    "No dropping adverse outcomes"
+  ]
+}
