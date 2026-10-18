@@ -1,0 +1,112 @@
+{
+  "study_id": "early_warning_20261018",
+  "declared_at": "2026-10-18T11:10:21+00:00",
+  "status": "Declared before acquiring any bond, spread, filing or equity observation for the new universe. Thresholds are copied from earlier frozen rules or fixed here without looking at outcomes. No parameter may be changed after holdout outcomes are read; any change requires a new dated declaration and the holdout becomes development evidence.",
+  "question": "Does issuer credit and funding information give useful advance warning of equity stress beyond price-only and broad-credit signals, on identical eligible observations?",
+  "prior_evidence": {
+    "classification": "DEVELOPMENT_ONLY",
+    "issuers": ["CRWV", "APLD", "IREN", "NBIS", "CORZ", "ORCL", "EQIX"],
+    "reason": "Examined in the 17-18 October 2026 studies; excluded from the new universe and from every holdout statistic."
+  },
+  "universe": {
+    "rule": "US-listed equities in capital-intensive, debt-funded sectors chosen by sector before outcomes, plus mature large-cap contrasts and convertible-funded growth issuers. The list is fixed; no issuer may be added or dropped after outcomes are read. Inclusion does not imply eligibility for any signal.",
+    "candidates": {
+      "CHTR": {"sector": "cable", "bond_search": "CCO HOLDINGS"},
+      "LUMN": {"sector": "telecom", "bond_search": "LEVEL 3"},
+      "SATS": {"sector": "satellite/telecom", "bond_search": "DISH"},
+      "T": {"sector": "telecom", "bond_search": "AT&T"},
+      "VZ": {"sector": "telecom", "bond_search": "VERIZON"},
+      "TMUS": {"sector": "telecom", "bond_search": "T-MOBILE"},
+      "WBD": {"sector": "media", "bond_search": "WARNERMEDIA"},
+      "PARA": {"sector": "media", "bond_search": "PARAMOUNT"},
+      "AMT": {"sector": "towers", "bond_search": "AMERICAN TOWER"},
+      "CCI": {"sector": "towers", "bond_search": "CROWN CASTLE"},
+      "SBAC": {"sector": "towers", "bond_search": "SBA COMMUNICATIONS"},
+      "DLR": {"sector": "data centers", "bond_search": "DIGITAL REALTY"},
+      "INTC": {"sector": "semiconductors", "bond_search": "INTEL"},
+      "MU": {"sector": "semiconductors", "bond_search": "MICRON"},
+      "WDC": {"sector": "storage hardware", "bond_search": "WESTERN DIGITAL"},
+      "STX": {"sector": "storage hardware", "bond_search": "SEAGATE"},
+      "AMZN": {"sector": "mature cloud contrast", "bond_search": "AMAZON"},
+      "META": {"sector": "mature cloud contrast", "bond_search": "META PLATFORMS"},
+      "OXY": {"sector": "energy", "bond_search": "OCCIDENTAL"},
+      "APA": {"sector": "energy", "bond_search": "APA CORP"},
+      "DVN": {"sector": "energy", "bond_search": "DEVON"},
+      "EQT": {"sector": "energy", "bond_search": "EQT CORP"},
+      "AAL": {"sector": "airlines", "bond_search": "AMERICAN AIRLINES"},
+      "UAL": {"sector": "airlines", "bond_search": "UNITED AIRLINES"},
+      "CCL": {"sector": "cruise", "bond_search": "CARNIVAL"},
+      "RCL": {"sector": "cruise", "bond_search": "ROYAL CARIBBEAN"},
+      "NCLH": {"sector": "cruise", "bond_search": "NCL CORP"},
+      "F": {"sector": "autos", "bond_search": "FORD MOTOR"},
+      "GM": {"sector": "autos", "bond_search": "GENERAL MOTORS"},
+      "MGM": {"sector": "casinos", "bond_search": "MGM RESORTS"},
+      "WYNN": {"sector": "casinos", "bond_search": "WYNN"},
+      "CZR": {"sector": "casinos", "bond_search": "CAESARS"},
+      "AES": {"sector": "power", "bond_search": "AES CORP"},
+      "CLF": {"sector": "steel", "bond_search": "CLEVELAND-CLIFFS"},
+      "RIVN": {"sector": "EV, convertible-funded", "bond_search": "RIVIAN"},
+      "LCID": {"sector": "EV, convertible-funded", "bond_search": "LUCID"},
+      "PLUG": {"sector": "hydrogen, convertible-funded", "bond_search": "PLUG POWER"},
+      "RUN": {"sector": "residential solar, convertible-funded", "bond_search": "SUNRUN"}
+    },
+    "benchmarks": ["SPY"]
+  },
+  "periods": {
+    "panel": ["2021-06-01", "2026-10-16"],
+    "development": ["2022-01-03", "2023-12-29"],
+    "holdout": ["2024-01-02", "2026-10-16"],
+    "rule": "Signals may use earlier observations as lookback. A signal or episode is assigned to the period containing its date. Holdout outcomes are computed only after the development run is recorded. Development results may expose software defects; fixing a defect is allowed only if it does not change a declared parameter, and the fix is logged with its timing."
+  },
+  "legal_borrower": {
+    "rule": "For each candidate, the bond issuer is the single exact FINRA issuerName with the most eligible bonds among names returned by the declared search term, restricted to names that are the equity issuer or an entity named in its filings as a consolidated subsidiary borrower. Different issuerName strings are never pooled. Parent guarantees, collateral and historical borrower changes are not available from the free sources; they are recorded as UNVERIFIED, not assumed.",
+    "bond_eligibility": "USD, couponType FXPV, isConvertible N, maturity 2028-01-01 through 2036-12-31, distinct economic issue (Reg S/144A twins and taps of the same coupon and maturity count once, keep the non-144A CUSIP when present). Choose up to four by maturity then CUSIP. Missing metadata excludes. Convertible notes are excluded from every spread calculation because their prices embed equity optionality; issuers with fewer than two eligible straight bonds are NOT_EVALUABLE for issuer credit and remain in price, funding and broad-credit arms.",
+    "callable_treatment": "Callable straight bonds are retained. Their spread is a G-spread, not option-adjusted. A sensitivity restricted to isCallable N bonds is reported where it leaves at least two bonds."
+  },
+  "target": {
+    "primary": "Equity stress episode onset: first session whose adjusted close is at least 20% below the maximum adjusted close of the preceding 60 sessions including itself. The episode ends at the first later close at or above 90% of that reference peak, or after 60 sessions. A new onset requires the previous episode to have ended. Episodes are nonoverlapping by construction.",
+    "secondary": "Idiosyncratic episode: the same construction applied to the issuer's cumulative return relative to SPY (price ratio), threshold 20%.",
+    "warning_window_sessions": [1, 20],
+    "same_day": "An alarm dated on the onset session is a same-day reaction, reported separately and never counted as an advance warning.",
+    "in_episode": "Alarms dated inside an active episode are reported separately and are neither hits nor false alarms."
+  },
+  "signal_timing": {
+    "price": "Adjusted close of session t; alarm date t.",
+    "trace": "FINRA end-of-day last sale for trade date t is published after the close; alarm date is session t+1.",
+    "treasury": "Treasury constant-maturity yields for date t pair with TRACE date t.",
+    "broad_credit": "ICE BofA index values for date t are published the next business day; alarm date is session t+1.",
+    "filings": "SEC acceptanceDateTime converted to America/New_York; alarm date is the first session whose 16:00 close is strictly after acceptance. If acceptance times are unavailable, the following-midnight convention applies and is labelled."
+  },
+  "signals": {
+    "P1_price_daily_drop": "Daily adjusted close return <= -5% (earlier frozen rule).",
+    "P2_price_drawdown": "First session with drawdown >= 10% from the 60-session maximum close; re-arms only after drawdown recovers above -5%.",
+    "B1_broad_hy_oas": "ICE BofA US High Yield OAS (FRED BAMLH0A0HYM2): each of the latest 3 observations >= median of the preceding 20 observations + 100 bp. Market-wide; same date for every issuer.",
+    "B2_broad_baa": "Moody's Baa minus 10-year Treasury (FRED BAA10Y): latest 3 observations >= median of preceding 20 + 50 bp. Longer history; yield spread, not OAS.",
+    "I0_issuer_raw_yield": "Earlier frozen rule: per bond, latest 3 last-sale yields >= median of preceding 20 + 100 bp, no gap > 4 calendar days; issuer warning when >= 2 distinct eligible bonds warn on the same trade date.",
+    "I1_issuer_gspread": "Same structure as I0 applied to G-spread = last-sale yield minus Treasury CMT yield linearly interpolated at remaining maturity (DGS1, DGS2, DGS3, DGS5, DGS7, DGS10, DGS20, DGS30). Not OAS.",
+    "I2_issuer_excess": "I1 and, on the same date, the issuer's median bond G-spread widening exceeds the B1 index widening over the same 20-observation baseline by >= 50 bp.",
+    "F1_funding_watch": "A 10-Q/10-K whose trailing-twelve-month cash capex exceeds trailing-twelve-month operating cash flow while debt is positive. Alarm on each such filing.",
+    "F2_funding_gap": "F1 and unrestricted cash and equivalents < (debt due within 12 months where reported, else 0) + |TTM capex - TTM OCF|. Restricted cash, undrawn facilities and announced but unclosed financings are never counted as cash. Alarm on each such filing.",
+    "E1_price_plus_issuer": "Union of P2 and I1 (detection incremental test).",
+    "E2_price_filtered_by_issuer": "P2 alarms on dates when I1 was active within the preceding 20 sessions or F2 is the latest filing state (filtering incremental test)."
+  },
+  "alarm_dedup": "For each signal, an alarm onset is the first alarm date after at least 20 sessions without an alarm of that signal. Persistence is the mean run length of consecutive alarm sessions.",
+  "evaluation": {
+    "common_sample": "Issuer-sessions where P2, B1, I1 and F1 are all evaluable: 60 prior equity sessions, B1 history, I1 state not UNKNOWN (>= 2 known bonds), and a filing accepted within the preceding 200 calendar days. Every comparison is reported on this identical sample; own-coverage results are secondary.",
+    "metrics": ["coverage", "alarm onsets", "advance hits (episode onset 1-20 sessions later)", "false alarms", "same-day and in-episode alarms", "episodes", "recall (episodes with an alarm 1-20 sessions earlier)", "median lead sessions", "false alarms per 250 issuer-sessions", "persistence"],
+    "base_rate": "Share of common-sample sessions outside an episode that are followed by an onset within 1-20 sessions.",
+    "dependence": "Within-issuer circular-shift permutation (2,000 draws, shift >= 40 sessions, fixed seed 20261018) for precision versus chance; issuer-cluster bootstrap (2,000 draws, seed 20261018) for differences between signals. Alarms are deduplicated before testing.",
+    "success_criteria": "Issuer information is useful only if, on the holdout common sample, at least one of: (a) I1 or E2 precision exceeds P2 precision by >= 10 percentage points with the issuer-cluster bootstrap 90% interval for the difference above zero and permutation p < 0.05 against chance; (b) E1 warns at least 2 more episodes than P2 with no more false alarms per added warned episode than P2 has per hit. Fewer than 5 issuer-credit alarm onsets in the holdout common sample gives INCONCLUSIVE_LOW_POWER. Funding signals are judged by the same criteria with F2 in place of I1."
+  },
+  "prohibitions": [
+    "No threshold, horizon or universe change after outcomes",
+    "No last-sale yield or G-spread labelled as OAS",
+    "No pooling of separate legal issuers to reach a bond quorum",
+    "No missing data treated as a safe or no-warning state",
+    "No facility commitment or restricted cash treated as unrestricted cash",
+    "No synthetic or interpolated bond observations",
+    "No purchased data or paid services",
+    "No change to frozen portfolio baselines, earlier snapshots, protocols or the prospective paper journal",
+    "No dropping adverse outcomes"
+  ]
+}

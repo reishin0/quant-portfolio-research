@@ -136,6 +136,7 @@ print('Original qualified issuer OAS gate:',strict)
 print('Frozen baseline:',verify_review_snapshot()['status'])
 ''')
     append_comparison(nb)
+    append_early_warning(nb)
     return nb
 
 
@@ -234,6 +235,108 @@ Reproduce offline with `python run_issuer_credit_replay.py --publish`. Source UR
 ''')
 
 
+def append_early_warning(nb):
+    """Broader early-warning study (early_warning_20261018), executed from saved evidence."""
+    def md(s): nb.cells.append(nbformat.v4.new_markdown_cell(s))
+    def code(s): nb.cells.append(nbformat.v4.new_code_cell(s))
+    manifest_sha=hashlib.sha256((ROOT/'data/early_warning_20261018/manifest.json').read_bytes()).hexdigest()
+    doc=(ROOT/'research/credit_funding/EARLY_WARNING_20261018.md').read_text(encoding='utf-8')
+    intro,closing=doc.split('<!-- notebook-intro-end -->')
+    md(intro)
+    md("""### Audit of the six-issuer result
+
+The earlier study reported a 10% interim loss within 20 sessions after four of six funding watches. The cell below asks how often that would happen with no information at all, using each issuer's own ordinary-day rate from the same table. The ordinary-day windows overlap, so this is an approximate benchmark, not an exact null.""")
+    code("""from itertools import product
+c20=study['comparison'].loc[study['comparison'].horizon.eq(20)&study['comparison'].arm.eq('all_equity_days')].set_index('issuer')
+rates=(c20.loss_hits/c20.complete).reindex(['APLD','IREN','NBIS','CORZ','ORCL','EQIX'])
+display(rates.rename('ordinary-day 20-session loss rate').to_frame())
+p_ge4=sum(np.prod([r if h else 1-r for r,h in zip(rates,hits)]) for hits in product([0,1],repeat=6) if sum(hits)>=4)
+print(f'Probability of at least 4 of 6 hits from ordinary-day rates alone: {p_ge4:.2f}')
+""")
+    md("""Other audit findings. The earlier study stays as published; these points qualify how it is read:
+
+- **Selection.** The six issuers were picked after a visible AI-infrastructure sell-off, with their financing structures already inspected. That makes them development evidence, not a test.
+- **The funding flag is close to a constant.** All six first disclosures were flagged. A flag that fires for every capital-intensive issuer describes the sector; it cannot time anything.
+- **Overlapping windows.** The ordinary-day comparison uses 179 overlapping 20-session windows per issuer, which overstates how much independent evidence there is.
+- **Raw yields mix rates and credit.** The 100 bp raw-yield rule responds to Treasury moves as well as issuer credit. The new study adds a G-spread version.
+- **No calculation error was found.** Censoring, the next-day eligibility rule and the same-day exclusion behave as documented.
+""")
+    code(f"""import json
+from research.credit_funding import early_warning as ew
+EW_MANIFEST_SHA={manifest_sha!r}
+ew_inputs=ew.load(ROOT,EW_MANIFEST_SHA)
+print('Evidence pinned at',ew_inputs['manifest']['created_at'],'| protocol',ew_inputs['manifest']['protocol_sha256'][:12])
+display(pd.DataFrame([dict(issuer=k,status=v['status'],legal_issuer=v.get('legal_issuer'),bonds=len(v['bonds']),
+    callable=sum(x=='Y' for x in v.get('callable',{{}}).values()),convertibles_excluded=len(v.get('convertible_cusips',[])))
+    for k,v in ew_inputs['selection'].items()]))
+print('Equity exclusions:',json.dumps(ew_inputs['quality']['reasons'],indent=1))
+""")
+    md("""### Development (2022-2023) and holdout (2024 to 16 October 2026)
+
+Both phases are recomputed here from the saved evidence and checked against their dated receipts. The holdout receipt was written once, after the development receipt, and neither phase changed a parameter. Permutation and bootstrap results are read from the receipts because they are slow to recompute.
+
+The declared primary sample needs the funding signal, which is not available, so it is empty. The table that matters is `common_no_funding`: the identical issuer-sessions on which the price, broad-credit and issuer-credit signals are all evaluable. In development it is almost empty because the ICE high-yield series on FRED starts in October 2023.""")
+    code("""cols=['signal','issuer_sessions','alarm_onsets','hits','false_alarms','same_day','in_episode','censored',
+      'precision_pct','episodes','warned','recall_pct','median_lead_sessions','false_per_250','persistence_sessions','base_rate_pct']
+phase_tables={}
+for phase in ['development','holdout']:
+    receipt=json.loads((ROOT/f'research/credit_funding/early_warning_{phase}_receipt_20261018.json').read_text(encoding='utf-8'))
+    got=ew.run_phase(ew_inputs,phase)
+    saved=pd.DataFrame(receipt['results'])
+    fresh=got['results'][saved.columns].reset_index(drop=True)
+    pd.testing.assert_frame_equal(fresh.astype(float,errors='ignore').round(9),saved.astype(float,errors='ignore').round(9),check_dtype=False)
+    phase_tables[phase]=dict(results=got['results'],dependence=pd.DataFrame(receipt['dependence_tests']),
+        relative=pd.DataFrame(receipt['relative_results']),executed=receipt['executed_at'])
+    print(phase,receipt['period'],'receipt',receipt['executed_at'],'reproduced exactly')
+for phase in ['development','holdout']:
+    r=phase_tables[phase]['results']
+    for sample in ['common_no_funding','own_price']:
+        print(f'{phase} | {sample}')
+        display(r.loc[r['sample'].eq(sample),cols].round(2))
+""")
+    md("""**Reading the tables.** A *hit* is an alarm followed by a new stress episode 1 to 20 sessions later. *Same-day* alarms fire on the onset session and *in-episode* alarms fire while a drop is already under way; neither counts as a warning. *Base rate* is the share of ordinary eligible sessions followed by an onset within 20 sessions, so a signal is informative only if its precision clearly beats it.""")
+    code("""h=phase_tables['holdout']
+dep=h['dependence']
+display(dep.loc[dep['sample'].eq('common_no_funding')].dropna(axis=1,how='all'))
+print(json.dumps(ew.verdict(h['results'],dep,'common_no_funding'),indent=1,default=str))
+rel=h['relative']
+print('Secondary target: drawdown relative to SPY')
+display(rel.loc[rel['sample'].eq('common_no_funding'),['signal','alarm_onsets','hits','false_alarms','same_day','in_episode','precision_pct','episodes','warned','recall_pct','base_rate_pct']].round(2))
+""")
+    md("""### How close did issuer spreads come to the rule?
+
+With zero issuer alarms there is nothing to score, so the useful question is whether the rule was nearly reached and when. For each issuer the cell shows the largest holdout widening of the second-widest bond on any day, which is what the two-bond quorum needs to exceed 100 bp. This is descriptive and changes no rule.""")
+    code("""_,_,ew_diag=ew.build_panel(ew_inputs)
+rows=[]
+for s,(d0,d1) in ew_diag.items():
+    d=d1[(d1.date>='2024-01-02')&d1.state.ne('UNKNOWN')]
+    q=d.groupby('date').minimum_widening_bp.apply(lambda x: x.nlargest(2).iloc[-1] if len(x)>=2 else np.nan) if len(d) else pd.Series(dtype=float)
+    rows.append(dict(issuer=s,known_bond_days=len(d),widest_bond_bp=d.minimum_widening_bp.max() if len(d) else np.nan,
+        second_bond_bp=q.max() if q.notna().any() else np.nan,date=q.idxmax() if q.notna().any() else None))
+near=pd.DataFrame(rows).sort_values('second_bond_bp',ascending=False)
+display(near.round(1))
+""")
+    code("""import matplotlib.pyplot as plt
+r=h['results'].loc[h['results']['sample'].eq('common_no_funding')].set_index('signal')
+show=['P1','P2','B1','I0','I1']
+fig,axes=plt.subplots(1,2,figsize=(13,4.2))
+ax=axes[0]
+ax.bar(show,r.loc[show,'precision_pct'].fillna(0),color=['#4c72b0','#4c72b0','#dd8452','#55a868','#55a868'])
+ax.axhline(r.base_rate_pct.iloc[0],color='k',ls='--',lw=1,label='base rate')
+for i,s in enumerate(show):
+    v=r.loc[s,'precision_pct']
+    ax.text(i,(v if np.isfinite(v) else 0)+0.6,f"{int(r.loc[s,'alarm_onsets'])} alarms",ha='center',fontsize=8)
+ax.set_ylabel('Precision (%)');ax.set_title('Holdout: advance-warning precision, identical sessions');ax.legend()
+ax=axes[1]
+r.loc[show,['hits','false_alarms','same_day','in_episode']].plot(kind='bar',stacked=True,ax=ax,
+    color=['#55a868','#c44e52','#8172b2','#ccb974'])
+ax.set_title('Holdout: what each signal fired on');ax.set_ylabel('Alarm onsets');ax.set_xlabel('')
+plt.tight_layout();plt.show()
+""")
+    md(closing)
+    code("print('Frozen baseline verification:',verify_review_snapshot()['status'])")
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--case',default=DEFAULT_CASE,help='Repository-relative case JSON')
@@ -244,7 +347,7 @@ def main():
     stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S_%fZ')
     out=ROOT/'outputs'/('issuer_credit_'+case['case_id']+'_'+stamp);out.mkdir(parents=True)
     nb=build_notebook(args.case)
-    NotebookClient(nb,timeout=180,kernel_name='portfolio-research',resources={'metadata':{'path':str(ROOT)}}).execute()
+    NotebookClient(nb,timeout=1200,kernel_name='portfolio-research',resources={'metadata':{'path':str(ROOT)}}).execute()
     verify_review_snapshot()
     nbformat.write(nb,out/NOTEBOOK)
     html,_=HTMLExporter().from_notebook_node(nb)
@@ -253,6 +356,8 @@ def main():
     receipt=dict(executed_at=datetime.now(timezone.utc).isoformat(),case=case['case_id'],
                  case_sha256=hashlib.sha256(inside(ROOT,args.case).read_bytes()).hexdigest(),
                  comparison_manifest_sha256=hashlib.sha256((ROOT/STUDY_DATA/'manifest.json').read_bytes()).hexdigest(),
+                 early_warning_manifest_sha256=hashlib.sha256((ROOT/'data/early_warning_20261018/manifest.json').read_bytes()).hexdigest(),
+                 early_warning_module_sha256=hashlib.sha256((ROOT/'research/credit_funding/early_warning.py').read_bytes()).hexdigest(),
                  comparison_module_sha256=hashlib.sha256((ROOT/'research/credit_funding/issuer_comparison.py').read_bytes()).hexdigest(),
                  notebook_sha256=hashlib.sha256((out/NOTEBOOK).read_bytes()).hexdigest(),
                  code_cells=sum(c.cell_type=='code' for c in nb.cells),

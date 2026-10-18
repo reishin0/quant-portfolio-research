@@ -1,0 +1,41 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/bondSearch",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "bondType"
+    ],
+    "multiFieldMatchFilters": [
+      {
+        "searchValue": "ROYAL",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      },
+      {
+        "searchValue": "CARIBBEAN",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:11:40.788928+00:00",
+  "sha256": "5b70019dbcbb0713d23422b2d23cc71b7c3ab5606cdeed9ba3086bff2def63ca",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

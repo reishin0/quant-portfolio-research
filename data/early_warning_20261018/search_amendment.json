@@ -1,0 +1,13 @@
+{
+  "declared_at": "2026-10-18T11:12:13+00:00",
+  "reason": "The first FINRA search used full words; FINRA stores abbreviated issuer names, so five candidates returned no or only pass-through results. Supplemental abbreviated search terms are added before any bond history, spread, filing or equity outcome is retrieved. The universe is unchanged.",
+  "supplemental_terms": {
+    "CHTR": ["CCO HLDGS", "CHARTER COMMUNICATIONS OPER"],
+    "DLR": ["DIGITAL RLTY"],
+    "F": ["FORD MTR"],
+    "GM": ["GENERAL MTRS"],
+    "UAL": ["UNITED AIRLS"],
+    "PARA": ["CBS CORP", "VIACOMCBS"],
+    "PLUG": ["PLUG PWR"]
+  }
+}

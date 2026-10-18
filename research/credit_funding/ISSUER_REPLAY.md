@@ -80,3 +80,9 @@ primary-source financial facts, instrument exclusions, missing-data states and
 failed warnings. Five zero-price/missing-yield rows are made unavailable only in
 the new adapter; raw observations and the earlier issuer model are unchanged.
 No frozen portfolio notebook, input snapshot, protocol or journal was amended.
+
+## Broader early-warning test, 18 October 2026
+
+`research/credit_funding/EARLY_WARNING_20261018.md` describes a separately declared test on 38 new issuers. Its protocol is `early_warning_protocol_20261018.json`, and its pinned evidence is in `data/early_warning_20261018/`. Run the development phase, then the holdout, with `python run_early_warning.py --phase development|holdout`. Each phase writes a one-time receipt and refuses to rerun. `python run_issuer_credit_replay.py --publish` reproduces both phases in the generic notebook from the saved evidence. Network acquisition is separate, in `python -m research.credit_funding.acquire_early_warning <stage>`.
+
+Holdout result: the frozen two-bond spread rule never fired in 2024-26 (INCONCLUSIVE_LOW_POWER). Broad high-yield stress arrived with equity stress, not before it. Price-only signals beat the base rate. The funding arm is not evaluated: SEC filings need an authorised contact header.

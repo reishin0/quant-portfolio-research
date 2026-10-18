@@ -1,0 +1,41 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/bondSearch",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "bondType"
+    ],
+    "multiFieldMatchFilters": [
+      {
+        "searchValue": "UNITED",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      },
+      {
+        "searchValue": "AIRLS",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:12:21.957198+00:00",
+  "sha256": "64e6019ffa4c5a9b94258b2d2f1500924e1be422868e34f5c16301fa8dd2701d",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

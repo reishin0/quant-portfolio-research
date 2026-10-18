@@ -1,0 +1,41 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/bondSearch",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "bondType"
+    ],
+    "multiFieldMatchFilters": [
+      {
+        "searchValue": "CLEVELAND",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      },
+      {
+        "searchValue": "CLIFFS",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:11:50.259961+00:00",
+  "sha256": "d5bcc1aa568fa7424734920d7b5e8dd864fdeaadb58b5bdf4cc3dfdd0f0045b5",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

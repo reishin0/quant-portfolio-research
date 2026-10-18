@@ -1,0 +1,30 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/bondSearch",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "bondType"
+    ],
+    "multiFieldMatchFilters": [
+      {
+        "searchValue": "WARNERMEDIA",
+        "fuzzy": false,
+        "synonym": false,
+        "fields": [
+          {
+            "name": "issuerName",
+            "boost": 1
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:11:15.557801+00:00",
+  "sha256": "29e8981a3f12fe38337c30db5350fccbb21d970cbe058c1d85a3e8719525f80b",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

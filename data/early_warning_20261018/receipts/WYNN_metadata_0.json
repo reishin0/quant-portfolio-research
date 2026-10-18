@@ -1,0 +1,63 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/corporateAndAgencySecurities",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "couponRate",
+      "maturityDate",
+      "isCallable",
+      "isConvertible",
+      "is144A",
+      "couponType",
+      "productSubTypeCode"
+    ],
+    "domainFilters": [
+      {
+        "fieldName": "cusip",
+        "values": [
+          "983130AL9",
+          "983130AU9",
+          "983130AV7",
+          "983130AX3",
+          "983133AA7",
+          "983133AB5",
+          "983133AC3",
+          "983133AD1",
+          "983133AE9",
+          "98313RAC0",
+          "98313RAD8",
+          "98313RAE6",
+          "98313RAG1",
+          "98313RAH9",
+          "98313RAJ5",
+          "98313RAK2",
+          "98313RAL0",
+          "983196AA4",
+          "983197AA2",
+          "G98149AD2",
+          "G98149AE0",
+          "G98149AH3",
+          "G98149AK6",
+          "G98149AL4",
+          "G98149AM2",
+          "U98347AL8",
+          "U98354AA8",
+          "U98354AC4",
+          "U98354AD2",
+          "U98354AE0",
+          "U98354AF7",
+          "Y9673DAC5",
+          "Y9673DAD3"
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:13:10.608149+00:00",
+  "sha256": "6f57174efb16a9a5974fc513e80ccebfd3751767f69da7f5996f7e918bbe5cef",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

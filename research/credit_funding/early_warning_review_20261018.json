@@ -1,0 +1,52 @@
+{
+  "reviewed_at": "2026-10-18T11:59:29.857536+00:00",
+  "study": "early_warning_20261018",
+  "scope": "Retrospective research only; no portfolio, protocol or prospective-journal modification",
+  "verdict": {
+    "primary": "INCONCLUSIVE_LOW_POWER",
+    "reason": "I1 issuer G-spread rule had 0 alarm onsets on 10,804 holdout common_no_funding issuer-sessions",
+    "funding_arm": "NOT_EVALUATED_SEC_CONTACT_NOT_AUTHORISED",
+    "declared_primary_sample": "EMPTY_WITHOUT_FUNDING"
+  },
+  "tests": {
+    "total": 209,
+    "passed": 208,
+    "skipped": 1,
+    "new_early_warning_tests": 14,
+    "pip_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "notebook": {
+    "status": "EXECUTED_WITHOUT_CELL_ERRORS",
+    "receipts_reproduced": [
+      "development",
+      "holdout"
+    ]
+  },
+  "independent_review": {
+    "outcome": "NO_BLOCKING_ISSUE",
+    "nonblocking_findings_disclosed_in": "research/credit_funding/EARLY_WARNING_20261018.md"
+  },
+  "baselines": {
+    "status": "VERIFIED_DATED_SNAPSHOT",
+    "baseline_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+    "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+    "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+    "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66"
+  },
+  "file_sha256": {
+    "research/credit_funding/early_warning_protocol_20261018.json": "5c7cbf15051673e1ad630bb61263a990b37a9c600251defe46905bad2b18564a",
+    "research/credit_funding/early_warning.py": "1442478b51396eda7237f515eb4f3b6df34682ccf1dee1c2c0ec2d3994078ff5",
+    "research/credit_funding/early_warning_filings.py": "0ebe4883da22081c604ec4f9b17d12a898c1ace30c14e5c77c299d58c2625e5e",
+    "research/credit_funding/early_warning_select.py": "a20d9805c4b8238e35962dc6eeecaabb5f48e7a465f62756cfd98e25ef62677d",
+    "research/credit_funding/acquire_early_warning.py": "4dc82e9231f08d883f1aa6dc375f693a729842c1cfe9e3deba4aeb68f686a365",
+    "run_early_warning.py": "1931e112095ba55f08ee5d5c6249dcd144a0ecf36dd785f89ff4e5c00c4c8668",
+    "run_issuer_credit_replay.py": "cd8fdb71569c682e8fb00562a40950a8defa772b9d15c47839c6ebcf4610be62",
+    "research/credit_funding/early_warning_development_receipt_20261018.json": "1f520835e8c59358b40c2b154c65e2d2860f2de554628aca62ed0cb52a820ca4",
+    "research/credit_funding/early_warning_holdout_receipt_20261018.json": "6623b3c8032a5f09917e71e2bb9a7a184a512262f1652aecb4f249f3cb454c0d",
+    "research/credit_funding/EARLY_WARNING_20261018.md": "a8a411c6e9163e72725af23c946dc1ad35c0faa307a890c0c288fce0bf38132d",
+    "tests/test_early_warning.py": "679d45279c7dc90e3071ca79ed14610d565a409e3d6020f2fd4e6d3e9757a6dd",
+    "issuer_credit_funding_research.ipynb": "86cef2ecad518b44c3a7859ede89737c2ecb770e075dc3f01a6f47437ba648d8",
+    "data/early_warning_20261018/manifest.json": "1553ccb6ec68324b10306e3a6eb9a28dda4afcb08689cddeb5f157c53a53cf78"
+  }
+}

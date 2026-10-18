@@ -1,0 +1,74 @@
+[
+  {
+    "isCallable": "Y",
+    "cusip": "76954LAA7",
+    "is144A": "Y",
+    "couponRate": 10.15126,
+    "issueSymbolIdentifier": "RIVN5333992",
+    "issuerName": "RIVIAN HLDGS LLC / RIVIAN LLC / RIVIAN AUTOMOTIVE LLC",
+    "maturityDate": "2026-10-15",
+    "couponType": "FRSU",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "U7667LAA7",
+    "is144A": "N",
+    "couponRate": null,
+    "issueSymbolIdentifier": "RIVN5361221",
+    "issuerName": "RIVIAN HLDGS LLC / RIVIAN LLC / RIVIAN AUTOMOTIVE LLC",
+    "maturityDate": "2026-10-08",
+    "couponType": "FROT",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "76954AAB9",
+    "is144A": "N",
+    "couponRate": 4.625,
+    "issueSymbolIdentifier": "RIVN5776027",
+    "issuerName": "RIVIAN AUTOMOTIVE INC",
+    "maturityDate": "2029-03-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "76954AAD5",
+    "is144A": "N",
+    "couponRate": 3.625,
+    "issueSymbolIdentifier": "RIVN5919556",
+    "issuerName": "RIVIAN AUTOMOTIVE INC",
+    "maturityDate": "2030-10-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "U7667LAB5",
+    "is144A": "Y",
+    "couponRate": 10,
+    "issueSymbolIdentifier": "RIVN6093517",
+    "issuerName": "RIVIAN HLDGS LLC / RIVIAN LLC / RIVIAN AUTOMOTIVE LLC",
+    "maturityDate": "2031-01-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "76954LAD1",
+    "is144A": "Y",
+    "couponRate": 10,
+    "issueSymbolIdentifier": "RIVN6093518",
+    "issuerName": "RIVIAN HLDGS LLC / RIVIAN LLC / RIVIAN AUTOMOTIVE LLC",
+    "maturityDate": "2031-01-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  }
+]

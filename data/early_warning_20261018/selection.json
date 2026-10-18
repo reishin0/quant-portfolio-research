@@ -1,0 +1,811 @@
+{
+  "selected_at": "2026-10-18T11:14:21.653304+00:00",
+  "protocol_sha256": "5c7cbf15051673e1ad630bb61263a990b37a9c600251defe46905bad2b18564a",
+  "excluded_name_parts": [
+    "KEYBANK",
+    "PARAMOUNT BANCORP",
+    "PARAMOUNT BAPTIST",
+    "PARAMOUNT RES",
+    "SWEDISH EXPT",
+    "KADISH",
+    "INTELSAT",
+    "INTELLIGENT PACKAGING",
+    "HAWAIIAN BRAND",
+    "INTERACTIVE INTELLIGENCE",
+    "MILEAGE PLUS",
+    "OCCIDENTAL COLLEGE",
+    "CANADIAN OCCIDENTAL",
+    "PEAPACK",
+    "HF SINCLAIR",
+    "WIWYNN",
+    "WYNNTON",
+    "AST SPACEMOBILE",
+    "FIAT CHRYSLER",
+    "STRATS TR",
+    "PASS THRU",
+    "PASS THROUGH",
+    "ESCROW",
+    "INTERNOTES",
+    "MEDIUM TERM",
+    "MED TERM",
+    "CBS OUTDOOR"
+  ],
+  "foreign_candidate": {
+    "AES": [
+      "CAESARS"
+    ]
+  },
+  "amendment_before_outcomes": "Retail note programs (Internotes, medium-term note books) and pass-through/equipment trusts are excluded as separately documented or collateralized programs; escrow issuers excluded. Ties on bond count break alphabetically by issuerName. Selection v2 replaces v1 (retained as selection_superseded_v1.json) because v1 preferred Reg S CINS twins, which rarely print in TRACE; the twin preference is registered, then 144A, then Reg S. Currency is not a FINRA metadata field: TRACE corporate prices are treated as USD issues and this remains an unverified assumption.",
+  "selection": {
+    "CHTR": {
+      "legal_issuer": "CHARTER COMMUNICATIONS OPER LLC / CHARTER COMMUNICATIONS OPER CAP CORP",
+      "bonds": [
+        "161175BF0",
+        "161175BH6",
+        "161175CD4",
+        "161175BR4"
+      ],
+      "callable": {
+        "161175BF0": "Y",
+        "161175BH6": "Y",
+        "161175CD4": "Y",
+        "161175BR4": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "CCO HLDGS LLC / CCO HLDGS CAP CORP": 13
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "LUMN": {
+      "legal_issuer": "LEVEL 3 FING INC",
+      "bonds": [
+        "527298BR3",
+        "527298BS1",
+        "527298BY8",
+        "527298CB7"
+      ],
+      "callable": {
+        "527298BR3": "Y",
+        "527298BS1": "Y",
+        "527298BY8": "Y",
+        "527298CB7": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "SATS": {
+      "legal_issuer": "DISH DBS CORP",
+      "bonds": [
+        "25470XBB0",
+        "25470XBF1",
+        "25470XBD6"
+      ],
+      "callable": {
+        "25470XBB0": "Y",
+        "25470XBF1": "Y",
+        "25470XBD6": "N"
+      },
+      "convertible_cusips": [
+        "25470MAB5",
+        "25470MAD1",
+        "25470MAF6"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "T": {
+      "legal_issuer": "AT&T INC",
+      "bonds": [
+        "00206RGN6",
+        "00206RHX3",
+        "00206RKG6",
+        "00206RGL0"
+      ],
+      "callable": {
+        "00206RGN6": "N",
+        "00206RHX3": "N",
+        "00206RKG6": "Y",
+        "00206RGL0": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "AT&T CORP": 2,
+        "AT&T WIRELESS SVCS INC": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "VZ": {
+      "legal_issuer": "VERIZON COMMUNICATIONS INC",
+      "bonds": [
+        "92343VHQ0",
+        "92343VGH1",
+        "92343VER1",
+        "92343VES9"
+      ],
+      "callable": {
+        "92343VHQ0": "N",
+        "92343VGH1": "Y",
+        "92343VER1": "N",
+        "92343VES9": "Y"
+      },
+      "convertible_cusips": [
+        "U9221ACH9"
+      ],
+      "other_eligible_names": {
+        "VERIZON GLOBAL FDG CORP": 3,
+        "VERIZON MD INC": 1,
+        "VERIZON NEW YORK INC": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "TMUS": {
+      "legal_issuer": "T-MOBILE USA INC",
+      "bonds": [
+        "87264AAV7",
+        "87264ACA1",
+        "87264ACZ6",
+        "87264ADA0"
+      ],
+      "callable": {
+        "87264AAV7": "Y",
+        "87264ACA1": "Y",
+        "87264ACZ6": "Y",
+        "87264ADA0": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "WBD": {
+      "legal_issuer": "WARNERMEDIA HLDGS INC",
+      "bonds": [
+        "55903VBY8",
+        "55903VBC6"
+      ],
+      "callable": {
+        "55903VBY8": "Y",
+        "55903VBC6": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "PARA": {
+      "legal_issuer": "PARAMOUNT SKYDANCE CORP",
+      "bonds": [
+        "U7010QAR3",
+        "U7010QAJ1",
+        "U7010QAA0",
+        "U7010QAS1"
+      ],
+      "callable": {
+        "U7010QAR3": "N",
+        "U7010QAJ1": "Y",
+        "U7010QAA0": "Y",
+        "U7010QAS1": "N"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "CBS CORP NEW": 3,
+        "VIACOMCBS INC": 2
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "AMT": {
+      "legal_issuer": "AMERICAN TOWER CORP NEW",
+      "bonds": [
+        "03027XAR1",
+        "03027XBJ8",
+        "03027XBY5",
+        "03027XCC2"
+      ],
+      "callable": {
+        "03027XAR1": "Y",
+        "03027XBJ8": "Y",
+        "03027XBY5": "Y",
+        "03027XCC2": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "CCI": {
+      "legal_issuer": "CROWN CASTLE INTL CORP NEW",
+      "bonds": [
+        "22822VBA8",
+        "22822VAK7",
+        "22822VBB6",
+        "22822VAL5"
+      ],
+      "callable": {
+        "22822VBA8": "Y",
+        "22822VAK7": "Y",
+        "22822VBB6": "Y",
+        "22822VAL5": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "CROWN CASTLE TOWERS LLC / CROWN CASTLE SOUTH LLC / CROWN COMMUNICATIONS LLC  ETC": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "SBAC": {
+      "legal_issuer": "SBA COMMUNICATIONS CORP NEW",
+      "bonds": [
+        "78410GAG9",
+        "78410GAH7",
+        "78410GAJ3",
+        "78410GAK0"
+      ],
+      "callable": {
+        "78410GAG9": "Y",
+        "78410GAH7": "N",
+        "78410GAJ3": "Y",
+        "78410GAK0": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "SBA COMMUNICATIONS CORPORATION": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "DLR": {
+      "legal_issuer": "DIGITAL RLTY TR LP",
+      "bonds": [
+        "25389JAV8",
+        "25389JAT3",
+        "25389JAU0"
+      ],
+      "callable": {
+        "25389JAV8": "Y",
+        "25389JAT3": "Y",
+        "25389JAU0": "Y"
+      },
+      "convertible_cusips": [
+        "25389JAA4",
+        "25389JAX4"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "INTC": {
+      "legal_issuer": "INTEL CORP",
+      "bonds": [
+        "458140CE8",
+        "458140BT6",
+        "458140BZ2",
+        "458140BH2"
+      ],
+      "callable": {
+        "458140CE8": "Y",
+        "458140BT6": "Y",
+        "458140BZ2": "Y",
+        "458140BH2": "Y"
+      },
+      "convertible_cusips": [
+        "458140AF7"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "MU": {
+      "legal_issuer": "MICRON TECHNOLOGY INC",
+      "bonds": [
+        "595112CA9",
+        "595112BN2",
+        "595112BV4",
+        "595112BQ5"
+      ],
+      "callable": {
+        "595112CA9": "Y",
+        "595112BN2": "Y",
+        "595112BV4": "Y",
+        "595112BQ5": "Y"
+      },
+      "convertible_cusips": [
+        "595112AP8",
+        "595112AT0",
+        "595112AV5",
+        "595112AX1",
+        "595112AY9"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "WDC": {
+      "legal_issuer": "WESTERN DIGITAL CORP",
+      "bonds": [
+        "958102AQ8",
+        "958102AR6"
+      ],
+      "callable": {
+        "958102AQ8": "Y",
+        "958102AR6": "Y"
+      },
+      "convertible_cusips": [
+        "958102AP0",
+        "958102AS4",
+        "958102AT2"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "STX": {
+      "legal_issuer": "SEAGATE DATA STORAGE TECHNOLOGY PTE LTD",
+      "bonds": [
+        "81180LAU9",
+        "81180LAV7",
+        "81180LAM7",
+        "81180LAT2"
+      ],
+      "callable": {
+        "81180LAU9": "Y",
+        "81180LAV7": "Y",
+        "81180LAM7": "Y",
+        "81180LAT2": "Y"
+      },
+      "convertible_cusips": [
+        "81180WBL4"
+      ],
+      "other_eligible_names": {
+        "SEAGATE HDD CAYMAN": 9
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "AMZN": {
+      "legal_issuer": "AMAZON COM INC",
+      "bonds": [
+        "023135DB9",
+        "023135BY1",
+        "023135CS3",
+        "023135DC7"
+      ],
+      "callable": {
+        "023135DB9": "N",
+        "023135BY1": "Y",
+        "023135CS3": "Y",
+        "023135DC7": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "META": {
+      "legal_issuer": "META PLATFORMS INC",
+      "bonds": [
+        "30303M8L9",
+        "30303M8S4",
+        "30303M8M7",
+        "30303MAB8"
+      ],
+      "callable": {
+        "30303M8L9": "Y",
+        "30303M8S4": "Y",
+        "30303M8M7": "Y",
+        "30303MAB8": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "OXY": {
+      "legal_issuer": "OCCIDENTAL PETE CORP",
+      "bonds": [
+        "674599DS1",
+        "674599BM6",
+        "674599DR3",
+        "674599EC5"
+      ],
+      "callable": {
+        "674599DS1": "N",
+        "674599BM6": "N",
+        "674599DR3": "N",
+        "674599EC5": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "APA": {
+      "legal_issuer": "APA CORP",
+      "bonds": [
+        "03743QAX6",
+        "U0379QAD4",
+        "03743QAY4",
+        "03743QAZ1"
+      ],
+      "callable": {
+        "03743QAX6": "Y",
+        "U0379QAD4": "Y",
+        "03743QAY4": "N",
+        "03743QAZ1": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "APACHE CORP": 2,
+        "APACHE FIN CDA CORP": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "DVN": {
+      "legal_issuer": "DEVON ENERGY CORP",
+      "bonds": [
+        "U0856AAD1",
+        "U0856AAG4",
+        "U0856AAE9",
+        "251799AA0"
+      ],
+      "callable": {
+        "U0856AAD1": "N",
+        "U0856AAG4": "N",
+        "U0856AAE9": "N",
+        "251799AA0": "N"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "DEVON ENERGY CORP NEW": 6,
+        "DEVON FING CORP U L C": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "EQT": {
+      "legal_issuer": "EQT CORP",
+      "bonds": [
+        "26884LAQ2",
+        "26884LAV1",
+        "26884LAL3",
+        "26884LAX7"
+      ],
+      "callable": {
+        "26884LAQ2": "Y",
+        "26884LAV1": "Y",
+        "26884LAL3": "Y",
+        "26884LAX7": "Y"
+      },
+      "convertible_cusips": [
+        "26884LAK5"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "AAL": {
+      "legal_issuer": "AMERICAN AIRLINES INC",
+      "bonds": [
+        "U02413AH2",
+        "U02413AJ8"
+      ],
+      "callable": {
+        "U02413AH2": "Y",
+        "U02413AJ8": "N"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "UAL": {
+      "legal_issuer": "UNITED AIRLS HLDGS INC",
+      "bonds": [
+        "910047AM1",
+        "910047AL3"
+      ],
+      "callable": {
+        "910047AM1": "Y",
+        "910047AL3": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "UNITED AIRLS INC": 2
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "CCL": {
+      "legal_issuer": "CARNIVAL CORP",
+      "bonds": [
+        "143658AH5",
+        "143658BQ4",
+        "143658BR2",
+        "143658CB6"
+      ],
+      "callable": {
+        "143658AH5": "N",
+        "143658BQ4": "Y",
+        "143658BR2": "Y",
+        "143658CB6": "Y"
+      },
+      "convertible_cusips": [
+        "143658AM4",
+        "143658AN2",
+        "143658AQ5",
+        "143658AS1",
+        "143658AT9",
+        "143658AV4",
+        "143658BE1",
+        "143658BT8",
+        "143658BU5",
+        "143658BV3"
+      ],
+      "other_eligible_names": {
+        "CARNIVAL HLDGS BERMUDA LTD": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "RCL": {
+      "legal_issuer": "ROYAL CARIBBEAN CRUISES LTD",
+      "bonds": [
+        "780153AW2",
+        "780153BG6",
+        "780153BR2",
+        "780153BS0"
+      ],
+      "callable": {
+        "780153AW2": "Y",
+        "780153BG6": "Y",
+        "780153BR2": "Y",
+        "780153BS0": "Y"
+      },
+      "convertible_cusips": [
+        "780153BB7",
+        "780153BF8",
+        "780153BP6",
+        "780153BQ4"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "NCLH": {
+      "legal_issuer": "NCL CORP LTD",
+      "bonds": [
+        "62886HBL4",
+        "62886HBN0",
+        "62886HBG5",
+        "62886HBP5"
+      ],
+      "callable": {
+        "62886HBL4": "Y",
+        "62886HBN0": "Y",
+        "62886HBG5": "Y",
+        "62886HBP5": "Y"
+      },
+      "convertible_cusips": [
+        "62886HAT8",
+        "62886HAX9",
+        "62886HBD2",
+        "62886HBK6",
+        "62886HBT7",
+        "62886HBX8"
+      ],
+      "other_eligible_names": {
+        "NCL CORPORATION LIMITED": 7,
+        "NCL CORPORATION LTD": 1
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "F": {
+      "legal_issuer": "FORD MTR CR CO LLC",
+      "bonds": [
+        "345397B51",
+        "345397G72",
+        "345397C92",
+        "345397D59"
+      ],
+      "callable": {
+        "345397B51": "Y",
+        "345397G72": "Y",
+        "345397C92": "Y",
+        "345397D59": "Y"
+      },
+      "convertible_cusips": [
+        "345370CF5",
+        "345370CZ1"
+      ],
+      "other_eligible_names": {
+        "FORD MTR CO DEL": 9
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "GM": {
+      "legal_issuer": "GENERAL MTRS FINL CO INC",
+      "bonds": [
+        "37045XCG9",
+        "37045XEB8",
+        "37045XFE1",
+        "37045XDH6"
+      ],
+      "callable": {
+        "37045XCG9": "Y",
+        "37045XEB8": "Y",
+        "37045XFE1": "N",
+        "37045XDH6": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "GENERAL MTRS ACCEP CORP": 1,
+        "GENERAL MTRS CO": 8
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "MGM": {
+      "legal_issuer": "MGM RESORTS INTL",
+      "bonds": [
+        "552953CH2",
+        "552953CK5",
+        "552953CJ8"
+      ],
+      "callable": {
+        "552953CH2": "Y",
+        "552953CK5": "Y",
+        "552953CJ8": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "WYNN": {
+      "legal_issuer": "WYNN RESORTS FIN LLC / WYNN RESORTS CAP CORP",
+      "bonds": [
+        "983133AA7",
+        "983133AC3",
+        "983133AD1",
+        "983133AE9"
+      ],
+      "callable": {
+        "983133AA7": "Y",
+        "983133AC3": "Y",
+        "983133AD1": "Y",
+        "983133AE9": "Y"
+      },
+      "convertible_cusips": [
+        "98313RAJ5",
+        "98313RAK2",
+        "G98149AL4"
+      ],
+      "other_eligible_names": {
+        "WYNN MACAU LIMITED": 3,
+        "WYNN MACAU LTD": 3
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "CZR": {
+      "legal_issuer": "CAESARS ENTMT INC NEW",
+      "bonds": [
+        "12769GAA8",
+        "12769GAB6",
+        "12769GAC4",
+        "12769GAD2"
+      ],
+      "callable": {
+        "12769GAA8": "Y",
+        "12769GAB6": "Y",
+        "12769GAC4": "Y",
+        "12769GAD2": "Y"
+      },
+      "convertible_cusips": [
+        "127686AA1",
+        "127687AA9",
+        "127687AB7"
+      ],
+      "other_eligible_names": {},
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "AES": {
+      "legal_issuer": "AES CORP",
+      "bonds": [
+        "00130HCH6",
+        "00130HCN3",
+        "00130HCC7",
+        "00130HCG8"
+      ],
+      "callable": {
+        "00130HCH6": "Y",
+        "00130HCN3": "Y",
+        "00130HCC7": "Y",
+        "00130HCG8": "Y"
+      },
+      "convertible_cusips": [],
+      "other_eligible_names": {
+        "AES CORPORATION": 2
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "CLF": {
+      "legal_issuer": "CLEVELAND-CLIFFS INC",
+      "bonds": [
+        "U1852LAK3",
+        "U1852LAQ0",
+        "U1852LAM9",
+        "U1852LAL1"
+      ],
+      "callable": {
+        "U1852LAK3": "Y",
+        "U1852LAQ0": "Y",
+        "U1852LAM9": "N",
+        "U1852LAL1": "Y"
+      },
+      "convertible_cusips": [
+        "185899AA9"
+      ],
+      "other_eligible_names": {
+        "CLEVELAND-CLIFFS INC NEW": 7
+      },
+      "status": "ELIGIBLE_ISSUER_CREDIT",
+      "guarantee_collateral": "UNVERIFIED; FINRA metadata has no guarantor or collateral fields"
+    },
+    "RIVN": {
+      "legal_issuer": "RIVIAN HLDGS LLC / RIVIAN LLC / RIVIAN AUTOMOTIVE LLC",
+      "bonds": [
+        "76954LAD1"
+      ],
+      "convertible_cusips": [
+        "76954AAB9",
+        "76954AAD5"
+      ],
+      "status": "NOT_EVALUABLE_FEWER_THAN_TWO_STRAIGHT_BONDS"
+    },
+    "LCID": {
+      "legal_issuer": null,
+      "bonds": [],
+      "convertible_cusips": [
+        "549498AA1",
+        "549498AC7",
+        "549498AE3"
+      ],
+      "status": "NOT_EVALUABLE_FEWER_THAN_TWO_STRAIGHT_BONDS"
+    },
+    "PLUG": {
+      "legal_issuer": null,
+      "bonds": [],
+      "convertible_cusips": [
+        "72919PAA1",
+        "72919PAB9",
+        "72919PAD5",
+        "72919PAF0",
+        "72919PAG8"
+      ],
+      "status": "NOT_EVALUABLE_FEWER_THAN_TWO_STRAIGHT_BONDS"
+    },
+    "RUN": {
+      "legal_issuer": null,
+      "bonds": [],
+      "convertible_cusips": [
+        "86771WAB1",
+        "86771WAD7"
+      ],
+      "status": "NOT_EVALUABLE_FEWER_THAN_TWO_STRAIGHT_BONDS"
+    }
+  }
+}

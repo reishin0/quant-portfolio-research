@@ -1,0 +1,65 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/corporateAndAgencySecurities",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "couponRate",
+      "maturityDate",
+      "isCallable",
+      "isConvertible",
+      "is144A",
+      "couponType",
+      "productSubTypeCode"
+    ],
+    "domainFilters": [
+      {
+        "fieldName": "cusip",
+        "values": [
+          "780153AG7",
+          "780153AU6",
+          "780153AW2",
+          "780153AX0",
+          "780153AY8",
+          "780153AZ5",
+          "780153BB7",
+          "780153BC5",
+          "780153BF8",
+          "780153BG6",
+          "780153BH4",
+          "780153BJ0",
+          "780153BK7",
+          "780153BL5",
+          "780153BP6",
+          "780153BQ4",
+          "780153BR2",
+          "780153BS0",
+          "780153BT8",
+          "780153BU5",
+          "780153BV3",
+          "780153BW1",
+          "780153BX9",
+          "78017TAB9",
+          "78017TAC7",
+          "78017TAD5",
+          "V7780TAE3",
+          "V7780TAH6",
+          "V7780TAJ2",
+          "V7780TAK9",
+          "V7780TAL7",
+          "V7780TAM5",
+          "V7780TAN3",
+          "V7780TAP8",
+          "V7780TAQ6"
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:13:03.173423+00:00",
+  "sha256": "10c4c79f7178c0553329b3879befda1d8fbc7efe522574f474c137d5bcf9a05d",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

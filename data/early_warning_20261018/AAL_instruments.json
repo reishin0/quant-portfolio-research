@@ -1,0 +1,50 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "02377AAA6",
+    "is144A": "N",
+    "couponRate": 3.7,
+    "issueSymbolIdentifier": "AAL4160717",
+    "issuerName": "AMERICAN AIRLINES INC 2014-1 CL A PASS THROUGH TRUSTS",
+    "maturityDate": "2028-04-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "02376XAA7",
+    "is144A": "N",
+    "couponRate": 4.375,
+    "issueSymbolIdentifier": "AAL4160720",
+    "issuerName": "AMERICAN AIRLINES INC 2014-1 CL B PASS THRU TRS",
+    "maturityDate": "2024-04-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "U02413AH2",
+    "is144A": "N",
+    "couponRate": 7.25,
+    "issueSymbolIdentifier": "AAL5538947",
+    "issuerName": "AMERICAN AIRLINES INC",
+    "maturityDate": "2028-02-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "U02413AJ8",
+    "is144A": "N",
+    "couponRate": 8.5,
+    "issueSymbolIdentifier": "AAL5706100",
+    "issuerName": "AMERICAN AIRLINES INC",
+    "maturityDate": "2029-05-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  }
+]

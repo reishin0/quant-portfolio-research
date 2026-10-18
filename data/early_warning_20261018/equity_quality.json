@@ -1,0 +1,14 @@
+{
+  "declared_at": "2026-10-18T11:17:37+00:00",
+  "checked_before_outcomes": "Price coverage and identity only; no episode, return or signal statistic was computed.",
+  "panel_sessions": 1352,
+  "xnys_sessions_2021_06_01_to_2026_10_16": 1352,
+  "excluded_equity": ["SATS", "WBD", "PARA"],
+  "reasons": {
+    "SATS": "Yahoo returned no history in the combined download or the single retry. Bond, funding and broad arms cannot be matched to equity outcomes; NOT_EVALUABLE.",
+    "WBD": "Yahoo returned one row (2026-10-05) for the ticker, consistent with a delisted symbol whose history is no longer served. NOT_EVALUABLE; no substitute ticker spliced.",
+    "PARA": "Ticker identity failure: the PARA series trades near 0.5-75 with repeated 50-97% daily jumps from 2024, inconsistent with Paramount; Paramount now trades as PSKY, for which Yahoo returned only 15 rows. NOT_EVALUABLE; no splice."
+  },
+  "retained_jump_check": "LUMN +93.1% on 2024-08-06 is retained as a genuine observed move; no other retained symbol has a daily move above 50%.",
+  "late_listing": {"RIVN": "First observed close inside the panel; earlier sessions are unobserved, not filled."}
+}

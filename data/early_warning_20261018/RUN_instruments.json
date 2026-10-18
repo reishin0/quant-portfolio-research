@@ -1,0 +1,38 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "86771QAA6",
+    "is144A": "Y",
+    "couponRate": 12,
+    "issueSymbolIdentifier": "RUN4083034",
+    "issuerName": "SUNRUN SOLAR OWNER HOLDCO XIV LLC",
+    "maturityDate": "2043-12-31",
+    "couponType": null,
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "86771WAB1",
+    "is144A": "N",
+    "couponRate": 0.0,
+    "issueSymbolIdentifier": "RUN5360273",
+    "issuerName": "SUNRUN INC",
+    "maturityDate": "2026-02-01",
+    "couponType": "FXZC",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "86771WAD7",
+    "is144A": "N",
+    "couponRate": 4,
+    "issueSymbolIdentifier": "RUN6026885",
+    "issuerName": "SUNRUN INC",
+    "maturityDate": "2030-03-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  }
+]

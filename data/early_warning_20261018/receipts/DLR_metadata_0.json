@@ -1,0 +1,44 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/corporateAndAgencySecurities",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "couponRate",
+      "maturityDate",
+      "isCallable",
+      "isConvertible",
+      "is144A",
+      "couponType",
+      "productSubTypeCode"
+    ],
+    "domainFilters": [
+      {
+        "fieldName": "cusip",
+        "values": [
+          "25389JAA4",
+          "25389JAE6",
+          "25389JAH9",
+          "25389JAJ5",
+          "25389JAK2",
+          "25389JAL0",
+          "25389JAN6",
+          "25389JAQ9",
+          "25389JAR7",
+          "25389JAS5",
+          "25389JAT3",
+          "25389JAU0",
+          "25389JAV8",
+          "25389JAX4"
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:12:51.786775+00:00",
+  "sha256": "221dae0db763032cd7147f2e7b2c82fe135280bd561f498c61b6eb786095155e",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

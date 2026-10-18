@@ -74,3 +74,10 @@ outputs/
 *backup*
 *Copy.ipynb
 .publication_work/
+!data/early_warning_20261018/
+data/early_warning_20261018/*
+!data/early_warning_20261018/*.json
+!data/early_warning_20261018/*.csv
+!data/early_warning_20261018/receipts/
+!data/early_warning_20261018/raw/
+data/early_warning_20261018/raw/sec_*

@@ -1,0 +1,62 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "72919PAA1",
+    "is144A": "Y",
+    "couponRate": 5.5,
+    "issueSymbolIdentifier": "PLUG4613350",
+    "issuerName": "PLUG PWR INC",
+    "maturityDate": "2023-03-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "72919PAB9",
+    "is144A": "N",
+    "couponRate": 5.5,
+    "issueSymbolIdentifier": "PLUG4970026",
+    "issuerName": "PLUG PWR INC",
+    "maturityDate": "2023-03-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "72919PAD5",
+    "is144A": "N",
+    "couponRate": 3.75,
+    "issueSymbolIdentifier": "PLUG5196400",
+    "issuerName": "PLUG PWR INC",
+    "maturityDate": "2025-06-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "72919PAF0",
+    "is144A": "N",
+    "couponRate": 7,
+    "issueSymbolIdentifier": "PLUG5776112",
+    "issuerName": "PLUG PWR INC",
+    "maturityDate": "2026-06-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "72919PAG8",
+    "is144A": "Y",
+    "couponRate": 6.75,
+    "issueSymbolIdentifier": "PLUG6239525",
+    "issuerName": "PLUG PWR INC",
+    "maturityDate": "2033-12-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  }
+]

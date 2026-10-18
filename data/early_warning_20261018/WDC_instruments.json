@@ -1,0 +1,74 @@
+[
+  {
+    "isCallable": "Y",
+    "cusip": "958102AM7",
+    "is144A": "N",
+    "couponRate": 4.75,
+    "issueSymbolIdentifier": "WDC4594056",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2026-02-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "958102AP0",
+    "is144A": "N",
+    "couponRate": 1.5,
+    "issueSymbolIdentifier": "WDC4890018",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2024-02-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "958102AQ8",
+    "is144A": "N",
+    "couponRate": 2.85,
+    "issueSymbolIdentifier": "WDC5319114",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2029-02-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "Y",
+    "cusip": "958102AR6",
+    "is144A": "N",
+    "couponRate": 3.1,
+    "issueSymbolIdentifier": "WDC5319124",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2032-02-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "N"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "958102AS4",
+    "is144A": "Y",
+    "couponRate": 3,
+    "issueSymbolIdentifier": "WDC5678471",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2028-11-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "958102AT2",
+    "is144A": "N",
+    "couponRate": 3,
+    "issueSymbolIdentifier": "WDC5933845",
+    "issuerName": "WESTERN DIGITAL CORP",
+    "maturityDate": "2028-11-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  }
+]

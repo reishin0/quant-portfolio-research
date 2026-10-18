@@ -1,0 +1,8 @@
+{
+  "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS3",
+  "request": null,
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:14:33.889052+00:00",
+  "sha256": "d85b8a0e70d8d67132d528384f4f9dcdea7ae92b30b0c717f91f887d2caf54b3",
+  "vintage": "FRED current vintage; ICE values published next business day"
+}

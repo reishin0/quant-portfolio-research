@@ -1,0 +1,71 @@
+{
+  "url": "https://services-dynarep.ddwa.finra.org/public/reporting/v2/data/group/FixedIncomeMarket/name/corporateAndAgencySecurities",
+  "request": {
+    "fields": [
+      "cusip",
+      "issueSymbolIdentifier",
+      "issuerName",
+      "couponRate",
+      "maturityDate",
+      "isCallable",
+      "isConvertible",
+      "is144A",
+      "couponType",
+      "productSubTypeCode"
+    ],
+    "domainFilters": [
+      {
+        "fieldName": "cusip",
+        "values": [
+          "92346MNE7",
+          "92346MNF4",
+          "92346MNG2",
+          "92346MNH0",
+          "92346MNJ6",
+          "92346MNK3",
+          "92346MNL1",
+          "92346MNM9",
+          "92346MNN7",
+          "92346MNP2",
+          "92346MNQ0",
+          "92346MNR8",
+          "92346MNS6",
+          "92346MNT4",
+          "92346MNU1",
+          "92346MNV9",
+          "92346MNW7",
+          "92346MNX5",
+          "92346MNY3",
+          "92346MNZ0",
+          "92346MPA3",
+          "U9221AAG3",
+          "U9221AAH1",
+          "U9221AAK4",
+          "U9221AAL2",
+          "U9221AAM0",
+          "U9221AAR9",
+          "U9221AAT5",
+          "U9221AAU2",
+          "U9221AAZ1",
+          "U9221ABJ6",
+          "U9221ABK3",
+          "U9221ABL1",
+          "U9221ABN7",
+          "U9221ABQ0",
+          "U9221ABR8",
+          "U9221ABS6",
+          "U9221ABY3",
+          "U9221ACH9",
+          "U9221ACJ5",
+          "U9221ACK2"
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 1000
+  },
+  "status": 200,
+  "retrieved_at": "2026-10-18T11:12:46.095719+00:00",
+  "sha256": "3661cde4ce9afcfcb379c2e6380173a230b27ae81fadacf92fb4eb588e1eec68",
+  "vintage": "Current retrieval; historical delivery times unknown"
+}

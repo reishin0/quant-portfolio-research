@@ -1,0 +1,38 @@
+[
+  {
+    "isCallable": "N",
+    "cusip": "549498AA1",
+    "is144A": "Y",
+    "couponRate": 1.25,
+    "issueSymbolIdentifier": "LCID5321247",
+    "issuerName": "LUCID GROUP INC",
+    "maturityDate": "2026-12-15",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "549498AC7",
+    "is144A": "Y",
+    "couponRate": 5,
+    "issueSymbolIdentifier": "LCID6045692",
+    "issuerName": "LUCID GROUP INC",
+    "maturityDate": "2030-04-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  },
+  {
+    "isCallable": "N",
+    "cusip": "549498AE3",
+    "is144A": "Y",
+    "couponRate": 7,
+    "issueSymbolIdentifier": "LCID6231883",
+    "issuerName": "LUCID GROUP INC",
+    "maturityDate": "2031-11-01",
+    "couponType": "FXPV",
+    "productSubTypeCode": "CORP",
+    "isConvertible": "Y"
+  }
+]
