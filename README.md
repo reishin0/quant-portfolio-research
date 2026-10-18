@@ -1,5 +1,13 @@
 # Portfolio Construction Research
 
+## Issuer credit and funding research — reviewed 18 October 2026
+
+The [executed issuer research notebook](issuer_credit_funding_research.ipynb) provides a reusable funding-disclosure and bond-yield diagnostic for funding-dependent issuers. Issuer identities, bond identifiers, units, reporting timezone, data snapshots, equity symbols and rules come from separate case files. CoreWeave is the retained historical example, with 612 public FINRA price/yield rows; it is not hard-coded into the calculation engine. See the [case contract, review fixes and future-use guide](research/credit_funding/ISSUER_REPLAY.md).
+
+Run `python run_issuer_credit_replay.py --publish` to reproduce the shipped notebook offline. For another declared case, use `python run_issuer_credit_replay.py --case research/credit_funding/cases/YOUR_CASE.json`; a new dated output is created without replacing the root notebook unless `--publish` is supplied. The frozen portfolio notebooks, original credit/funding notebook/model, protocols, source pins and paper journal remain unchanged.
+
+In the CoreWeave case, financing dependence appears in the earliest loaded annual filing, conservatively available March 3. The yield diagnostic flags July 27 and October 15: CRWV gained about 21% over five observed sessions after July's flag, and October's flag followed the October 14 fall. Reliable advance warning is **not demonstrated**. EOD bond history ends October 15; equity context ends October 16. Current-vintage yields are not historical point-in-time OAS; the original qualified credit gate remains UNKNOWN. Future cases need their own dated evidence and untouched validation periods.
+
 ## Credit and funding extension — 17 October 2026
 
 The separate [executed credit/funding notebook](credit_funding_research.ipynb) adds dated issuer disclosures, credit-versus-peer rules, sector/index separation and monthly cash-funding scenarios. It preserves both portfolio notebooks and their frozen protocols. Run `python run_credit_funding.py`; see [data contracts and evidence limits](research/credit_funding/README.md). The included case supports a funding watch, while issuer spread history and a usable company cash forecast remain unavailable. Synthetic scenarios validate accounting; no historical trading advantage or live integration is claimed.

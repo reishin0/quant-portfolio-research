@@ -1,0 +1,18 @@
+{
+  "version": "20261017-coreweave-evidence-v1",
+  "scope": "Retrospective single-issuer diagnostic; not a trading backtest or point-in-time performance claim",
+  "declared_before_computing_results": true,
+  "bond_window": ["2026-01-01", "2026-10-16"],
+  "bonds": ["21873SAB4", "21873SAC2", "21873SAG3", "21873SAK4"],
+  "yield_rule": "For each bond independently, each of the most recent 3 observed yields must exceed the median of the preceding 20 observations by at least 100 basis points. Yield in percent is multiplied by 100. No interpolation, no forward fill, no changing bond constituents within an instrument window.",
+  "history": 20,
+  "persistence": 3,
+  "widening_bp": 100.0,
+  "max_gap_calendar_days": 4,
+  "issuer_diagnostic": "At least two eligible distinct bonds flag on the same observation date. Report every onset, not only the October episode.",
+  "availability": "TRACE retrieved now is current-vintage last-sale history; historical receipt times and correction vintages are not supplied. Yield diagnostics are indexed by trade date only, and NEVER admitted into the original point-in-time OAS rule. Funding filings use the day after the SEC filing date at New York midnight as a conservative public-information convention, not measured feed arrival.",
+  "funding_rule": "Same direction-only idea as existing rule: cash purchases of PP&E exceed operating cash flow, with positive debt principal. Keep fiscal year, quarter and six-month periods explicit; never annualize or add overlapping periods. This signals financing dependence, not default or a cash runway.",
+  "equity_comparison": "Current-vintage adjusted daily CRWV, SPY and QQQ closes as descriptive context. At every simultaneous two-bond diagnostic onset report subsequent 5 and 20 observed-session returns from that date's close, or null if incomplete. These are not achievable strategy returns: no verified signal delivery, entry policy, trading costs or holdouts.",
+  "controls": "Do not change frozen portfolio notebooks, original credit specification/model, protocols, journal or saved original observations. No threshold optimization, no default forecast, no SPY signal from one issuer, and no monthly funding forecast from annualized cash flows.",
+  "remaining_strict_requirements": ["issuer and matched-peer OAS with instrument conventions and historical availability", "legally usable current cash and drawable capacity by cash pool", "dated monthly mandatory capex, receipts, principal and hedge exposures"]
+}

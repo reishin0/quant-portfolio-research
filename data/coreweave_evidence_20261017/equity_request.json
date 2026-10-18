@@ -1,0 +1,8 @@
+{
+  "provider": "Yahoo via yfinance",
+  "auto_adjust": true,
+  "start": "2026-01-01",
+  "end_exclusive": "2026-10-17",
+  "retrieved_at": "2026-10-17T03:42:06.370566+00:00",
+  "vintage": "current; not historical receipt history"
+}

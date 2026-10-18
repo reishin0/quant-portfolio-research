@@ -1,0 +1,60 @@
+{
+  "case_id": "coreweave_20261017",
+  "issuer": "CRWV",
+  "issuer_name": "CoreWeave",
+  "bond_issuer_name": "COREWEAVE INC",
+  "units": "USD millions",
+  "bond_currency": "USD",
+  "reporting_timezone": "America/New_York",
+  "evidence_dir": "data/coreweave_evidence_20261017",
+  "evidence_manifest_sha256": "55d4a6ecf8b4532714e391441eb73776e598ef782806febe0fcc7389c7a56c2a",
+  "prior_spec_path": "research/credit_funding/coreweave_replay_spec.json",
+  "bond_window": [
+    "2026-01-01",
+    "2026-10-16"
+  ],
+  "bonds": [
+    "21873SAB4",
+    "21873SAC2",
+    "21873SAG3",
+    "21873SAK4"
+  ],
+  "equity_symbols": [
+    "CRWV",
+    "SPY",
+    "QQQ"
+  ],
+  "horizons": [
+    5,
+    20
+  ],
+  "rules": {
+    "history": 20,
+    "persistence": 3,
+    "widening_bp": 100.0,
+    "max_gap_calendar_days": 4,
+    "min_warning_bonds": 2
+  },
+  "case_notes": [
+    "This retained case is retrospective and selected after the October decline. It is not a prospective or cross-issuer validation.",
+    "Funding covers FY2025, Q1 2026 and H1 2026. The May 7 earnings release precedes the May 8 filing date; earliest loaded filing is not earliest public warning. Direct SEC HTTP downloads returned 403; tables were verified with the web reader.",
+    "All four current FINRA instruments are callable, non-convertible Rule 144A bonds. Current metadata contains October 16 quotes while the retained EOD history stops October 15. Do not splice the two.",
+    "The October 15 yield flag follows the October 14 equity fall. July outcomes include strong subsequent gains; retain this adverse evidence. Completed September financing is favourable evidence of financing access, not a current cash balance."
+  ],
+  "preserved_text_lf_sha256": {
+    ".gitattributes": "2f16d1af52f346a7ca2786818375b5618ab0106dc7e269275b272571432ac10d",
+    "AMENDMENTS.md": "7d255d55762cb2d5f0d0bc6198e6f421e7338f650a76bc4db679e6ecf60725b9",
+    "CHANGELOG.md": "05c6983f702dcf426d8ee04f5d3bee0fca54f7472446ab8d3976a073aa51429d",
+    "VALIDATION.md": "3a5cfad9f9d08ba86bd428a848f655323032fa035706c4ff9f32dfda6dc7a6d0",
+    "data/README.md": "eecf26c76d5333cff5626f861a28c5d97711c51c4e6f5e0e40b4f2d40a55b6e9",
+    "requirements-lock-windows-py313.txt": "e182add477b5c6a94aff6dac9ef0ab52c1f04bd6b60abd6d860f975d0544653f",
+    "requirements.txt": "a05a0b9b7c7ff7cb454ae0b4473d4b75a8661942dad2ef44a87dec8f497eb813",
+    "research/AMENDMENTS_IMPLEMENTED_20261016.md": "57958afb7449da2adf51a9b7f11e2d9f731af767567de825445e3be4062d1a79",
+    "research/REFRESH_20261016.md": "eba7ce373efd6a95da88a40c4cb76ad841547ea92b39aa33d1acf732313819d2",
+    "research/REVIEW_FIXES_20261016.md": "1518bd93505808e3460ef6fe9ebdb468e7965a7074872b86f42ce2bd330dda89",
+    "research/credit_funding/README.md": "ab3e65cca8f92fd94e9663c341cf78af43333e5f7afcf1773b14789cebd197de",
+    "research/macro_regime/REVIEW_20261016.md": "0ed06b1ec5f2296f7ce1ea6344c8b4dd15da8afc5f8ee90b4e1467fb95747399",
+    "run_project.bat": "695d16ebdc9ee1f5b8ff4c57fe6b22e8ca3bcb2b42748dba5a827ae25a024835",
+    "run_project.command": "f554dc2b9b21b88ef51a3496e4e1771c1d53964fa101766d632e75c60f7854f9"
+  }
+}

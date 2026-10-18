@@ -1,0 +1,70 @@
+{
+  "validation_date_sgt": "2026-10-18",
+  "verified_at_utc": "2026-10-18T02:58:20.248691+00:00",
+  "evidence_snapshot": "data/coreweave_evidence_20261017/manifest.json",
+  "retained_execution": {
+    "executed_at": "2026-10-17T03:47:48.637191+00:00",
+    "code_cells": 6,
+    "notebook_sha256": "6ef3929676ba7801fcf06045f50ce70fd43ee86b3f0fa4f49be1503cf9712cff",
+    "status": "EXECUTED_WITHOUT_CELL_ERRORS",
+    "scope": "Current-vintage diagnostic, not qualified historical strategy test"
+  },
+  "tests": {
+    "full_suite_date_sgt": "2026-10-17",
+    "run": 159,
+    "passed": 158,
+    "optional_skipped": 1,
+    "replay_tests_rechecked": 8,
+    "mirror_replay_tests_passed": 8
+  },
+  "preserved_prior_project_files": 98,
+  "frozen_baseline": "VERIFIED_UNCHANGED_IN_BOTH_FOLDERS",
+  "snapshot": {
+    "bond_rows": 612,
+    "bonds": 4,
+    "missing_yields": 8,
+    "bond_history_through": "2026-10-15",
+    "equity_history_through": "2026-10-16"
+  },
+  "diagnostic_onsets": [
+    "2026-07-27",
+    "2026-10-15"
+  ],
+  "equity_context": [
+    {
+      "date": "2026-07-27T00:00:00.000",
+      "CRWV_5_sessions_pct": 21.1470561196,
+      "CRWV_20_sessions_pct": 21.8392412552,
+      "QQQ_5_sessions_pct": 2.631504697,
+      "QQQ_20_sessions_pct": 3.5477620875,
+      "SPY_5_sessions_pct": 2.5138965512,
+      "SPY_20_sessions_pct": 3.2986385916
+    },
+    {
+      "date": "2026-10-15T00:00:00.000",
+      "CRWV_5_sessions_pct": null,
+      "CRWV_20_sessions_pct": null,
+      "QQQ_5_sessions_pct": null,
+      "QQQ_20_sessions_pct": null,
+      "SPY_5_sessions_pct": null,
+      "SPY_20_sessions_pct": null
+    }
+  ],
+  "original_qualified_issuer_oas_state": "UNKNOWN",
+  "interpretation": "Earlier disclosed financing dependence; reliable advance warning of the October sell-off not demonstrated. July warning followed by gains; October warning followed the October 14 fall.",
+  "remaining_gaps": [
+    "Historical issuer and matched-peer OAS availability/correction vintages",
+    "Current legally usable cash and drawable capacity by pool",
+    "Dated monthly capex, collections, principal and actual hedge schedules"
+  ],
+  "implementation_sha256": {
+    "research/credit_funding/coreweave_replay.py": "47fdfbdce0213473e0418bb58703828403ef9e2f871fc6864510e1dc78f465da",
+    "research/credit_funding/coreweave_replay_spec.json": "7fe166d1b5556a995d23851d9bf0b35abaf1c2c9b9e87776ae50fb605004ffbc",
+    "research/credit_funding/fetch_coreweave_bonds.py": "9637ae8d78b7d4e578443ad3e38be0862b1755c9402a5ba31957cba79b699075",
+    "run_coreweave_replay.py": "0387bb718eda5b7cad0918bf74e53d0b35bbf6ddcd6595205f0aa66987745e3d",
+    "tests/test_coreweave_replay.py": "5732c3484523605c8147f77df0ed52f32a62c9f7a813204baa18453663478491",
+    "coreweave_credit_replay.ipynb": "6ef3929676ba7801fcf06045f50ce70fd43ee86b3f0fa4f49be1503cf9712cff"
+  },
+  "data_manifest_sha256": "55d4a6ecf8b4532714e391441eb73776e598ef782806febe0fcc7389c7a56c2a",
+  "full_suite_log_sha256": "9c527b7ea7aa4cedacdd6db717ee99ca266973625213724559b33c63a74c4049"
+}

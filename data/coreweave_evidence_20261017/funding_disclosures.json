@@ -1,0 +1,143 @@
+{
+  "retrieved_at": "2026-10-17T03:44:28.305069+00:00",
+  "records": [
+    {
+      "issuer": "CRWV",
+      "period_label": "FY2025",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "filed_on": "2026-03-02",
+      "units": "USD millions",
+      "operating_cash_flow": 3058,
+      "cash_capex": 10309,
+      "cash_and_equivalents": 3127,
+      "debt_principal": 21615,
+      "reported_facility_availability": 3701,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/crwv-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/0001769628-26-000104-index.htm",
+      "extraction": "Manually verified cash-flow statement, debt note and liquidity table via web reader; direct SEC HTTP download returned 403.",
+      "availability": "Following SEC filing date at New York midnight; conservative convention, not feed arrival",
+      "current_parent_usable_cash": null,
+      "qualified_drawable_capacity": null
+    },
+    {
+      "issuer": "CRWV",
+      "period_label": "Q1 2026",
+      "period_start": "2026-01-01",
+      "period_end": "2026-03-31",
+      "filed_on": "2026-05-08",
+      "units": "USD millions",
+      "operating_cash_flow": 2984,
+      "cash_capex": 7695,
+      "cash_and_equivalents": 2244,
+      "debt_principal": 25149,
+      "reported_facility_availability": 8825,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000222/crwv-20260331.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000222/0001769628-26-000222-index.htm",
+      "extraction": "Manually verified cash-flow statement, debt note and liquidity table via web reader; direct SEC HTTP download returned 403.",
+      "availability": "Following SEC filing date at New York midnight; conservative convention, not feed arrival",
+      "current_parent_usable_cash": null,
+      "qualified_drawable_capacity": null
+    },
+    {
+      "issuer": "CRWV",
+      "period_label": "H1 2026",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "filed_on": "2026-08-12",
+      "units": "USD millions",
+      "operating_cash_flow": 3663,
+      "cash_capex": 14117,
+      "cash_and_equivalents": 5524,
+      "debt_principal": 35551,
+      "reported_facility_availability": 10014,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/0001769628-26-000366-index.htm",
+      "extraction": "Manually verified cash-flow statement, debt note and liquidity table via web reader; direct SEC HTTP download returned 403.",
+      "availability": "Following SEC filing date at New York midnight; conservative convention, not feed arrival",
+      "current_parent_usable_cash": null,
+      "qualified_drawable_capacity": null
+    }
+  ],
+  "note": "Coverage starts FY2025 filing. Earlier public risk disclosures and earnings releases may exist. Earliest loaded filing is not first-ever warning. Overlapping fiscal periods are not added.",
+  "principal_schedules_usdm": [
+    {
+      "period_end": "2026-03-31",
+      "buckets": {
+        "remaining_2026": 6066,
+        "2027": 5652,
+        "2028": 3802,
+        "2029": 2894,
+        "2030": 2348,
+        "thereafter": 4387
+      },
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000222/crwv-20260331.htm"
+    },
+    {
+      "period_end": "2026-06-30",
+      "buckets": {
+        "remaining_2026": 4413,
+        "2027": 6184,
+        "2028": 4416,
+        "2029": 2421,
+        "2030": 3221,
+        "thereafter": 14896
+      },
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+    }
+  ],
+  "facilities": [
+    {
+      "name": "DDTL 4.0",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000222/crwv-20260331.htm",
+      "source_period_end": "2026-03-31",
+      "borrower": "CoreWeave Compute Acquisition Co. VIII, LLC",
+      "commitment_usdm": 8500,
+      "floating_commitment_approx_usdm": 4500,
+      "fixed_commitment_approx_usdm": 4000,
+      "floating_sofr_margin_bp": 225,
+      "fixed_treasury_margin_bp": 200,
+      "draw_commitment_ends": "2027-06-30",
+      "maturity_month": "2032-03",
+      "outstanding_usdm": 1260,
+      "nonrecourse": true,
+      "qualified_drawable_capacity": null,
+      "reason": "Project asset, debt-service coverage and delivery conditions; commitments are not unrestricted parent cash",
+      "principal_timing": "Monthly amortization contingent on commitment termination, delayed-site dates or top-up draws; no full dated schedule acquired",
+      "hedging": "June filing requires at least 95% hedging of anticipated floating borrowings within specified periods after commitment termination; not proof of hedges already in force",
+      "hedging_source": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+    }
+  ],
+  "favourable_evidence": [
+    "Management states expected liquidity sufficient for next-year obligations in annual and quarterly filings; this is management guidance, not independently verified runway.",
+    "Prior retained snapshot includes completed September convertible financing; do not ignore financing access or add proceeds to stale cash."
+  ],
+  "missing": [
+    "Historical TRACE correction/dissemination vintages",
+    "Issuer OAS and qualified matched peers",
+    "Cash pool transferability and actual current drawable amounts",
+    "Monthly capex/receipts/debt service and actual hedge schedules"
+  ],
+  "acquisition_attempts": [
+    {
+      "source": "SEC direct HTTP annual/Q1/Q2 and annual index",
+      "status": 403,
+      "fallback": "Public web reader used to verify specified tables and filing indexes"
+    },
+    {
+      "source": "FINRA instrument request without fields and upper-case dataset",
+      "status": 400,
+      "resolution": "Corrected documented lower-case dataset and explicit fields; 4 records received"
+    },
+    {
+      "source": "Guessed annual-release URL",
+      "status": 404,
+      "resolution": "Not used; verified SEC annual filing used"
+    },
+    {
+      "source": "BondTerminal",
+      "status": 200,
+      "use": "Instrument discovery only; FINRA primary history and metadata used for calculations"
+    }
+  ]
+}

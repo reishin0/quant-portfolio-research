@@ -1,0 +1,80 @@
+{
+  "review_date_sgt": "2026-10-18",
+  "completed_at_utc": "2026-10-18T03:17:00.618651+00:00",
+  "scope": "Reusable issuer credit and funding diagnostic; CoreWeave retained as historical case, not a predictor or automatic company classifier",
+  "execution": {
+    "executed_at": "2026-10-18T03:16:11.206364+00:00",
+    "case": "coreweave_20261017",
+    "case_sha256": "cb6b50f4af1c896bb706d23d49f5c48e3e5cf7467c4639f1588ec8753e216867",
+    "notebook_sha256": "ac73acc0192657cffa65b37a01eb396fe7725f87a9d7bba41ff4686444857675",
+    "code_cells": 6,
+    "published": true,
+    "status": "EXECUTED_WITHOUT_CELL_ERRORS",
+    "scope": "Retrospective diagnostic; no qualified historical strategy or prospective claim"
+  },
+  "tests": {
+    "run": 171,
+    "passed": 170,
+    "optional_hmm_skipped": 1,
+    "issuer_replay_tests": 20,
+    "mirror_issuer_replay_tests_passed": 20
+  },
+  "fixes": [
+    "Issuer, currency, timezone, symbols, thresholds, quorum and horizons configured per case",
+    "Dynamic notebook results replace copied case conclusions",
+    "Empty/no-warning panels retain stable schemas and UNKNOWN states",
+    "Duplicate diagnostic bonds cannot manufacture quorum; mixed issuers and invalid states rejected",
+    "Boolean prices, bad dates and invalid parameters rejected",
+    "Distinct financial periods and dated revisions retained without backdating",
+    "Evidence hashes, instrument ownership and equity symbols checked before calculation",
+    "Downloader refuses existing destinations and incomplete panels",
+    "Declare canonical LF digests for 14 supporting text files to tolerate Git checkout line endings; frozen code/notebooks/data retain exact hashes"
+  ],
+  "frozen_prior_project_files_verified": 98,
+  "original_portfolio_notebooks_and_protocols_and_journal": "UNCHANGED",
+  "retained_case_results_unchanged": true,
+  "case_warning_dates": [
+    "2026-07-27",
+    "2026-10-15"
+  ],
+  "predictive_evidence": "Not demonstrated; no untouched issuer/period holdouts or qualified OAS receipt vintages",
+  "fictional_second_issuer_test": "Software contract test using different issuer, EUR units and Europe/London timezone; not empirical validation",
+  "legacy_validation": "research/credit_funding/coreweave_validation_20261018.json describes superseded filenames/hashes; retained for prior case outcomes",
+  "renamed_entry_points": {
+    "coreweave_credit_replay.ipynb": {
+      "new_path": "issuer_credit_funding_research.ipynb",
+      "old_sha256": "6ef3929676ba7801fcf06045f50ce70fd43ee86b3f0fa4f49be1503cf9712cff"
+    },
+    "run_coreweave_replay.py": {
+      "new_path": "run_issuer_credit_replay.py",
+      "old_sha256": "0387bb718eda5b7cad0918bf74e53d0b35bbf6ddcd6595205f0aa66987745e3d"
+    },
+    "research/credit_funding/coreweave_replay.py": {
+      "new_path": "research/credit_funding/issuer_replay.py",
+      "old_sha256": "47fdfbdce0213473e0418bb58703828403ef9e2f871fc6864510e1dc78f465da"
+    },
+    "research/credit_funding/fetch_coreweave_bonds.py": {
+      "new_path": "research/credit_funding/fetch_bond_history.py",
+      "old_sha256": "9637ae8d78b7d4e578443ad3e38be0862b1755c9402a5ba31957cba79b699075"
+    },
+    "tests/test_coreweave_replay.py": {
+      "new_path": "tests/test_issuer_replay.py",
+      "old_sha256": "5732c3484523605c8147f77df0ed52f32a62c9f7a813204baa18453663478491"
+    }
+  },
+  "file_sha256": {
+    "issuer_credit_funding_research.ipynb": "ac73acc0192657cffa65b37a01eb396fe7725f87a9d7bba41ff4686444857675",
+    "run_issuer_credit_replay.py": "6b1eb6bfe3c3996518e35962832ec34a688309976b71dd6747c8029fc7828129",
+    "research/credit_funding/issuer_replay.py": "4a177312397ae4f790601812603ca1ff5f016cddb9c0436d08f8a77520c48ed4",
+    "research/credit_funding/fetch_bond_history.py": "4106daa7ca8d8a72a86fa4e49f7a9bf833e8a4dbbedc94c4c71bab99896620ae",
+    "research/credit_funding/cases/coreweave_20261017.json": "cb6b50f4af1c896bb706d23d49f5c48e3e5cf7467c4639f1588ec8753e216867",
+    "tests/test_issuer_replay.py": "f17646cac24d7ac968031e433e1ada4f59bc5c9b11ffa78abcd54a5e0da37012"
+  },
+  "evidence_manifest_sha256": "55d4a6ecf8b4532714e391441eb73776e598ef782806febe0fcc7389c7a56c2a",
+  "full_suite_log_sha256": "f0194ed879d710989c5fc9aa8820556b357fc8166a5b6acfd3b3c06f9a5c2fdc",
+  "dependency_check": "pip check passed",
+  "documentation_sha256_normalized_lf": {
+    "research/credit_funding/ISSUER_REPLAY.md": "7ae665ac46440ef71c6a6d4606d4cf6d26577e9961decc3b0fe9165677c4fa90"
+  },
+  "staged_checkout": "Verified frozen snapshot, full case input hashes, generic implementation hashes and retained warning dates from Git archive"
+}
