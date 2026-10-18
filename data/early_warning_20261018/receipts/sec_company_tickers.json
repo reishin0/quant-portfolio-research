@@ -1,0 +1,8 @@
+{
+  "url": "https://www.sec.gov/files/company_tickers.json",
+  "request": null,
+  "status": 200,
+  "retrieved_at": "2026-10-18T12:31:40.964360+00:00",
+  "sha256": "bbffa40adbea620bba590da9a193ea14b21bfc04992f102549a2688d4e7d32df",
+  "vintage": "Current SEC ticker map"
+}

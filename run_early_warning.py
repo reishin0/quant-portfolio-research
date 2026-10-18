@@ -43,14 +43,20 @@ def tests(result, period):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--phase', choices=['development', 'holdout'], required=True)
+    parser.add_argument('--phase', choices=['development', 'holdout', 'funding_development', 'funding_holdout'], required=True)
     args = parser.parse_args()
     if receipt_path(args.phase).exists():
         raise SystemExit('Phase already recorded; a rerun needs a new declaration: ' + str(receipt_path(args.phase)))
     if args.phase == 'holdout' and not receipt_path('development').exists():
         raise SystemExit('Record the development phase first')
+    if args.phase == 'funding_holdout' and not receipt_path('funding_development').exists():
+        raise SystemExit('Record the funding development phase first')
     inputs = ew.load(ROOT)
-    result = ew.run_phase(inputs, args.phase)
+    period_name = args.phase.replace('funding_', '')
+    if args.phase.startswith('funding_'):
+        from research.credit_funding.early_warning_filings import load_addendum
+        inputs['filings'] = load_addendum(ROOT)[1]
+    result = ew.run_phase(inputs, period_name)
     period = result['period']
     sig = tests(result, period)
     relative = []
@@ -61,7 +67,7 @@ def main():
             r, _, _ = ew.evaluate(rpanel, s, mask, period)
             r.update(base_rate_pct=br, base_sessions=n, target='SPY_RELATIVE')
             relative.append(r)
-    out = dict(phase=args.phase, executed_at=datetime.now(timezone.utc).isoformat(), period=period,
+    out = dict(phase=args.phase, funding_addendum_manifest_sha256=(hashlib.sha256((ROOT / ew.DATA_DIR / 'funding_addendum/manifest.json').read_bytes()).hexdigest() if args.phase.startswith('funding_') else None), executed_at=datetime.now(timezone.utc).isoformat(), period=period,
                manifest_sha256=hashlib.sha256((ROOT / ew.DATA_DIR / 'manifest.json').read_bytes()).hexdigest(),
                module_sha256=hashlib.sha256((ROOT / 'research/credit_funding/early_warning.py').read_bytes()).hexdigest(),
                coverage=jsonable(result['coverage']), results=jsonable(result['results']),
@@ -71,7 +77,7 @@ def main():
     cols = ['signal', 'issuer_sessions', 'alarm_onsets', 'hits', 'false_alarms', 'same_day', 'in_episode',
             'precision_pct', 'episodes', 'warned', 'recall_pct', 'median_lead_sessions', 'false_per_250', 'base_rate_pct']
     with pd.option_context('display.width', 250, 'display.max_columns', 30):
-        for mask in ['common', 'common_no_funding', 'own_price', 'own_issuer']:
+        for mask in ['common', 'common_no_funding', 'own_funding', 'own_issuer']:
             print('==', mask)
             print(show.loc[show['sample'].eq(mask), cols].round(2).to_string(index=False))
         print(sig.round(4).to_string(index=False))

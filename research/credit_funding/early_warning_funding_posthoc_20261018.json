@@ -1,0 +1,68 @@
+{
+  "label": "POST-HOC EXPLORATORY, not a declared test. Chosen after reading the funding receipts.",
+  "computed_at": "2026-10-18T12:46:43.176495+00:00",
+  "question": "On each issuer's own funding coverage (not the identical common sample), do P2 alarms filtered by an active funding gap (E2) beat P2?",
+  "results": {
+    "development": {
+      "ci90": [
+        0.4831253492270438,
+        51.67328835582207
+      ],
+      "perm_obs": 0.6666666666666666,
+      "perm_p": 0.009495252373813094,
+      "issuers_with_scored_E2": 9,
+      "hits_by_issuer": {
+        "NCLH": 5,
+        "RCL": 4,
+        "CCL": 2,
+        "DLR": 1,
+        "LCID": 1,
+        "PLUG": 1
+      },
+      "dates": [
+        "2022-02",
+        "2022-03",
+        "2022-04",
+        "2022-09",
+        "2022-11",
+        "2022-12",
+        "2023-02",
+        "2023-03",
+        "2023-07",
+        "2023-08"
+      ]
+    },
+    "holdout": {
+      "ci90": [
+        -4.709572401490582,
+        34.8686785850965
+      ],
+      "perm_obs": 0.4666666666666667,
+      "perm_p": 0.15542228885557222,
+      "issuers_with_scored_E2": 9,
+      "hits_by_issuer": {
+        "LCID": 6,
+        "NCLH": 2,
+        "CLF": 2,
+        "RCL": 1,
+        "RIVN": 1,
+        "PLUG": 1
+      },
+      "dates": [
+        "2024-01",
+        "2024-04",
+        "2024-07",
+        "2024-09",
+        "2024-12",
+        "2025-02",
+        "2025-05",
+        "2025-07",
+        "2025-10",
+        "2026-02",
+        "2026-05",
+        "2026-07",
+        "2026-08"
+      ]
+    }
+  }
+}

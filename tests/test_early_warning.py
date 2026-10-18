@@ -136,6 +136,21 @@ class FilingTest(unittest.TestCase):
         self.assertEqual(q['alarm_session'], '2024-08-02')
         self.assertEqual(recs['K']['F1'], 'UNKNOWN')  # no debt tag in the annual filing: never assumed safe
 
+    def test_older_period_revision_never_replaces_current_state(self):
+        recs = [dict(acceptance_local='2024-08-01T17:00:00-04:00', period_end='2024-06-30'),
+                dict(acceptance_local='2024-09-01T09:00:00-04:00', period_end='2024-03-31'),
+                dict(acceptance_local='2024-11-01T09:00:00-04:00', period_end='2024-09-30')]
+        out = ef.current_only(recs)
+        self.assertEqual([r['state_effect'] for r in out], [True, False, True])
+        self.assertEqual(out[1]['status'], 'OLDER_PERIOD_REVISION')
+
+    def test_comparative_is_tag_and_accession_specific(self):
+        f = ef.facts_frame(self.facts())
+        val, _ = ef.same_tag(f, 'PaymentsToAcquirePropertyPlantAndEquipment', 'Q', pd.Timestamp('2023-07-02'), 181)
+        self.assertEqual(val, 40)
+        self.assertTrue(np.isnan(ef.same_tag(f, 'PaymentsToAcquirePropertyPlantAndEquipment', 'K',
+                                             pd.Timestamp('2023-06-30'), 181)[0]))
+
     def test_stale_filing_state_becomes_unknown(self):
         sessions = pd.bdate_range('2024-01-02', '2024-12-31')
         filings = pd.DataFrame([dict(issuer='X', alarm_session='2024-01-03', period_end='2023-12-31',

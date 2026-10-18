@@ -1,0 +1,8 @@
+{
+  "url": "https://data.sec.gov/submissions/CIK0001053507.json",
+  "request": null,
+  "status": 200,
+  "retrieved_at": "2026-10-18T12:31:57.554080+00:00",
+  "sha256": "f57566944b74d717fb0c42aa710966d93027b9aece81b1613b25374972caad02",
+  "vintage": "Current SEC vintage; acceptanceDateTime from submissions"
+}

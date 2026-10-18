@@ -1,0 +1,8 @@
+{
+  "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000874761.json",
+  "request": null,
+  "status": 200,
+  "retrieved_at": "2026-10-18T12:32:42.231001+00:00",
+  "sha256": "0026125c9740c5d2cd27d52c84e9b9ee15795978ef56633f0b3f830f08c95f16",
+  "vintage": "Current SEC vintage; acceptanceDateTime from submissions"
+}

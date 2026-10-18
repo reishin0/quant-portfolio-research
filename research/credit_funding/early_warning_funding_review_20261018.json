@@ -1,0 +1,41 @@
+{
+  "reviewed_at": "2026-10-18T13:27:44.651207+00:00",
+  "study": "early_warning_20261018 funding addendum",
+  "verdict": {
+    "funding": "NOT_ESTABLISHED",
+    "issuer_credit": "INCONCLUSIVE_LOW_POWER",
+    "posthoc_lead": "E2 funding-gap filter on own coverage; not significant in holdout; exploratory only"
+  },
+  "tests": {
+    "total": 211,
+    "passed": 210,
+    "skipped": 1
+  },
+  "notebook": "EXECUTED_WITHOUT_CELL_ERRORS; funding receipts reproduced exactly",
+  "independent_review": {
+    "outcome": "NO_BLOCKING_ISSUE",
+    "write_up_corrections": "coverage count, unknown-state causes, P1 precision, parser-hash timing, development concentration"
+  },
+  "parser_hash_note": "declaration.json parser_sha256 covers the parsing logic as declared; build_addendum/load_addendum I/O helpers were appended afterwards and are covered by manifest.json parser_sha256",
+  "baselines": {
+    "status": "VERIFIED_DATED_SNAPSHOT",
+    "baseline_sha256": "a1924728765f10d91d7620054e5d2e604e1b3df3f47b872c74fefce41c85d244",
+    "parent_protocol_sha256": "97226bad70fc261537536322b6450d36379c8a389b99bd52642f58a3cea59bf2",
+    "paper_protocol_sha256": "6cad006a15f77ffd19fa5147e3262f1693b8edf68f13a20de980e8653a05a536",
+    "journal_head_sha256": "5808c1f3bcfb7c85202cd42ab552675f6605f3d2c4d9a1bb0d27b80a16cfdc66"
+  },
+  "file_sha256": {
+    "research/credit_funding/early_warning_filings.py": "b8ab87ceae32c17470f7905c43bd85f9ae05d68f6946f5a12e867791fae4fd86",
+    "run_early_warning.py": "4dbca7612c31db87010e1bd6bac3cf23b623711fa69dd4675d413267d266639f",
+    "run_issuer_credit_replay.py": "392bd2d0cc34d8acf6d1e961b9ef5b4f598361783396fadd59f9ef8f0a4d0184",
+    "research/credit_funding/early_warning.py": "1442478b51396eda7237f515eb4f3b6df34682ccf1dee1c2c0ec2d3994078ff5",
+    "research/credit_funding/early_warning_funding_development_receipt_20261018.json": "e0bc107d068be0132ca88b830037531d36ce254c86db9e85ed46c9c3ba230e5d",
+    "research/credit_funding/early_warning_funding_holdout_receipt_20261018.json": "d2a270285bcc968dc445a7729603a0f75e41e93f171a711dfd7726b150615ddc",
+    "research/credit_funding/early_warning_funding_posthoc_20261018.json": "d520f8d7eb7e2fe2385a58e3cadff4b7c955ad85ec5d59b9557d6d3cb2a7f44b",
+    "research/credit_funding/EARLY_WARNING_20261018.md": "9bf994edf08c32863c40100569a156191e00d3dc105a27164d0acabbb947c3d8",
+    "tests/test_early_warning.py": "3510666445ecf05762b0c245b5d25ff5c8b09a4b0127b973e454909c31f5e71d",
+    "issuer_credit_funding_research.ipynb": "58614b1285098275a41cbe8297b71665157a4a1284dd19ae7f99757e24cc42b5",
+    "data/early_warning_20261018/funding_addendum/manifest.json": "ddeec3b05861c60948387bbdf20267bd63d33902de94ce990041eaa58fcd8ab1",
+    "data/early_warning_20261018/funding_addendum/declaration.json": "fe89d19481faf908ed61f2a4b2f582b35c0c8016182d8dbcd4d35b597c2796d1"
+  }
+}

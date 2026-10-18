@@ -30,7 +30,7 @@ No threshold, horizon, universe member or signal definition changed after any ou
 - **Not pooled:** different legal borrowers are never combined to reach the two-bond quorum.
 - **Guarantees and collateral:** FINRA metadata has no guarantor or collateral fields, so these are recorded as UNVERIFIED.
 - **Equity and curve data:** prices are Yahoo adjusted closes in their current vintage. The Treasury curve and spread indices come from FRED in its current vintage. FRED serves ICE indices only from October 2023, so B1 is unavailable in development.
-- **Funding data:** the funding arm needs SEC XBRL filings with acceptance timestamps. The SEC requires a contact email in each request, and none was authorised, so F1, F2 and E2 are **NOT EVALUATED**. The parsing code and its tests are in place (`early_warning_filings.py`).
+- **Funding data:** SEC XBRL company facts and the submissions index. Acceptance timestamps set when each filing becomes usable. These were added in a separate dated addendum after the author authorised a contact email at 12:30 UTC (see *Funding addendum* below). Restricted cash, undrawn facilities and financing proceeds are recorded but never counted as cash. SATS has no SEC CIK in the current ticker map.
 
 <!-- notebook-intro-end -->
 
@@ -51,7 +51,24 @@ No threshold, horizon, universe member or signal definition changed after any ou
 - This is retrospective evidence on current-vintage data. It is not prospective validation, and nothing here changes portfolio weights or the prospective paper journal.
 - Zero issuer alarms means the frozen rule (100 bp over a 20-observation median, persisting three observations, on two bonds) is too insensitive for 2024-26 conditions in these issuers. It does not prove that issuer spreads carry no information. A more sensitive rule would need a new declaration and new untouched data, because these holdout dates have now been seen.
 - Coverage is uneven. TRACE prints for many high-yield bonds are too sparse for the four-day gap rule. For AAL, CLF, DVN and part of APA, the selection still chose Reg S international CUSIPs because no registered or 144A twin appeared in the search, and those rarely print. Several issuers (STX, APA, DVN, AAL, CLF, SBAC) have little or no evaluable issuer-credit coverage, and they stay unknown, not "no warning".
-- The declared primary sample includes funding, and it could not be evaluated. The reported comparison uses the declared metrics on the three-family identical sample, labelled `common_no_funding`.
+- The main holdout used the three-family sample `common_no_funding`; the funding addendum then scored the declared four-family primary sample. Both are reported.
+
+### Funding addendum (declared 12:32 UTC, scored after the main holdout)
+
+The funding rules F1, F2 and E2 were frozen at 11:10 with everything else. They are scored here without change on the declared primary sample: sessions where the price, broad-credit, issuer-credit and funding signals are all evaluable. The parser was corrected before any filing was parsed. The SEC download began 23 seconds before the declaration was written, but nothing was read until 12:34 (`funding_addendum/declaration.json`). The declaration's parser hash covers the parsing logic; the manifest's hash also covers the I/O helpers appended afterwards. The holdout price episodes had already been seen, so this addendum cannot be tuned, but it is not blind to the episode set.
+
+- **Coverage:** 2,234 periodic filings in the ledger, 781 of them accepted inside the panel (June 2021 onward). Older filings map onto the first panel session, but they are superseded and stale before the development period starts, so they affect no scored number. Unknown states come from missing debt tags (292), missing cash-flow tags (85) and trailing twelve-month totals that cannot be built (186). A missing cash tag leaves the funding watch known and makes only the funding gap unknown.
+- **Holdout result on the declared primary sample** (7,685 issuer-sessions, 37 episodes, base rate 14.5%):
+  - The funding watch F1 fired 28 times, with 3 hits and 18 false alarms. Its precision of 14% equals the base rate (permutation p = 0.68).
+  - The funding gap F2 fired 5 times with no hits.
+  - Price alarms filtered by funding or credit state (E2) fired 6 times with no hits.
+  - On the same sessions, the price signals P1 and P2 had precision of 28% and 24% (p = 0.002 and 0.029).
+- **Verdict under the frozen criteria:** funding information is **NOT_ESTABLISHED** as an improvement, and issuer credit stays **INCONCLUSIVE_LOW_POWER**.
+- **One post-hoc lead, which is not a declared test.** On each issuer's own funding coverage, a wider sample that includes convertible-funded issuers, price alarms during an active funding gap were right more often than price alarms alone. Holdout: 13 of 29 (45%) against 61 of 209 (29%). Development: 14 of 21 (67%) against 53 of 137 (39%).
+  - In the holdout the gain is not significant. The issuer-bootstrap 90% interval runs from −5 to +35 points, and the permutation p is 0.16.
+  - It is also concentrated. Lucid supplies 6 of the 13 holdout hits. In development, 11 of the 14 hits are cruise lines in 2022, which is one sector shock, so the development p of 0.009 is not independent evidence.
+  - Because the issuer-credit rule never fired in the holdout, E2 there is simply "price alarm during an active funding gap".
+  - It was chosen after reading the receipts, so it can only be validated prospectively or on new issuers. It is saved separately in `early_warning_funding_posthoc_20261018.json`.
 
 ### Independent review notes (after the holdout run)
 
@@ -67,7 +84,7 @@ An independent read-only review found no blocking error. Timing, sample identity
 
 ### What would be needed to go further
 
-1. Authorise an SEC contact so the funding arm (F1, F2, E2) can be scored on the same frozen rules. Those rules were fixed before any outcome, so scoring them now is still a clean test of them.
+1. Test the post-hoc funding-gap filter prospectively, or on issuers and dates not used here, with its rule frozen first.
 2. Obtain issuer and peer OAS with dated vintages. This likely means a licensed source, which needs approval.
 3. Obtain historical guarantor, collateral and legal-borrower mappings, for example from indentures.
 4. Run any new, more sensitive spread rule prospectively, or on a later period nobody has examined.

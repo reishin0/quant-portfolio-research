@@ -275,7 +275,7 @@ print('Equity exclusions:',json.dumps(ew_inputs['quality']['reasons'],indent=1))
 
 Both phases are recomputed here from the saved evidence and checked against their dated receipts. The holdout receipt was written once, after the development receipt, and neither phase changed a parameter. Permutation and bootstrap results are read from the receipts because they are slow to recompute.
 
-The declared primary sample needs the funding signal, which is not available, so it is empty. The table that matters is `common_no_funding`: the identical issuer-sessions on which the price, broad-credit and issuer-credit signals are all evaluable. In development it is almost empty because the ICE high-yield series on FRED starts in October 2023.""")
+Without funding data the declared primary sample is empty, so this section uses `common_no_funding`: the identical issuer-sessions on which the price, broad-credit and issuer-credit signals are all evaluable. In development it is almost empty because the ICE high-yield series on FRED starts in October 2023.""")
     code("""cols=['signal','issuer_sessions','alarm_onsets','hits','false_alarms','same_day','in_episode','censored',
       'precision_pct','episodes','warned','recall_pct','median_lead_sessions','false_per_250','persistence_sessions','base_rate_pct']
 phase_tables={}
@@ -333,6 +333,30 @@ r.loc[show,['hits','false_alarms','same_day','in_episode']].plot(kind='bar',stac
 ax.set_title('Holdout: what each signal fired on');ax.set_ylabel('Alarm onsets');ax.set_xlabel('')
 plt.tight_layout();plt.show()
 """)
+    md("""### Funding addendum: SEC filings, scored after the main holdout
+
+Declared at 12:32 UTC after the author authorised an SEC contact header. The rules are unchanged from the 11:10 protocol, and the evaluator module is the same file. Both funding phases are recomputed here and checked against their receipts. `common` is now the declared primary sample: price, broad-credit, issuer-credit and funding signals all evaluable.""")
+    code("""from research.credit_funding.early_warning_filings import load_addendum
+ledger,usable,add_manifest=load_addendum(ROOT)
+print('Filing ledger:',len(ledger),'records |',ledger.status.value_counts().to_dict())
+fund_inputs=dict(ew_inputs); fund_inputs['filings']=usable
+for phase in ['development','holdout']:
+    receipt=json.loads((ROOT/f'research/credit_funding/early_warning_funding_{phase}_receipt_20261018.json').read_text(encoding='utf-8'))
+    got=ew.run_phase(fund_inputs,phase)
+    saved=pd.DataFrame(receipt['results'])
+    pd.testing.assert_frame_equal(got['results'][saved.columns].reset_index(drop=True).astype(float,errors='ignore').round(9),
+        saved.astype(float,errors='ignore').round(9),check_dtype=False)
+    print(phase,'funding receipt',receipt['executed_at'],'reproduced exactly')
+    if phase=='holdout':
+        fh=got['results']; fdep=pd.DataFrame(receipt['dependence_tests'])
+display(fh.loc[fh['sample'].eq('common'),cols].round(2))
+display(fdep.loc[fdep['sample'].eq('common')].dropna(axis=1,how='all'))
+print('Funding verdict:',json.dumps(ew.verdict(fh,fdep,'common',issuer_signal='F2'),indent=1,default=str))
+print('Issuer-credit verdict on the primary sample:',ew.verdict(fh,fdep,'common')['verdict'])
+display(usable.loc[usable.alarm_session.ge('2024-01-02'),['issuer','form','period_end','acceptance_local','alarm_session','ttm_ocf_usd','ttm_capex_usd','unrestricted_cash_usd','debt_usd','F1','F2']].tail(8))
+posthoc=json.loads((ROOT/'research/credit_funding/early_warning_funding_posthoc_20261018.json').read_text(encoding='utf-8'))
+print(posthoc['label']); print(json.dumps(posthoc['results'],indent=1))
+""")
     md(closing)
     code("print('Frozen baseline verification:',verify_review_snapshot()['status'])")
 
@@ -357,6 +381,7 @@ def main():
                  case_sha256=hashlib.sha256(inside(ROOT,args.case).read_bytes()).hexdigest(),
                  comparison_manifest_sha256=hashlib.sha256((ROOT/STUDY_DATA/'manifest.json').read_bytes()).hexdigest(),
                  early_warning_manifest_sha256=hashlib.sha256((ROOT/'data/early_warning_20261018/manifest.json').read_bytes()).hexdigest(),
+                 early_warning_funding_manifest_sha256=hashlib.sha256((ROOT/'data/early_warning_20261018/funding_addendum/manifest.json').read_bytes()).hexdigest(),
                  early_warning_module_sha256=hashlib.sha256((ROOT/'research/credit_funding/early_warning.py').read_bytes()).hexdigest(),
                  comparison_module_sha256=hashlib.sha256((ROOT/'research/credit_funding/issuer_comparison.py').read_bytes()).hexdigest(),
                  notebook_sha256=hashlib.sha256((out/NOTEBOOK).read_bytes()).hexdigest(),

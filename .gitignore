@@ -81,3 +81,4 @@ data/early_warning_20261018/*
 !data/early_warning_20261018/receipts/
 !data/early_warning_20261018/raw/
 data/early_warning_20261018/raw/sec_*
+!data/early_warning_20261018/funding_addendum/

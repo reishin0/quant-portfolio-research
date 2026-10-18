@@ -1,0 +1,15 @@
+{
+  "declared_at": "2026-10-18T12:32:03+00:00",
+  "authorisation": "The author approved using a personal contact email in the SEC request header at 2026-10-18T12:30:29Z. The email is sent only to SEC servers and is not stored in any receipt.",
+  "rules": "F1, F2, E2 and the declared primary 'common' sample are scored exactly as frozen in early_warning_protocol_20261018.json (declared 11:10 UTC). No funding threshold, staleness limit or definition is changed.",
+  "parser_fixes_before_loading_filings": [
+    "Prior-year comparative searched inside the same accession and tag, tolerant of 52/53-week years",
+    "Annual totals use the same OCF and capex tags as the year-to-date values",
+    "A late filing for an older period never replaces the current state (OLDER_PERIOD_REVISION, no state effect)",
+    "A filing whose TTM cannot be constructed sets the state to UNKNOWN from its alarm session instead of leaving an older state live"
+  ],
+  "known_limitation": "Capex uses the first matching tag in priority order; issuers reporting several separate capex lines can be understated.",
+  "parser_sha256": "26485cc6f578a54a2798bd62ef1e5b43f9cd8142b0bc747dc3885844e75d8112",
+  "blindness": "The holdout price episodes were already seen when the price, broad and issuer arms were scored. The funding rules were fixed before any outcome and cannot be tuned now, but this addendum is not blind to the episode set. It is reported as a separate dated addendum.",
+  "evaluator": "early_warning.py unchanged (SHA-256 1442478b51396eda7237f515eb4f3b6df34682ccf1dee1c2c0ec2d3994078ff5)"
+}
