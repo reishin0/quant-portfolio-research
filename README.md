@@ -1,5 +1,17 @@
 # Quant Portfolio Research
 
+> [!IMPORTANT]
+> **Disclaimer and limitation of liability**
+>
+> - **Not advice.** The code, data, notebooks, outputs and commentary in this repository are for educational and research purposes only. Nothing here is financial, investment, trading, credit, legal, accounting or tax advice, or a recommendation, offer or solicitation to buy, sell or hold any security, bond, derivative or other financial instrument.
+> - **No licensed or fiduciary relationship.** The author does not act as a licensed financial adviser, capital markets services licence holder, broker, credit rating agency or fiduciary in any jurisdiction. Using this repository creates no adviser–client or other relationship.
+> - **Hypothetical, retrospective results.** All performance figures come from simulated, backtested or retrospective analysis on historical data, with stated assumptions and known limitations. They are not actual trading results. Past or simulated performance does not indicate future results. Investing involves risk, including loss of principal.
+> - **Issuer case studies.** Named companies, securities and events (for example, CoreWeave) are retrospective illustrations of a research method using publicly available data. They are not statements of opinion about any issuer's creditworthiness, solvency, valuation or prospects, are not credit ratings, and do not predict future events.
+> - **Third-party data and sources.** Data and research views from third parties (including Yahoo Finance, FINRA, the Kenneth French Data Library, SOFR/Treasury publications, World Bank, BIS and J.P. Morgan materials) may be incomplete, revised or inaccurate and remain subject to their providers' terms. They are cited for research only and imply no endorsement or affiliation.
+> - **No warranty; use at your own risk.** Everything is provided "as is", without warranty of any kind, express or implied, including accuracy, completeness, fitness for a particular purpose or non-infringement. To the fullest extent permitted by law, the author accepts no liability for any loss or damage, direct or indirect, arising from the use of, or reliance on, this repository.
+> - **Personal capacity.** This is a personal research project. Views are the author's own and do not represent any current or former employer, educational institution or other organisation.
+> - **Seek professional advice.** Consult an appropriately licensed professional before making any financial decision.
+
 ## Issuer credit and funding research — reviewed 18 October 2026
 
 The [executed issuer research notebook](issuer_credit_funding_research.ipynb) provides a reusable funding-disclosure and bond-yield diagnostic for funding-dependent issuers. Issuer identities, bond identifiers, units, reporting timezone, data snapshots, equity symbols and rules come from separate case files. CoreWeave is the retained historical example, with 612 public FINRA price/yield rows; it is not hard-coded into the calculation engine. See the [case contract, review fixes and future-use guide](research/credit_funding/ISSUER_REPLAY.md).
@@ -35,18 +47,6 @@ The [isolated intraday investigation](research/macro_regime/REVIEW_20261016.md) 
 **Reishin · Maintained continuation of the August 2024 portfolio study**
 
 This repository implements a reproducible multi-asset portfolio research workflow. It combines Black–Litterman expected returns with conventional and advanced allocation methods, evaluates every strategy chronologically, and records data provenance, turnover and modeled implementation costs.
-
-> [!IMPORTANT]
-> **Disclaimer and limitation of liability**
->
-> - **Not advice.** The code, data, notebooks, outputs and commentary in this repository are for educational and research purposes only. Nothing here is financial, investment, trading, credit, legal, accounting or tax advice, or a recommendation, offer or solicitation to buy, sell or hold any security, bond, derivative or other financial instrument.
-> - **No licensed or fiduciary relationship.** The author does not act as a licensed financial adviser, capital markets services licence holder, broker, credit rating agency or fiduciary in any jurisdiction. Using this repository creates no adviser–client or other relationship.
-> - **Hypothetical, retrospective results.** All performance figures come from simulated, backtested or retrospective analysis on historical data, with stated assumptions and known limitations. They are not actual trading results. Past or simulated performance does not indicate future results. Investing involves risk, including loss of principal.
-> - **Issuer case studies.** Named companies, securities and events (for example, CoreWeave) are retrospective illustrations of a research method using publicly available data. They are not statements of opinion about any issuer's creditworthiness, solvency, valuation or prospects, are not credit ratings, and do not predict future events.
-> - **Third-party data and sources.** Data and research views from third parties (including Yahoo Finance, FINRA, the Kenneth French Data Library, SOFR/Treasury publications, World Bank, BIS and J.P. Morgan materials) may be incomplete, revised or inaccurate and remain subject to their providers' terms. They are cited for research only and imply no endorsement or affiliation.
-> - **No warranty; use at your own risk.** Everything is provided "as is", without warranty of any kind, express or implied, including accuracy, completeness, fitness for a particular purpose or non-infringement. To the fullest extent permitted by law, the author accepts no liability for any loss or damage, direct or indirect, arising from the use of, or reliance on, this repository.
-> - **Personal capacity.** This is a personal research project. Views are the author's own and do not represent any current or former employer, educational institution or other organisation.
-> - **Seek professional advice.** Consult an appropriately licensed professional before making any financial decision.
 
 The work originated as a CQF Final Project submission titled **Portfolio Construction using Black-Litterman Model and Factors**. The original brief required delegates to implement the model and numerical techniques without AI coding tools and submit working, documented code with an analytical report. This repository is a later documented research edition with subsequent methodology and software amendments. The maintained project is broader than the submission brief: its design is governed by methodological consistency and reproducibility rather than by reproducing the original report structure.
 
