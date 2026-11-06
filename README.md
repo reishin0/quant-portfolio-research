@@ -16,7 +16,7 @@
 
 The [executed issuer research notebook](issuer_credit_funding_research.ipynb) provides a reusable funding-disclosure and bond-yield diagnostic for funding-dependent issuers. Issuer identities, bond identifiers, units, reporting timezone, data snapshots, equity symbols and rules come from separate case files. CoreWeave is the retained historical example, with 612 public FINRA price/yield rows; it is not hard-coded into the calculation engine. See the [case contract, review fixes and future-use guide](research/credit_funding/ISSUER_REPLAY.md).
 
-Run `python run_issuer_credit_replay.py --publish` to reproduce the shipped notebook offline. For another declared case, use `python run_issuer_credit_replay.py --case research/credit_funding/cases/YOUR_CASE.json`; a new dated output is created without replacing the root notebook unless `--publish` is supplied. The frozen portfolio notebooks, original credit/funding notebook/model, protocols, source pins and paper journal remain unchanged.
+After the environment setup in [Run the project](#run-the-project), run `python run_issuer_credit_replay.py --publish` to reproduce the shipped notebook offline (about 15–20 minutes). For another declared case, use `python run_issuer_credit_replay.py --case research/credit_funding/cases/YOUR_CASE.json`; a new dated output is created without replacing the root notebook unless `--publish` is supplied. The frozen portfolio notebooks, original credit/funding notebook/model, protocols, source pins and paper journal remain unchanged.
 
 In the CoreWeave case, financing dependence appears in the earliest loaded annual filing, conservatively available March 3. The yield diagnostic flags July 27 and October 15: CRWV gained about 21% over five observed sessions after July's flag, and October's flag followed the October 14 fall. Reliable advance warning is **not demonstrated**. EOD bond history ends October 15; equity context ends October 16. Current-vintage yields are not historical point-in-time OAS; the original qualified credit gate remains UNKNOWN. Future cases need their own dated evidence and untouched validation periods.
 
@@ -185,6 +185,46 @@ Use `--check --mode synthetic` for a separate generated-data software check.
 `--check --mode submission` explicitly opts into the original 2024 price cache;
 it does not enable old factors, macro snapshots or investor views automatically.
 
+### Frozen protocol checks
+
+The frozen protocols pin exact `numpy`, `pandas`, `scipy`, `pandas_market_calendars`
+and `exchange_calendars` versions ([`constraints-frozen.txt`](constraints-frozen.txt)).
+`run_project.bat` installs the newest versions allowed by `requirements.txt`, so the
+frozen verifiers (`forward_evaluation.py`, `review_checks.py`, `run_reviewed_analysis.py`)
+reject that environment once any pinned package publishes a newer release. To verify
+everything in one step on Windows, double-click:
+
+```text
+run_frozen_checks.bat
+```
+
+It prepares `.venv` with the pinned versions, executes the notebook check, verifies both
+frozen protocols and re-executes the reviewed amendment. Wheels for the pinned versions
+exist for 64-bit Python 3.12 and 3.13; Python 3.11 and Apple-silicon macOS cannot install
+them, so the frozen checks run on Windows (or Linux) only. The research notebooks
+themselves still run on every supported platform.
+
+Every runner (`run_*.py`) executes notebooks with the `portfolio-research` kernel that
+`launch.py` registers. Run `run_project.bat --check` or `run_frozen_checks.bat` once before
+calling a runner directly, and call runners with `.venv\Scripts\python.exe`.
+
+Expected durations: notebook runners about 2–3 minutes each; `run_issuer_credit_replay.py`
+about 15–20 minutes, because the frozen early-warning panel re-evaluates every bond window.
+The four `run_early_warning.py` phases are single-use: each is already recorded, and a
+rerun deliberately stops with "Phase already recorded".
+
+## Troubleshooting
+
+| Message | Cause | Fix |
+|---|---|---|
+| `Frozen runtime changed: numpy` (or pandas, scipy, calendars) | Environment installed newer package releases than the frozen protocol | Run `run_frozen_checks.bat`, or `set PIP_CONSTRAINT=constraints-frozen.txt` then `python launch.py --repair` |
+| `No such kernel named portfolio-research` | A runner was started before `launch.py` registered the project kernel | Run `run_project.bat --check` once, then use `.venv\Scripts\python.exe run_….py` |
+| `Phase already recorded; a rerun needs a new declaration` | Early-warning phases are single-use by design | No action; results are in `research/credit_funding/*_receipt_20261018.json` |
+| `Preserved project changed: <file>` / `Frozen file changed: <file>` | A hash-pinned file was edited or its line endings were converted | Restore the file from Git (`git checkout -- <file>`); keep `.gitattributes` as shipped |
+| `This folder has an older .venv` | `.venv` was created by an unsupported Python | Rename `.venv`, then launch again with Python 3.12 or 3.13 |
+| `No matching distribution found for numpy==2.5.3` | Python 3.11 or Apple-silicon macOS with frozen constraints | Use 64-bit Python 3.12/3.13 on Windows for frozen checks; run notebooks without the constraints |
+| Setup stops during `pip install` | No network access or a read-only folder | Connect to the internet, extract the ZIP to a writable folder, then `python launch.py --repair` |
+
 ## Research configuration
 
 The notebook defaults to the October 2026 price update. Original settings are
@@ -337,6 +377,8 @@ Existing output folders are never overwritten.
 | [`requirements-lock-windows-py313.txt`](requirements-lock-windows-py313.txt) | Exact package pins for tested Windows Python 3.13 environment |
 | [`tests/`](tests/) | Offline behavioral and look-ahead checks |
 | [`run_project.bat`](run_project.bat) / [`run_project.command`](run_project.command) | Reproducible environment launchers |
+| [`run_frozen_checks.bat`](run_frozen_checks.bat) | One-step Windows verification of every frozen protocol with the pinned runtime |
+| [`constraints-frozen.txt`](constraints-frozen.txt) | Exact runtime versions required by the frozen protocols |
 | [`run_analysis.py`](run_analysis.py) | Deterministic notebook execution and HTML export |
 | [`VALIDATION.md`](VALIDATION.md) | Dated verification evidence and scope |
 | [`AMENDMENTS.md`](AMENDMENTS.md) | Corrections from the 2024 implementation |

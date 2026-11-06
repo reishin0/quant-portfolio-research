@@ -1,0 +1,9 @@
+# Exact runtime pins required by the frozen research protocols
+# (data/forward_protocol_20261009.json and research/paper_protocol_20261016.json).
+# Used as a pip constraints file by run_frozen_checks.bat; the protocols reject any other version.
+# Wheels for these exact versions exist for Windows 64-bit Python 3.12 and 3.13.
+numpy==2.5.3
+pandas==2.3.3
+scipy==1.18.1
+pandas_market_calendars==5.5.0
+exchange_calendars==4.13.2
